@@ -1,0 +1,32 @@
+{
+  "name": "setbased/abc-form-raw",
+  "description": "SetBased ABC Framework",
+  "keywords": [
+    "Framework",
+    "Form"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "phing/phing": "2.*",
+    "phpunit/phpunit": "4.* || 5.*"
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "setbased/exception": "1.*",
+    "setbased/abc-html": "1.*",
+    "setbased/abc-obfuscator-interface": "1.*",
+    "setbased/abc-url": "1.*",
+    "setbased/php-affirm": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SetBased\\Abc\\Form\\": "src/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}
