@@ -344,6 +344,18 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the attribute [action](http://www.w3schools.com/tags/att_form_action.asp). The default value is the URI which
+   * was given the access the current page, i.e. $_SERVER['REQUEST_URI'].
+   *
+   * @param string $url The URL to send the form-data when this form is submitted.
+   */
+  public function setAttrAction($url)
+  {
+    $this->attributes['action'] = $url;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets the attribute [autocomplete](http://www.w3schools.com/tags/att_form_autocomplete.asp). Possible values:
    * * Any value that evaluates to true will set the attribute to 'on'.
    * * Any value that evaluates to false will set the attribute to 'off'.
