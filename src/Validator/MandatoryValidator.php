@@ -51,17 +51,17 @@ class MandatoryValidator implements Validator
   {
     foreach ($array as $element)
     {
-      if (is_scalar($element))
+      if (is_array($element))
       {
-        if ($element!==null && $element!==false && $element!=='')
+        $tmp = $this->validateArray($element);
+        if ($tmp===true)
         {
           return true;
         }
       }
       else
       {
-        $tmp = $this->validateArray($element);
-        if ($tmp===true)
+        if ($element!==null && $element!==false && $element!=='')
         {
           return true;
         }
