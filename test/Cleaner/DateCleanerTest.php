@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Cleaner;
+
 use SetBased\Abc\Form\Cleaner\DateCleaner;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12,7 +14,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * {@inheritdoc}
    */
-  function makeCleaner()
+  public function makeCleaner()
   {
     return new DateCleaner('d-m-Y');
   }

@@ -1,11 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Cleaner;
+
 use SetBased\Abc\Form\Cleaner\Cleaner;
 
 /**
  * Class CleanerTest
  */
-abstract class CleanerTest extends PHPUnit_Framework_TestCase
+abstract class CleanerTest extends \PHPUnit_Framework_TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   protected $myEmptyValues = ['', false, null, ' ', '  ', "\n", "\n \n", "\n \t"];
@@ -18,7 +20,7 @@ abstract class CleanerTest extends PHPUnit_Framework_TestCase
    *
    * @return Cleaner
    */
-  abstract function makeCleaner();
+  abstract public function makeCleaner();
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

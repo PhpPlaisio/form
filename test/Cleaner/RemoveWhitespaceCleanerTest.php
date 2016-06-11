@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Cleaner;
+
 use SetBased\Abc\Form\Cleaner\RemoveWhitespaceCleaner;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9,7 +11,7 @@ class RemoveWhitespaceCleanerTest extends CleanerTest
   /**
    * {@inheritdoc}
    */
-  function makeCleaner()
+  public function makeCleaner()
   {
     return RemoveWhitespaceCleaner::get();
   }

@@ -1,16 +1,17 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Cleaner;
+
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
 
 //----------------------------------------------------------------------------------------------------------------------
 class PruneWhitespaceCleanerTest extends CleanerTest
 {
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  function makeCleaner()
+  public function makeCleaner()
   {
     return PruneWhitespaceCleaner::get();
   }
@@ -18,7 +19,7 @@ class PruneWhitespaceCleanerTest extends CleanerTest
   //--------------------------------------------------------------------------------------------------------------------
   public function testClean()
   {
-    $raw     = "  Hello  \n\n  World!   ";
+    $raw     = "  Hello  \n\n\x0a\x00  World!   \x0b";
     $cleaner = PruneWhitespaceCleaner::get();
     $value   = $cleaner->clean($raw);
 

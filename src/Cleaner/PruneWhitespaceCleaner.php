@@ -35,7 +35,7 @@ class PruneWhitespaceCleaner implements Cleaner
    * Returns a submitted value with leading and training whitespace removed. Intermediate whitespace and multiple
    * intermediate whitespace (including new lines and tabs) are replaced with a single space.
    *
-   * @param string $value The submitted value.
+   * @param string|null $value The submitted value.
    *
    * @return string|null
    */
@@ -46,7 +46,9 @@ class PruneWhitespaceCleaner implements Cleaner
       return null;
     }
 
-    $tmp = trim(mb_ereg_replace('[\ \t\n\r\0\x0B\xA0]+', ' ', $value, 'p'));
+    $tmp = AmbiguityCleaner::get()->clean($value);
+
+    $tmp = trim(mb_ereg_replace('[\ \t\n]+', ' ', $tmp, 'p'));
     if ($tmp==='') $tmp = null;
 
     return $tmp;

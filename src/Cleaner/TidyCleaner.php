@@ -35,7 +35,7 @@ class TidyCleaner implements Cleaner
   /**
    * Returns a HTML snippet cleaned by [HTML Tidy](http://www.html-tidy.org/).
    *
-   * @param string $value The submitted HTML snippet.
+   * @param string|null $value The submitted HTML snippet.
    *
    * @return string|null
    */

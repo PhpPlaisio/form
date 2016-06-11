@@ -59,7 +59,7 @@ class DateCleaner implements Cleaner
    * Cleans a submitted date and returns the date in ISO 8601 machine format if the date is a valid date. Otherwise
    * returns the original submitted value.
    *
-   * @param string $value The submitted date.
+   * @param string|null $value The submitted date.
    *
    * @return string
    */

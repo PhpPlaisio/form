@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Cleaner;
+
 use SetBased\Abc\Form\Cleaner\UrlCleaner;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12,7 +14,7 @@ class UrlCleanerTest extends CleanerTest
   /**
    * {@inheritdoc}
    */
-  function makeCleaner()
+  public function makeCleaner()
   {
     return UrlCleaner::get();
   }

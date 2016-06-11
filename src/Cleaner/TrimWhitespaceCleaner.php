@@ -33,7 +33,7 @@ class TrimWhitespaceCleaner implements Cleaner
   /**
    * Returns a submitted value with leading and training whitespace removed.
    *
-   * @param string $value The submitted value.
+   * @param string|null $value The submitted value.
    *
    * @return string|null
    */
@@ -44,7 +44,9 @@ class TrimWhitespaceCleaner implements Cleaner
       return null;
     }
 
-    $tmp = trim($value, " \t\n\r\0\x0B\xA0");
+    $tmp = AmbiguityCleaner::get()->clean($value);
+
+    $tmp = trim($tmp, " \t\n");
     if ($tmp==='') $tmp = null;
 
     return $tmp;
