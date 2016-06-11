@@ -402,7 +402,7 @@ abstract class SimpleControl extends Control
   /**
    * Sets the value of this form control.
    *
-   * @param string $value The new value for the form control.
+   * @param mixed $value The new value for the form control.
    */
   public function setValue($value)
   {
