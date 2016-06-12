@@ -35,7 +35,7 @@ class AmbiguityCleaner implements Cleaner
    */
   protected $ambiguities =
     // Spaces.
-    [' '  => ["\xa0",          // NO-BRAKE SPACE*
+    [' '  => ["\xc2\xa0",      // NO-BRAKE SPACE*
               "\xe1\x9a\x80",  // OGHAM SPACE MARK*
               "\xe1\xa0\x8e",  // MONGOLIAN VOWEL SEPARATOR
               "\xe2\x80\x80",  // EN QUAD
@@ -67,68 +67,68 @@ class AmbiguityCleaner implements Cleaner
               "\xe2\x80\xa9"], // PARAGRAPH SEPARATOR
 
      // Control characters.
-     ''   => ["\x00", // NULL*
-              "\x01", // START OF HEADING
-              "\x02", // START OF TEXT
-              "\x03", // END OF TEXT
-              "\x04", // END OF TRANSMISSION
-              "\x05", // ENQUIRY
-              "\x06", // ACKNOWLEDGE
-              "\x07", // BELL
-              "\x08", // BACKSPACE
-              "\x0c", // FORM FEED (FF)*, \f
-              "\x0d", // CARRIAGE RETURN (CR)*, \r
-              "\x0e", // SHIFT OUT
-              "\x0f", // SHIFT IN
-              "\x10", // DATA LINK ESCAPE
-              "\x11", // DEVICE CONTROL ONE
-              "\x12", // DEVICE CONTROL TWO
-              "\x13", // DEVICE CONTROL THREE
-              "\x14", // DEVICE CONTROL FOUR
-              "\x15", // NEGATIVE ACKNOWLEDGE
-              "\x16", // SYNCHRONOUS IDLE
-              "\x17", // END OF TRANSMISSION BLOCK
-              "\x18", // CANCEL
-              "\x19", // END OF MEDIUM
-              "\x1a", // SUBSTITUTE
-              "\x1b", // ESCAPE*, \e
-              "\x1c", // INFORMATION SEPARATOR FOUR
-              "\x1d", // INFORMATION SEPARATOR THREE
-              "\x1e", // INFORMATION SEPARATOR TWO
-              "\x1f", // INFORMATION SEPARATOR ONE
-              "\x7f", // DELETE
-              "\x80", // <control>
-              "\x81", // <control> 	
-              "\x82", // BREAK PERMITTED HERE
-              "\x83", // NO BREAK HERE
-              "\x84", // <control>
-              "\x85", // NEXT LINE (NEL)
-              "\x86", // START OF SELECTED AREA
-              "\x87", // END OF SELECTED AREA
-              "\x88", // CHARACTER TABULATION SET
-              "\x89", // CHARACTER TABULATION WITH JUSTIFICATION
-              "\x8a", // LINE TABULATION SET
-              "\x8b", // PARTIAL LINE FORWARD
-              "\x8c", // PARTIAL LINE BACKWARD
-              "\x8d", // REVERSE LINE FEED
-              "\x8e", // SINGLE SHIFT TWO
-              "\x8f", // SINGLE SHIFT THREE
-              "\x90", // DEVICE CONTROL STRING 	
-              "\x91", // PRIVATE USE ONE
-              "\x92", // PRIVATE USE TWO
-              "\x93", // SET TRANSMIT STATE
-              "\x94", // CANCEL CHARACTER
-              "\x95", // MESSAGE WAITING
-              "\x96", // START OF GUARDED AREA
-              "\x97", // END OF GUARDED AREA
-              "\x98", // START OF STRING
-              "\x99", // <control>
-              "\x9a", // SINGLE CHARACTER INTRODUCER
-              "\x9b", // CONTROL SEQUENCE INTRODUCER
-              "\x9c", // STRING TERMINATOR
-              "\x9d", // OPERATING SYSTEM COMMAND
-              "\x9e", // PRIVACY MESSAGE
-              "\x9f"] // APPLICATION PROGRAM COMMAND
+     ''   => ["\x00",     // NULL*
+              "\x01",     // START OF HEADING
+              "\x02",     // START OF TEXT
+              "\x03",     // END OF TEXT
+              "\x04",     // END OF TRANSMISSION
+              "\x05",     // ENQUIRY
+              "\x06",     // ACKNOWLEDGE
+              "\x07",     // BELL
+              "\x08",     // BACKSPACE
+              "\x0c",     // FORM FEED (FF)*, \f
+              "\x0d",     // CARRIAGE RETURN (CR)*, \r
+              "\x0e",     // SHIFT OUT
+              "\x0f",     // SHIFT IN
+              "\x10",     // DATA LINK ESCAPE
+              "\x11",     // DEVICE CONTROL ONE
+              "\x12",     // DEVICE CONTROL TWO
+              "\x13",     // DEVICE CONTROL THREE
+              "\x14",     // DEVICE CONTROL FOUR
+              "\x15",     // NEGATIVE ACKNOWLEDGE
+              "\x16",     // SYNCHRONOUS IDLE
+              "\x17",     // END OF TRANSMISSION BLOCK
+              "\x18",     // CANCEL
+              "\x19",     // END OF MEDIUM
+              "\x1a",     // SUBSTITUTE
+              "\x1b",     // ESCAPE*, \e
+              "\x1c",     // INFORMATION SEPARATOR FOUR
+              "\x1d",     // INFORMATION SEPARATOR THREE
+              "\x1e",     // INFORMATION SEPARATOR TWO
+              "\x1f",     // INFORMATION SEPARATOR ONE
+              "\x7f",     // DELETE
+              "\xc2\x80", // <control>
+              "\xc2\x81", // <control> 	
+              "\xc2\x82", // BREAK PERMITTED HERE
+              "\xc2\x83", // NO BREAK HERE
+              "\xc2\x84", // <control>
+              "\xc2\x85", // NEXT LINE (NEL)
+              "\xc2\x86", // START OF SELECTED AREA
+              "\xc2\x87", // END OF SELECTED AREA
+              "\xc2\x88", // CHARACTER TABULATION SET
+              "\xc2\x89", // CHARACTER TABULATION WITH JUSTIFICATION
+              "\xc2\x8a", // LINE TABULATION SET
+              "\xc2\x8b", // PARTIAL LINE FORWARD
+              "\xc2\x8c", // PARTIAL LINE BACKWARD
+              "\xc2\x8d", // REVERSE LINE FEED
+              "\xc2\x8e", // SINGLE SHIFT TWO
+              "\xc2\x8f", // SINGLE SHIFT THREE
+              "\xc2\x90", // DEVICE CONTROL STRING 	
+              "\xc2\x91", // PRIVATE USE ONE
+              "\xc2\x92", // PRIVATE USE TWO
+              "\xc2\x93", // SET TRANSMIT STATE
+              "\xc2\x94", // CANCEL CHARACTER
+              "\xc2\x95", // MESSAGE WAITING
+              "\xc2\x96", // START OF GUARDED AREA
+              "\xc2\x97", // END OF GUARDED AREA
+              "\xc2\x98", // START OF STRING
+              "\xc2\x99", // <control>
+              "\xc2\x9a", // SINGLE CHARACTER INTRODUCER
+              "\xc2\x9b", // CONTROL SEQUENCE INTRODUCER
+              "\xc2\x9c", // STRING TERMINATOR
+              "\xc2\x9d", // OPERATING SYSTEM COMMAND
+              "\xc2\x9e", // PRIVACY MESSAGE
+              "\xc2\x9f"] // APPLICATION PROGRAM COMMAND
     ];
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -162,12 +162,15 @@ class AmbiguityCleaner implements Cleaner
 
     // Replace all ambiguous characters.
     $tmp = $value;
-    foreach ($this->ambiguities as $unambiguity => $ambiguity)
+    foreach ($this->ambiguities as $unambiguity => $ambiguities)
     {
-      // Note: str_replace works fine with multi byte characters. 
-      $tmp = str_replace($ambiguity, $unambiguity, $tmp);
+      foreach ($ambiguities as $ambiguity)
+      {
+        // Note: str_replace works fine with multi byte characters like UTF-8.
+        $tmp = str_replace($ambiguity, $unambiguity, $tmp);
+      }
     }
-    
+
     // Restore EOL for DOS users.
     if (PHP_EOL!="\n") $tmp = str_replace("\n", PHP_EOL, $tmp);
 

@@ -25,28 +25,57 @@ class AmbiguityCleanerTest extends CleanerTest
   //--------------------------------------------------------------------------------------------------------------------
   public function testEmptyStringClean1()
   {
-    $raw     = "  Hello\x00\x0d\x07World!  ";
-    $cleaner = AmbiguityCleaner::get();
-    $value   = $cleaner->clean($raw);
+    $raw   = "  Hello\x00\x0d\x07World!  ";
+    $clean = '  HelloWorld!  ';
 
-    $this->assertEquals('  HelloWorld!  ', $value);
+    $this->baseTest($raw, $clean);
+
+    return $clean;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   public function testEmptyStringClean2()
   {
-    $raw     = "\x00\x0d\x08";
-    $cleaner = AmbiguityCleaner::get();
-    $value   = $cleaner->clean($raw);
+    $raw   = "\x00\x0d\x08";
+    $clean = null;
 
-    $this->assertNull($value);
+    $this->baseTest($raw, $clean);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  public function testLineFeedClean()
+  {
+    $raw   = "  Hello\x0b\xe2\x80\xa8\xe2\x80\xa9World!  ";
+    $clean = "  Hello\n\n\nWorld!  ";
+
+    $null = $this->baseTest($raw, $clean);
+    $this->assertNull($null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  public function testSpacesClean()
+  {
+    $raw   = "  Hello\xe1\x9a\x80 \xe2\x80\x8aWorld!  ";
+    $clean = '  Hello   World!  ';
+
+    $this->baseTest($raw, $clean);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test umlauts are preserved. For example: Ö is "\xc3\x96" and "\x96" is a control character that will removed.
+   */
+  public function testUmlautClean()
+  {
+    $raw = "ä ö ü ß Ä Ö Ü";
+    $this->baseTest($raw, $raw);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Length of ambiguous characters must be 1 character.
    */
-  public function testLengthAmbiguities()
+  public function testValidUtf8Ambiguities()
   {
     $cleaner = new AmbiguityCleaner();
 
@@ -59,29 +88,29 @@ class AmbiguityCleanerTest extends CleanerTest
     {
       foreach ($ambiguities as $ambiguity)
       {
+        $this->checkEncoding($ambiguity);
         $this->assertEquals(1, mb_strlen($ambiguity), sprintf("Length of '%s' is not 1", bin2hex($ambiguity)));
       }
     }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testLineFeedClean()
+  private function baseTest($raw, $clean)
   {
-    $raw     = "  Hello\x0b\xe2\x80\xa8\xe2\x80\xa9World!  ";
     $cleaner = AmbiguityCleaner::get();
     $value   = $cleaner->clean($raw);
 
-    $this->assertEquals("  Hello\n\n\nWorld!  ", $value);
+    $this->checkEncoding($raw);
+    $this->checkEncoding($value);
+    $this->checkEncoding($clean);
+
+    $this->assertEquals($clean, $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testSpacesClean()
+  private function checkEncoding($var)
   {
-    $raw     = "  Hello\xe1\x9a\x80 \xe2\x80\x8aWorld!  ";
-    $cleaner = AmbiguityCleaner::get();
-    $value   = $cleaner->clean($raw);
-
-    $this->assertEquals('  Hello   World!  ', $value);
+    $this->assertTrue(mb_check_encoding($var), sprintf("%s is not valid UTF-8", bin2hex($var)));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
