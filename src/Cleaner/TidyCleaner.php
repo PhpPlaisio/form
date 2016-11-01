@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\Cleaner;
 
 use SetBased\Abc\Helper\Html;
+use SetBased\Exception\FallenException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -33,6 +34,47 @@ class TidyCleaner implements Cleaner
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the Tidy's encoding name of the PHP encoding as set in Html::$encoding.
+   *
+   * @return string
+   */
+  private static function getTidyEncoding()
+  {
+    switch (Html::$encoding)
+    {
+      case 'UTF-8':
+        return 'utf8';
+
+      case 'ISO8859-1':
+      case 'ISO-8859-1':
+        return 'latin1';
+
+      case 'cp1251':
+      case 'Windows-1251':
+      case 'win-1251':
+      case '1251':
+        return 'win1252';
+
+      case 'BIG5-HKSCS':
+        return 'big5';
+
+      case 'Shift_JIS':
+      case 'SJIS':
+      case 'SJIS-win':
+      case 'cp932':
+      case '932':
+        return 'shiftjis';
+
+      case 'MacRoman':
+        return 'mac';
+
+      default:
+        throw new FallenException('encoding', self::getTidyEncoding());
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns a HTML snippet cleaned by [HTML Tidy](http://www.html-tidy.org/).
    *
    * @param string|null $value The submitted HTML snippet.
@@ -57,7 +99,7 @@ class TidyCleaner implements Cleaner
 
     $tidy = new \tidy;
 
-    $tidy->parseString($value, $tidy_config, Html::$encoding);
+    $tidy->parseString($value, $tidy_config, self::getTidyEncoding());
     $tidy->cleanRepair();
     $value = trim(tidy_get_output($tidy));
 
