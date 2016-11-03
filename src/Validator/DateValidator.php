@@ -33,9 +33,8 @@ class DateValidator implements Validator
     if (!is_scalar($value)) throw new LogicException('%s is not a valid date.', gettype($value));
 
     // We assume that DateCleaner did a good job and date is in YYYY-MM-DD format.
-    $parts = explode('-', $value);
-
-    $valid = (count($parts)==3 && checkdate($parts[1], $parts[2], $parts[0]));
+    $match = preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value, $parts);
+    $valid = ($match && checkdate($parts[2], $parts[3], $parts[1]));
     if (!$valid)
     {
       // @todo babel

@@ -159,6 +159,12 @@ class DateCleanerTest extends CleanerTest
     $raw     = 'Hello world.';
     $value   = $cleaner->clean($raw);
     $this->assertEquals('Hello world.', $value);
+
+    // Some other string.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = '15- 7 -20';
+    $value   = $cleaner->clean($raw);
+    $this->assertEquals('15- 7 -20', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
