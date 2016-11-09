@@ -60,7 +60,7 @@ class FileControl extends SimpleControl
   {
     $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if ($_FILES[$submit_name]['error']===0)
+    if (isset($_FILES[$submit_name]['error']) && $_FILES[$submit_name]['error']===0)
     {
       $changedInputs[$this->name]  = $this;
       $whiteListValue[$this->name] = $_FILES[$submit_name];
