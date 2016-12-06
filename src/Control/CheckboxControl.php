@@ -18,6 +18,20 @@ class CheckboxControl extends SimpleControl
    */
   protected $value;
 
+  /**
+   * The value that must be used when the submitted value is checked.
+   *
+   * @var mixed
+   */
+  protected $valueChecked = true;
+
+  /**
+   * The value that must be used when the submitted value is not checked.
+   *
+   * @var mixed
+   */
+  protected $valueUnchecked = false;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the HTML code for this form control.
@@ -52,6 +66,24 @@ class CheckboxControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the values that must be used when the submitted value is checked and not checked.
+   *
+   * By default values true (checked) and false (not checked) are used.
+   *
+   * If the value of this checkbox is stored as not nullable integer in a database one might use 1 for checked and 0
+   * for not checked.
+   *
+   * @param mixed $checked   The value that must be used when the submitted value is checked.
+   * @param mixed $unchecked The value that must be used when the submitted value is not checked.
+   */
+  public function useValues($checked, $unchecked)
+  {
+    $this->valueChecked   = $checked;
+    $this->valueUnchecked = $unchecked;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * {@inheritdoc}
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
@@ -65,13 +97,13 @@ class CheckboxControl extends SimpleControl
 
     if (!empty($submittedValue[$submit_name]))
     {
-      $this->value                 = true;
-      $whiteListValue[$this->name] = true;
+      $this->value                 = $this->valueChecked;
+      $whiteListValue[$this->name] = $this->valueChecked;
     }
     else
     {
-      $this->value                 = false;
-      $whiteListValue[$this->name] = false;
+      $this->value                 = $this->valueUnchecked;
+      $whiteListValue[$this->name] = $this->valueUnchecked;
     }
   }
 

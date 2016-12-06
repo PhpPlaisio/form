@@ -46,7 +46,7 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $input = new CheckboxControl('test1');
     $fieldset->addFormControl($input);
 
@@ -73,7 +73,7 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $input = new CheckboxControl('test2');
     $fieldset->addFormControl($input);
 
@@ -99,7 +99,7 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $input = new CheckboxControl('test3');
     $input->setValue(true);
     $fieldset->addFormControl($input);
@@ -142,6 +142,63 @@ class CheckboxControlTest extends PHPUnit_Framework_TestCase
 
     // Value has not changed.
     $this->assertArrayNotHasKey('test4', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test submit value with alternative values.
+   *
+   * In form unchecked.
+   * In POST unchecked.
+   */
+  public function testSubmittedValue5()
+  {
+    $form     = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxControl('test5');
+    $input->useValues(1, 0);
+    $fieldset->addFormControl($input);
+
+    $form->loadSubmittedValues();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    // Value has not set.
+    $this->assertSame(0, $values['test5']);
+    // Value has not change.
+    $this->assertArrayNotHasKey('test5', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test submit value with alternative values.
+   *
+   * In form unchecked.
+   * In POST checked.
+   */
+  public function testSubmittedValue6()
+  {
+    $_POST['test6'] = 'on';
+
+    $form     = new RawForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxControl('test6');
+    $input->useValues('1', '0');
+    $fieldset->addFormControl($input);
+
+    $form->loadSubmittedValues();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    // Value has not set.
+    $this->assertSame('1', $values['test6']);
+
+    // Value has changed.
+    $this->assertArrayHasKey('test6', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

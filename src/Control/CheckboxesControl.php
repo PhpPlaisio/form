@@ -7,9 +7,7 @@ use SetBased\Abc\Obfuscator\Obfuscator;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- *
- *
-
+ * Class for form controls of with multiple checkboxes.
  */
 class CheckboxesControl extends Control
 {
@@ -78,11 +76,25 @@ class CheckboxesControl extends Control
   protected $optionsObfuscator;
 
   /**
-   * The value of the checked radio button.
+   * The value of a checked checkbox.
    *
    * @var string
    */
   protected $value;
+
+  /**
+   * The value that must be used when a submitted value is checked.
+   *
+   * @var mixed
+   */
+  protected $valueChecked = true;
+
+  /**
+   * The value that must be used when a submitted value is not checked.
+   *
+   * @var mixed
+   */
+  protected $valueUnchecked = false;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -269,7 +281,7 @@ class CheckboxesControl extends Control
   public function setValuesBase($values)
   {
     if ($this->name==='')
-    { 
+    {
       // Nothing to do.
       ;
     }
@@ -286,6 +298,24 @@ class CheckboxesControl extends Control
     {
       $this->options[$id][$this->checkedKey] = !empty($values[$option[$this->keyKey]]);
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the values that must be used when the submitted value is checked and not checked.
+   *
+   * By default values true (checked) and false (not checked) are used.
+   *
+   * If the values of this checkboxes are stored as not nullable integers in a database one might use 1 for checked
+   * and 0 for not checked.
+   *
+   * @param mixed $checked   The value that must be used when the submitted value is checked.
+   * @param mixed $unchecked The value that must be used when the submitted value is not checked.
+   */
+  public function useValues($checked, $unchecked)
+  {
+    $this->valueChecked   = $checked;
+    $this->valueUnchecked = $unchecked;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -315,8 +345,16 @@ class CheckboxesControl extends Control
         // If the original value differs from the submitted value then the form control has been changed.
         if (empty($value)!==empty($submitted)) $changedInputs[$this->name][$key] = $this;
 
-        // Set the white listed value.
-        $whiteListValue[$this->name][$key] = !empty($submitted);
+        if (!empty($submitted))
+        {
+          $this->value[$key]                 = $this->valueChecked;
+          $whiteListValue[$this->name][$key] = $this->valueChecked;
+        }
+        else
+        {
+          $this->value[$key]                 = $this->valueUnchecked;
+          $whiteListValue[$this->name][$key] = $this->valueUnchecked;
+        }
       }
       else
       {
@@ -326,14 +364,19 @@ class CheckboxesControl extends Control
         // If the original value differs from the submitted value then the form control has been changed.
         if (empty($value)!==empty($submitted)) $changedInputs[$key] = $this;
 
-        // Set the white listed value.
-        $whiteListValue[$key] = !empty($submitted);
+        if (!empty($submitted))
+        {
+          $this->value[$key]    = $this->valueChecked;
+          $whiteListValue[$key] = $this->valueChecked;
+        }
+        else
+        {
+          $this->value[$key]    = $this->valueUnchecked;
+          $whiteListValue[$key] = $this->valueUnchecked;
+        }
       }
 
-      // Set the submitted value to be used method getSubmittedValue.
-      $this->value[$key] = !empty($submitted);
-
-      $this->options[$i][$this->checkedKey] = !empty($submitted);
+      $this->options[$i][$this->checkedKey] = $this->value[$key];
     }
   }
 
