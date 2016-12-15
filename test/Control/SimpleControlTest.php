@@ -56,7 +56,7 @@ abstract class SimpleControlTest extends PHPUnit_Framework_TestCase
     $input->setPrefix('Hello');
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
-    
+
     $form->prepare();
     $html = $form->generate();
 
@@ -92,6 +92,23 @@ abstract class SimpleControlTest extends PHPUnit_Framework_TestCase
   {
     $name          = 'Set Based IT Consultancy';
     $_POST['name'] = '';
+
+    $form    = $this->setupForm1($name);
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    $this->assertEmpty($values['name']);
+    $this->assertNotEmpty($changed['name']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with missing submitted value.
+   */
+  public function testValid103()
+  {
+    $name                = 'Set Based IT Consultancy';
+    $_POST['other_name'] = '';
 
     $form    = $this->setupForm1($name);
     $values  = $form->getValues();

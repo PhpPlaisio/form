@@ -22,7 +22,7 @@ class HiddenControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
-    else                    $this->attributes['value'] = $this->value;
+    else                  $this->attributes['value'] = $this->value;
 
     $ret = $this->prefix;
     $ret .= Html::generateVoidElement('input', $this->attributes);
@@ -50,21 +50,13 @@ class HiddenControl extends SimpleControl
   {
     $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    // Get the submitted value and clean it (if required).
-    if ($this->cleaner)
-    {
-      $new_value = $this->cleaner->clean($submittedValue[$submit_name]);
-    }
-    else
-    {
-      $new_value = $submittedValue[$submit_name];
-    }
+    // Get the submitted value.
+    $new_value = (isset($submittedValue[$submit_name])) ? $submittedValue[$submit_name] : null;
 
-    // Normalize old (original) value and new (submitted) value.
-    $old_value = (string)$this->value;
-    $new_value = (string)$new_value;
+    // Clean the submitted value, if we have a cleaner.
+    if ($this->cleaner) $new_value = $this->cleaner->clean($new_value);
 
-    if ($old_value!==$new_value)
+    if ((string)$this->value!==(string)$new_value)
     {
       $changedInputs[$this->name] = $this;
       $this->value                = $new_value;
