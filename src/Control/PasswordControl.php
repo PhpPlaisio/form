@@ -35,18 +35,6 @@ class PasswordControl extends SimpleControl
     $this->attributes['name']  = $this->submitName;
     $this->attributes['value'] = $this->value;
 
-    if (isset($this->attributes['maxlength']))
-    {
-      if (isset($this->attributes['size']))
-      {
-        $this->attributes['size'] = min($this->attributes['size'], $this->attributes['maxlength']);
-      }
-      else
-      {
-        $this->attributes['size'] = $this->attributes['maxlength'];
-      }
-    }
-
     $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
