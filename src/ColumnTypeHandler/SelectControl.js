@@ -1,4 +1,3 @@
-/*jslint browser: true, vars: true, indent: 2, maxlen: 120 */
 /*global define */
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14,6 +13,7 @@ define(
     //------------------------------------------------------------------------------------------------------------------
     /**
      * Prototype for column handlers for columns with a text input form control.
+     * 
      * @constructor
      */
     function SelectControl() {
@@ -29,32 +29,32 @@ define(
     /**
      * Returns the label of the checked radio button.
      *
-     * @param table_cell
+     * @param {HTMLTableCellElement} tableCell The table cell.
      *
      * @returns string
      */
-    SelectControl.prototype.extractForFilter = function (table_cell) {
+    SelectControl.prototype.extractForFilter = function (tableCell) {
       var text;
 
-      text = $(table_cell).find('select option:selected').text();
+      text = $(tableCell).find('select option:selected').text();
 
-      return OverviewTable.toLowerCaseNoAccents(text);
+      return OverviewTable.toLowerCaseNoDiacritics(text);
     };
 
     //------------------------------------------------------------------------------------------------------------------
     /**
      * Returns the label of the checked radio button.
      *
-     * @param table_cell
+     * @param {HTMLTableCellElement} tableCell The table cell.
      *
      * @returns string
      */
-    SelectControl.prototype.getSortKey = function (table_cell) {
+    SelectControl.prototype.getSortKey = function (tableCell) {
       var text;
 
-      text = $(table_cell).find('select option:selected').text();
+      text = $(tableCell).find('select option:selected').text();
 
-      return OverviewTable.toLowerCaseNoAccents(text);
+      return OverviewTable.toLowerCaseNoDiacritics(text);
     };
 
     //------------------------------------------------------------------------------------------------------------------

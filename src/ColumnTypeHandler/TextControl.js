@@ -1,4 +1,3 @@
-/*jslint browser: true, vars: true, indent: 2, maxlen: 120 */
 /*global define */
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14,6 +13,7 @@ define(
     //------------------------------------------------------------------------------------------------------------------
     /**
      * Prototype for column handlers for columns with a text input form control.
+     *
      * @constructor
      */
     function TextControl() {
@@ -27,19 +27,26 @@ define(
 
     //------------------------------------------------------------------------------------------------------------------
     /**
-     * Returns the text content of the input box in a table_cell.
+     * Returns the text content of the input box in a tableCell.
      *
-     * @param table_cell
+     * @param {HTMLTableElement} tableCell The table cell.
      *
      * @returns string
      */
-    TextControl.prototype.extractForFilter = function (table_cell) {
-      return OverviewTable.toLowerCaseNoAccents($(table_cell).find('input').val());
+    TextControl.prototype.extractForFilter = function (tableCell) {
+      return OverviewTable.toLowerCaseNoDiacritics($(tableCell).find('input').val());
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    TextControl.prototype.getSortKey = function (table_cell) {
-      return OverviewTable.toLowerCaseNoAccents($(table_cell).find('input').val());
+    /**
+     * Returns the text content of a table cell.
+     *
+     * @param {HTMLTableCellElement} tableCell The table cell.
+     *
+     * @returns {string}
+     */
+    TextControl.prototype.getSortKey = function (tableCell) {
+      return OverviewTable.toLowerCaseNoDiacritics($(tableCell).find('input').val());
     };
 
     //------------------------------------------------------------------------------------------------------------------

@@ -16,5 +16,9 @@
     "node_modules",
     "bower_components",
     "test"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "2.*",
+    "setbased-abc-table-overview-table": "*"
+  }
 }

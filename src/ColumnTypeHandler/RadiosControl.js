@@ -1,4 +1,3 @@
-/*jslint browser: true, vars: true, indent: 2, maxlen: 120 */
 /*global define */
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14,6 +13,7 @@ define(
     //------------------------------------------------------------------------------------------------------------------
     /**
      * Prototype for column handlers for columns with a text input form control.
+     *
      * @constructor
      */
     function RadiosControl() {
@@ -29,32 +29,32 @@ define(
     /**
      * Returns the label of the checked radio button.
      *
-     * @param table_cell
+     * @param {HTMLTableCellElement} tableCell The table cell.
      *
      * @returns string
      */
-    RadiosControl.prototype.extractForFilter = function (table_cell) {
+    RadiosControl.prototype.extractForFilter = function (tableCell) {
       var id;
 
-      id = $(table_cell).find('input[type="radio"]:checked').prop('id');
+      id = $(tableCell).find('input[type="radio"]:checked').prop('id');
 
-      return OverviewTable.toLowerCaseNoAccents(($('label[for=' + id + ']').text()));
+      return OverviewTable.toLowerCaseNoDiacritics(($('label[for=' + id + ']').text()));
     };
 
     //------------------------------------------------------------------------------------------------------------------
     /**
      * Returns the label of the checked radio button.
      *
-     * @param table_cell
+     * @param {HTMLTableCellElement} tableCell The table cell.
      *
      * @returns string
      */
-    RadiosControl.prototype.getSortKey = function (table_cell) {
+    RadiosControl.prototype.getSortKey = function (tableCell) {
       var id;
 
-      id = $(table_cell).find('input[type="radio"]:checked').prop('id');
+      id = $(tableCell).find('input[type="radio"]:checked').prop('id');
 
-      return OverviewTable.toLowerCaseNoAccents(($('label[for=' + id + ']').text()));
+      return OverviewTable.toLowerCaseNoDiacritics(($('label[for=' + id + ']').text()));
     };
 
     //------------------------------------------------------------------------------------------------------------------

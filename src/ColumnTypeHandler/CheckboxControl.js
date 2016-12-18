@@ -1,4 +1,3 @@
-/*jslint browser: true, vars: true, indent: 2, maxlen: 120 */
 /*global define */
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -26,14 +25,14 @@ define(
 
     //------------------------------------------------------------------------------------------------------------------
     /**
-     * Returns the text content of the input box in a table_cell.
+     * Returns the text content of the input box in a tableCell.
      *
-     * @param table_cell
+     * @param {HTMLTableCellElement} tableCell The table cell.
      *
      * @returns string
      */
-    CheckboxControl.prototype.extractForFilter = function (table_cell) {
-      if ($(table_cell).find('input:checkbox').prop('checked')) {
+    CheckboxControl.prototype.extractForFilter = function (tableCell) {
+      if ($(tableCell).find('input:checkbox').prop('checked')) {
         return '1';
       }
 
@@ -41,8 +40,15 @@ define(
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    CheckboxControl.prototype.getSortKey = function (table_cell) {
-      if ($(table_cell).find('input:checkbox').prop('checked')) {
+    /**
+     * Returns the text content of a table cell.
+     *
+     * @param {HTMLTableCellElement} tableCell The table cell.
+     *
+     * @returns {string}
+     */
+    CheckboxControl.prototype.getSortKey = function (tableCell) {
+      if ($(tableCell).find('input:checkbox').prop('checked')) {
         return '1';
       }
 

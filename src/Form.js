@@ -1,6 +1,4 @@
-/*jslint browser: true, vars: true, indent: 2, maxlen: 120 */
 /*global define */
-/*global require */
 
 //----------------------------------------------------------------------------------------------------------------------
 define(
@@ -15,6 +13,7 @@ define(
      * Object constructor.
      *
      * @param {jQuery} $form The jQuery object of the form (SetBased/Abc/Form/Form).
+     * 
      * @constructor
      */
     function Form($form) {

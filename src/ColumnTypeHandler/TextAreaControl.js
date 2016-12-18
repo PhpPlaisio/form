@@ -1,4 +1,3 @@
-/*jslint browser: true, vars: true, indent: 2, maxlen: 120 */
 /*global define */
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14,6 +13,7 @@ define(
     //------------------------------------------------------------------------------------------------------------------
     /**
      * Prototype for column handlers for columns with a textarea form control.
+     *
      * @constructor
      */
     function TextAreaControl() {
@@ -27,19 +27,26 @@ define(
 
     //------------------------------------------------------------------------------------------------------------------
     /**
-     * Returns the text content of the input box in a table_cell.
+     * Returns the text content of the input box in a tableCell.
      *
-     * @param table_cell
+     * @param {HTMLTableCellElement} tableCell The table cell.
      *
      * @returns string
      */
-    TextAreaControl.prototype.extractForFilter = function (table_cell) {
-      return OverviewTable.toLowerCaseNoAccents($(table_cell).find('textarea').val());
+    TextAreaControl.prototype.extractForFilter = function (tableCell) {
+      return OverviewTable.toLowerCaseNoDiacritics($(tableCell).find('textarea').val());
     };
 
     //------------------------------------------------------------------------------------------------------------------
-    TextAreaControl.prototype.getSortKey = function (table_cell) {
-      return OverviewTable.toLowerCaseNoAccents($(table_cell).find('textarea').val());
+    /**
+     * Returns the text content of a table cell.
+     *
+     * @param {HTMLTableCellElement} tableCell The table cell.
+     *
+     * @returns {string}
+     */
+    TextAreaControl.prototype.getSortKey = function (tableCell) {
+      return OverviewTable.toLowerCaseNoDiacritics($(tableCell).find('textarea').val());
     };
 
     //------------------------------------------------------------------------------------------------------------------
