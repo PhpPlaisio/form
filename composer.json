@@ -7,8 +7,6 @@
   ],
   "type": "library",
   "license": "MIT",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require-dev": {
     "phing/phing": "2.*",
     "phpunit/phpunit": "4.* || 5.*"
