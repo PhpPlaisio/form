@@ -76,9 +76,9 @@ class CheckboxesControl extends Control
   protected $optionsObfuscator;
 
   /**
-   * The value of a checked checkbox.
+   * The values of the checkboxes.
    *
-   * @var string
+   * @var array
    */
   protected $value;
 
