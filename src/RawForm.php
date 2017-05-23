@@ -128,34 +128,6 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates a fieldset and appends this fieldset to the list of field sets of this form.
-   *
-   * @param string $type The class name of the fieldset which must be derived from class FieldSet. The following
-   *                     aliases are implemented:
-   *                     * fieldset: class FieldSet
-   * @param string $name The name (which might be empty) of the fieldset.
-   *
-   * @return FieldSet
-   */
-  public function createFieldSet($type = 'fieldset', $name = '')
-  {
-    switch ($type)
-    {
-      case 'fieldset':
-        $fieldset = new FieldSet($name);
-        break;
-
-      default:
-        $fieldset = new $type($name);
-    }
-
-    $this->fieldSets->addFormControl($fieldset);
-
-    return $fieldset;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * {@inheritdoc}
    *
    * @since 1.0.0
