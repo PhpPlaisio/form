@@ -8,9 +8,9 @@ use SetBased\Abc\Form\Control\PasswordControl;
 class PasswordControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getControl($theName)
+  protected function getControl($name)
   {
-    return new PasswordControl($theName);
+    return new PasswordControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

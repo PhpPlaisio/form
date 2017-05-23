@@ -14,9 +14,9 @@ class ButtonControlTest extends PushMeControlTest
   /**
    * {@inheritdoc}
    */
-  protected function getControl($theName)
+  protected function getControl($name)
   {
-    return new ButtonControl($theName);
+    return new ButtonControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -14,9 +14,9 @@ class SubmitControlTest extends PushMeControlTest
   /**
    * {@inheritdoc}
    */
-  protected function getControl($theName)
+  protected function getControl($name)
   {
-    return new SubmitControl($theName);
+    return new SubmitControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -122,28 +122,28 @@ abstract class SimpleControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param $theName
+   * @param $name
    *
    * @return SimpleControl
    */
-  abstract protected function getControl($theName);
+  abstract protected function getControl($name);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a text form control.
    *
-   * @param string $theValue The value of the form control
+   * @param string $value The value of the form control
    *
    * @return RawForm
    */
-  private function setupForm1($theValue)
+  private function setupForm1($value)
   {
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('name');
-    if (isset($theValue)) $input->setValue($theValue);
+    if (isset($value)) $input->setValue($value);
     $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();

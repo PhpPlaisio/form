@@ -167,17 +167,17 @@ class MandatoryValidatorTest extends TestCase
   /**
    * Setups a form with a single form control of certain type.
    *
-   * @param SimpleControl $theControl
+   * @param SimpleControl $control
    *
    * @return RawForm
    */
-  private function setupForm1($theControl)
+  private function setupForm1($control)
   {
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
-    $input = $theControl;
+    $input = $control;
     $input->addValidator(new MandatoryValidator());
     $fieldset->addFormControl($input);
 

@@ -71,9 +71,9 @@ class TextControlTest extends SimpleControlTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getControl($theName)
+  protected function getControl($name)
   {
-    return new TextControl($theName);
+    return new TextControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

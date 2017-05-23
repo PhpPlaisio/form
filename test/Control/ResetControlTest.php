@@ -14,9 +14,9 @@ class ResetControlTest extends PushMeControlTest
   /**
    * {@inheritdoc}
    */
-  protected function getControl($theName)
+  protected function getControl($name)
   {
-    return new ResetControl($theName);
+    return new ResetControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

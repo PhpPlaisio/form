@@ -66,9 +66,9 @@ class HiddenControlTest extends SimpleControlTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getControl($theName)
+  protected function getControl($name)
   {
-    return new HiddenControl($theName);
+    return new HiddenControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

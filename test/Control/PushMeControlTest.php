@@ -2,6 +2,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Test\Control;
 
+use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\PushMeControl;
 use SetBased\Abc\Form\RawForm;
 
@@ -15,7 +16,7 @@ abstract class PushMeControlTest extends AbcTestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = $form->addFieldSet(new FieldSet());
 
     $input = $this->getControl('name');
     $fieldset->addFormControl($input);
@@ -41,7 +42,7 @@ abstract class PushMeControlTest extends AbcTestCase
   {
     // Create form.
     $form     = new RawForm();
-    $fieldset = $form->createFieldSet();
+    $fieldset = $form->addFieldSet(new FieldSet());
 
     $input = $this->getControl('button');
     $input->setValue("Do not push");
@@ -68,11 +69,11 @@ abstract class PushMeControlTest extends AbcTestCase
   /**
    * Returns a concrete instance of PushMeControl.
    *
-   * @param string $theName The of the control.
+   * @param string $name The of the control.
    *
    * @return PushMeControl
    */
-  abstract protected function getControl($theName);
+  abstract protected function getControl($name);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

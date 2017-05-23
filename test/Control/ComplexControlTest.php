@@ -450,20 +450,20 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test form with specific name of control.
    *
-   * @param string $theName The name of the form control.
+   * @param string $name The name of the form control.
    *
    * @return RawForm
    */
-  private function setForm3($theName)
+  private function setForm3($name)
   {
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
-    $complex = new ComplexControl($theName);
+    $complex = new ComplexControl($name);
     $fieldset->addFormControl($complex);
 
-    $input = new TextControl($theName);
+    $input = new TextControl($name);
     $complex->addFormControl($input);
 
     $this->myOriginComplexControl = $complex;

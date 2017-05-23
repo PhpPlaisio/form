@@ -277,19 +277,19 @@ class FormTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param string $theFieldSetName
-   * @param string $theComplexControlName
-   * @param string $theTextControlName
+   * @param string $fieldSetName
+   * @param string $complexControlName
+   * @param string $textControlName
    *
    * @return RawForm
    */
-  private function setupFormFind($theFieldSetName = 'vacation',
-                                 $theComplexControlName = 'post',
-                                 $theTextControlName = 'city'
+  private function setupFormFind($fieldSetName = 'vacation',
+                                 $complexControlName = 'post',
+                                 $textControlName = 'city'
   )
   {
     $form     = new RawForm();
-    $fieldset = new FieldSet($theFieldSetName);
+    $fieldset = new FieldSet($fieldSetName);
     $form->addFieldSet($fieldset);
 
     
@@ -333,12 +333,12 @@ class FormTest extends TestCase
     $complex->addFormControl($input);
 
 
-    $complex = new ComplexControl($theComplexControlName);
+    $complex = new ComplexControl($complexControlName);
     $fieldset->addFormControl($complex);
 
     $input = new TextControl('street');
     $complex->addFormControl($input);
-    $input = new TextControl($theTextControlName);
+    $input = new TextControl($textControlName);
     $complex->addFormControl($input);
 
 
