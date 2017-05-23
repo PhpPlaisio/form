@@ -35,7 +35,7 @@ class HtmlControl extends Control
   /**
    * Returns the value of this form control.
    *
-   * @return mixed
+   * @return string
    */
   public function getSubmittedValue()
   {
