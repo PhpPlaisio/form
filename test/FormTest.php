@@ -293,7 +293,7 @@ class FormTest extends TestCase
     $form->addFieldSet($fieldset);
 
     
-    $complex = new ComplexControl('');
+    $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
     
     $input = new TextControl('street');
@@ -324,7 +324,7 @@ class FormTest extends TestCase
     $form->addFieldSet($fieldset);
 
 
-    $complex = new ComplexControl('');
+    $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
 
     $input = new TextControl('street');
@@ -342,7 +342,7 @@ class FormTest extends TestCase
     $complex->addFormControl($input);
 
 
-    $complex = new ComplexControl('');
+    $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
 
     $input = new TextControl('street2');

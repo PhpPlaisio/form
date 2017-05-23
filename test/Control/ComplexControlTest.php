@@ -336,7 +336,7 @@ class ComplexControlTest extends AbcTestCase
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
-    $complex = new ComplexControl('');
+    $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
 
     $input = new TextControl('street');
@@ -375,7 +375,7 @@ class ComplexControlTest extends AbcTestCase
     $fieldset = new FieldSet('vacation');
     $form->addFieldSet($fieldset);
 
-    $complex = new ComplexControl('');
+    $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
 
     $input = new TextControl('street');
@@ -393,7 +393,7 @@ class ComplexControlTest extends AbcTestCase
     $input = new TextControl('city');
     $complex->addFormControl($input);
 
-    $complex = new ComplexControl('');
+    $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
 
     $input = new TextControl('street2');
@@ -417,7 +417,7 @@ class ComplexControlTest extends AbcTestCase
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
-    $complex1 = new ComplexControl('');
+    $complex1 = new ComplexControl();
     $fieldset->addFormControl($complex1);
 
     $input = new TextControl('field_1');
@@ -429,7 +429,7 @@ class ComplexControlTest extends AbcTestCase
     $input = new TextControl('field_2');
     $complex1->addFormControl($input);
 
-    $complex2 = new ComplexControl('');
+    $complex2 = new ComplexControl();
     $complex1->addFormControl($complex2);
 
     $input = new TextControl('field_3');

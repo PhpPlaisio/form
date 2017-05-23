@@ -41,6 +41,17 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Object constructor.
+   *
+   * @param string $name The (local) name of this complex form control.
+   */
+  public function __construct($name='')
+  {
+    parent::__construct($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Adds a form control to this complex form control.
    *
    * @param Control $control The from control added.
