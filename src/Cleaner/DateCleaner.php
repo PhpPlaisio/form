@@ -61,7 +61,7 @@ class DateCleaner implements Cleaner
    *
    * @param string|null $value The submitted date.
    *
-   * @return string
+   * @return string|null
    */
   public function clean($value)
   {
