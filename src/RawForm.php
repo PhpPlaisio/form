@@ -283,33 +283,6 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if the element (of type submit or image) has been submitted.
-   *
-   * @param string $name
-   *
-   * @return bool
-   */
-  public function isSubmitted($name)
-  {
-    switch ($this->attributes['method'])
-    {
-      case 'post':
-        if (isset($_POST[$name])) return true;
-        break;
-
-      case 'get':
-        if (isset($_GET[$name])) return true;
-        break;
-
-      default:
-        throw new FallenException('method', $this->attributes['method']);
-    }
-
-    return false;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Loads the submitted values. The white listed values can be obtained with method {@link getValues).
    *
    * @since 1.0.0
