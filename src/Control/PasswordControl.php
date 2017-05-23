@@ -53,7 +53,7 @@ class PasswordControl extends SimpleControl
     $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value.
-    $new_value = (isset($submittedValue[$submit_name])) ? $submittedValue[$submit_name] : null;
+    $new_value = $submittedValue[$submit_name] ?? null;
 
     // Clean the submitted value, if we have a cleaner.
     if ($this->cleaner) $new_value = $this->cleaner->clean($new_value);

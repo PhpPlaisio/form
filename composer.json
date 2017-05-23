@@ -9,10 +9,10 @@
   "license": "MIT",
   "require-dev": {
     "phing/phing": "^2.0",
-    "phpunit/phpunit": "^4.0 || ^5.0"
+    "phpunit/phpunit": "^6.0.0"
   },
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=7.0.0",
     "setbased/exception": "^1.0.0",
     "setbased/abc-html": "^1.0.0",
     "setbased/abc-obfuscator-interface": "^1.0.0",

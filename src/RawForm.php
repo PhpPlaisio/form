@@ -62,7 +62,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function __construct($name = '')
   {
-    $this->attributes['action'] = (isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : '';
+    $this->attributes['action'] = $_SERVER['REQUEST_URI'] ?? '';
     $this->attributes['method'] = 'post';
 
     $this->fieldSets = new ComplexControl($name);
@@ -101,7 +101,9 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function addFieldSet($fieldSet)
   {
-    return $this->fieldSets->addFormControl($fieldSet);
+    $this->fieldSets->addFormControl($fieldSet);
+
+    return $fieldSet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -138,7 +140,9 @@ class RawForm extends HtmlElement implements CompoundControl
         $fieldset = new $type($name);
     }
 
-    return $this->fieldSets->addFormControl($fieldset);
+    $this->fieldSets->addFormControl($fieldset);
+
+    return $fieldset;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

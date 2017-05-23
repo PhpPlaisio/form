@@ -1,11 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\ImageControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
-class ImageControlTest extends PHPUnit_Framework_TestCase
+class ImageControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()

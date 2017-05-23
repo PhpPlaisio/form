@@ -1,11 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LinkControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
-class LinkControlTest extends PHPUnit_Framework_TestCase
+class LinkControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
@@ -14,7 +16,7 @@ class LinkControlTest extends PHPUnit_Framework_TestCase
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
-    $input =  new LinkControl('name');
+    $input = new LinkControl('name');
     $input->setPrefix('Hello');
     $input->setPostfix('World');
     $fieldset->addFormControl($input);

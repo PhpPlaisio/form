@@ -335,12 +335,12 @@ class CheckboxesControl extends Control
       $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
       // Get the original value (i.e. the option is checked or not).
-      $value = (isset($option[$this->checkedKey])) ? $option[$this->checkedKey] : false;
+      $value = $option[$this->checkedKey] ?? false;
 
       if ($submit_name!=='')
       {
         // Get the submitted value (i.e. the option is checked or not).
-        $submitted = (isset($submittedValue[$submit_name][$code])) ? $submittedValue[$submit_name][$code] : false;
+        $submitted = $submittedValue[$submit_name][$code] ?? false;
 
         // If the original value differs from the submitted value then the form control has been changed.
         if (empty($value)!==empty($submitted)) $changedInputs[$this->name][$key] = $this;
@@ -359,7 +359,7 @@ class CheckboxesControl extends Control
       else
       {
         // Get the submitted value (i.e. the option is checked or not).
-        $submitted = (isset($submittedValue[$code])) ? $submittedValue[$code] : false;
+        $submitted = $submittedValue[$code] ?? false;
 
         // If the original value differs from the submitted value then the form control has been changed.
         if (empty($value)!==empty($submitted)) $changedInputs[$key] = $this;

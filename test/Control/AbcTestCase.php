@@ -2,38 +2,23 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\FileControl;
-use SetBased\Abc\Form\RawForm;
+use PHPUnit\Framework\TestCase;
 
 //----------------------------------------------------------------------------------------------------------------------
-class FileControlTest extends AbcTestCase
+class AbcTestCase extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  public function testPrefixAndPostfix()
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp()
   {
-    $form     = new RawForm();
-    $fieldset = new FieldSet('');
-    $form->addFieldSet($fieldset);
+    parent::setUp();
 
-    $input = new FileControl('name');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
-    $fieldset->addFormControl($input);
-
-    $form->prepare();
-    $html = $form->generate();
-
-    $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    $_POST = [];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-

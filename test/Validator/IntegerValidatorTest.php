@@ -1,12 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\IntegerValidator;
 
 //----------------------------------------------------------------------------------------------------------------------
-class IntegerValidatorTest extends PHPUnit_Framework_TestCase
+class IntegerValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /** A string must be invalid.

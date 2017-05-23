@@ -2,19 +2,22 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Test\Cleaner;
 
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Cleaner\Cleaner;
 
+//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class CleanerTest
  */
-abstract class CleanerTest extends \PHPUnit_Framework_TestCase
+abstract class CleanerTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected $myEmptyValues = ['', false, null, ' ', '  ', "\n", "\n \n", "\n \t"];
+  protected $emptyValues = ['', false, null, ' ', '  ', "\n", "\n \n", "\n \t"];
 
-  protected $myZeroValues = ['0', ' 0 ', "\t 0 \n"];
+  protected $zeroValues = ['0', ' 0 ', "\t 0 \n"];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Creates a cleaner.
    *
@@ -30,7 +33,7 @@ abstract class CleanerTest extends \PHPUnit_Framework_TestCase
   {
     $cleaner = $this->makeCleaner();
 
-    foreach ($this->myEmptyValues as $value)
+    foreach ($this->emptyValues as $value)
     {
       $cleaned = $cleaner->clean($value);
 
@@ -46,7 +49,7 @@ abstract class CleanerTest extends \PHPUnit_Framework_TestCase
   {
     $cleaner = $this->makeCleaner();
 
-    foreach ($this->myZeroValues as $value)
+    foreach ($this->zeroValues as $value)
     {
       $cleaned = $cleaner->clean($value);
 

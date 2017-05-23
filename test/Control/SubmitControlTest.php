@@ -1,8 +1,8 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-use SetBased\Abc\Form\Control\SubmitControl;
+namespace SetBased\Abc\Form\Test\Control;
 
-require_once(__DIR__.'/PushMeControlTest.php');
+use SetBased\Abc\Form\Control\SubmitControl;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -10,6 +10,15 @@ require_once(__DIR__.'/PushMeControlTest.php');
  */
 class SubmitControlTest extends PushMeControlTest
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * {@inheritdoc}
+   */
+  protected function getControl($theName)
+  {
+    return new SubmitControl($theName);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Return submit type for form control.
@@ -21,15 +30,6 @@ class SubmitControlTest extends PushMeControlTest
     return 'submit';
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * {@inheritdoc}
-   */
-  protected function getControl($theName)
-  {
-    return new SubmitControl($theName);
-  } 
-  
   //--------------------------------------------------------------------------------------------------------------------
 }
 

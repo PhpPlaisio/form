@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\FieldSet;
@@ -12,7 +14,7 @@ use SetBased\Abc\Form\Validator\MandatoryValidator;
 /**
  * Class ButtonControlTest
  */
-class ComplexControlTest extends PHPUnit_Framework_TestCase
+class ComplexControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -26,6 +28,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   private $myOriginControl;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test find FormControl by name.
    */
@@ -75,7 +78,6 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $input = $form->findFormControlByPath('/vacation/post/street');
     $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
-
     // Find form control by path what does not exist. Must return null.
     $input = $form->findFormControlByPath('/not_exists');
     $this->assertEquals(null, $input);
@@ -85,7 +87,6 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
 
     $input = $form->findFormControlByPath('/vacation/not_exists');
     $this->assertEquals(null, $input);
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -135,7 +136,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   /**
    * Get form control by name what does not exist. Must trow exception.
    *
-   * @expectedException Exception
+   * @expectedException \Exception
    */
   public function testGetNotExistsFormControlByName1()
   {
@@ -147,7 +148,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   /**
    * Get form control by name what does not exist. Must trow exception.
    *
-   * @expectedException Exception
+   * @expectedException \Exception
    */
   public function testGetNotExistsFormControlByName2()
   {
@@ -159,7 +160,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   /**
    * Get form control by name what does not exist. Must trow exception.
    *
-   * @expectedException Exception
+   * @expectedException \Exception
    */
   public function testGetNotExistsFormControlByName3()
   {
@@ -171,7 +172,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   /**
    * Get form control by path what does not exist. Must trow exception.
    *
-   * @expectedException Exception
+   * @expectedException \Exception
    */
   public function testGetNotExistsFormControlByPath1()
   {
@@ -183,7 +184,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   /**
    * Get form control by path what does not exist. Must trow exception.
    *
-   * @expectedException Exception
+   * @expectedException \Exception
    */
   public function testGetNotExistsFormControlByPath2()
   {
@@ -196,7 +197,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   /**
    * Get form control by path what does not exist. Must trow exception.
    *
-   * @expectedException Exception
+   * @expectedException \Exception
    */
   public function testGetNotExistsFormControlByPath3()
   {
@@ -208,7 +209,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
   /**
    * Get form control by path what does not exist. Must trow exception.
    *
-   * @expectedException Exception
+   * @expectedException \Exception
    */
   public function testGetNotExistsFormControlByPath4()
   {
@@ -278,7 +279,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
    */
   public function testValidate()
   {
-    $form = new RawForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -334,7 +335,7 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $complex = new ComplexControl('');
     $fieldset->addFormControl($complex);
 
@@ -344,7 +345,6 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $input = new TextControl('city');
     $complex->addFormControl($input);
 
-
     $complex = new ComplexControl('post');
     $fieldset->addFormControl($complex);
 
@@ -353,7 +353,6 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
 
     $input = new TextControl('city');
     $complex->addFormControl($input);
-
 
     $complex = new ComplexControl('post');
     $fieldset->addFormControl($complex);
@@ -364,7 +363,6 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $input = new TextControl('state');
     $complex->addFormControl($input);
 
-
     $complex = new ComplexControl('post');
     $fieldset->addFormControl($complex);
 
@@ -374,10 +372,8 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $input = new TextControl('state');
     $complex->addFormControl($input);
 
-
     $fieldset = new FieldSet('vacation');
     $form->addFieldSet($fieldset);
-
 
     $complex = new ComplexControl('');
     $fieldset->addFormControl($complex);
@@ -388,7 +384,6 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $input = new TextControl('city');
     $complex->addFormControl($input);
 
-
     $complex = new ComplexControl('post');
     $fieldset->addFormControl($complex);
 
@@ -397,7 +392,6 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
 
     $input = new TextControl('city');
     $complex->addFormControl($input);
-
 
     $complex = new ComplexControl('');
     $fieldset->addFormControl($complex);
@@ -423,13 +417,11 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
-
     $complex1 = new ComplexControl('');
     $fieldset->addFormControl($complex1);
 
     $input = new TextControl('field_1');
     $complex1->addFormControl($input);
-
 
     $complex1 = new ComplexControl('complex_name');
     $fieldset->addFormControl($complex1);
@@ -437,13 +429,11 @@ class ComplexControlTest extends PHPUnit_Framework_TestCase
     $input = new TextControl('field_2');
     $complex1->addFormControl($input);
 
-
     $complex2 = new ComplexControl('');
     $complex1->addFormControl($complex2);
 
     $input = new TextControl('field_3');
     $complex2->addFormControl($input);
-
 
     $complex3 = new ComplexControl('complex_name2');
     $complex2->addFormControl($complex3);

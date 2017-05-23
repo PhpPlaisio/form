@@ -1,8 +1,8 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-use SetBased\Abc\Form\Control\PasswordControl;
+namespace SetBased\Abc\Form\Test\Control;
 
-require_once(__DIR__.'/SimpleControlTest.php');
+use SetBased\Abc\Form\Control\PasswordControl;
 
 //----------------------------------------------------------------------------------------------------------------------
 class PasswordControlTest extends SimpleControlTest

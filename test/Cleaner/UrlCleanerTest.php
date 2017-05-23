@@ -8,9 +8,6 @@ use SetBased\Abc\Form\Cleaner\UrlCleaner;
 class UrlCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected $myZeroValues = [];
-
-  //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
@@ -99,6 +96,22 @@ class UrlCleanerTest extends CleanerTest
     $raw   = 'mailto:info@setbased.nl ';
     $value = $cleaner->clean($raw);
     $this->assertEquals('mailto:info@setbased.nl', $value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * UrlCleaner must return 'http://0/' (instead of '0').
+   */
+  public function testZeroValues()
+  {
+    $cleaner = $this->makeCleaner();
+
+    foreach ($this->zeroValues as $value)
+    {
+      $cleaned = $cleaner->clean($value);
+
+      $this->assertEquals('http://0/', $cleaned, sprintf("Cleaning '%s' must return 'http://0'.", addslashes($value)));
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

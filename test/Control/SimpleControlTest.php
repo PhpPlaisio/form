@@ -1,14 +1,16 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Abstract super class for test for TextControl, HiddenControl, and PasswordControl.
+ * Abstract super class for test for TextControl, HiddenControl, and PasswordControl.
  */
-abstract class SimpleControlTest extends PHPUnit_Framework_TestCase
+abstract class SimpleControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

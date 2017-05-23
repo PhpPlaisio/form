@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\PushMeControl;
 use SetBased\Abc\Form\RawForm;
 
@@ -7,7 +9,7 @@ use SetBased\Abc\Form\RawForm;
 /**
  * Class PushMeControlTest
  */
-abstract class PushMeControlTest extends PHPUnit_Framework_TestCase
+abstract class PushMeControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
@@ -53,22 +55,14 @@ abstract class PushMeControlTest extends PHPUnit_Framework_TestCase
     $form->prepare();
     $html = $form->generate();
 
-    $doc = new DOMDocument();
+    $doc = new \DOMDocument();
     $doc->loadXML($html);
-    $xpath = new DOMXpath($doc);
+    $xpath = new \DOMXpath($doc);
 
     // Names of buttons must be absolute setValue has no effect for buttons.
     $list = $xpath->query("/form/fieldset/input[@name='button' and @value='Do not push' and @type='".$this->getControlType()."']");
     $this->assertEquals(1, $list->length);
   }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Return type of form control.
-   *
-   * @return string
-   */
-  abstract protected function getControlType();
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -79,6 +73,14 @@ abstract class PushMeControlTest extends PHPUnit_Framework_TestCase
    * @return PushMeControl
    */
   abstract protected function getControl($theName);
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Return type of form control.
+   *
+   * @return string
+   */
+  abstract protected function getControlType();
 
   //--------------------------------------------------------------------------------------------------------------------
 }

@@ -1,11 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\InvisibleControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
-class InvisibleControlTest extends PHPUnit_Framework_TestCase
+class InvisibleControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testForm1()

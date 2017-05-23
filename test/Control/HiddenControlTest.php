@@ -1,6 +1,6 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-require_once(__DIR__.'/SimpleControlTest.php');
+namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
 use SetBased\Abc\Form\Control\FieldSet;
@@ -21,7 +21,7 @@ class HiddenControlTest extends SimpleControlTest
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $input = new HiddenControl('test');
     $input->setValue('Old value');
     $fieldset->addFormControl($input);
@@ -45,7 +45,7 @@ class HiddenControlTest extends SimpleControlTest
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $input = new HiddenControl('test');
     $input->setValue('Hello World!');
     $fieldset->addFormControl($input);
@@ -63,7 +63,6 @@ class HiddenControlTest extends SimpleControlTest
 
     // Value not change.
     $this->assertArrayNotHasKey('test', $changed);
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
@@ -8,7 +10,7 @@ use SetBased\Abc\Form\RawForm;
 /**
  * Class CheckboxesControlTest Test class for testing SatBased\Html\Form\CheckboxesControl class.
  */
-class CheckboxesControlTest extends PHPUnit_Framework_TestCase
+class CheckboxesControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -130,9 +132,9 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
     $form->prepare();
     $html = $form->generate();
 
-    $doc = new DOMDocument();
+    $doc = new \DOMDocument();
     $doc->loadXML($html);
-    $xpath = new DOMXpath($doc);
+    $xpath = new \DOMXpath($doc);
 
     // Asset that the checkboxes are set or unset according to the $values.
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");
@@ -185,9 +187,9 @@ class CheckboxesControlTest extends PHPUnit_Framework_TestCase
     $form->prepare();
     $form = $form->generate();
 
-    $doc = new DOMDocument();
+    $doc = new \DOMDocument();
     $doc->loadXML($form);
-    $xpath = new DOMXpath($doc);
+    $xpath = new \DOMXpath($doc);
 
     // Asset that the checkboxes are set or unset according to the $values.
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");

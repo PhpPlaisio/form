@@ -1,12 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\HttpValidator;
 
 //----------------------------------------------------------------------------------------------------------------------
-class HttpValidatorTest extends PHPUnit_Framework_TestCase
+class HttpValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

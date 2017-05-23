@@ -1,5 +1,6 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\FieldSet;
@@ -10,7 +11,7 @@ use SetBased\Abc\Form\RawForm;
 /**
  * Class FormTest
  */
-class FormTest extends PHPUnit_Framework_TestCase
+class FormTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

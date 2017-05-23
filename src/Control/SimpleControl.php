@@ -415,7 +415,7 @@ abstract class SimpleControl extends Control
    */
   public function setValuesBase($values)
   {
-    $this->setValue(isset($values[$this->name]) ? $values[$this->name] : null);
+    $this->setValue($values[$this->name] ?? null);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

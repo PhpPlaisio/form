@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Cleaner\DateCleaner;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
@@ -20,7 +22,7 @@ class TextControlTest extends SimpleControlTest
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $input = new TextControl('birthday');
     $input->setValue('1966-04-10');
     $input->setCleaner(new DateCleaner('d-m-Y', '-', '/-. '));
@@ -37,7 +39,6 @@ class TextControlTest extends SimpleControlTest
 
     // Effectively the date is not changed.
     $this->assertArrayNotHasKey('birthday', $changed);
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -52,8 +53,8 @@ class TextControlTest extends SimpleControlTest
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
-    $input =  new TextControl('test');
+
+    $input = new TextControl('test');
     $input->setValue('Hello World!');
     $fieldset->addFormControl($input);
 

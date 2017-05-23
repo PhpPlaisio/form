@@ -1,11 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
-class SelectControlTest extends PHPUnit_Framework_TestCase
+class SelectControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
@@ -18,7 +20,7 @@ class SelectControlTest extends PHPUnit_Framework_TestCase
     $input->setPrefix('Hello');
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
-    
+
     $form->prepare();
     $html = $form->generate();
 
@@ -87,8 +89,8 @@ class SelectControlTest extends PHPUnit_Framework_TestCase
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
-    $input  = new SelectControl('cnt_id');
+
+    $input = new SelectControl('cnt_id');
     $input->setEmptyOption();
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
@@ -112,7 +114,7 @@ class SelectControlTest extends PHPUnit_Framework_TestCase
     $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
-    
+
     $input = new SelectControl('cnt_id');
     $input->setEmptyOption(true);
     $input->setValue('1');

@@ -1,12 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\DateControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\DateValidator;
 
 //----------------------------------------------------------------------------------------------------------------------
-class DateValidatorTest extends PHPUnit_Framework_TestCase
+class DateValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

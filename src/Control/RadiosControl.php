@@ -229,7 +229,7 @@ class RadiosControl extends Control
    */
   public function setValuesBase($values)
   {
-    $this->value = (isset($values[$this->name])) ? $values[$this->name] : null;
+    $this->value = $values[$this->name] ?? null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

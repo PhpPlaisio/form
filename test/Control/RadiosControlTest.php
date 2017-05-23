@@ -1,11 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadiosControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
-class RadiosControlTest extends PHPUnit_Framework_TestCase
+class RadiosControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

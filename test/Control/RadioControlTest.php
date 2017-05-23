@@ -1,11 +1,13 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Control;
+
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadioControl;
 use SetBased\Abc\Form\RawForm;
 
 //----------------------------------------------------------------------------------------------------------------------
-class RadioControlTest extends PHPUnit_Framework_TestCase
+class RadioControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
@@ -18,7 +20,7 @@ class RadioControlTest extends PHPUnit_Framework_TestCase
     $input->setPrefix('Hello');
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
-    
+
     $form->prepare();
     $html = $form->generate();
 
@@ -99,7 +101,6 @@ class RadioControlTest extends PHPUnit_Framework_TestCase
     $this->assertArrayHasKey('name', $values);
     $this->assertNull($values['name']);
     $this->assertEmpty($form->getChangedControls());
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------

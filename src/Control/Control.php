@@ -123,7 +123,7 @@ abstract class Control extends HtmlElement
    */
   public function getAttribute($name)
   {
-    return (isset($this->attributes[$name])) ? $this->attributes[$name] : null;
+    return $this->attributes[$name] ?? null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

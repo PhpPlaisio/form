@@ -9,9 +9,9 @@ use SetBased\Abc\Form\Cleaner\AmbiguityCleaner;
 class AmbiguityCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected $myEmptyValues = ['', false, null];
+  protected $emptyValues = ['', false, null];
 
-  protected $myZeroValues = ['0'];
+  protected $zeroValues = ['0'];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

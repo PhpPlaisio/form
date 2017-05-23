@@ -1,9 +1,10 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Formatter\DateFormatter;
 
 //----------------------------------------------------------------------------------------------------------------------
-class DateFormatterTest extends PHPUnit_Framework_TestCase
+class DateFormatterTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testInvalidDate1()

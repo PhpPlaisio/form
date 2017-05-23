@@ -1,5 +1,6 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
@@ -11,7 +12,7 @@ use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
 //----------------------------------------------------------------------------------------------------------------------
-class MandatoryValidatorTest extends PHPUnit_Framework_TestCase
+class MandatoryValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

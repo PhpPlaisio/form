@@ -1,8 +1,8 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-use SetBased\Abc\Form\Control\ResetControl;
+namespace SetBased\Abc\Form\Test\Control;
 
-require_once(__DIR__.'/PushMeControlTest.php');
+use SetBased\Abc\Form\Control\ResetControl;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -10,6 +10,15 @@ require_once(__DIR__.'/PushMeControlTest.php');
  */
 class ResetControlTest extends PushMeControlTest
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * {@inheritdoc}
+   */
+  protected function getControl($theName)
+  {
+    return new ResetControl($theName);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Return reset type for form control.
@@ -21,15 +30,6 @@ class ResetControlTest extends PushMeControlTest
     return 'reset';
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * {@inheritdoc}
-   */
-  protected function getControl($theName)
-  {
-    return new ResetControl($theName);
-  } 
-  
   //--------------------------------------------------------------------------------------------------------------------
 }
 
