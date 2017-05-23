@@ -59,6 +59,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * Object constructor.
    *
    * @param string $name The name of the form.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct($name = '')
   {
@@ -98,6 +101,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * @param FieldSet $fieldSet
    *
    * @return FieldSet
+   *
+   * @since 1.0.0
+   * @api
    */
   public function addFieldSet($fieldSet)
   {
@@ -111,6 +117,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * Adds a compound validator to list of compound validators for this form.
    *
    * @param CompoundValidator $validator
+   *
+   * @since 1.0.0
+   * @api
    */
   public function addValidator($validator)
   {
@@ -148,6 +157,9 @@ class RawForm extends HtmlElement implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
+   *
+   * @since 1.0.0
+   * @api
    */
   public function findFormControlByName($name)
   {
@@ -157,6 +169,9 @@ class RawForm extends HtmlElement implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
+   *
+   * @since 1.0.0
+   * @api
    */
   public function findFormControlByPath($path)
   {
@@ -165,17 +180,22 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the HTML code of this form.
+   *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate()
   {
-    $ret = $this->generateStartTag();
+    $html = $this->generateStartTag();
 
-    $ret .= $this->generateBody();
+    $html .= $this->generateBody();
 
-    $ret .= $this->generateEndTag();
+    $html .= $this->generateEndTag();
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -183,8 +203,11 @@ class RawForm extends HtmlElement implements CompoundControl
    * Returns all form control names of which the value has been changed.
    *
    * @return array A nested array of form control names (keys are form control names and (for complex form controls)
-   *               values are arrays or (for simple form controls) @c true).
+   *               values are arrays or (for simple form controls) true).
    * @note This method should only be invoked after method Form::loadSubmittedValues() has been invoked.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getChangedControls()
   {
@@ -194,6 +217,9 @@ class RawForm extends HtmlElement implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getFormControlByName($name)
   {
@@ -203,6 +229,9 @@ class RawForm extends HtmlElement implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getFormControlByPath($path)
   {
@@ -216,6 +245,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * @return array A nested array of form control names (keys are form control names and (for complex form controls)
    *               values are arrays or (for simple form controls) true).
    * @note This method should only be invoked after method Form::validate() has been invoked.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getInvalidControls()
   {
@@ -257,6 +289,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * @note This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
    *
    * @return array
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getValues()
   {
@@ -304,6 +339,9 @@ class RawForm extends HtmlElement implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Loads the submitted values. The white listed values can be obtained with method {@link getValues).
+   *
+   * @since 1.0.0
+   * @api
    */
   public function loadSubmittedValues()
   {
@@ -340,6 +378,9 @@ class RawForm extends HtmlElement implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Prepares this form for HTML code generation or loading submitted values.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function prepare()
   {
@@ -352,6 +393,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * was given the access the current page, i.e. $_SERVER['REQUEST_URI'].
    *
    * @param string $url The URL to send the form-data when this form is submitted.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrAction($url)
   {
@@ -366,6 +410,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * * Null will unset the attribute.
    *
    * @param mixed $autoComplete The auto complete.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrAutoComplete($autoComplete)
   {
@@ -380,6 +427,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * * text/plain
    *
    * @param string $encType The encoding type.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrEncType($encType)
   {
@@ -393,6 +443,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * * get
    *
    * @param string $method The method.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrMethod($method)
   {
@@ -417,6 +470,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * passed their validations validates the form itself against all its installed validation checks.
    *
    * @return bool True if the submitted values are valid, false otherwise.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate()
   {
@@ -425,7 +481,12 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the inner HTML code of this form.
+   *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generateBody()
   {
@@ -434,7 +495,12 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the end tag of this form.
+   *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generateEndTag()
   {
@@ -443,7 +509,12 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the start tag of this form.
+   *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generateStartTag()
   {
