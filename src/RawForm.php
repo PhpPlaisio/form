@@ -228,10 +228,10 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the current values of the form controls of this form. This method can be invoked be for
+   * Returns the current values of the form controls of this form. This method can be invoked before
    * loadSubmittedValues has been invoked. The values returned are the values set with {@link setValues},
    * {@link mergeValues}, and {@link SimpleControl.setValue}. These values might not be white listed.
-   * After {@link loadSubmittedValues} has been invoked use getValues.
+   * After {@link loadSubmittedValues} has been invoked use {@link getValues}.
    *
    * @return array
    */
