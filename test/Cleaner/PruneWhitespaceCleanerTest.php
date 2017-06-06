@@ -23,7 +23,7 @@ class PruneWhitespaceCleanerTest extends CleanerTest
     $cleaner = PruneWhitespaceCleaner::get();
     $value   = $cleaner->clean($raw);
 
-    $this->assertEquals('Hello World!', $value);
+    self::assertEquals('Hello World!', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

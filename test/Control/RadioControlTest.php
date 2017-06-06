@@ -25,10 +25,10 @@ class RadioControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ class RadioControlTest extends AbcTestCase
     $form   = $this->setForm1();
     $values = $form->getValues();
 
-    $this->assertEquals('2', $values['name']);
+    self::assertEquals('2', $values['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ class RadioControlTest extends AbcTestCase
     $form   = $this->setForm2();
     $values = $form->getValues();
 
-    $this->assertEquals(2, $values['name']);
+    self::assertEquals(2, $values['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ class RadioControlTest extends AbcTestCase
     $form   = $this->setForm2();
     $values = $form->getValues();
 
-    $this->assertEquals(3, $values['name']);
+    self::assertEquals(3, $values['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ class RadioControlTest extends AbcTestCase
     $form   = $this->setForm3();
     $values = $form->getValues();
 
-    $this->assertEquals('0.0', $values['name']);
+    self::assertEquals('0.0', $values['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -98,9 +98,9 @@ class RadioControlTest extends AbcTestCase
     $form   = $this->setForm1();
     $values = $form->getValues();
 
-    $this->assertArrayHasKey('name', $values);
-    $this->assertNull($values['name']);
-    $this->assertEmpty($form->getChangedControls());
+    self::assertArrayHasKey('name', $values);
+    self::assertNull($values['name']);
+    self::assertEmpty($form->getChangedControls());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -115,10 +115,10 @@ class RadioControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertArrayHasKey('name', $values);
-    $this->assertNull($values['name']);
+    self::assertArrayHasKey('name', $values);
+    self::assertNull($values['name']);
 
-    $this->assertNotEmpty($changed['name']);
+    self::assertNotEmpty($changed['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

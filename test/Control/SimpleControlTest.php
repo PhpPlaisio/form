@@ -25,8 +25,8 @@ abstract class SimpleControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertEquals($name, $values['name']);
-    $this->assertNotEmpty($changed['name']);
+    self::assertEquals($name, $values['name']);
+    self::assertNotEmpty($changed['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -42,8 +42,8 @@ abstract class SimpleControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertEquals($name, $values['name']);
-    $this->assertNotEmpty($changed['name']);
+    self::assertEquals($name, $values['name']);
+    self::assertNotEmpty($changed['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -63,10 +63,10 @@ abstract class SimpleControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -82,8 +82,8 @@ abstract class SimpleControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertEquals($name, $values['name']);
-    $this->assertNotEmpty($changed['name']);
+    self::assertEquals($name, $values['name']);
+    self::assertNotEmpty($changed['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -99,8 +99,8 @@ abstract class SimpleControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertEmpty($values['name']);
-    $this->assertNotEmpty($changed['name']);
+    self::assertEmpty($values['name']);
+    self::assertNotEmpty($changed['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -116,8 +116,8 @@ abstract class SimpleControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertEmpty($values['name']);
-    $this->assertNotEmpty($changed['name']);
+    self::assertEmpty($values['name']);
+    self::assertNotEmpty($changed['name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

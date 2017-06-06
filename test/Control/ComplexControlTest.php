@@ -38,17 +38,17 @@ class ComplexControlTest extends AbcTestCase
 
     // Find form control by name. Must return object.
     $input = $form->findFormControlByName('street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     // Find form control by name what does not exist. Must return null.
     $input = $form->findFormControlByName('not_exists');
-    $this->assertEquals(null, $input);
+    self::assertEquals(null, $input);
 
     $input = $form->findFormControlByName('/no_path/not_exists');
-    $this->assertEquals(null, $input);
+    self::assertEquals(null, $input);
 
     $input = $form->findFormControlByName('/vacation/not_exists');
-    $this->assertEquals(null, $input);
+    self::assertEquals(null, $input);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -61,32 +61,32 @@ class ComplexControlTest extends AbcTestCase
 
     // Find form control by path. Must return object.
     $input = $form->findFormControlByPath('/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->findFormControlByPath('/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->findFormControlByPath('/post/zip-code');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->findFormControlByPath('/vacation/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->findFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->findFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     // Find form control by path what does not exist. Must return null.
     $input = $form->findFormControlByPath('/not_exists');
-    $this->assertEquals(null, $input);
+    self::assertEquals(null, $input);
 
     $input = $form->findFormControlByPath('/no_path/not_exists');
-    $this->assertEquals(null, $input);
+    self::assertEquals(null, $input);
 
     $input = $form->findFormControlByPath('/vacation/not_exists');
-    $this->assertEquals(null, $input);
+    self::assertEquals(null, $input);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -99,11 +99,11 @@ class ComplexControlTest extends AbcTestCase
 
     // Get form control by name. Must return object.
     $input = $form->getFormControlByName('vacation');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $input->getFormControlByName('city2');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
-    $this->assertEquals('city2', $input->getLocalName());
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertEquals('city2', $input->getLocalName());
   }
 
 
@@ -117,19 +117,19 @@ class ComplexControlTest extends AbcTestCase
 
     // Get form control by path. Must return object.
     $input = $form->getFormControlByPath('/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->getFormControlByPath('/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->getFormControlByPath('/vacation/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->getFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
     $input = $form->getFormControlByPath('/vacation/post/street');
-    $this->assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -233,13 +233,13 @@ class ComplexControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertArrayHasKey('field_1', $values);
-    $this->assertArrayHasKey('field_2', $values['complex_name']);
+    self::assertArrayHasKey('field_1', $values);
+    self::assertArrayHasKey('field_2', $values['complex_name']);
 
-    $this->assertArrayHasKey('field_3', $values['complex_name']);
-    $this->assertArrayHasKey('field_4', $values['complex_name']['complex_name2']);
+    self::assertArrayHasKey('field_3', $values['complex_name']);
+    self::assertArrayHasKey('field_4', $values['complex_name']['complex_name2']);
 
-    $this->assertNotEmpty($changed);
+    self::assertNotEmpty($changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -259,17 +259,17 @@ class ComplexControlTest extends AbcTestCase
       $complex_control = $form->findFormControlByName($name);
 
       // Test for complex control.
-      $this->assertNotEmpty($complex_control);
-      $this->assertEquals($this->myOriginComplexControl, $complex_control);
-      $this->assertEquals($name, $complex_control->getLocalName());
+      self::assertNotEmpty($complex_control);
+      self::assertEquals($this->myOriginComplexControl, $complex_control);
+      self::assertEquals($name, $complex_control->getLocalName());
 
       // Find control by name.
       $input = $complex_control->findFormControlByName($name);
 
       // Test for control.
-      $this->assertNotEmpty($input);
-      $this->assertEquals($this->myOriginControl, $input);
-      $this->assertEquals($name, $input->getLocalName());
+      self::assertNotEmpty($input);
+      self::assertEquals($this->myOriginControl, $input);
+      self::assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -303,7 +303,7 @@ class ComplexControlTest extends AbcTestCase
     $invalid = $form->getInvalidControls();
 
     // We expect 2 invalid controls.
-    $this->assertCount(2, $invalid);
+    self::assertCount(2, $invalid);
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -320,10 +320,10 @@ class ComplexControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertArrayNotHasKey('unknown_field', $values);
-    $this->assertArrayNotHasKey('unknown_complex', $values);
+    self::assertArrayNotHasKey('unknown_field', $values);
+    self::assertArrayNotHasKey('unknown_complex', $values);
 
-    $this->assertEmpty($changed);
+    self::assertEmpty($changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

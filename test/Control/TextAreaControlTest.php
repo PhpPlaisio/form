@@ -27,10 +27,10 @@ class TextAreaControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -58,10 +58,10 @@ class TextAreaControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // After clean '  Hello    World!   ' must be equal 'Hello World!'.
-    $this->assertEquals('Hello World!', $values['test']);
+    self::assertEquals('Hello World!', $values['test']);
 
     // Value not change.
-    $this->assertArrayNotHasKey('test', $changed);
+    self::assertArrayNotHasKey('test', $changed);
   }
 
 
@@ -86,10 +86,10 @@ class TextAreaControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertEquals('Hello World!', $values['test']);
+    self::assertEquals('Hello World!', $values['test']);
 
     // Value is change.
-    $this->assertNotEmpty($changed['test']);
+    self::assertNotEmpty($changed['test']);
   }
   //--------------------------------------------------------------------------------------------------------------------
 }

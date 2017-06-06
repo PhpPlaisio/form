@@ -48,7 +48,7 @@ class HtmlControlTest extends AbcTestCase
 
     $values = $form->getValues();
 
-    $this->assertSame($html, $values['snippet']);
+    self::assertSame($html, $values['snippet']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ class HtmlControlTest extends AbcTestCase
 
     $values = $form->getValues();
 
-    $this->assertSame($html, $values['snippet']);
+    self::assertSame($html, $values['snippet']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class HtmlControlTest extends AbcTestCase
 
     $values = $form->getValues();
 
-    $this->assertSame($html, $values['snippet']);
+    self::assertSame($html, $values['snippet']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ class HtmlControlTest extends AbcTestCase
 
     $values = $form->getValues();
 
-    $this->assertSame('&lt;&amp;&gt;', $values['snippet']);
+    self::assertSame('&lt;&amp;&gt;', $values['snippet']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ class HtmlControlTest extends AbcTestCase
 
     $values = $form->getValues();
 
-    $this->assertSame($html, $values['snippet']);
+    self::assertSame($html, $values['snippet']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

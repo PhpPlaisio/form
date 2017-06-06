@@ -20,7 +20,7 @@ class RadiosControlTest extends AbcTestCase
     $form   = $this->setupForm1();
     $values = $form->getValues();
 
-    $this->assertEquals('3', $values['cnt_id']);
+    self::assertEquals('3', $values['cnt_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ class RadiosControlTest extends AbcTestCase
     $form   = $this->setupForm2();
     $values = $form->getValues();
 
-    $this->assertEquals('3', $values['cnt_id']);
+    self::assertEquals('3', $values['cnt_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -49,9 +49,9 @@ class RadiosControlTest extends AbcTestCase
     $form   = $this->setupForm1();
     $values = $form->getValues();
 
-    $this->assertArrayHasKey('cnt_id', $values);
-    $this->assertNull($values['cnt_id']);
-    $this->assertEmpty($form->getChangedControls());
+    self::assertArrayHasKey('cnt_id', $values);
+    self::assertNull($values['cnt_id']);
+    self::assertEmpty($form->getChangedControls());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

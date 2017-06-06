@@ -25,10 +25,10 @@ class LinkControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<a>');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '</a>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

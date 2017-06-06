@@ -26,8 +26,8 @@ class FormTest extends TestCase
       $form = $this->setupFormFind('', $name);
 
       $input = $form->findFormControlByName($name);
-      $this->assertNotEmpty($input);
-      $this->assertEquals($name, $input->getLocalName());
+      self::assertNotEmpty($input);
+      self::assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -44,8 +44,8 @@ class FormTest extends TestCase
       $form = $this->setupFormFind($name);
 
       $input = $form->findFormControlByName($name);
-      $this->assertNotEmpty($input);
-      $this->assertEquals($name, $input->getLocalName());
+      self::assertNotEmpty($input);
+      self::assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -62,8 +62,8 @@ class FormTest extends TestCase
       $form = $this->setupFormFind('', 'post', $name);
 
       $input = $form->findFormControlByName($name);
-      $this->assertNotEmpty($input);
-      $this->assertEquals($name, $input->getLocalName());
+      self::assertNotEmpty($input);
+      self::assertEquals($name, $input->getLocalName());
     }
   }
 
@@ -103,11 +103,11 @@ class FormTest extends TestCase
 
     $current = $form->getSetValues();
 
-    $this->assertEquals('name1', $current['name1']);
-    $this->assertEquals('name2', $current['name2']);
-    $this->assertTrue($current['options'][1]);
-    $this->assertFalse($current['options'][2]);
-    $this->assertTrue($current['options'][3]);
+    self::assertEquals('name1', $current['name1']);
+    self::assertEquals('name2', $current['name2']);
+    self::assertTrue($current['options'][1]);
+    self::assertFalse($current['options'][2]);
+    self::assertTrue($current['options'][3]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ class FormTest extends TestCase
     $changed     = $form->getChangedControls();
     $has_scalars = $form->hasScalars($changed);
 
-    $this->assertFalse($has_scalars);
+    self::assertFalse($has_scalars);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ class FormTest extends TestCase
     $changed     = $form->getChangedControls();
     $has_scalars = $form->hasScalars($changed);
 
-    $this->assertTrue($has_scalars);
+    self::assertTrue($has_scalars);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ class FormTest extends TestCase
     $changed     = $form->getChangedControls();
     $has_scalars = $form->hasScalars($changed);
 
-    $this->assertTrue($has_scalars);
+    self::assertTrue($has_scalars);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ class FormTest extends TestCase
     $changed     = $form->getChangedControls();
     $has_scalars = $form->hasScalars($changed);
 
-    $this->assertFalse($has_scalars);
+    self::assertFalse($has_scalars);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -229,23 +229,23 @@ class FormTest extends TestCase
 
     // name[name1] must be overridden.
     $list = $xpath->query("/form/fieldset/input[@name='name[name1]' and @value='NAME1']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     // name[name2] must be unchanged.
     $list = $xpath->query("/form/fieldset/input[@name='name[name2]' and @value='name2']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     // name[options][1] must be unchanged.
     $list = $xpath->query("/form/fieldset/span/input[@name='name[options][1]' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     // name[options][2] must be changed.
     $list = $xpath->query("/form/fieldset/span/input[@name='name[options][2]' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     // name[options][3] must be changed.
     $list = $xpath->query("/form/fieldset/span/input[@name='name[options][3]' and not(@checked)]");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

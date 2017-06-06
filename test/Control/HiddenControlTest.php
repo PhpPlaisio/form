@@ -31,7 +31,7 @@ class HiddenControlTest extends SimpleControlTest
     $changed = $form->getChangedControls();
 
     // Value is change.
-    $this->assertNotEmpty($changed['test']);
+    self::assertNotEmpty($changed['test']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,10 +59,10 @@ class HiddenControlTest extends SimpleControlTest
     $changed = $form->getChangedControls();
 
     // After clean '  Hello    World!   ' must be equal 'Hello World!'.
-    $this->assertEquals('Hello World!', $values['test']);
+    self::assertEquals('Hello World!', $values['test']);
 
     // Value not change.
-    $this->assertArrayNotHasKey('test', $changed);
+    self::assertArrayNotHasKey('test', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

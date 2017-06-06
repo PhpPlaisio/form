@@ -28,10 +28,10 @@ abstract class PushMeControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ abstract class PushMeControlTest extends AbcTestCase
 
     // Names of buttons must be absolute setValue has no effect for buttons.
     $list = $xpath->query("/form/fieldset/input[@name='button' and @value='Do not push' and @type='".$this->getControlType()."']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

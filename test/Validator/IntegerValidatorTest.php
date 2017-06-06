@@ -17,7 +17,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = 'string';
     $form             = $this->setupForm1();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '0.1';
     $form             = $this->setupForm1();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '123abc'; // My favorite password ;-)
     $form             = $this->setupForm1();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '-9';
     $form             = $this->setupForm2();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '-2';
     $form             = $this->setupForm2();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '11';
     $form             = $this->setupForm2();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '23';
     $form             = $this->setupForm2();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = 0;
     $form             = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '56';
     $form             = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = 37;
     $form             = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '-11';
     $form             = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = -45;
     $form             = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -161,7 +161,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '-1';
     $form             = $this->setupForm2();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '0';
     $form             = $this->setupForm2();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -184,7 +184,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '3';
     $form             = $this->setupForm2();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -196,7 +196,7 @@ class IntegerValidatorTest extends TestCase
     $_POST['integer'] = '10';
     $form             = $this->setupForm2();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

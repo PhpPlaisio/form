@@ -23,7 +23,7 @@ class RemoveWhitespaceCleanerTest extends CleanerTest
     $cleaner = RemoveWhitespaceCleaner::get();
     $value   = $cleaner->clean($raw);
 
-    $this->assertEquals('HelloWorld!', $value);
+    self::assertEquals('HelloWorld!', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -37,7 +37,7 @@ abstract class CleanerTest extends TestCase
     {
       $cleaned = $cleaner->clean($value);
 
-      $this->assertNull($cleaned, sprintf("Cleaning '%s' must return null.", addslashes($value)));
+      self::assertNull($cleaned, sprintf("Cleaning '%s' must return null.", addslashes($value)));
     }
   }
 
@@ -53,7 +53,7 @@ abstract class CleanerTest extends TestCase
     {
       $cleaned = $cleaner->clean($value);
 
-      $this->assertEquals('0', $cleaned, sprintf("Cleaning '%s' must return '0'.", addslashes($value)));
+      self::assertEquals('0', $cleaned, sprintf("Cleaning '%s' must return '0'.", addslashes($value)));
     }
   }
 

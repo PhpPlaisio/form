@@ -49,7 +49,7 @@ class AmbiguityCleanerTest extends CleanerTest
     $clean = "  Hello\n\n\nWorld!  ";
 
     $null = $this->baseTest($raw, $clean);
-    $this->assertNull($null);
+    self::assertNull($null);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class AmbiguityCleanerTest extends CleanerTest
       foreach ($ambiguities as $ambiguity)
       {
         $this->checkEncoding($ambiguity);
-        $this->assertEquals(1, mb_strlen($ambiguity), sprintf("Length of '%s' is not 1", bin2hex($ambiguity)));
+        self::assertEquals(1, mb_strlen($ambiguity), sprintf("Length of '%s' is not 1", bin2hex($ambiguity)));
       }
     }
   }
@@ -104,13 +104,13 @@ class AmbiguityCleanerTest extends CleanerTest
     $this->checkEncoding($value);
     $this->checkEncoding($clean);
 
-    $this->assertEquals($clean, $value);
+    self::assertEquals($clean, $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   private function checkEncoding($var)
   {
-    $this->assertTrue(mb_check_encoding($var), sprintf("%s is not valid UTF-8", bin2hex($var)));
+    self::assertTrue(mb_check_encoding($var), sprintf("%s is not valid UTF-8", bin2hex($var)));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -35,10 +35,10 @@ class TextControlTest extends SimpleControlTest
     $changed = $form->getChangedControls();
 
     // After formatting and clean the date must be in ISO 8601 format.
-    $this->assertEquals('1966-04-10', $values['birthday']);
+    self::assertEquals('1966-04-10', $values['birthday']);
 
     // Effectively the date is not changed.
-    $this->assertArrayNotHasKey('birthday', $changed);
+    self::assertArrayNotHasKey('birthday', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -64,10 +64,10 @@ class TextControlTest extends SimpleControlTest
     $changed = $form->getChangedControls();
 
     // After clean '  Hello    World!   ' must be equal 'Hello World!'.
-    $this->assertEquals('Hello World!', $values['test']);
+    self::assertEquals('Hello World!', $values['test']);
 
     // Effectively the value is not changed.
-    $this->assertArrayNotHasKey('test', $changed);
+    self::assertArrayNotHasKey('test', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

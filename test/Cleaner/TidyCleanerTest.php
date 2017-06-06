@@ -29,7 +29,7 @@ class TidyCleanerTest extends CleanerTest
     foreach ($cases as $dirty => $clean)
     {
       $cleaned = $cleaner->clean($dirty);
-      $this->assertSame($clean, $cleaned, $dirty);
+      self::assertSame($clean, $cleaned, $dirty);
     }
   }
 

@@ -13,7 +13,7 @@ class DateFormatterTest extends TestCase
     $formatter = new DateFormatter('d-m-Y');
     $value     = $formatter->format($text);
 
-    $this->assertEquals($text, $value);
+    self::assertEquals($text, $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ class DateFormatterTest extends TestCase
     $formatter = new DateFormatter('d-m-Y');
     $value     = $formatter->format($text);
 
-    $this->assertEquals($text, $value);
+    self::assertEquals($text, $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ class DateFormatterTest extends TestCase
     $formatter = new DateFormatter('d-m-Y');
     $value     = $formatter->format('1966-04-10');
 
-    $this->assertEquals('10-04-1966', $value);
+    self::assertEquals('10-04-1966', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -25,10 +25,10 @@ class DivControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<div>');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '</div>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

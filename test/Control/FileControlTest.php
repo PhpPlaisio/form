@@ -25,10 +25,10 @@ class FileControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

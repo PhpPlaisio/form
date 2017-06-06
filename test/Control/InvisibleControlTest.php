@@ -19,10 +19,10 @@ class InvisibleControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Assert the value of "name" is still "1".
-    $this->assertEquals('1', $values['name']);
+    self::assertEquals('1', $values['name']);
 
     // Assert "name" has not be recorded as a changed value.
-    $this->assertArrayNotHasKey('name', $changed);
+    self::assertArrayNotHasKey('name', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -41,10 +41,10 @@ class InvisibleControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

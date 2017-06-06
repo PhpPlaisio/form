@@ -22,7 +22,7 @@ class DateValidatorTest extends TestCase
       $_POST['date'] = $date;
       $form          = $this->setupForm1();
 
-      $this->assertFalse($form->validate(), "Submitted: $date");
+      self::assertFalse($form->validate(), "Submitted: $date");
     }
   }
 
@@ -39,7 +39,7 @@ class DateValidatorTest extends TestCase
       $_POST['date'] = $date;
       $form          = $this->setupForm1();
 
-      $this->assertTrue($form->validate(), "Submitted: $date");
+      self::assertTrue($form->validate(), "Submitted: $date");
     }
   }
 

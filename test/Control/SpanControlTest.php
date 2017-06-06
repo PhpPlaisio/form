@@ -25,10 +25,10 @@ class SpanControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<span>');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '</span>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

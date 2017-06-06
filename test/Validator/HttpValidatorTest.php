@@ -18,7 +18,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = 'hffd//:www.setbased/nl';
     $form         = $this->setupForm1();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = 'http//golgelinva';
     $form         = $this->setupForm1();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = 'ftp//:!#$%&\'*+-/=?^_`{}|~ed.com';
     $form         = $this->setupForm1();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = 'http://www.setbased.nl';
     $form         = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = 'http://www.google.com';
     $form         = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = 'http://www.php.net';
     $form         = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = '';
     $form         = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = false;
     $form         = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ class HttpValidatorTest extends TestCase
     $_POST['url'] = null;
     $form         = $this->setupForm1();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

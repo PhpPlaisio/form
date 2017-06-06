@@ -54,7 +54,7 @@ class MandatoryValidatorTest extends TestCase
         }
         $form = $this->setupForm1($control);
 
-        $this->assertFalse($form->validate(),
+        self::assertFalse($form->validate(),
                            sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
       }
     }
@@ -68,7 +68,7 @@ class MandatoryValidatorTest extends TestCase
     $_POST = [];
     $form  = $this->setupForm2();
 
-    $this->assertFalse($form->validate());
+    self::assertFalse($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ class MandatoryValidatorTest extends TestCase
         }
         $form = $this->setupForm1($control);
 
-        $this->assertFalse($form->validate(),
+        self::assertFalse($form->validate(),
                            sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
       }
     }
@@ -118,7 +118,7 @@ class MandatoryValidatorTest extends TestCase
     $_POST['box'] = 'on';
     $form         = $this->setupForm2();
 
-    $this->assertTrue($form->validate());
+    self::assertTrue($form->validate());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ class MandatoryValidatorTest extends TestCase
       }
       $form = $this->setupForm1($control);
 
-      $this->assertTrue($form->validate(), sprintf("type: '%s'.", $type));
+      self::assertTrue($form->validate(), sprintf("type: '%s'.", $type));
     }
   }
 

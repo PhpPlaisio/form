@@ -31,10 +31,10 @@ class CheckboxControlTest extends AbcTestCase
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
 
     $pos = strpos($html, '/>World');
-    $this->assertNotEquals(false, $pos);
+    self::assertNotEquals(false, $pos);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -57,9 +57,9 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value has not set.
-    $this->assertFalse($values['test1']);
+    self::assertFalse($values['test1']);
     // Value has not change.
-    $this->assertArrayNotHasKey('test1', $changed);
+    self::assertArrayNotHasKey('test1', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -84,10 +84,10 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value set from POST.
-    $this->assertTrue($values['test2']);
+    self::assertTrue($values['test2']);
 
     // Assert value has changed.
-    $this->assertNotEmpty($changed['test2']);
+    self::assertNotEmpty($changed['test2']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -111,10 +111,10 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value set from POST checkbox unchecked.
-    $this->assertFalse($values['test3']);
+    self::assertFalse($values['test3']);
 
     // Value is change.
-    $this->assertNotEmpty($changed['test3']);
+    self::assertNotEmpty($changed['test3']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -140,10 +140,10 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value set from POST.
-    $this->assertTrue($values['test4']);
+    self::assertTrue($values['test4']);
 
     // Value has not changed.
-    $this->assertArrayNotHasKey('test4', $changed);
+    self::assertArrayNotHasKey('test4', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -168,9 +168,9 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value has not set.
-    $this->assertSame(0, $values['test5']);
+    self::assertSame(0, $values['test5']);
     // Value has not change.
-    $this->assertArrayNotHasKey('test5', $changed);
+    self::assertArrayNotHasKey('test5', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -197,10 +197,10 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value has not set.
-    $this->assertSame('1', $values['test6']);
+    self::assertSame('1', $values['test6']);
 
     // Value has changed.
-    $this->assertArrayHasKey('test6', $changed);
+    self::assertArrayHasKey('test6', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

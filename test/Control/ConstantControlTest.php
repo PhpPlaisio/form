@@ -19,10 +19,10 @@ class ConstantControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Assert the value of "name" is still "1".
-    $this->assertEquals('1', $values['name']);
+    self::assertEquals('1', $values['name']);
 
     // Assert "name" has not be recoded as a changed value.
-    $this->assertArrayNotHasKey('name', $changed);
+    self::assertArrayNotHasKey('name', $changed);
   }
 
   //-------------------------------------------------------------------------------------------------------------------

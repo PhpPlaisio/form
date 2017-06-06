@@ -23,11 +23,11 @@ class UrlCleanerTest extends CleanerTest
 
     $raw   = 'ftp://ftp.setbased.nl';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('ftp://ftp.setbased.nl/', $value);
+    self::assertEquals('ftp://ftp.setbased.nl/', $value);
 
     $raw   = '  ftp://user:password@ftp.setbased.nl';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('ftp://user:password@ftp.setbased.nl/', $value);
+    self::assertEquals('ftp://user:password@ftp.setbased.nl/', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -37,55 +37,55 @@ class UrlCleanerTest extends CleanerTest
 
     $raw   = 'www.setbased.nl';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/', $value);
+    self::assertEquals('http://www.setbased.nl/', $value);
 
     $raw   = '  www.setbased.nl  ';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/', $value);
+    self::assertEquals('http://www.setbased.nl/', $value);
 
     $raw   = 'www.setbased.nl/';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/', $value);
+    self::assertEquals('http://www.setbased.nl/', $value);
 
     $raw   = 'www.setbased.nl/index.php';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/index.php', $value);
+    self::assertEquals('http://www.setbased.nl/index.php', $value);
 
     $raw   = 'www.setbased.nl#here';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/#here', $value);
+    self::assertEquals('http://www.setbased.nl/#here', $value);
 
     $raw   = 'www.setbased.nl?query';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/?query', $value);
+    self::assertEquals('http://www.setbased.nl/?query', $value);
 
     $raw   = 'http://www.setbased.nl?query';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/?query', $value);
+    self::assertEquals('http://www.setbased.nl/?query', $value);
 
     $raw   = 'www.setbased.nl?a=1;b=2';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/?a=1;b=2', $value);
+    self::assertEquals('http://www.setbased.nl/?a=1;b=2', $value);
 
     $raw   = 'www.setbased.nl/test/index.php?a=1;b=2';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/test/index.php?a=1;b=2', $value);
+    self::assertEquals('http://www.setbased.nl/test/index.php?a=1;b=2', $value);
 
     $raw   = 'www.setbased.nl/test/test';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/test/test', $value);
+    self::assertEquals('http://www.setbased.nl/test/test', $value);
 
     $raw   = 'www.setbased.nl/test/test/index.php?a=1;b=2#here';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/test/test/index.php?a=1;b=2#here', $value);
+    self::assertEquals('http://www.setbased.nl/test/test/index.php?a=1;b=2#here', $value);
 
     $raw   = 'http://www.setbased.nl/test/test/index.php?a=1;b=2#here';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/test/test/index.php?a=1;b=2#here', $value);
+    self::assertEquals('http://www.setbased.nl/test/test/index.php?a=1;b=2#here', $value);
 
     $raw   = 'http://www.setbased.nl';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('http://www.setbased.nl/', $value);
+    self::assertEquals('http://www.setbased.nl/', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ class UrlCleanerTest extends CleanerTest
 
     $raw   = 'mailto:info@setbased.nl ';
     $value = $cleaner->clean($raw);
-    $this->assertEquals('mailto:info@setbased.nl', $value);
+    self::assertEquals('mailto:info@setbased.nl', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ class UrlCleanerTest extends CleanerTest
     {
       $cleaned = $cleaner->clean($value);
 
-      $this->assertEquals('http://0/', $cleaned, sprintf("Cleaning '%s' must return 'http://0'.", addslashes($value)));
+      self::assertEquals('http://0/', $cleaned, sprintf("Cleaning '%s' must return 'http://0'.", addslashes($value)));
     }
   }
 

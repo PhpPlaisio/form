@@ -24,10 +24,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index '0' has been checked.
-    $this->assertTrue($values['cnt_id']['0']);
+    self::assertTrue($values['cnt_id']['0']);
 
     // Test checkbox with index '0.0' has not been checked.
-    $this->assertFalse($values['cnt_id']['0.0']);
+    self::assertFalse($values['cnt_id']['0.0']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -42,10 +42,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index '0' has been checked.
-    $this->assertTrue($values['cnt_id']['0']);
+    self::assertTrue($values['cnt_id']['0']);
 
     // Test checkbox with index '0.0' has not been checked.
-    $this->assertFalse($values['cnt_id']['0.0']);
+    self::assertFalse($values['cnt_id']['0.0']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -60,10 +60,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index '0' has not been checked.
-    $this->assertFalse($values['cnt_id']['0']);
+    self::assertFalse($values['cnt_id']['0']);
 
     // Test checkbox with index '0.0' has been checked.
-    $this->assertTrue($values['cnt_id']['0.0']);
+    self::assertTrue($values['cnt_id']['0.0']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -78,10 +78,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index '0' has been checked.
-    $this->assertTrue($values['cnt_id']['0']);
+    self::assertTrue($values['cnt_id']['0']);
 
     // Test checkbox with index '1' has not been checked.
-    $this->assertFalse($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -96,10 +96,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index '0' has been checked.
-    $this->assertTrue($values['cnt_id']['0']);
+    self::assertTrue($values['cnt_id']['0']);
 
     // Test checkbox with index '0.0' has not been checked.
-    $this->assertFalse($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -138,19 +138,19 @@ class CheckboxesControlTest extends AbcTestCase
 
     // Asset that the checkboxes are set or unset according to the $values.
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[1]' and @type='checkbox' and not(@checked)]");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[2]' and @type='checkbox' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[3]' and @type='checkbox' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[4]' and @type='checkbox' and not(@checked)]");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -193,19 +193,19 @@ class CheckboxesControlTest extends AbcTestCase
 
     // Asset that the checkboxes are set or unset according to the $values.
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[1]' and @type='checkbox' and not(@checked)]");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[2]' and @type='checkbox' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[3]' and @type='checkbox' and @checked='checked']");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
 
     $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[4]' and @type='checkbox' and not(@checked)]");
-    $this->assertEquals(1, $list->length);
+    self::assertEquals(1, $list->length);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -220,10 +220,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
-    $this->assertTrue($values['cnt_id']['2']);
+    self::assertTrue($values['cnt_id']['2']);
 
     // Test checkbox with index 1 has not been checked.
-    $this->assertFalse($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -238,10 +238,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index 0.1 has been checked.
-    $this->assertTrue($values['cnt_id']['0.1']);
+    self::assertTrue($values['cnt_id']['0.1']);
 
     // Test checkbox with index 1 has not been checked.
-    $this->assertFalse($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -256,10 +256,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
-    $this->assertTrue($values['cnt_id']['2']);
+    self::assertTrue($values['cnt_id']['2']);
 
     // Test checkbox with index 1 has not been checked.
-    $this->assertFalse($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -274,10 +274,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
-    $this->assertSame('hello', $values['cnt_id']['2']);
+    self::assertSame('hello', $values['cnt_id']['2']);
 
     // Test checkbox with index 1 has not been checked.
-    $this->assertSame('world', $values['cnt_id']['1']);
+    self::assertSame('world', $values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -292,10 +292,10 @@ class CheckboxesControlTest extends AbcTestCase
     $values = $form->getValues();
 
     // Test checkbox with index 0.1 has been checked.
-    $this->assertTrue($values['cnt_id']['0.1']);
+    self::assertTrue($values['cnt_id']['0.1']);
 
     // Test checkbox with index 1 has not been checked.
-    $this->assertFalse($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -311,8 +311,8 @@ class CheckboxesControlTest extends AbcTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    $this->assertArrayNotHasKey('cnt_id', $changed);
-    $this->assertArrayNotHasKey('99', $values['cnt_id']);
+    self::assertArrayNotHasKey('cnt_id', $changed);
+    self::assertArrayNotHasKey('99', $values['cnt_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
