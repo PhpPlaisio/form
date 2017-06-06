@@ -6,9 +6,68 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for SelectControl.
+ */
 class SelectControlTest extends AbcTestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is not marked changed when the empty value is submitted.
+   */
+  public function testChangedControls1()
+  {
+    $_POST['cnt_id'] = ' ';
+
+    $form    = $this->setupForm1();
+    $changed = $form->getChangedControls();
+
+    $this->assertEmpty($changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is marked changed when a valid value is submitted.
+   */
+  public function testChangedControls2()
+  {
+    $_POST['cnt_id'] = '2';
+
+    $form    = $this->setupForm1();
+    $changed = $form->getChangedControls();
+
+    $this->assertNotEmpty($changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is not marked changed when a none valid value is submitted.
+   */
+  public function testChangedControls3()
+  {
+    $_POST['cnt_id'] = '123';
+
+    $form    = $this->setupForm1();
+    $changed = $form->getChangedControls();
+
+    $this->assertEmpty($changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is not marked changed when the none default empty value is submitted.
+   */
+  public function testChangedControls4()
+  {
+    $_POST['cnt_id'] = '-';
+
+    $form    = $this->setupForm1('-');
+
+    $changed = $form->getChangedControls();
+
+    $this->assertEmpty($changed);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
   {
@@ -79,8 +138,12 @@ class SelectControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a select form control.
+   *
+   * @param string $emptyOption The value of the empty option.
+   *
+   * @return RawForm
    */
-  private function setupForm1()
+  private function setupForm1($emptyOption=' ')
   {
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
@@ -91,7 +154,7 @@ class SelectControlTest extends AbcTestCase
     $form->addFieldSet($fieldset);
 
     $input = new SelectControl('cnt_id');
-    $input->setEmptyOption();
+    $input->setEmptyOption($emptyOption);
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
@@ -116,7 +179,7 @@ class SelectControlTest extends AbcTestCase
     $form->addFieldSet($fieldset);
 
     $input = new SelectControl('cnt_id');
-    $input->setEmptyOption(true);
+    $input->setEmptyOption();
     $input->setValue('1');
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);

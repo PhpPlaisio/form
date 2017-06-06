@@ -182,10 +182,9 @@ class SelectControl extends SimpleControl
 
       if (isset($this->emptyOption) && $submitted===(string)$this->emptyOption)
       {
-
         $this->value                 = null;
         $whiteListValue[$this->name] = null;
-        if ($value!==(string)$this->emptyOption)
+        if ($value!=='')
         {
           $changedInputs[$this->name] = $this;
         }
