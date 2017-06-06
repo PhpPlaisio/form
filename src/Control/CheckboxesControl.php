@@ -6,6 +6,7 @@ use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
 //----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Class for form controls of with multiple checkboxes.
  */
@@ -62,6 +63,14 @@ class CheckboxesControl extends Control
   protected $labelPrefix = '';
 
   /**
+   * If true labels are valid HTML. Otherwise special characters in the labels will be replaced with HTML
+   * entities.
+   *
+   * @var bool
+   */
+  protected $labelsAreHtml = false;
+
+  /**
    * The options of this select box.
    *
    * @var array[]
@@ -97,6 +106,7 @@ class CheckboxesControl extends Control
   protected $valueUnchecked = false;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * {@inheritdoc}
    */
@@ -127,7 +137,7 @@ class CheckboxesControl extends Control
         $html .= Html::generateVoidElement('input', $input_attributes);
 
         $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey]);
+        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey], $this->labelsAreHtml);
         $html .= $this->labelPostfix;
       }
     }
@@ -243,21 +253,24 @@ class CheckboxesControl extends Control
    * @param string|null $disabledKey     The key holding the disabled flag. Any none empty value results that the
    *                                     checkbox is disabled.
    * @param string|null $idKey           The key holding the HTML ID attribute of the checkboxes.
+   * @param bool $labelsAreHtml          If true labels are valid HTML. Otherwise special characters in the labels will
+   *                                     be replaced with HTML entities.
    */
   public function setOptions(&$options,
                              $keyKey,
                              $labelKey,
                              $checkedKey = 'abc_map_checked',
                              $disabledKey = null,
-                             $idKey = null
-  )
+                             $idKey = null,
+                             $labelsAreHtml = false)
   {
-    $this->options     = $options;
-    $this->keyKey      = $keyKey;
-    $this->labelKey    = $labelKey;
-    $this->checkedKey  = $checkedKey;
-    $this->disabledKey = $disabledKey;
-    $this->idKey       = $idKey;
+    $this->options       = $options;
+    $this->keyKey        = $keyKey;
+    $this->labelKey      = $labelKey;
+    $this->checkedKey    = $checkedKey;
+    $this->disabledKey   = $disabledKey;
+    $this->idKey         = $idKey;
+    $this->labelsAreHtml = $labelsAreHtml;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

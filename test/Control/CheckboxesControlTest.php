@@ -6,7 +6,6 @@ use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class CheckboxesControlTest Test class for testing SatBased\Html\Form\CheckboxesControl class.
  */
@@ -100,6 +99,42 @@ class CheckboxesControlTest extends AbcTestCase
 
     // Test checkbox with index '0.0' has not been checked.
     self::assertFalse($values['cnt_id']['1']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test special characters in the labels are replaced with HTML entities.
+   */
+  public function testLabels1()
+  {
+    $entities[] = ['id' => 0, 'name' => '<&\';">'];
+    $entities[] = ['id' => 1, 'name' => '&nbsp;'];
+
+    $input = new CheckboxesControl('id');
+    $input->setOptions($entities, 'id', 'name', null, null, 'id');
+
+    $html = $input->generate();
+
+    self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
+    self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test special characters in the labels are not replaced with HTML entities.
+   */
+  public function testLabels2()
+  {
+    $entities[] = ['id' => 0, 'name' => '<span>0</span>'];
+    $entities[] = ['id' => 1, 'name' => '<span>1</span>'];
+
+    $input = new CheckboxesControl('id');
+    $input->setOptions($entities, 'id', 'name', null, null, 'id', true);
+
+    $html = $input->generate();
+
+    self::assertContains('<label for="0"><span>0</span></label>', $html);
+    self::assertContains('<label for="1"><span>1</span></label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -371,7 +406,7 @@ class CheckboxesControlTest extends AbcTestCase
     return $form;
   }
 
-  //-------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a select form control.
    */
@@ -393,7 +428,7 @@ class CheckboxesControlTest extends AbcTestCase
     return $form;
   }
 
-  //-------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a select form control.
    */
