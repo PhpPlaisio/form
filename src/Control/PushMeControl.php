@@ -30,7 +30,7 @@ class PushMeControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
-    else                    $this->attributes['value'] = $this->value;
+    else                  $this->attributes['value'] = $this->value;
 
     $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();

@@ -126,7 +126,9 @@ class ImageControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param string|bool $value .
+   * Does nothing. It is not possible the set the value of an image form control.
+   *
+   * @param mixed $value Not used.
    */
   public function setValue($value)
   {

@@ -68,7 +68,9 @@ abstract class SimpleControl extends Control
   /**
    * The value of this form control.
    *
-   * @var string
+   * Only for a MultipleFileControl the value can be an array.
+   *
+   * @var string|array|null
    */
   protected $value;
 
@@ -104,7 +106,7 @@ abstract class SimpleControl extends Control
   /**
    * Returns the submitted value of this form control.
    *
-   * @return string
+   * @return string|array|null
    */
   public function getSubmittedValue()
   {
