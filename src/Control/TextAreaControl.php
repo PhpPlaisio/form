@@ -32,7 +32,7 @@ class TextAreaControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     $html = $this->prefix;
-    $html .= Html::generateElement('textarea', $this->attributes, $this->value);
+    $html .= Html::generateElement('textarea', $this->attributes, (string)$this->value);
     $html .= $this->postfix;
 
     return $html;
