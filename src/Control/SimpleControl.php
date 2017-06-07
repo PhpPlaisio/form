@@ -220,19 +220,6 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the attribute [multiple](http://www.w3schools.com/tags/att_input_multiple.asp).
-   * This is a boolean attribute. Any none [empty](http://php.net/manual/function.empty.php) value will set the
-   * attribute to 'multiple'. Any other value will unset the attribute.
-   *
-   * @param mixed $value The attribute value.
-   */
-  public function setAttrMultiple($value)
-  {
-    $this->attributes['multiple'] = $value;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Sets the attribute [pattern](http://www.w3schools.com/tags/att_input_pattern.asp).
    *
    * @param string $value The attribute value.

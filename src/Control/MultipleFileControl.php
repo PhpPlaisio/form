@@ -4,12 +4,11 @@ namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
- * Class for form controls of type [input:file](http://www.w3schools.com/tags/tag_input.asp) that allows a single file
+ * Class for form controls of type [input:file](http://www.w3schools.com/tags/tag_input.asp) that allows multiple files
  * to be uploaded.
  */
-class FileControl extends SimpleControl
+class MultipleFileControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -19,8 +18,9 @@ class FileControl extends SimpleControl
    */
   public function generate()
   {
-    $this->attributes['type'] = 'file';
-    $this->attributes['name'] = $this->submitName;
+    $this->attributes['type']     = 'file';
+    $this->attributes['name']     = $this->submitName.'[]';
+    $this->attributes['multiple'] = true;
 
     $ret = $this->prefix;
     $ret .= $this->generatePrefixLabel();
@@ -61,14 +61,31 @@ class FileControl extends SimpleControl
   {
     $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (isset($_FILES[$submit_name]['error']) && $_FILES[$submit_name]['error']===0)
+    if (isset($_FILES[$submit_name]['name']))
     {
       $changedInputs[$this->name]  = $this;
-      $whiteListValue[$this->name] = $_FILES[$submit_name];
-      $this->value                 = $_FILES[$submit_name];
+      $whiteListValue[$this->name] = [];
+      $this->value                 = [];
+
+      foreach ($_FILES[$submit_name]['name'] as $i => $dummy)
+      {
+        if ($_FILES[$submit_name]['error'][$i]===UPLOAD_ERR_OK)
+        {
+          $tmp = ['name'     => $_FILES[$submit_name]['name'][$i],
+                  'type'     => $_FILES[$submit_name]['type'][$i],
+                  'tmp_name' => $_FILES[$submit_name]['tmp_name'][$i],
+                  'size'     => $_FILES[$submit_name]['size'][$i]];
+
+          $whiteListValue[$this->name][] = $tmp;
+          $this->value[]                 = $tmp;
+        }
+      }
     }
-    else
+
+    if (empty($this->value))
     {
+      // Either no files have been uploaded or all uploaded files have errors.
+      unset($changedInputs[$this->name]);
       $this->value                 = null;
       $whiteListValue[$this->name] = null;
     }
