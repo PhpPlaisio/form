@@ -1,8 +1,9 @@
 {
   "name": "setbased/abc-form-raw",
-  "description": "SetBased ABC Framework",
+  "description": "ABC-Framework: Raw Form",
   "keywords": [
-    "Framework",
+    "ABC-Framework",
+    "Raw",
     "Form"
   ],
   "type": "library",
