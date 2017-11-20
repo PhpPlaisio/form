@@ -41,7 +41,7 @@ class MandatoryValidator implements Validator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Validates recursively if one of the leaves of @a $array has a non-empty value.
+   * Validates recursively if one of the leaves has a value.
    *
    * @param array $array
    *

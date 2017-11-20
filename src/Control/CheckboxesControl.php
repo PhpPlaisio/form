@@ -245,16 +245,18 @@ class CheckboxesControl extends Control
   /**
    * Sets the options for the checkboxes box.
    *
-   * @param array[]     $options         An array of arrays with the options.
-   * @param string      $keyKey          The key holding the keys of the checkboxes.
-   * @param string      $labelKey        The key holding the labels for the checkboxes.
-   * @param string|null $checkedKey      The key holding the checked flag. Any none empty value results that the
-   *                                     checkbox is checked.
-   * @param string|null $disabledKey     The key holding the disabled flag. Any none empty value results that the
-   *                                     checkbox is disabled.
-   * @param string|null $idKey           The key holding the HTML ID attribute of the checkboxes.
-   * @param bool $labelsAreHtml          If true labels are valid HTML. Otherwise special characters in the labels will
-   *                                     be replaced with HTML entities.
+   * @param array[]     $options       An array of arrays with the options.
+   * @param string      $keyKey        The key holding the keys of the checkboxes.
+   * @param string      $labelKey      The key holding the labels for the checkboxes.
+   * @param string|null $checkedKey    The key holding the checked flag. Any
+   *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
+   *                                   checkbox is checked.
+   * @param string|null $disabledKey   The key holding the disabled flag. Any
+   *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
+   *                                   checkbox is disabled.
+   * @param string|null $idKey         The key holding the HTML ID attribute of the checkboxes.
+   * @param bool        $labelsAreHtml If true labels are valid HTML. Otherwise special characters in the labels will
+   *                                   be replaced with HTML entities.
    */
   public function setOptions(&$options,
                              $keyKey,
@@ -287,7 +289,8 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the checkboxes, a non-empty value will check a checkbox.
+   * Sets the values of the checkboxes, a [non-empty](http://php.net/manual/function.empty.php) value will check a
+   * checkbox.
    *
    * @param array $values The values.
    */

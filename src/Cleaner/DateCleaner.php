@@ -31,7 +31,7 @@ class DateCleaner implements Cleaner
   protected $separator;
 
   /**
-   * If set the date that will treated as an open date. An an empty form control will be translated to the open date.
+   * If set the date that will treated as an open date. An empty form control will be translated to the open date.
    *
    * @var string
    */

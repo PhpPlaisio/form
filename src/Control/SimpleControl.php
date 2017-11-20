@@ -7,7 +7,6 @@ use SetBased\Abc\Form\Formatter\Formatter;
 use SetBased\Abc\Helper\Html;
 use SetBased\Exception\LogicException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent class for form controls of type:
  * <ul>
@@ -142,10 +141,10 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [autofocus](http://www.w3schools.com/tags/att_input_autofocus.asp).
-   * This is a boolean attribute. Any none [empty](http://php.net/manual/function.empty.php) value will set the
+   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
    * attribute to 'autofocus'. Any other value will unset the attribute.
    *
-   * @param string $value The attribute value.
+   * @param mixed $value The attribute value.
    */
   public function setAttrAutoFocus($value)
   {
@@ -155,7 +154,7 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [disabled](http://www.w3schools.com/tags/att_input_disabled.asp).
-   * This is a boolean attribute. Any none [empty](http://php.net/manual/function.empty.php) value will set the
+   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
    * attribute to 'disabled'. Any other value will unset the attribute.
    *
    * @param mixed $value The attribute value.
@@ -245,7 +244,7 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [readonly](http://www.w3schools.com/tags/att_input_readonly.asp).
-   * This is a boolean attribute. Any none [empty](http://php.net/manual/function.empty.php) value will set the
+   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
    * attribute to 'readonly'. Any other value will unset the attribute.
    *
    * @param mixed $value The attribute value.
@@ -258,7 +257,7 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [required](http://www.w3schools.com/tags/att_input_required.asp).
-   * This is a boolean attribute. Any none [empty](http://php.net/manual/function.empty.php) value will set the
+   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
    * attribute to 'required'. Any other value will unset the attribute.
    *
    * @param mixed $value The attribute value.

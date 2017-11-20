@@ -132,17 +132,17 @@ class SelectControl extends SimpleControl
     $this->emptyOption = $emptyOption;
   }
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the options for this select box.
    *
-   * @param array[]     $options         The options of this select box.
-   * @param string      $keyKey          The key holding the keys of the options.
-   * @param string      $labelKey        The key holding the labels for the options.
-   * @param string|null $disabledKey     The key holding the disabled flag. Any none empty value results that the
-   *                                     option is disables.
-   * @param string|null $idKey           The key holding the HTML ID attribute of the options.
+   * @param array[]     $options     The options of this select box.
+   * @param string      $keyKey      The key holding the keys of the options.
+   * @param string      $labelKey    The key holding the labels for the options.
+   * @param string|null $disabledKey The key holding the disabled flag. Any
+   *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the option
+   *                                 is disabled.
+   * @param string|null $idKey       The key holding the HTML ID attribute of the options.
    */
   public function setOptions(&$options, $keyKey, $labelKey, $disabledKey = null, $idKey = null)
   {
