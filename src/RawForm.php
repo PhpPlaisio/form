@@ -10,7 +10,6 @@ use SetBased\Abc\Helper\Html;
 use SetBased\Abc\HtmlElement;
 use SetBased\Exception\FallenException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for generating [form](http://www.w3schools.com/tags/tag_form.asp) elements and processing submitted data.
  */
@@ -24,6 +23,13 @@ class RawForm extends HtmlElement implements CompoundControl
    * @var array
    */
   protected $changedControls = [];
+
+  /**
+   * The list of error messages associated with this form control.
+   *
+   * @var string[]|null
+   */
+  protected $errorMessages;
 
   /**
    * The field sets of this form.
@@ -40,8 +46,7 @@ class RawForm extends HtmlElement implements CompoundControl
   protected $formValidators = [];
 
   /**
-   * After a call to {@link validate} holds the names of the form controls which have valid one or more
-   * validation tests.
+   * After a call to {@link validate} holds the form controls which have failed one or more validations.
    *
    * @var array
    */
@@ -176,7 +181,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @return array A nested array of form control names (keys are form control names and (for complex form controls)
    *               values are arrays or (for simple form controls) true).
-   * @note This method should only be invoked after method Form::loadSubmittedValues() has been invoked.
+   * @note  This method should only be invoked after method Form::loadSubmittedValues() has been invoked.
    *
    * @since 1.0.0
    * @api
@@ -216,7 +221,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @return array A nested array of form control names (keys are form control names and (for complex form controls)
    *               values are arrays or (for simple form controls) true).
-   * @note This method should only be invoked after method Form::validate() has been invoked.
+   * @note  This method should only be invoked after method Form::validate() has been invoked.
    *
    * @since 1.0.0
    * @api
@@ -258,7 +263,7 @@ class RawForm extends HtmlElement implements CompoundControl
   /**
    * Returns the submitted values of all form controls.
    *
-   * @note This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
+   * @note  This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
    *
    * @return array
    *
@@ -395,6 +400,17 @@ class RawForm extends HtmlElement implements CompoundControl
   public function setAttrMethod($method)
   {
     $this->attributes['method'] = $method;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds an error message to the list of error messages for this form control.
+   *
+   * @param string $message The error message.
+   */
+  public function setErrorMessage($message)
+  {
+    $this->errorMessages[] = $message;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

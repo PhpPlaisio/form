@@ -61,6 +61,14 @@ interface CompoundControl
   public function getSubmittedValue();
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds an error message to the list of error messages for this form control.
+   *
+   * @param string $message The error message.
+   */
+  public function setErrorMessage($message);
+
+  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
