@@ -9,7 +9,7 @@
   "type": "library",
   "license": "MIT",
   "require-dev": {
-    "phing/phing": "^2.0",
+    "phing/phing": "^2.0.0",
     "phpunit/phpunit": "^6.0.0"
   },
   "require": {
@@ -30,6 +30,6 @@
     }
   },
   "config": {
-    "bin-dir": "bin"
+    "bin-dir": "bin/"
   }
 }
