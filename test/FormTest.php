@@ -9,9 +9,8 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
- * Class FormTest
+ * Test cases for class RawForm.
  */
 class FormTest extends TestCase
 {
@@ -123,7 +122,7 @@ class FormTest extends TestCase
     $form = $this->setupForm1();
     $form->loadSubmittedValues();
     $changed     = $form->getChangedControls();
-    $has_scalars = $form->hasScalars($changed);
+    $has_scalars = $form::hasScalars($changed);
 
     self::assertFalse($has_scalars);
   }
@@ -140,7 +139,7 @@ class FormTest extends TestCase
     $form = $this->setupForm1();
     $form->loadSubmittedValues();
     $changed     = $form->getChangedControls();
-    $has_scalars = $form->hasScalars($changed);
+    $has_scalars = $form::hasScalars($changed);
 
     self::assertTrue($has_scalars);
   }
@@ -158,7 +157,7 @@ class FormTest extends TestCase
     $form = $this->setupForm1();
     $form->loadSubmittedValues();
     $changed     = $form->getChangedControls();
-    $has_scalars = $form->hasScalars($changed);
+    $has_scalars = $form::hasScalars($changed);
 
     self::assertTrue($has_scalars);
   }
@@ -175,7 +174,7 @@ class FormTest extends TestCase
     $form = $this->setupForm1();
     $form->loadSubmittedValues();
     $changed     = $form->getChangedControls();
-    $has_scalars = $form->hasScalars($changed);
+    $has_scalars = $form::hasScalars($changed);
 
     self::assertFalse($has_scalars);
   }
@@ -225,9 +224,9 @@ class FormTest extends TestCase
     $form->prepare();
     $html = $form->generate();
 
-    $doc = new DOMDocument();
+    $doc = new \DOMDocument();
     $doc->loadXML($html);
-    $xpath = new DOMXpath($doc);
+    $xpath = new \DOMXpath($doc);
 
     // name[name1] must be overridden.
     $list = $xpath->query("/form/fieldset/input[@name='name[name1]' and @value='NAME1']");

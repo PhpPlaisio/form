@@ -2,7 +2,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Cleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Cleaner for cleaning and transforming dates to ISO 8601 machine format.
  */
@@ -98,7 +97,7 @@ class DateCleaner implements Cleaner
     {
       // Note: String '2000-02-30' will transformed to date '2000-03-01' with a warning. We consider this as an
       // invalid date.
-      $tmp = $date->getLastErrors();
+      $tmp = $date::getLastErrors();
       if ($tmp['warning_count']==0) return $date->format('Y-m-d');
     }
 
