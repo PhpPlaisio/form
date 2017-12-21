@@ -61,6 +61,7 @@ class PushMeControl extends SimpleControl
   public function mergeValuesBase($values)
   {
     // Nothing to do.
+    unset($values);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -72,6 +73,7 @@ class PushMeControl extends SimpleControl
   public function setValuesBase($values)
   {
     // Nothing to do.
+    unset($values);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
