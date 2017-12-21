@@ -4,7 +4,9 @@ namespace SetBased\Abc\Form\Test\Cleaner;
 
 use SetBased\Abc\Form\Cleaner\UrlCleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for class UrlCleaner.
+ */
 class UrlCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------

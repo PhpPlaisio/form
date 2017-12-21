@@ -1,5 +1,7 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Validator;
+
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\FieldSet;
@@ -11,7 +13,9 @@ use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for class MandatoryValidator.
+ */
 class MandatoryValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

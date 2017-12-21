@@ -1,16 +1,21 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Validator;
+
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\IntegerValidator;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for class IntegerValidator.
+ */
 class IntegerValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  /** A string must be invalid.
+  /**
+   * A string must be invalid.
    */
   public function testInvalidInteger1()
   {

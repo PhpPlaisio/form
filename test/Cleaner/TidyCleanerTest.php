@@ -4,7 +4,9 @@ namespace SetBased\Abc\Form\Test\Cleaner;
 
 use SetBased\Abc\Form\Cleaner\TidyCleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for class TidyCleaner.
+ */
 class TidyCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------

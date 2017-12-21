@@ -5,9 +5,8 @@ namespace SetBased\Abc\Form\Test\Cleaner;
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Cleaner\Cleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
- * Class CleanerTest
+ * Abstract parent test cases for cleaners.
  */
 abstract class CleanerTest extends TestCase
 {

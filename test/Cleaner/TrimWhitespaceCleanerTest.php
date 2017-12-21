@@ -4,7 +4,9 @@ namespace SetBased\Abc\Form\Test\Cleaner;
 
 use SetBased\Abc\Form\Cleaner\TrimWhitespaceCleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for class TrimWhitespaceCleaner.
+ */
 class TrimWhitespaceCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------

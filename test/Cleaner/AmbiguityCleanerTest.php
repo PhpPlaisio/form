@@ -5,7 +5,9 @@ namespace SetBased\Abc\Form\Test\Cleaner;
 use ReflectionClass;
 use SetBased\Abc\Form\Cleaner\AmbiguityCleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for class AmbiguityCleaner.
+ */
 class AmbiguityCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------

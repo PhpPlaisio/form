@@ -1,12 +1,16 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
+namespace SetBased\Abc\Form\Test\Validator;
+
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\HttpValidator;
 
-//----------------------------------------------------------------------------------------------------------------------
+/**
+ * Test cases for class HttpValidator.
+ */
 class HttpValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

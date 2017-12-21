@@ -4,9 +4,8 @@ namespace SetBased\Abc\Form\Test\Cleaner;
 
 use SetBased\Abc\Form\Cleaner\DateCleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
- * Class DateCleanerTest
+ * Test cases for class DateCleaner.
  */
 class DateCleanerTest extends CleanerTest
 {
@@ -30,6 +29,31 @@ class DateCleanerTest extends CleanerTest
     $raw     = '1966-04-10';
     $value   = $cleaner->clean($raw);
     self::assertEquals('1966-04-10', $value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against illegal dates.
+   */
+  public function testClean10()
+  {
+    // String with 3 parts.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = '10-april-1966';
+    $value   = $cleaner->clean($raw);
+    self::assertEquals('10-april-1966', $value);
+
+    // Some other string.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = 'Hello world.';
+    $value   = $cleaner->clean($raw);
+    self::assertEquals('Hello world.', $value);
+
+    // Some other string.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = '15- 7 -20';
+    $value   = $cleaner->clean($raw);
+    self::assertEquals('15- 7 -20', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -140,31 +164,6 @@ class DateCleanerTest extends CleanerTest
     $raw   = '11/31/1966';
     $value = $cleaner->clean($raw);
     self::assertEquals('11/31/1966', $value);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test against illegal dates.
-   */
-  public function testClean10()
-  {
-    // String with 3 parts.
-    $cleaner = new DateCleaner('d-m-Y');
-    $raw     = '10-april-1966';
-    $value   = $cleaner->clean($raw);
-    self::assertEquals('10-april-1966', $value);
-
-    // Some other string.
-    $cleaner = new DateCleaner('d-m-Y');
-    $raw     = 'Hello world.';
-    $value   = $cleaner->clean($raw);
-    self::assertEquals('Hello world.', $value);
-
-    // Some other string.
-    $cleaner = new DateCleaner('d-m-Y');
-    $raw     = '15- 7 -20';
-    $value   = $cleaner->clean($raw);
-    self::assertEquals('15- 7 -20', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

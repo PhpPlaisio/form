@@ -64,7 +64,6 @@ class TextAreaControlTest extends AbcTestCase
     self::assertArrayNotHasKey('test', $changed);
   }
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test submit value.
@@ -91,6 +90,7 @@ class TextAreaControlTest extends AbcTestCase
     // Value is change.
     self::assertNotEmpty($changed['test']);
   }
+
   //--------------------------------------------------------------------------------------------------------------------
 }
 
