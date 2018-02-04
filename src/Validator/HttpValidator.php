@@ -53,9 +53,19 @@ class HttpValidator implements Validator
       return false;
     }
 
-    // Test that the page actually exits. We consider all HTTP 200-399 responses are valid.
-    $headers = get_headers($url);
-    $ok      = (is_array($headers) && preg_match('/^HTTP\\/\\d+\\.\\d+\\s+[23]\\d\\d\\s*.*$/', $headers[0]));
+    // Test that the page actually exits. We consider all HTTP 200-399 responses as valid.
+    try
+    {
+      $headers = get_headers($url);
+      $ok      = (is_array($headers) && preg_match('/^HTTP\\/\\d+\\.\\d+\\s+[23]\\d\\d\\s*.*$/', $headers[0]));
+    }
+    catch (\Exception $e)
+    {
+      // Something went wrong. Possibly:
+      // * Unable to open stream
+      // * Peer certificate did not match expected
+      $ok = false;
+    }
 
     return $ok;
   }
