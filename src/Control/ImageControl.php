@@ -5,7 +5,6 @@ namespace SetBased\Abc\Form\Control;
 use SetBased\Abc\Helper\Html;
 use SetBased\Exception\LogicException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for form controls of type [input:image](http://www.w3schools.com/tags/tag_input.asp).
  */
@@ -137,7 +136,7 @@ class ImageControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {

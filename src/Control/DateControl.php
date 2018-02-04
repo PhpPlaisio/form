@@ -6,7 +6,6 @@ use SetBased\Abc\Form\Cleaner\DateCleaner;
 use SetBased\Abc\Form\Formatter\DateFormatter;
 use SetBased\Abc\Form\Validator\DateValidator;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for form controls with jQuery UI datepicker.
  */
@@ -29,7 +28,7 @@ class DateControl extends TextControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function __construct($name)
   {

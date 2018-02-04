@@ -4,7 +4,6 @@ namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for form controls of type [input:file](http://www.w3schools.com/tags/tag_input.asp) that allows a single file
  * to be uploaded.
@@ -55,7 +54,7 @@ class FileControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {

@@ -5,7 +5,6 @@ namespace SetBased\Abc\Form\Control;
 use SetBased\Abc\Form\Legend;
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for [fieldsets](http://www.w3schools.com/tags/tag_fieldset.asp).
  */
@@ -46,7 +45,7 @@ class FieldSet extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {

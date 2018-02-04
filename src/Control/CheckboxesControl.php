@@ -5,8 +5,6 @@ namespace SetBased\Abc\Form\Control;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
-//----------------------------------------------------------------------------------------------------------------------
-
 /**
  * Class for form controls of with multiple checkboxes.
  */
@@ -106,9 +104,8 @@ class CheckboxesControl extends Control
   protected $valueUnchecked = false;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {
@@ -178,7 +175,7 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getSubmittedValue()
   {
@@ -336,7 +333,7 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
@@ -398,7 +395,7 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function validateBase(&$invalidFormControls)
   {

@@ -5,7 +5,6 @@ namespace SetBased\Abc\Form\Control;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for form controls of type [select](http://www.w3schools.com/tags/tag_select.asp).
  */
@@ -63,7 +62,7 @@ class SelectControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {
@@ -166,7 +165,7 @@ class SelectControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {

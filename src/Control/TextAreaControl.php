@@ -5,7 +5,6 @@ namespace SetBased\Abc\Form\Control;
 use SetBased\Abc\Form\Cleaner\TrimWhitespaceCleaner;
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for form controls of type [textarea](http://www.w3schools.com/tags/tag_textarea.asp).
  */
@@ -13,7 +12,7 @@ class TextAreaControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function __construct($name)
   {
@@ -25,7 +24,7 @@ class TextAreaControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {
@@ -75,7 +74,7 @@ class TextAreaControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {

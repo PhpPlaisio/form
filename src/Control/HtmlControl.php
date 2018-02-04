@@ -4,7 +4,6 @@ namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A class for pseudo form controls for generating arbitrary HTML code inside forms.
  */
@@ -20,7 +19,7 @@ class HtmlControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {
@@ -44,7 +43,7 @@ class HtmlControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function mergeValuesBase($values)
   {
@@ -78,7 +77,7 @@ class HtmlControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function setValuesBase($values)
   {
@@ -87,7 +86,7 @@ class HtmlControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {

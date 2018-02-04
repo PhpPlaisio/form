@@ -4,7 +4,6 @@ namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A class for pseudo form controls for generating [div](http://www.w3schools.com/tags/tag_div.asp) elements inside
  * forms.
@@ -19,7 +18,7 @@ class DivControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {
@@ -63,7 +62,7 @@ class DivControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {

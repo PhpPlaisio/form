@@ -11,7 +11,7 @@ class DateCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function makeCleaner()
   {

@@ -11,7 +11,7 @@ class UrlCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function makeCleaner()
   {

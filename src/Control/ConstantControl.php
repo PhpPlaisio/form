@@ -2,7 +2,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Control;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for pseudo form controls for form controls of which the value is constant.
  */
@@ -32,7 +31,7 @@ class ConstantControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    *
    * Note:
    * Always sets the white listed value to the value of this constant form control.

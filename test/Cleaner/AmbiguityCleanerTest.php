@@ -17,7 +17,7 @@ class AmbiguityCleanerTest extends CleanerTest
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function makeCleaner()
   {

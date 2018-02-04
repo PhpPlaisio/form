@@ -11,7 +11,7 @@ class TrimWhitespaceCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function makeCleaner()
   {

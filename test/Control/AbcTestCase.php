@@ -9,7 +9,7 @@ class AbcTestCase extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function setUp()
   {
