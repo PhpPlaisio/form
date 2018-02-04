@@ -54,6 +54,24 @@ class DateCleanerTest extends CleanerTest
     $raw     = '15- 7 -20';
     $value   = $cleaner->clean($raw);
     self::assertEquals('15- 7 -20', $value);
+
+    // Some date long time ago.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = '08-11-20';
+    $value   = $cleaner->clean($raw);
+    self::assertEquals('0020-11-08', $value);
+
+    // Some date long time ago.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = '08-11-020';
+    $value   = $cleaner->clean($raw);
+    self::assertEquals('0020-11-08', $value);
+
+    // Some date long time ago.
+    $cleaner = new DateCleaner('d-m-Y');
+    $raw     = '08-11-0020';
+    $value   = $cleaner->clean($raw);
+    self::assertEquals('0020-11-08', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
