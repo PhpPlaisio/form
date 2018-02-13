@@ -36,7 +36,7 @@ class FileControl extends SimpleControl
    *
    * @param string $value The attribute value.
    */
-  public function setAttrForm($value)
+  public function setAttrAccept($value)
   {
     $this->attributes['accept'] = $value;
   }
