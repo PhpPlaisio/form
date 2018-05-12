@@ -16,7 +16,6 @@ class MaxLengthCleaner implements Cleaner
   private $maxLength;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -42,7 +41,12 @@ class MaxLengthCleaner implements Cleaner
       return null;
     }
 
-    return mb_substr($value, 0, $this->maxLength);
+    $tmp = PruneWhitespaceCleaner::get()->clean($value);
+
+    $tmp = mb_substr($tmp, 0, $this->maxLength);
+    if ($tmp==='') $tmp = null;
+
+    return $tmp;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

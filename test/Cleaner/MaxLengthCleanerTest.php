@@ -10,11 +10,6 @@ use SetBased\Abc\Form\Cleaner\MaxLengthCleaner;
 class MaxLengthCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected $emptyValues = ['', false, null];
-
-  protected $zeroValues = ['0'];
-
-  //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
