@@ -15,68 +15,76 @@ class RadiosControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The key in $options holding the disabled flag for the radio buttons.
-   * 
-   * @var string 
+   *
+   * @var string
    */
   protected $disabledKey;
 
   /**
    * The key in $options holding the HTML ID attribute of the radios.
-   * 
-   * @var string|null 
+   *
+   * @var string|null
    */
   protected $idKey;
 
   /**
    * The key in $options holding the keys for the radio buttons.
-   * 
-   * @var string 
+   *
+   * @var string
    */
   protected $keyKey;
 
   /**
+   * If true and only if true labels are HTML code.
+   *
+   * @var bool
+   */
+  protected $labelIsHtml = false;
+
+  /**
    * The key in $options holding the labels for the radio buttons.
-   * 
-   * @var string 
+   *
+   * @var string
    */
   protected $labelKey;
 
   /**
    * The HTML snippet appended after each label for the radio buttons.
-   * 
-   * @var string 
+   *
+   * @var string
    */
   protected $labelPostfix = '';
 
   /**
    * The HTML snippet inserted before each label for the radio buttons.
-   * 
-   * @var string 
+   *
+   * @var string
    */
   protected $labelPrefix = '';
 
   /**
    * The data for the radio buttons.
-   * 
-   * @var array[] 
+   *
+   * @var array[]
    */
   protected $options;
 
   /**
    * The obfuscator for the names of the radio buttons.
-   * 
-   * @var Obfuscator 
+   *
+   * @var Obfuscator
    */
   protected $optionsObfuscator;
 
   /**
    * The value of the checked radio button.
-   * 
-   * @var string 
+   *
+   * @var string
    */
   protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    */
@@ -110,7 +118,7 @@ class RadiosControl extends Control
         $html .= Html::generateVoidElement('input', $input_attributes);
 
         $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey]);
+        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey], $this->labelIsHtml);
         $html .= $this->labelPostfix;
       }
     }
@@ -155,6 +163,17 @@ class RadiosControl extends Control
     {
       $this->setValuesBase($values);
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets whether labels are HTML code.
+   *
+   * @param bool $labelIsHtml If true and only if true labels are HTML code.
+   */
+  public function setLabelIsHtml($labelIsHtml = true)
+  {
+    $this->labelIsHtml = $labelIsHtml;
   }
 
 //--------------------------------------------------------------------------------------------------------------------

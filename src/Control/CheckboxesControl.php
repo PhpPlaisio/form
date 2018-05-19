@@ -40,6 +40,14 @@ class CheckboxesControl extends Control
   protected $keyKey;
 
   /**
+   * If true and only if true labels are HTML code. Otherwise special characters in the labels will be replaced with
+   * HTML entities.
+   *
+   * @var bool
+   */
+  protected $labelIsHtml = false;
+
+  /**
    * The key in $options holding the labels for the checkboxes.
    *
    * @var string
@@ -59,14 +67,6 @@ class CheckboxesControl extends Control
    * @var string
    */
   protected $labelPrefix = '';
-
-  /**
-   * If true labels are valid HTML. Otherwise special characters in the labels will be replaced with HTML
-   * entities.
-   *
-   * @var bool
-   */
-  protected $labelsAreHtml = false;
 
   /**
    * The options of this select box.
@@ -104,6 +104,7 @@ class CheckboxesControl extends Control
   protected $valueUnchecked = false;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    */
@@ -134,7 +135,7 @@ class CheckboxesControl extends Control
         $html .= Html::generateVoidElement('input', $input_attributes);
 
         $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey], $this->labelsAreHtml);
+        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey], $this->labelIsHtml);
         $html .= $this->labelPostfix;
       }
     }
@@ -218,6 +219,17 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets whether labels are HTML code.
+   *
+   * @param bool $labelIsHtml If true and only if true labels are HTML code.
+   */
+  public function setLabelIsHtml($labelIsHtml = true)
+  {
+    $this->labelIsHtml = $labelIsHtml;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets the label prefix, e.g. the HTML code that is inserted before the HTML code of each label of the checkboxes.
    *
    * @param string $htmlSnippet The label prefix.
@@ -252,7 +264,7 @@ class CheckboxesControl extends Control
    *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
    *                                   checkbox is disabled.
    * @param string|null $idKey         The key holding the HTML ID attribute of the checkboxes.
-   * @param bool        $labelsAreHtml If true labels are valid HTML. Otherwise special characters in the labels will
+   * @param bool        $labelsIsHtml  If true labels are valid HTML. Otherwise special characters in the labels will
    *                                   be replaced with HTML entities.
    */
   public function setOptions(&$options,
@@ -261,15 +273,15 @@ class CheckboxesControl extends Control
                              $checkedKey = 'abc_map_checked',
                              $disabledKey = null,
                              $idKey = null,
-                             $labelsAreHtml = false)
+                             $labelsIsHtml = false)
   {
-    $this->options       = $options;
-    $this->keyKey        = $keyKey;
-    $this->labelKey      = $labelKey;
-    $this->checkedKey    = $checkedKey;
-    $this->disabledKey   = $disabledKey;
-    $this->idKey         = $idKey;
-    $this->labelsAreHtml = $labelsAreHtml;
+    $this->options     = $options;
+    $this->keyKey      = $keyKey;
+    $this->labelKey    = $labelKey;
+    $this->checkedKey  = $checkedKey;
+    $this->disabledKey = $disabledKey;
+    $this->idKey       = $idKey;
+    $this->labelIsHtml = $labelsIsHtml;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
