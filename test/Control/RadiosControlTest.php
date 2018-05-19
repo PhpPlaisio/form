@@ -6,8 +6,48 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadiosControl;
 use SetBased\Abc\Form\RawForm;
 
+/**
+ * Test cases for class RadiosControl
+ */
 class RadiosControlTest extends AbcTestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test special characters in the labels are replaced with HTML entities.
+   */
+  public function testLabels1()
+  {
+    $entities[] = ['id' => 0, 'name' => '<&\';">'];
+    $entities[] = ['id' => 1, 'name' => '&nbsp;'];
+
+    $input = new RadiosControl('id');
+    $input->setOptions($entities, 'id', 'name', null, 'id');
+
+    $html = $input->generate();
+
+    self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
+    self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test special characters in the labels are not replaced with HTML entities.
+   */
+  public function testLabels2()
+  {
+    $entities[] = ['id' => 0, 'name' => '<span>0</span>'];
+    $entities[] = ['id' => 1, 'name' => '<span>1</span>'];
+
+    $input = new RadiosControl('id');
+    $input->setOptions($entities, 'id', 'name', null, 'id');
+    $input->setLabelIsHtml();
+
+    $html = $input->generate();
+
+    self::assertContains('<label for="0"><span>0</span></label>', $html);
+    self::assertContains('<label for="1"><span>1</span></label>', $html);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * A white listed value must be valid.
