@@ -47,22 +47,22 @@ class HiddenControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value.
-    $new_value = $submittedValue[$submit_name] ?? null;
+    $newValue = $submittedValue[$submitName] ?? null;
 
     // Clean the submitted value, if we have a cleaner.
-    if ($this->cleaner) $new_value = $this->cleaner->clean($new_value);
+    if ($this->cleaner) $newValue = $this->cleaner->clean($newValue);
 
-    if ((string)$this->value!==(string)$new_value)
+    if ((string)$this->value!==(string)$newValue)
     {
       $changedInputs[$this->name] = $this;
-      $this->value                = $new_value;
+      $this->value                = $newValue;
     }
 
     // Any text can be in a input:hidden box. So, any value is white listed.
-    $whiteListValue[$this->name] = $new_value;
+    $whiteListValue[$this->name] = $newValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

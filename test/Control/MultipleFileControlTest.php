@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\MultipleFileControl;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
 class MultipleFileControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

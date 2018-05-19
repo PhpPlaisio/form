@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\CheckboxControl;
@@ -10,7 +10,6 @@ use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class ButtonControlTest
  */
@@ -20,15 +19,14 @@ class ComplexControlTest extends AbcTestCase
   /**
    * @var ComplexControl
    */
-  private $myOriginComplexControl;
+  private $originComplexControl;
 
   /**
    * @var SimpleControl
    */
-  private $myOriginControl;
+  private $originControl;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Test find FormControl by name.
    */
@@ -256,19 +254,19 @@ class ComplexControlTest extends AbcTestCase
       $form = $this->setForm3($name);
 
       // Firs find complex control by name.
-      $complex_control = $form->findFormControlByName($name);
+      $complexControl = $form->findFormControlByName($name);
 
       // Test for complex control.
-      self::assertNotEmpty($complex_control);
-      self::assertEquals($this->myOriginComplexControl, $complex_control);
-      self::assertEquals($name, $complex_control->getLocalName());
+      self::assertNotEmpty($complexControl);
+      self::assertEquals($this->originComplexControl, $complexControl);
+      self::assertEquals($name, $complexControl->getLocalName());
 
       // Find control by name.
-      $input = $complex_control->findFormControlByName($name);
+      $input = $complexControl->findFormControlByName($name);
 
       // Test for control.
       self::assertNotEmpty($input);
-      self::assertEquals($this->myOriginControl, $input);
+      self::assertEquals($this->originControl, $input);
       self::assertEquals($name, $input->getLocalName());
     }
   }
@@ -466,8 +464,8 @@ class ComplexControlTest extends AbcTestCase
     $input = new TextControl($name);
     $complex->addFormControl($input);
 
-    $this->myOriginComplexControl = $complex;
-    $this->myOriginControl        = $input;
+    $this->originComplexControl = $complex;
+    $this->originControl        = $input;
 
     $form->prepare();
 

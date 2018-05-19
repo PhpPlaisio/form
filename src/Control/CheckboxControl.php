@@ -87,14 +87,14 @@ class CheckboxControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (empty($this->value)!==empty($submittedValue[$submit_name]))
+    if (empty($this->value)!==empty($submittedValue[$submitName]))
     {
       $changedInputs[$this->name] = $this;
     }
 
-    if (!empty($submittedValue[$submit_name]))
+    if (!empty($submittedValue[$submitName]))
     {
       $this->value                 = $this->valueChecked;
       $whiteListValue[$this->name] = $this->valueChecked;

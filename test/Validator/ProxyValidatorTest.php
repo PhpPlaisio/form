@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Validator;
 
 use PHPUnit\Framework\TestCase;

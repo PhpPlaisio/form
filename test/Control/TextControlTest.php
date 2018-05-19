@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Cleaner\DateCleaner;

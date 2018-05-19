@@ -95,30 +95,30 @@ class RadiosControl extends Control
 
     if (is_array($this->options))
     {
-      $input_attributes = ['type'     => 'radio',
-                           'name'     => $this->submitName,
-                           'id'       => '',
-                           'value'    => '',
-                           'checked'  => false,
-                           'disabled' => false];
+      $inputAttributes = ['type'     => 'radio',
+                          'name'     => $this->submitName,
+                          'id'       => '',
+                          'value'    => '',
+                          'checked'  => false,
+                          'disabled' => false];
       // Note: we use a reference to unsure that the for attribute of the label and the id attribute of the radio
       // button match.
-      $label_attributes = ['for' => &$input_attributes['id']];
+      $labelAttributes = ['for' => &$inputAttributes['id']];
 
       foreach ($this->options as $option)
       {
         $key   = (string)$option[$this->keyKey];
         $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
-        $input_attributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
-        $input_attributes['value']    = $value;
-        $input_attributes['checked']  = ((string)$this->value===(string)$key);
-        $input_attributes['disabled'] = ($this->disabledKey && !empty($option[$this->disabledKey]));
+        $inputAttributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
+        $inputAttributes['value']    = $value;
+        $inputAttributes['checked']  = ((string)$this->value===(string)$key);
+        $inputAttributes['disabled'] = ($this->disabledKey && !empty($option[$this->disabledKey]));
 
-        $html .= Html::generateVoidElement('input', $input_attributes);
+        $html .= Html::generateVoidElement('input', $inputAttributes);
 
         $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey], $this->labelIsHtml);
+        $html .= Html::generateElement('label', $labelAttributes, $option[$this->labelKey], $this->labelIsHtml);
         $html .= $this->labelPostfix;
       }
     }
@@ -257,12 +257,12 @@ class RadiosControl extends Control
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (isset($submittedValue[$submit_name]))
+    if (isset($submittedValue[$submitName]))
     {
       // Normalize the submitted value as a string.
-      $submitted_value = (string)$submittedValue[$submit_name];
+      $submittedValue = (string)$submittedValue[$submitName];
 
       foreach ($this->options as $option)
       {
@@ -272,7 +272,7 @@ class RadiosControl extends Control
         // If an obfuscator is installed compute the obfuscated code of the radio button name.
         $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
-        if ($submitted_value===(string)$code)
+        if ($submittedValue===(string)$code)
         {
           // If the original value differs from the submitted value then the form control has been changed.
           if ((string)$this->value!==$key)

@@ -56,10 +56,10 @@ class RadioControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
-    $new_value   = $submittedValue[$submit_name] ?? '';
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $newValue   = $submittedValue[$submitName] ?? '';
 
-    if (isset($this->attributes['value']) && (string)$new_value===(string)$this->attributes['value'])
+    if (isset($this->attributes['value']) && (string)$newValue===(string)$this->attributes['value'])
     {
       if (empty($this->attributes['checked']))
       {

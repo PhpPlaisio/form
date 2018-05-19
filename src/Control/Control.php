@@ -284,16 +284,16 @@ abstract class Control extends HtmlElement
    */
   protected function setSubmitName($parentSubmitName)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if ($parentSubmitName!=='')
     {
-      if ($submit_name!=='') $this->submitName = $parentSubmitName.'['.$submit_name.']';
+      if ($submitName!=='') $this->submitName = $parentSubmitName.'['.$submitName.']';
       else                   $this->submitName = $parentSubmitName;
     }
     else
     {
-      $this->submitName = $submit_name;
+      $this->submitName = $submitName;
     }
   }
 

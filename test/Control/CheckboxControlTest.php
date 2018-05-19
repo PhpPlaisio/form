@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class CheckboxControlTest Test class for testing SatBased\Html\Form\CheckboxControl class.
  */

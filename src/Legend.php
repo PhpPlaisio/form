@@ -5,7 +5,6 @@ namespace SetBased\Abc\Form;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\HtmlElement;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for generating [legend](http://www.w3schools.com/tags/tag_legend.asp) elements.
  */

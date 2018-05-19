@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Formatter;
 
 use PHPUnit\Framework\TestCase;

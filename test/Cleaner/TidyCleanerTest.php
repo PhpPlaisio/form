@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Cleaner;
 
 use SetBased\Abc\Form\Cleaner\TidyCleaner;

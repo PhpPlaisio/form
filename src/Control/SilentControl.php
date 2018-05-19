@@ -47,32 +47,32 @@ class SilentControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value and clean it (if required).
-    if (isset($submittedValue[$submit_name]))
+    if (isset($submittedValue[$submitName]))
     {
       if ($this->cleaner)
       {
-        $new_value = $this->cleaner->clean($submittedValue[$submit_name]);
+        $newValue = $this->cleaner->clean($submittedValue[$submitName]);
       }
       else
       {
-        $new_value = $submittedValue[$submit_name];
+        $newValue = $submittedValue[$submitName];
       }
     }
     else
     {
-      $new_value = null;
+      $newValue = null;
     }
 
     // Normalize old (original) value and new (submitted) value.
-    $old_value = (string)$this->value;
-    $new_value = (string)$new_value;
+    $oldValue = (string)$this->value;
+    $newValue = (string)$newValue;
 
-    if ($old_value!==$new_value)
+    if ($oldValue!==$newValue)
     {
-      $this->value = $new_value;
+      $this->value = $newValue;
     }
   }
 

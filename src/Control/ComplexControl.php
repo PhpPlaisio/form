@@ -106,11 +106,11 @@ class ComplexControl extends Control implements CompoundControl
     }
 
     // Remove leading slash from the path.
-    $relative_path = substr($path, 1);
+    $relativePath = substr($path, 1);
 
     foreach ($this->controls as $control)
     {
-      $parts = preg_split('/\/+/', $relative_path);
+      $parts = preg_split('/\/+/', $relativePath);
 
       if ($control->name==$parts[0])
       {
@@ -269,7 +269,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if ($this->name==='')
     {
@@ -279,7 +279,7 @@ class ComplexControl extends Control implements CompoundControl
     }
     else
     {
-      $tmp1 = &$submittedValue[$submit_name];
+      $tmp1 = &$submittedValue[$submitName];
       $tmp2 = &$whiteListValue[$this->name];
       $tmp3 = &$changedInputs[$this->name];
     }

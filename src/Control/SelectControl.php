@@ -81,10 +81,10 @@ class SelectControl extends SimpleControl
 
     if (is_array($this->options))
     {
-      $option_attributes = ['value'    => '',
-                            'selected' => false,
-                            'disabled' => false,
-                            'id'       => null];
+      $optionAttributes = ['value'    => '',
+                           'selected' => false,
+                           'disabled' => false,
+                           'id'       => null];
 
       foreach ($this->options as $option)
       {
@@ -94,12 +94,12 @@ class SelectControl extends SimpleControl
         // If an obfuscator is installed compute the obfuscated code of the (database) ID.
         $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
-        $option_attributes['value']    = $code;
-        $option_attributes['selected'] = ((string)$this->value===$key);
-        $option_attributes['disabled'] = (isset($this->disabledKey) && !empty($option[$this->disabledKey]));
-        $option_attributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : null;
+        $optionAttributes['value']    = $code;
+        $optionAttributes['selected'] = ((string)$this->value===$key);
+        $optionAttributes['disabled'] = (isset($this->disabledKey) && !empty($option[$this->disabledKey]));
+        $optionAttributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : null;
 
-        $html .= Html::generateElement('option', $option_attributes, $option[$this->labelKey]);
+        $html .= Html::generateElement('option', $optionAttributes, $option[$this->labelKey]);
       }
     }
 
@@ -169,15 +169,15 @@ class SelectControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Normalize default value as a string.
     $value = (string)$this->value;
 
-    if (isset($submittedValue[$submit_name]))
+    if (isset($submittedValue[$submitName]))
     {
       // Normalize the submitted value as a string.
-      $submitted = (string)$submittedValue[$submit_name];
+      $submitted = (string)$submittedValue[$submitName];
 
       if (isset($this->emptyOption) && $submitted===(string)$this->emptyOption)
       {

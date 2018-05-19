@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
@@ -8,7 +8,6 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextAreaControl;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
 class TextAreaControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

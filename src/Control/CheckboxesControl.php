@@ -104,7 +104,6 @@ class CheckboxesControl extends Control
   protected $valueUnchecked = false;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritdoc
    */
@@ -115,27 +114,27 @@ class CheckboxesControl extends Control
 
     if (is_array($this->options))
     {
-      $input_attributes = ['type'     => 'checkbox',
-                           'name'     => '',
-                           'id'       => '',
-                           'checked'  => false,
-                           'disabled' => false];
-      $label_attributes = ['for' => &$input_attributes['id']];
+      $inputAttributes = ['type'     => 'checkbox',
+                          'name'     => '',
+                          'id'       => '',
+                          'checked'  => false,
+                          'disabled' => false];
+      $labelAttributes = ['for' => &$inputAttributes['id']];
 
       foreach ($this->options as $option)
       {
         $code = ($this->optionsObfuscator) ?
           $this->optionsObfuscator->encode($option[$this->keyKey]) : $option[$this->keyKey];
 
-        $input_attributes['name']     = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
-        $input_attributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
-        $input_attributes['checked']  = (isset($this->checkedKey) && !empty($option[$this->checkedKey]));
-        $input_attributes['disabled'] = (isset($this->disabledKey) && !empty($option[$this->disabledKey]));
+        $inputAttributes['name']     = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
+        $inputAttributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
+        $inputAttributes['checked']  = (isset($this->checkedKey) && !empty($option[$this->checkedKey]));
+        $inputAttributes['disabled'] = (isset($this->disabledKey) && !empty($option[$this->disabledKey]));
 
-        $html .= Html::generateVoidElement('input', $input_attributes);
+        $html .= Html::generateVoidElement('input', $inputAttributes);
 
         $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label', $label_attributes, $option[$this->labelKey], $this->labelIsHtml);
+        $html .= Html::generateElement('label', $labelAttributes, $option[$this->labelKey], $this->labelIsHtml);
         $html .= $this->labelPostfix;
       }
     }
@@ -349,7 +348,7 @@ class CheckboxesControl extends Control
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     foreach ($this->options as $i => $option)
     {
@@ -362,10 +361,10 @@ class CheckboxesControl extends Control
       // Get the original value (i.e. the option is checked or not).
       $value = $option[$this->checkedKey] ?? false;
 
-      if ($submit_name!=='')
+      if ($submitName!=='')
       {
         // Get the submitted value (i.e. the option is checked or not).
-        $submitted = $submittedValue[$submit_name][$code] ?? false;
+        $submitted = $submittedValue[$submitName][$code] ?? false;
 
         // If the original value differs from the submitted value then the form control has been changed.
         if (empty($value)!==empty($submitted)) $changedInputs[$this->name][$key] = $this;

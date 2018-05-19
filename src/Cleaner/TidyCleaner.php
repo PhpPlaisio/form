@@ -6,6 +6,7 @@ use SetBased\Abc\Helper\Html;
 use SetBased\Exception\FallenException;
 
 //----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Cleaner for cleaning HTML code using [HTML Tidy](http://www.html-tidy.org/).
  */
@@ -92,14 +93,14 @@ class TidyCleaner implements Cleaner
       return null;
     }
 
-    $tidy_config = ['clean'          => false,
-                    'output-xhtml'   => true,
-                    'show-body-only' => true,
-                    'wrap'           => 100];
+    $tidyConfig = ['clean'          => false,
+                   'output-xhtml'   => true,
+                   'show-body-only' => true,
+                   'wrap'           => 100];
 
     $tidy = new \tidy;
 
-    $tidy->parseString($value, $tidy_config, self::getTidyEncoding());
+    $tidy->parseString($value, $tidyConfig, self::getTidyEncoding());
     $tidy->cleanRepair();
     $value = trim(tidy_get_output($tidy));
 

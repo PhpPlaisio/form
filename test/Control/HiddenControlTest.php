@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
@@ -7,7 +7,6 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
 class HiddenControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------

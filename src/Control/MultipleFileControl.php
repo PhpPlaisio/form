@@ -59,22 +59,22 @@ class MultipleFileControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (isset($_FILES[$submit_name]['name']))
+    if (isset($_FILES[$submitName]['name']))
     {
       $changedInputs[$this->name]  = $this;
       $whiteListValue[$this->name] = [];
       $this->value                 = [];
 
-      foreach ($_FILES[$submit_name]['name'] as $i => $dummy)
+      foreach ($_FILES[$submitName]['name'] as $i => $dummy)
       {
-        if ($_FILES[$submit_name]['error'][$i]===UPLOAD_ERR_OK)
+        if ($_FILES[$submitName]['error'][$i]===UPLOAD_ERR_OK)
         {
-          $tmp = ['name'     => $_FILES[$submit_name]['name'][$i],
-                  'type'     => $_FILES[$submit_name]['type'][$i],
-                  'tmp_name' => $_FILES[$submit_name]['tmp_name'][$i],
-                  'size'     => $_FILES[$submit_name]['size'][$i]];
+          $tmp = ['name'     => $_FILES[$submitName]['name'][$i],
+                  'type'     => $_FILES[$submitName]['type'][$i],
+                  'tmp_name' => $_FILES[$submitName]['tmp_name'][$i],
+                  'size'     => $_FILES[$submitName]['size'][$i]];
 
           $whiteListValue[$this->name][] = $tmp;
           $this->value[]                 = $tmp;

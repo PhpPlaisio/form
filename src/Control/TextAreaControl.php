@@ -78,25 +78,25 @@ class TextAreaControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value and cleaned (if required).
     if ($this->cleaner)
     {
-      $new_value = $this->cleaner->clean($submittedValue[$submit_name]);
+      $newValue = $this->cleaner->clean($submittedValue[$submitName]);
     }
     else
     {
-      $new_value = $submittedValue[$submit_name];
+      $newValue = $submittedValue[$submitName];
     }
 
-    if ((string)$this->value!==(string)$new_value)
+    if ((string)$this->value!==(string)$newValue)
     {
       $changedInputs[$this->name] = $this;
-      $this->value                = $new_value;
+      $this->value                = $newValue;
     }
 
-    $whiteListValue[$this->name] = $new_value;
+    $whiteListValue[$this->name] = $newValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
