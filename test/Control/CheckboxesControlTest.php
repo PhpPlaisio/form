@@ -129,7 +129,8 @@ class CheckboxesControlTest extends AbcTestCase
     $entities[] = ['id' => 1, 'name' => '<span>1</span>'];
 
     $input = new CheckboxesControl('id');
-    $input->setOptions($entities, 'id', 'name', null, null, 'id', true);
+    $input->setOptions($entities, 'id', 'name', null, null, 'id');
+    $input->setLabelIsHtml();
 
     $html = $input->generate();
 

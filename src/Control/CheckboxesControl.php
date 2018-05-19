@@ -263,16 +263,13 @@ class CheckboxesControl extends Control
    *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
    *                                   checkbox is disabled.
    * @param string|null $idKey         The key holding the HTML ID attribute of the checkboxes.
-   * @param bool        $labelsIsHtml  If true labels are valid HTML. Otherwise special characters in the labels will
-   *                                   be replaced with HTML entities.
    */
   public function setOptions(&$options,
                              $keyKey,
                              $labelKey,
                              $checkedKey = 'abc_map_checked',
                              $disabledKey = null,
-                             $idKey = null,
-                             $labelsIsHtml = false)
+                             $idKey = null)
   {
     $this->options     = $options;
     $this->keyKey      = $keyKey;
@@ -280,7 +277,6 @@ class CheckboxesControl extends Control
     $this->checkedKey  = $checkedKey;
     $this->disabledKey = $disabledKey;
     $this->idKey       = $idKey;
-    $this->labelIsHtml = $labelsIsHtml;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
