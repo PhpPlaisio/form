@@ -37,9 +37,9 @@ class ConstantControl extends SimpleControl
    * Always sets the white listed value to the value of this constant form control.
    * Never uses $whiteListValue and never sets the $changedInputs.
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
-    $whiteListValue[$this->name] = $this->value;
+    $whiteListValues[$this->name] = $this->value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -56,20 +56,20 @@ class FileControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if (isset($_FILES[$submitName]['error']) && $_FILES[$submitName]['error']===0)
     {
-      $changedInputs[$this->name]  = $this;
-      $whiteListValue[$this->name] = $_FILES[$submitName];
-      $this->value                 = $_FILES[$submitName];
+      $changedInputs[$this->name]   = $this;
+      $whiteListValues[$this->name] = $_FILES[$submitName];
+      $this->value                  = $_FILES[$submitName];
     }
     else
     {
-      $this->value                 = null;
-      $whiteListValue[$this->name] = null;
+      $this->value                  = null;
+      $whiteListValues[$this->name] = null;
     }
   }
 

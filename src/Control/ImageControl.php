@@ -138,7 +138,7 @@ class ImageControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     throw new LogicException('Not implemented.');
   }

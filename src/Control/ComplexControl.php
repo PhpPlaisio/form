@@ -267,20 +267,20 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  public function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if ($this->name==='')
     {
-      $tmp1 = &$submittedValue;
-      $tmp2 = &$whiteListValue;
+      $tmp1 = &$submittedValues;
+      $tmp2 = &$whiteListValues;
       $tmp3 = &$changedInputs;
     }
     else
     {
-      $tmp1 = &$submittedValue[$submitName];
-      $tmp2 = &$whiteListValue[$this->name];
+      $tmp1 = &$submittedValues[$submitName];
+      $tmp2 = &$whiteListValues[$this->name];
       $tmp3 = &$changedInputs[$this->name];
     }
 
@@ -292,7 +292,7 @@ class ComplexControl extends Control implements CompoundControl
 
     if ($this->name!=='')
     {
-      if (empty($whiteListValue[$this->name])) unset($whiteListValue[$this->name]);
+      if (empty($whiteListValues[$this->name])) unset($whiteListValues[$this->name]);
       if (empty($changedInputs[$this->name])) unset($changedInputs[$this->name]);
     }
 

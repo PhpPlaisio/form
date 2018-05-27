@@ -342,7 +342,7 @@ class CheckboxesControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
@@ -360,39 +360,39 @@ class CheckboxesControl extends Control
       if ($submitName!=='')
       {
         // Get the submitted value (i.e. the option is checked or not).
-        $submitted = $submittedValue[$submitName][$code] ?? false;
+        $newValue = $submittedValues[$submitName][$code] ?? false;
 
         // If the original value differs from the submitted value then the form control has been changed.
-        if (empty($value)!==empty($submitted)) $changedInputs[$this->name][$key] = $this;
+        if (empty($value)!==empty($newValue)) $changedInputs[$this->name][$key] = $this;
 
-        if (!empty($submitted))
+        if (!empty($newValue))
         {
-          $this->value[$key]                 = $this->valueChecked;
-          $whiteListValue[$this->name][$key] = $this->valueChecked;
+          $this->value[$key]                  = $this->valueChecked;
+          $whiteListValues[$this->name][$key] = $this->valueChecked;
         }
         else
         {
-          $this->value[$key]                 = $this->valueUnchecked;
-          $whiteListValue[$this->name][$key] = $this->valueUnchecked;
+          $this->value[$key]                  = $this->valueUnchecked;
+          $whiteListValues[$this->name][$key] = $this->valueUnchecked;
         }
       }
       else
       {
         // Get the submitted value (i.e. the option is checked or not).
-        $submitted = $submittedValue[$code] ?? false;
+        $newValue = $submittedValues[$code] ?? false;
 
         // If the original value differs from the submitted value then the form control has been changed.
-        if (empty($value)!==empty($submitted)) $changedInputs[$key] = $this;
+        if (empty($value)!==empty($newValue)) $changedInputs[$key] = $this;
 
-        if (!empty($submitted))
+        if (!empty($newValue))
         {
-          $this->value[$key]    = $this->valueChecked;
-          $whiteListValue[$key] = $this->valueChecked;
+          $this->value[$key]     = $this->valueChecked;
+          $whiteListValues[$key] = $this->valueChecked;
         }
         else
         {
-          $this->value[$key]    = $this->valueUnchecked;
-          $whiteListValue[$key] = $this->valueUnchecked;
+          $this->value[$key]     = $this->valueUnchecked;
+          $whiteListValues[$key] = $this->valueUnchecked;
         }
       }
 

@@ -255,14 +255,14 @@ class RadiosControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (isset($submittedValue[$submitName]))
+    if (isset($submittedValues[$submitName]))
     {
       // Normalize the submitted value as a string.
-      $newValue = (string)$submittedValue[$submitName];
+      $newValue = (string)$submittedValues[$submitName];
 
       foreach ($this->options as $option)
       {
@@ -281,8 +281,8 @@ class RadiosControl extends Control
           }
 
           // Set the white listed value.
-          $whiteListValue[$this->name] = $key;
-          $this->value                 = $key;
+          $whiteListValues[$this->name] = $key;
+          $this->value                  = $key;
 
           // Leave the loop after first match.
           break;
@@ -292,15 +292,15 @@ class RadiosControl extends Control
     else
     {
       // No radio button has been checked.
-      $whiteListValue[$this->name] = null;
-      $this->value                 = null;
+      $whiteListValues[$this->name] = null;
+      $this->value                  = null;
     }
 
-    if (!array_key_exists($this->name, $whiteListValue))
+    if (!array_key_exists($this->name, $whiteListValues))
     {
       // The white listed value has not been set. This can only happen when a none white listed value has been submitted.
       // In this case we ignore this and assume the default value has been submitted.
-      $whiteListValue[$this->name] = $this->value;
+      $whiteListValues[$this->name] = $this->value;
     }
   }
 

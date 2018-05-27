@@ -48,12 +48,12 @@ class InvisibleControl extends SimpleControl
    *
    * Note:
    * Always sets the white listed value to the value of this constant form control.
-   * Never uses $submittedValue and never sets the $changedInputs.
+   * Never uses $submittedValues and never sets the $changedInputs.
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     // Note: by definition the value of a input:invisible form control will not be changed, whatever is submitted.
-    $whiteListValue[$this->name] = $this->value;
+    $whiteListValues[$this->name] = $this->value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

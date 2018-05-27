@@ -167,22 +167,22 @@ class SelectControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Normalize default value as a string.
     $value = (string)$this->value;
 
-    if (isset($submittedValue[$submitName]))
+    if (isset($submittedValues[$submitName]))
     {
       // Normalize the submitted value as a string.
-      $submitted = (string)$submittedValue[$submitName];
+      $newValue = (string)$submittedValues[$submitName];
 
-      if (isset($this->emptyOption) && $submitted===(string)$this->emptyOption)
+      if (isset($this->emptyOption) && $newValue===(string)$this->emptyOption)
       {
-        $this->value                 = null;
-        $whiteListValue[$this->name] = null;
+        $this->value                  = null;
+        $whiteListValues[$this->name] = null;
         if ($value!=='')
         {
           $changedInputs[$this->name] = $this;
@@ -200,7 +200,7 @@ class SelectControl extends SimpleControl
             // If an obfuscator is installed compute the obfuscated code of the (database) ID.
             $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
-            if ($submitted===(string)$code)
+            if ($newValue===(string)$code)
             {
               // If the original value differs from the submitted value then the form control has been changed.
               if ($value!==$key)
@@ -209,8 +209,8 @@ class SelectControl extends SimpleControl
               }
 
               // Set the white listed value.
-              $this->value                 = $key;
-              $whiteListValue[$this->name] = $key;
+              $this->value                  = $key;
+              $whiteListValues[$this->name] = $key;
 
               // Leave the loop.
               break;
@@ -222,19 +222,19 @@ class SelectControl extends SimpleControl
     else
     {
       // No value has been submitted.
-      $this->value                 = null;
-      $whiteListValue[$this->name] = null;
+      $this->value                  = null;
+      $whiteListValues[$this->name] = null;
       if ($value!==(string)$this->emptyOption)
       {
         $changedInputs[$this->name] = $this;
       }
     }
 
-    if (!array_key_exists($this->name, $whiteListValue))
+    if (!array_key_exists($this->name, $whiteListValues))
     {
       // The white listed value has not been set. This can only happen when a none white listed value has been submitted.
       // In this case we ignore this and assume the default value has been submitted.
-      $whiteListValue[$this->name] = $this->value;
+      $whiteListValues[$this->name] = $this->value;
     }
   }
 

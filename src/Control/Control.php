@@ -257,13 +257,13 @@ abstract class Control extends HtmlElement
   /**
    * Loads the submitted values.
    *
-   * @param array $submittedValue The submitted values.
-   * @param array $whiteListValue The white listed values.
-   * @param array $changedInputs  The form controls which values are changed by the form submit.
+   * @param array $submittedValues The submitted values.
+   * @param array $whiteListValues The white listed values.
+   * @param array $changedInputs   The form controls which values are changed by the form submit.
    *
    * @return void
    */
-  abstract protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs);
+  abstract protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

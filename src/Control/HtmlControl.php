@@ -88,9 +88,9 @@ class HtmlControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
-    $whiteListValue[$this->name] = $this->value;
+    $whiteListValues[$this->name] = $this->value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

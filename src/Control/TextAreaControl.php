@@ -76,18 +76,18 @@ class TextAreaControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     // Get the submitted value and cleaned (if required).
     if ($this->cleaner)
     {
-      $newValue = $this->cleaner->clean($submittedValue[$submitName]);
+      $newValue = $this->cleaner->clean($submittedValues[$submitName]);
     }
     else
     {
-      $newValue = $submittedValue[$submitName];
+      $newValue = $submittedValues[$submitName];
     }
 
     if ((string)$this->value!==(string)$newValue)
@@ -96,7 +96,7 @@ class TextAreaControl extends SimpleControl
       $this->value                = $newValue;
     }
 
-    $whiteListValue[$this->name] = $newValue;
+    $whiteListValues[$this->name] = $newValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

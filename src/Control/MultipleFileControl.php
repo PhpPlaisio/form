@@ -57,15 +57,15 @@ class MultipleFileControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if (isset($_FILES[$submitName]['name']))
     {
-      $changedInputs[$this->name]  = $this;
-      $whiteListValue[$this->name] = [];
-      $this->value                 = [];
+      $changedInputs[$this->name]   = $this;
+      $whiteListValues[$this->name] = [];
+      $this->value                  = [];
 
       foreach ($_FILES[$submitName]['name'] as $i => $dummy)
       {
@@ -76,8 +76,8 @@ class MultipleFileControl extends SimpleControl
                   'tmp_name' => $_FILES[$submitName]['tmp_name'][$i],
                   'size'     => $_FILES[$submitName]['size'][$i]];
 
-          $whiteListValue[$this->name][] = $tmp;
-          $this->value[]                 = $tmp;
+          $whiteListValues[$this->name][] = $tmp;
+          $this->value[]                  = $tmp;
         }
       }
     }
@@ -86,8 +86,8 @@ class MultipleFileControl extends SimpleControl
     {
       // Either no files have been uploaded or all uploaded files have errors.
       unset($changedInputs[$this->name]);
-      $this->value                 = null;
-      $whiteListValue[$this->name] = null;
+      $this->value                  = null;
+      $whiteListValues[$this->name] = null;
     }
   }
 

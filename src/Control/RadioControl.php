@@ -54,10 +54,10 @@ class RadioControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
-    $newValue   = $submittedValue[$submitName] ?? '';
+    $newValue   = $submittedValues[$submitName] ?? '';
 
     if (isset($this->attributes['value']) && (string)$newValue===(string)$this->attributes['value'])
     {
@@ -65,9 +65,9 @@ class RadioControl extends SimpleControl
       {
         $changedInputs[$this->name] = $this;
       }
-      $this->attributes['checked'] = true;
-      $whiteListValue[$this->name] = $this->attributes['value'];
-      $this->value                 = $this->attributes['value'];
+      $this->attributes['checked']  = true;
+      $whiteListValues[$this->name] = $this->attributes['value'];
+      $this->value                  = $this->attributes['value'];
     }
     else
     {
@@ -81,9 +81,9 @@ class RadioControl extends SimpleControl
       // If the white listed value is not set by a radio button with the same name as this radio button, set the white
       // listed value of this radio button (and other radio buttons with the same name) to null. If another radio button
       // with the same name is checked the white listed value will be overwritten.
-      if (!isset($whiteListValue[$this->name]))
+      if (!isset($whiteListValues[$this->name]))
       {
-        $whiteListValue[$this->name] = null;
+        $whiteListValues[$this->name] = null;
       }
     }
   }
