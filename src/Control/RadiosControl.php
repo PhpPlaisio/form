@@ -262,7 +262,7 @@ class RadiosControl extends Control
     if (isset($submittedValue[$submitName]))
     {
       // Normalize the submitted value as a string.
-      $submittedValue = (string)$submittedValue[$submitName];
+      $newValue = (string)$submittedValue[$submitName];
 
       foreach ($this->options as $option)
       {
@@ -272,7 +272,7 @@ class RadiosControl extends Control
         // If an obfuscator is installed compute the obfuscated code of the radio button name.
         $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
-        if ($submittedValue===(string)$code)
+        if ($newValue===(string)$code)
         {
           // If the original value differs from the submitted value then the form control has been changed.
           if ((string)$this->value!==$key)
@@ -284,7 +284,7 @@ class RadiosControl extends Control
           $whiteListValue[$this->name] = $key;
           $this->value                 = $key;
 
-          // Leave the loop.
+          // Leave the loop after first match.
           break;
         }
       }
