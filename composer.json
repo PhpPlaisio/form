@@ -13,10 +13,10 @@
     "phpunit/phpunit": "^6.0.0"
   },
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.1.0",
     "setbased/exception": "^1.0.0",
     "setbased/abc-html": "^1.0.0",
-    "setbased/abc-obfuscator": "^1.0.0",
+    "setbased/abc-obfuscator": "^2.0.0",
     "setbased/abc-url": "^1.0.0"
   },
   "autoload": {
