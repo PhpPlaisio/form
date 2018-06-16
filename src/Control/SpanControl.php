@@ -14,7 +14,7 @@ class SpanControl extends Control
   /**
    * The inner HTML code of this div element.
    *
-   * @var string
+   * @var string|null
    */
   protected $innerHtml;
 
@@ -44,9 +44,9 @@ class SpanControl extends Control
   /**
    * Set the inner HTML of this span element.
    *
-   * @param string $htmlSnippet The inner HTML. It is the developer's responsibility that it is valid HTML code.
+   * @param string|null $htmlSnippet The inner HTML. It is the developer's responsibility that it is valid HTML code.
    */
-  public function setInnerHtml($htmlSnippet)
+  public function setInnerHtml(?string $htmlSnippet): void
   {
     $this->innerHtml = $htmlSnippet;
   }
@@ -57,7 +57,7 @@ class SpanControl extends Control
    *
    * @param string $text The inner text. Special characters will be converted to HTML entities.
    */
-  public function setInnerText($text)
+  public function setInnerText(?string $text): void
   {
     $this->innerHtml = Html::txt2Html($text);
   }

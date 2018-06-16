@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -12,7 +12,9 @@ class DivControl extends Control
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @var string The inner HTML code of this div element.
+   * The inner HTML code of this div element.
+   *
+   * @var string|null
    */
   protected $innerHtml;
 
@@ -42,9 +44,9 @@ class DivControl extends Control
   /**
    * Set the inner HTML of this div element.
    *
-   * @param string $htmlSnippet The inner HTML. It is the developer's responsibility that it is valid HTML code.
+   * @param string|null $htmlSnippet The inner HTML. It is the developer's responsibility that it is valid HTML code.
    */
-  public function setInnerHtml($htmlSnippet)
+  public function setInnerHtml(?string $htmlSnippet): void
   {
     $this->innerHtml = $htmlSnippet;
   }
@@ -53,9 +55,9 @@ class DivControl extends Control
   /**
    * Set the inner HTML of this div element.
    *
-   * @param string $text The inner HTML. Special characters will be converted to HTML entities.
+   * @param string|null $text The inner HTML. Special characters will be converted to HTML entities.
    */
-  public function setInnerText($text)
+  public function setInnerText(?string $text): void
   {
     $this->innerHtml = Html::txt2Html($text);
   }
