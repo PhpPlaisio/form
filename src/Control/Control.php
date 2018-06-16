@@ -104,29 +104,6 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the value of an attribute.
-   *
-   * @note Depending on the child class the returned value might be different than in the actual generated HTML code
-   *       for the following attributes:
-   *       <ul>
-   *       <li> type
-   *       <li> name
-   *       <li> value
-   *       <li> checked
-   *       <li> size
-   *       </ul>
-   *
-   * @param string $name The name of the requested attribute.
-   *
-   * @return string|null
-   */
-  public function getAttribute($name)
-  {
-    return $this->attributes[$name] ?? null;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the the error messages of this form control.
    *
    * @param bool $recursive
