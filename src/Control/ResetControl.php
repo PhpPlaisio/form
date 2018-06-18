@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 /**
@@ -11,7 +11,7 @@ class ResetControl extends PushMeControl
   /**
    * @inheritdoc
    */
-  public function __construct($name)
+  public function __construct(?string $name)
   {
     parent::__construct($name);
 

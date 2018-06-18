@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -15,7 +15,7 @@ class RadioControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type'] = 'radio';
     $this->attributes['name'] = $this->submitName;
@@ -45,7 +45,7 @@ class RadioControl extends SimpleControl
    *
    * @param mixed $value The attribute value.
    */
-  public function setAttrValue($value)
+  public function setAttrValue($value): void
   {
     $this->attributes['value'] = $value;
   }
@@ -54,7 +54,9 @@ class RadioControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
     $newValue   = $submittedValues[$submitName] ?? '';

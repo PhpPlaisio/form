@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -23,7 +23,7 @@ class PushMeControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type'] = $this->buttonType;
     $this->attributes['name'] = $this->submitName;
@@ -42,11 +42,11 @@ class PushMeControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Has no effect. The value of a button is not retrieved by this method.
+   * Has no effect. The value of a button is not set by this method.
    *
    * @param array $values Not used.
    */
-  public function getCurrentValues(&$values)
+  public function mergeValuesBase(array $values): void
   {
     // Nothing to do.
   }
@@ -57,29 +57,18 @@ class PushMeControl extends SimpleControl
    *
    * @param array $values Not used.
    */
-  public function mergeValuesBase($values)
+  public function setValuesBase(array $values): void
   {
     // Nothing to do.
-    unset($values);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Has no effect. The value of a button is not set by this method.
-   *
-   * @param array $values Not used.
-   */
-  public function setValuesBase($values)
-  {
-    // Nothing to do.
-    unset($values);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 

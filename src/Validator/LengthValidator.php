@@ -32,7 +32,7 @@ class LengthValidator implements Validator
    * @param int $minLength The minimum length.
    * @param int $maxLength The maximum length.
    */
-  public function __construct($minLength = 0, $maxLength = PHP_INT_MAX)
+  public function __construct(int $minLength = 0, int $maxLength = PHP_INT_MAX)
   {
     $this->minLength = $minLength;
     $this->maxLength = $maxLength;
@@ -49,7 +49,7 @@ class LengthValidator implements Validator
    *
    * @return bool
    */
-  public function validate($control)
+  public function validate(Control $control): bool
   {
     $value = $control->getSubmittedValue();
 

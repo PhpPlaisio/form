@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Validator\CompoundValidator;
@@ -66,21 +66,11 @@ abstract class Control extends HtmlElement
   /**
    * Object constructor.
    *
-   * @param string $name The (local) name of this form control.
+   * @param string|null $name The (local) name of this form control.
    */
-  public function __construct($name)
+  public function __construct(?string $name)
   {
-    if ($name===null || $name===false || $name==='')
-    {
-      // We consider null, bool(false), and string(0) as empty. In these cases we set the name to '' such that
-      // we only have to test against '' using the === operator in other parts of the code.
-      $this->name = '';
-    }
-    else
-    {
-      // We consider int(0), float(0), string(3) "0.0" as non empty names.
-      $this->name = (string)$name;
-    }
+    $this->name = $name ?? '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -89,7 +79,7 @@ abstract class Control extends HtmlElement
    *
    * @param Validator|CompoundValidator $validator
    */
-  public function addValidator($validator)
+  public function addValidator($validator): void
   {
     $this->validators[] = $validator;
   }
@@ -100,7 +90,7 @@ abstract class Control extends HtmlElement
    *
    * @return string
    */
-  abstract public function generate();
+  abstract public function generate(): string;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -111,7 +101,7 @@ abstract class Control extends HtmlElement
    * @return string[]|null
    */
   public function getErrorMessages(/** @noinspection PhpUnusedParameterInspection */
-    $recursive = false)
+    $recursive = false): ?array
   {
     return $this->errorMessages;
   }
@@ -122,7 +112,7 @@ abstract class Control extends HtmlElement
    *
    * @return string
    */
-  public function getHtmlTableCell()
+  public function getHtmlTableCell(): string
   {
     return '<td class="control">'.$this->generate().'</td>';
   }
@@ -133,7 +123,7 @@ abstract class Control extends HtmlElement
    *
    * @return string
    */
-  public function getLocalName()
+  public function getLocalName(): string
   {
     return $this->name;
   }
@@ -144,7 +134,7 @@ abstract class Control extends HtmlElement
    *
    * @param array $values
    */
-  public function getSetValuesBase(&$values)
+  public function getSetValuesBase(array &$values): void
   {
     // Nothing to do.
   }
@@ -155,7 +145,7 @@ abstract class Control extends HtmlElement
    *
    * @return string
    */
-  public function getSubmitName()
+  public function getSubmitName(): string
   {
     return $this->submitName;
   }
@@ -172,7 +162,7 @@ abstract class Control extends HtmlElement
   /**
    * @param mixed $values
    */
-  public function mergeValuesBase($values)
+  public function mergeValuesBase(array $values): void
   {
     // Nothing to do.
   }
@@ -183,7 +173,7 @@ abstract class Control extends HtmlElement
    *
    * @param string $message The error message.
    */
-  public function setErrorMessage($message)
+  public function setErrorMessage(string $message): void
   {
     $this->errorMessages[] = $message;
   }
@@ -194,7 +184,7 @@ abstract class Control extends HtmlElement
    *
    * @param Obfuscator $obfuscator The obfuscator.
    */
-  public function setObfuscator($obfuscator)
+  public function setObfuscator(Obfuscator $obfuscator): void
   {
     $this->obfuscator = $obfuscator;
   }
@@ -205,7 +195,7 @@ abstract class Control extends HtmlElement
    *
    * @param string $htmlSnippet The HTML prefix.
    */
-  public function setPostfix($htmlSnippet)
+  public function setPostfix(string $htmlSnippet): void
   {
     $this->postfix = $htmlSnippet;
   }
@@ -216,19 +206,16 @@ abstract class Control extends HtmlElement
    *
    * @param string $htmlSnippet The HTML postfix.
    */
-  public function setPrefix($htmlSnippet)
+  public function setPrefix(string $htmlSnippet): void
   {
     $this->prefix = $htmlSnippet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param mixed $values
+   * @inheritdoc
    */
-  public function setValuesBase($values)
-  {
-    // Nothing to do.
-  }
+  abstract public function setValuesBase(array $values): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -240,7 +227,9 @@ abstract class Control extends HtmlElement
    *
    * @return void
    */
-  abstract protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs);
+  abstract protected function loadSubmittedValuesBase(array $submittedValues,
+                                                      array &$whiteListValues,
+                                                      array &$changedInputs): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -248,7 +237,7 @@ abstract class Control extends HtmlElement
    *
    * @param string $parentSubmitName The submit name of the parent control.
    */
-  protected function prepare($parentSubmitName)
+  protected function prepare(string $parentSubmitName): void
   {
     $this->setSubmitName($parentSubmitName);
   }
@@ -259,14 +248,14 @@ abstract class Control extends HtmlElement
    *
    * @param string $parentSubmitName The submit name of the parent form control of this form control.
    */
-  protected function setSubmitName($parentSubmitName)
+  protected function setSubmitName(string $parentSubmitName): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if ($parentSubmitName!=='')
     {
       if ($submitName!=='') $this->submitName = $parentSubmitName.'['.$submitName.']';
-      else                   $this->submitName = $parentSubmitName;
+      else                  $this->submitName = $parentSubmitName;
     }
     else
     {
@@ -282,7 +271,7 @@ abstract class Control extends HtmlElement
    *
    * @return bool True if and only if the submitted values are valid.
    */
-  abstract protected function validateBase(&$invalidFormControls);
+  abstract protected function validateBase(array &$invalidFormControls): bool;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

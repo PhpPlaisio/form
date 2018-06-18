@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -16,7 +16,7 @@ class MultipleFileControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type']     = 'file';
     $this->attributes['name']     = $this->submitName.'[]';
@@ -35,9 +35,9 @@ class MultipleFileControl extends SimpleControl
   /**
    * Sets the attribute [accept](http://www.w3schools.com/tags/att_input_accept.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrForm($value)
+  public function setAttrAccept(?string $value): void
   {
     $this->attributes['accept'] = $value;
   }
@@ -48,7 +48,7 @@ class MultipleFileControl extends SimpleControl
    *
    * @param mixed $value Not used.
    */
-  public function setValue($value)
+  public function setValue($value): void
   {
     // Nothing to do.
   }
@@ -57,7 +57,9 @@ class MultipleFileControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 

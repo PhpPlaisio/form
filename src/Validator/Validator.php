@@ -1,11 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Validator;
 
 use SetBased\Abc\Form\Control\Control;
 
 /**
- * IInterface for defining validators on form controls.
+ * Interface for defining validators on form controls.
  */
 interface Validator
 {
@@ -17,7 +17,7 @@ interface Validator
    *
    * @return bool
    */
-  public function validate($control);
+  public function validate(Control $control): bool;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

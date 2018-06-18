@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\TrimWhitespaceCleaner;
@@ -14,7 +14,7 @@ class TextAreaControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  public function __construct($name)
+  public function __construct(?string $name)
   {
     parent::__construct($name);
 
@@ -26,7 +26,7 @@ class TextAreaControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['name'] = $this->submitName;
 
@@ -41,9 +41,9 @@ class TextAreaControl extends SimpleControl
   /**
    * Sets the attribute [cols](http://www.w3schools.com/tags/att_textarea_cols.asp).
    *
-   * @param int $value The attribute value.
+   * @param int|null $value The attribute value.
    */
-  public function setAttrCols($value)
+  public function setAttrCols(?int $value): void
   {
     $this->attributes['cols'] = $value;
   }
@@ -52,9 +52,9 @@ class TextAreaControl extends SimpleControl
   /**
    * Sets the attribute [rows](http://www.w3schools.com/tags/att_textarea_rows.asp).
    *
-   * @param int $value The attribute value.
+   * @param int|null $value The attribute value.
    */
-  public function setAttrRows($value)
+  public function setAttrRows(?int $value): void
   {
     $this->attributes['rows'] = $value;
   }
@@ -65,9 +65,9 @@ class TextAreaControl extends SimpleControl
    * * soft
    * * hard
    *
-   * @param int $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrWrap($value)
+  public function setAttrWrap(?string $value): void
   {
     $this->attributes['wrap'] = $value;
   }
@@ -76,7 +76,9 @@ class TextAreaControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 

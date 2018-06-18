@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -16,7 +16,7 @@ class ImageControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type'] = 'image';
     $this->attributes['name'] = $this->submitName;
@@ -34,9 +34,9 @@ class ImageControl extends SimpleControl
   /**
    * Sets the attribute [alt](http://www.w3schools.com/tags/att_input_alt.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttr($value)
+  public function setAttrAlt(?string $value): void
   {
     $this->attributes['alt'] = $value;
   }
@@ -45,9 +45,9 @@ class ImageControl extends SimpleControl
   /**
    * Sets the attribute [formaction](http://www.w3schools.com/tags/att_input_formaction.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormAction($value)
+  public function setAttrFormAction(?string $value): void
   {
     $this->attributes['formaction'] = $value;
   }
@@ -59,9 +59,9 @@ class ImageControl extends SimpleControl
    * * multipart/form-data
    * * text/plain
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormEncType($value)
+  public function setAttrFormEncType(?string $value): void
   {
     $this->attributes['formenctype'] = $value;
   }
@@ -72,9 +72,9 @@ class ImageControl extends SimpleControl
    * * post (default)
    * * get
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormMethod($value)
+  public function setAttrFormMethod(?string $value): void
   {
     $this->attributes['formmethod'] = $value;
   }
@@ -83,9 +83,9 @@ class ImageControl extends SimpleControl
   /**
    * Sets the attribute [formtarget](http://www.w3schools.com/tags/att_input_formtarget.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormTarget($value)
+  public function setAttrFormTarget(?string $value): void
   {
     $this->attributes['formtarget'] = $value;
   }
@@ -94,9 +94,9 @@ class ImageControl extends SimpleControl
   /**
    * Sets the attribute [height](http://www.w3schools.com/tags/att_input_height.asp).
    *
-   * @param int $value The attribute value.
+   * @param int|null $value The attribute value.
    */
-  public function setAttrHeight($value)
+  public function setAttrHeight(?int $value): void
   {
     $this->attributes['height'] = $value;
   }
@@ -105,9 +105,9 @@ class ImageControl extends SimpleControl
   /**
    * Sets the attribute [src](http://www.w3schools.com/tags/att_input_src.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrSrc($value)
+  public function setAttrSrc(?string $value): void
   {
     $this->attributes['src'] = $value;
   }
@@ -116,9 +116,9 @@ class ImageControl extends SimpleControl
   /**
    * Sets the attribute [width](http://www.w3schools.com/tags/att_input_width.asp).
    *
-   * @param int $value The attribute value.
+   * @param int|null $value The attribute value.
    */
-  public function setAttrWidth($value)
+  public function setAttrWidth(?int $value): void
   {
     $this->attributes['width'] = $value;
   }
@@ -129,7 +129,7 @@ class ImageControl extends SimpleControl
    *
    * @param mixed $value Not used.
    */
-  public function setValue($value)
+  public function setValue($value): void
   {
     // Nothing to do.
   }
@@ -138,7 +138,9 @@ class ImageControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     throw new LogicException('Not implemented.');
   }

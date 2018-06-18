@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Validator;
 
 use SetBased\Abc\Form\Control\Control;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Validator for integer values.
  */
@@ -32,7 +31,7 @@ class IntegerValidator implements Validator
    * @param int|null $minValue The minimum required value.
    * @param int      $maxValue The maximum required value.
    */
-  public function __construct($minValue = null, $maxValue = PHP_INT_MAX)
+  public function __construct(?int $minValue = null, int $maxValue = PHP_INT_MAX)
   {
     $this->minValue = (isset($minValue)) ? $minValue : -PHP_INT_MAX;
     $this->maxValue = $maxValue;
@@ -49,7 +48,7 @@ class IntegerValidator implements Validator
    *
    * @return bool
    */
-  public function validate($control)
+  public function validate(Control $control): bool
   {
     $options = ['options' => ['min_range' => $this->minValue,
                               'max_range' => $this->maxValue]];

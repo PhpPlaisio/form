@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -16,7 +16,7 @@ class InvisibleControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type'] = 'hidden';
     $this->attributes['name'] = $this->submitName;
@@ -37,7 +37,7 @@ class InvisibleControl extends SimpleControl
    *
    * @return string An empty string.
    */
-  public function getHtmlTableCell()
+  public function getHtmlTableCell(): string
   {
     return '';
   }
@@ -50,7 +50,9 @@ class InvisibleControl extends SimpleControl
    * Always sets the white listed value to the value of this constant form control.
    * Never uses $submittedValues and never sets the $changedInputs.
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     // Note: by definition the value of a input:invisible form control will not be changed, whatever is submitted.
     $whiteListValues[$this->name] = $this->value;

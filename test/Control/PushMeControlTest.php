@@ -15,7 +15,8 @@ abstract class PushMeControlTest extends AbcTestCase
   public function testPrefixAndPostfix()
   {
     $form     = new RawForm();
-    $fieldset = $form->addFieldSet(new FieldSet());
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
 
     $input = $this->getControl('name');
     $fieldset->addFormControl($input);
@@ -41,7 +42,8 @@ abstract class PushMeControlTest extends AbcTestCase
   {
     // Create form.
     $form     = new RawForm();
-    $fieldset = $form->addFieldSet(new FieldSet());
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
 
     $input = $this->getControl('button');
     $input->setValue("Do not push");

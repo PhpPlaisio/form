@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -88,7 +88,7 @@ class RadiosControl extends Control
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $html = $this->prefix;
     $html .= Html::generateTag('span', $this->attributes);
@@ -135,7 +135,7 @@ class RadiosControl extends Control
    *
    * @param array $values The values.
    */
-  public function getSetValuesBase(&$values)
+  public function getSetValuesBase(array &$values): void
   {
     $values[$this->name] = $this->value;
   }
@@ -157,7 +157,7 @@ class RadiosControl extends Control
    *
    * @param array $values
    */
-  public function mergeValuesBase($values)
+  public function mergeValuesBase(array $values): void
   {
     if (array_key_exists($this->name, $values))
     {
@@ -171,7 +171,7 @@ class RadiosControl extends Control
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
    */
-  public function setLabelIsHtml($labelIsHtml = true)
+  public function setLabelIsHtml(bool $labelIsHtml = true): void
   {
     $this->labelIsHtml = $labelIsHtml;
   }
@@ -180,9 +180,9 @@ class RadiosControl extends Control
   /**
    * Sets the label postfix., e.g. the HTML code that is appended after the HTML code of each label of the checkboxes.
    *
-   * @param string $htmlSnippet The label postfix.
+   * @param string|null $htmlSnippet The label postfix.
    */
-  public function setLabelPostfix($htmlSnippet)
+  public function setLabelPostfix(?string $htmlSnippet): void
   {
     $this->labelPostfix = $htmlSnippet;
   }
@@ -191,9 +191,9 @@ class RadiosControl extends Control
   /**
    * Sets the label prefix, e.g. the HTML code that is inserted before the HTML code of each label of the checkboxes.
    *
-   * @param string $htmlSnippet The label prefix.
+   * @param string|null $htmlSnippet The label prefix.
    */
-  public function setLabelPrefix($htmlSnippet)
+  public function setLabelPrefix(?string $htmlSnippet): void
   {
     $this->labelPrefix = $htmlSnippet;
   }
@@ -210,7 +210,11 @@ class RadiosControl extends Control
    *                                 button is disabled.
    * @param string|null $idKey       The key holding the HTML ID attribute of the radios.
    */
-  public function setOptions(&$options, $keyKey, $labelKey, $disabledKey = null, $idKey = null)
+  public function setOptions(array &$options,
+                             string $keyKey,
+                             string $labelKey,
+                             ?string $disabledKey = null,
+                             ?string $idKey = null)
   {
     $this->options     = $options;
     $this->keyKey      = $keyKey;
@@ -224,9 +228,9 @@ class RadiosControl extends Control
    * Sets the obfuscator for the values of the radio buttons. This method should be used when the values of the radio
    * buttons are database IDs.
    *
-   * @param Obfuscator $obfuscator The obfuscator for the radio buttons values.
+   * @param Obfuscator|null $obfuscator The obfuscator for the radio buttons values.
    */
-  public function setOptionsObfuscator($obfuscator)
+  public function setOptionsObfuscator(?Obfuscator $obfuscator): void
   {
     $this->optionsObfuscator = $obfuscator;
   }
@@ -237,7 +241,7 @@ class RadiosControl extends Control
    *
    * @param string $value The new value for the form control.
    */
-  public function setValue($value)
+  public function setValue(string $value): void
   {
     $this->value = $value;
   }
@@ -246,7 +250,7 @@ class RadiosControl extends Control
   /**
    * @inheritdoc
    */
-  public function setValuesBase($values)
+  public function setValuesBase(array $values): void
   {
     $this->value = $values[$this->name] ?? null;
   }
@@ -255,7 +259,9 @@ class RadiosControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
@@ -308,7 +314,7 @@ class RadiosControl extends Control
   /**
    * @inheritdoc
    */
-  protected function validateBase(&$invalidFormControls)
+  protected function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
 

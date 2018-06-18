@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\DateCleaner;
@@ -30,7 +30,7 @@ class DateControl extends TextControl
   /**
    * @inheritdoc
    */
-  public function __construct($name)
+  public function __construct(?string $name)
   {
     parent::__construct($name);
 
@@ -50,7 +50,7 @@ class DateControl extends TextControl
    *
    * @param string $openDate The open date in YYYY-MM-DD format.
    */
-  public function setOpenDate($openDate)
+  public function setOpenDate(string $openDate): void
   {
     $this->cleaner->setOpenDate($openDate);
     $this->formatter->setOpenDate($openDate);

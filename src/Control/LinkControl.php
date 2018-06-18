@@ -19,10 +19,11 @@ class LinkControl extends Control
   protected $innerHtml;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $ret = $this->prefix;
     $ret .= Html::generateElement('a', $this->attributes, $this->innerHtml, true);
@@ -33,7 +34,7 @@ class LinkControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns null;
+   * Returns null.
    */
   public function getSubmittedValue()
   {
@@ -66,7 +67,18 @@ class LinkControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  public function setValuesBase(array $values): void
+  {
+    // Nothing to do.
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     // Nothing to do.
   }
@@ -79,7 +91,7 @@ class LinkControl extends Control
    *
    * @return bool
    */
-  protected function validateBase(&$invalidFormControls)
+  protected function validateBase(array &$invalidFormControls): bool
   {
     return true;
   }

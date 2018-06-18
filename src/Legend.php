@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form;
 
 use SetBased\Abc\Helper\Html;
@@ -12,7 +12,9 @@ class Legend extends HtmlElement
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @var string The inner HTML snippet of this legend.
+   * The inner HTML snippet of this legend.
+   *
+   * @var string|null
    */
   protected $legend;
 
@@ -22,7 +24,7 @@ class Legend extends HtmlElement
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     return Html::generateElement('legend', $this->attributes, $this->legend, true);
   }
@@ -31,9 +33,9 @@ class Legend extends HtmlElement
   /**
    * Sets the inner HTML of this legend.
    *
-   * @param string $html The HTML of legend. It is the developer's responsibility that it is valid HTML code.
+   * @param string|null $html The HTML of legend. It is the developer's responsibility that it is valid HTML code.
    */
-  public function setLegendHtml($html)
+  public function setLegendHtml(?string $html): void
   {
     $this->legend = $html;
   }
@@ -42,9 +44,9 @@ class Legend extends HtmlElement
   /**
    * Sets the inner HTML of this legend.
    *
-   * @param string $text The text of legend. Special characters will be converted to HTML entities.
+   * @param string|null $text The text of legend. Special characters will be converted to HTML entities.
    */
-  public function setLegendText($text)
+  public function setLegendText(?string $text): void
   {
     $this->legend = Html::txt2Html($text);
   }

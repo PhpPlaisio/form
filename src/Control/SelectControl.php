@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -14,21 +14,21 @@ class SelectControl extends SimpleControl
   /**
    * The key in $options holding the disabled flag for the options in this select box.
    *
-   * @var string
+   * @var string|null
    */
   protected $disabledKey;
 
   /**
    * If set the first option in the select box with be an option with an empty label with value $emptyOption.
    *
-   * @var string The value for the empty option.
+   * @var string|null
    */
   protected $emptyOption;
 
   /**
    * The key in $options holding the HTML ID for the options in this select box.
    *
-   * @var string
+   * @var string|null
    */
   protected $idKey;
 
@@ -56,7 +56,7 @@ class SelectControl extends SimpleControl
   /**
    * The obfuscator for the names of the options.
    *
-   * @var Obfuscator
+   * @var Obfuscator|null
    */
   protected $optionsObfuscator;
 
@@ -64,7 +64,7 @@ class SelectControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['name'] = $this->submitName;
 
@@ -115,7 +115,7 @@ class SelectControl extends SimpleControl
    *
    * @return array[]
    */
-  public function getOptions()
+  public function getOptions(): array
   {
     return $this->options;
   }
@@ -124,9 +124,9 @@ class SelectControl extends SimpleControl
   /**
    * Adds an option with empty label as first option to this select box.
    *
-   * @param string $emptyOption The value for the empty option. This value will not be obfuscated.
+   * @param string|null $emptyOption The value for the empty option. This value will not be obfuscated.
    */
-  public function setEmptyOption($emptyOption = ' ')
+  public function setEmptyOption(?string $emptyOption = ' '): void
   {
     $this->emptyOption = $emptyOption;
   }
@@ -143,7 +143,11 @@ class SelectControl extends SimpleControl
    *                                 is disabled.
    * @param string|null $idKey       The key holding the HTML ID attribute of the options.
    */
-  public function setOptions(&$options, $keyKey, $labelKey, $disabledKey = null, $idKey = null)
+  public function setOptions(array &$options,
+                             string $keyKey,
+                             string $labelKey,
+                             ?string $disabledKey = null,
+                             ?string $idKey = null)
   {
     $this->options     = $options;
     $this->keyKey      = $keyKey;
@@ -156,9 +160,9 @@ class SelectControl extends SimpleControl
   /**
    * Sets the obfuscator for the names (most likely the names are databases IDs) of the radio buttons.
    *
-   * @param Obfuscator $obfuscator The obfuscator for the radio buttons.
+   * @param Obfuscator|null $obfuscator The obfuscator for the radio buttons.
    */
-  public function setOptionsObfuscator($obfuscator)
+  public function setOptionsObfuscator(?Obfuscator $obfuscator): void
   {
     $this->optionsObfuscator = $obfuscator;
   }
@@ -167,7 +171,9 @@ class SelectControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 

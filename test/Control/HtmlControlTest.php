@@ -6,7 +6,6 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HtmlControl;
 use SetBased\Abc\Form\RawForm;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Test cases for class HtmlControl.
  */

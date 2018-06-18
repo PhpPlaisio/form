@@ -1,8 +1,7 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Cleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Cleaner for removing all whitespace.
  */
@@ -22,7 +21,7 @@ class RemoveWhitespaceCleaner implements Cleaner
    *
    * @return RemoveWhitespaceCleaner
    */
-  public static function get()
+  public static function get(): RemoveWhitespaceCleaner
   {
     if (!self::$singleton) self::$singleton = new self();
 

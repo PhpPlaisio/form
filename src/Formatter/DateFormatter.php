@@ -1,8 +1,7 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Formatter;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Formatter for formatting dates.
  */
@@ -19,7 +18,7 @@ class DateFormatter implements Formatter
   /**
    * If set the date that will treated as an open date. An open date will be shown as an empty form control.
    *
-   * @var string
+   * @var string|null
    */
   private $openDate;
 
@@ -29,7 +28,7 @@ class DateFormatter implements Formatter
    *
    * @param string $format The date format, see <http://www.php.net/manual/function.date.php>.
    */
-  public function __construct($format)
+  public function __construct(string $format)
   {
     $this->format = $format;
   }
@@ -49,7 +48,7 @@ class DateFormatter implements Formatter
     $valid = ($match && checkdate($parts[2], $parts[3], $parts[1]));
     if ($valid)
     {
-      if ($value==$this->openDate) return '';
+      if ($value===$this->openDate) return '';
 
       $date = new \DateTime($value);
 
@@ -67,7 +66,7 @@ class DateFormatter implements Formatter
    *
    * @param string $openDate The open date in YYYY-MM-DD format.
    */
-  public function setOpenDate($openDate)
+  public function setOpenDate(?string $openDate): void
   {
     $this->openDate = $openDate;
   }

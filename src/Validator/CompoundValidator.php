@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Validator;
 
 use SetBased\Abc\Form\Control\CompoundControl;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Interface for defining classes that validate compound controls (e.g. a complex control or a form).
  */
@@ -18,7 +17,7 @@ interface CompoundValidator
    *
    * @return bool On Successful validation returns true, otherwise false.
    */
-  public function validate($control);
+  public function validate(CompoundControl $control): bool;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

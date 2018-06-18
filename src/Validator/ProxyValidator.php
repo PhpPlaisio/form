@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Validator;
 
 use SetBased\Abc\Form\Control\Control;
@@ -31,7 +31,7 @@ class ProxyValidator implements Validator
    * @param callable $callable The callable to which the validation must be delegated.
    * @param mixed    $data     If not null the additional data passed to the callable as second argument.
    */
-  public function __construct($callable, $data = null)
+  public function __construct(callable $callable, $data = null)
   {
     $this->callable = $callable;
     $this->data     = $data;
@@ -45,7 +45,7 @@ class ProxyValidator implements Validator
    *
    * @return bool
    */
-  public function validate($control)
+  public function validate(Control $control): bool
   {
     return ($this->data===null) ? ($this->callable)($control) : ($this->callable)($control, $this->data);
   }

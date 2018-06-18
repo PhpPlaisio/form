@@ -2,10 +2,9 @@
 //--------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Form\Validator;
 
-use SetBased\Abc\Form\Control\DateControl;
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Exception\LogicException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Validator for dates.
  */
@@ -18,11 +17,11 @@ class DateValidator implements Validator
    * Note:
    * * Empty values are considered valid.
    *
-   * @param DateControl $control
+   * @param Control $control The DateControl.
    *
    * @return bool
    */
-  public function validate($control)
+  public function validate(Control $control): bool
   {
     $value = $control->getSubmittedValue();
 

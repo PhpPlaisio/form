@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -107,7 +107,7 @@ class CheckboxesControl extends Control
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $html = $this->prefix;
     $html .= Html::generateTag('span', $this->attributes);
@@ -151,7 +151,7 @@ class CheckboxesControl extends Control
    *
    * @param array $values The values.
    */
-  public function getSetValuesBase(&$values)
+  public function getSetValuesBase(array &$values): void
   {
     if ($this->name==='')
     {
@@ -184,11 +184,11 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Set the values (i.e. checked or not checked) of the checkboxes of this form control according to @a $values.
+   * Set the values (i.e. checked or not checked) of the checkboxes of this form control.
    *
-   * @param array $values
+   * @param array $values the values.
    */
-  public function mergeValuesBase($values)
+  public function mergeValuesBase(array $values): void
   {
     if ($this->name==='')
     {
@@ -222,7 +222,7 @@ class CheckboxesControl extends Control
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
    */
-  public function setLabelIsHtml($labelIsHtml = true)
+  public function setLabelIsHtml(bool $labelIsHtml = true): void
   {
     $this->labelIsHtml = $labelIsHtml;
   }
@@ -233,7 +233,7 @@ class CheckboxesControl extends Control
    *
    * @param string $htmlSnippet The label prefix.
    */
-  public function setLabelPostfix($htmlSnippet)
+  public function setLabelPostfix(string $htmlSnippet): void
   {
     $this->labelPostfix = $htmlSnippet;
   }
@@ -244,7 +244,7 @@ class CheckboxesControl extends Control
    *
    * @param string $htmlSnippet The label postfix.
    */
-  public function setLabelPrefix($htmlSnippet)
+  public function setLabelPrefix(string $htmlSnippet): void
   {
     $this->labelPrefix = $htmlSnippet;
   }
@@ -264,12 +264,12 @@ class CheckboxesControl extends Control
    *                                   checkbox is disabled.
    * @param string|null $idKey         The key holding the HTML ID attribute of the checkboxes.
    */
-  public function setOptions(&$options,
-                             $keyKey,
-                             $labelKey,
-                             $checkedKey = 'abc_map_checked',
-                             $disabledKey = null,
-                             $idKey = null)
+  public function setOptions(array &$options,
+                             string $keyKey,
+                             string $labelKey,
+                             ?string $checkedKey = 'abc_map_checked',
+                             ?string $disabledKey = null,
+                             ?string $idKey = null): void
   {
     $this->options     = $options;
     $this->keyKey      = $keyKey;
@@ -286,7 +286,7 @@ class CheckboxesControl extends Control
    *
    * @param Obfuscator $obfuscator The obfuscator for the checkbox names.
    */
-  public function setOptionsObfuscator($obfuscator)
+  public function setOptionsObfuscator(Obfuscator $obfuscator): void
   {
     $this->optionsObfuscator = $obfuscator;
   }
@@ -298,7 +298,7 @@ class CheckboxesControl extends Control
    *
    * @param array $values The values.
    */
-  public function setValuesBase($values)
+  public function setValuesBase(array $values): void
   {
     if ($this->name==='')
     {
@@ -342,7 +342,9 @@ class CheckboxesControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
@@ -404,7 +406,7 @@ class CheckboxesControl extends Control
   /**
    * @inheritdoc
    */
-  protected function validateBase(&$invalidFormControls)
+  protected function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
 

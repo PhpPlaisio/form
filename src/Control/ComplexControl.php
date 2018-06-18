@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\Cleaner;
@@ -14,7 +14,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * The cleaner to clean and/or translate (to machine format) the submitted values.
    *
-   * @var Cleaner
+   * @var Cleaner|null
    */
   protected $cleaner;
 
@@ -43,9 +43,9 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Object constructor.
    *
-   * @param string $name The (local) name of this complex form control.
+   * @param string|null $name The (local) name of this complex form control.
    */
-  public function __construct($name='')
+  public function __construct(?string $name='')
   {
     parent::__construct($name);
   }
@@ -55,21 +55,17 @@ class ComplexControl extends Control implements CompoundControl
    * Adds a form control to this complex form control.
    *
    * @param Control $control The from control added.
-   *
-   * @return Control The added form control.
    */
-  public function addFormControl($control)
+  public function addFormControl(Control $control): void
   {
     $this->controls[] = $control;
-
-    return $control;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
-  public function findFormControlByName($name)
+  public function findFormControlByName(string $name): ?Control
   {
     // Name must be string. Convert name to the string.
     $name = (string)$name;
@@ -92,9 +88,9 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function findFormControlByPath($path)
+  public function findFormControlByPath(string $path): ?Control
   {
-    if ($path===null || $path===false || $path==='' || $path==='/')
+    if ($path==='' || $path==='/')
     {
       return null;
     }
@@ -142,7 +138,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $ret = $this->prefix;
     foreach ($this->controls as $control)
@@ -163,7 +159,7 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @return array|null
    */
-  public function getErrorMessages($recursive = false)
+  public function getErrorMessages($recursive = false): ?array
   {
     $ret = [];
     if ($recursive)
@@ -192,7 +188,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function getFormControlByName($name)
+  public function getFormControlByName(string $name): Control
   {
     $control = $this->findFormControlByName($name);
     if ($control===null)
@@ -207,7 +203,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function getFormControlByPath($path)
+  public function getFormControlByPath(string $path): Control
   {
     $control = $this->findFormControlByPath($path);
     if ($control===null)
@@ -222,7 +218,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function getSetValuesBase(&$values)
+  public function getSetValuesBase(array &$values): void
   {
     if ($this->name==='')
     {
@@ -246,7 +242,7 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @returns array
    */
-  public function getSubmittedValue()
+  public function getSubmittedValue(): array
   {
     return $this->value;
   }
@@ -258,7 +254,7 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @return bool
    */
-  public function isValid()
+  public function isValid(): bool
   {
     return (empty($this->invalidControls) && empty($this->errorMessages));
   }
@@ -267,19 +263,25 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  public function loadSubmittedValuesBase(array $submittedValues,
+                                          array &$whiteListValues,
+                                          array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if ($this->name==='')
     {
-      $tmp1 = &$submittedValues;
+      $tmp1 = $submittedValues;
       $tmp2 = &$whiteListValues;
       $tmp3 = &$changedInputs;
     }
     else
     {
-      $tmp1 = &$submittedValues[$submitName];
+      if (!isset($submittedValues[$submitName])) $submittedValues[$submitName] = [];
+      if (!isset($whiteListValues[$this->name])) $whiteListValues[$this->name] = [];
+      if (!isset($changedInputs[$this->name])) $changedInputs[$this->name] = [];
+
+      $tmp1 = $submittedValues[$submitName];
       $tmp2 = &$whiteListValues[$this->name];
       $tmp3 = &$changedInputs[$this->name];
     }
@@ -307,7 +309,7 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @param mixed $values The values as a nested array.
    */
-  public function mergeValuesBase($values)
+  public function mergeValuesBase(array $values): void
   {
     if ($this->name==='')
     {
@@ -338,7 +340,7 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @param string $parentSubmitName The submit name of the parent control.
    */
-  public function prepare($parentSubmitName)
+  public function prepare(string $parentSubmitName): void
   {
     parent::prepare($parentSubmitName);
 
@@ -352,9 +354,9 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Sets the cleaner for this form control.
    *
-   * @param Cleaner $cleaner The cleaner.
+   * @param Cleaner|null $cleaner The cleaner.
    */
-  public function setCleaner($cleaner)
+  public function setCleaner(?Cleaner $cleaner): void
   {
     $this->cleaner = $cleaner;
   }
@@ -366,7 +368,7 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @param mixed $values The values as a nested array.
    */
-  public function setValue($values)
+  public function setValue($values): void
   {
     foreach ($this->controls as $control)
     {
@@ -379,9 +381,9 @@ class ComplexControl extends Control implements CompoundControl
    * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
    * value is set are set to null.
    *
-   * @param mixed $values The values as a nested array.
+   * @param array $values The values as a nested array.
    */
-  public function setValuesBase($values)
+  public function setValuesBase(array $values): void
   {
     if ($this->name==='')
     {
@@ -412,7 +414,7 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @return bool True if and only if all form controls are valid.
    */
-  public function validateBase(&$invalidFormControls)
+  public function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
 

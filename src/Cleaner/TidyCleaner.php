@@ -1,11 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Cleaner;
 
 use SetBased\Abc\Helper\Html;
 use SetBased\Exception\FallenException;
-
-//----------------------------------------------------------------------------------------------------------------------
 
 /**
  * Cleaner for cleaning HTML code using [HTML Tidy](http://www.html-tidy.org/).
@@ -26,7 +24,7 @@ class TidyCleaner implements Cleaner
    *
    * @return TidyCleaner
    */
-  public static function get()
+  public static function get(): TidyCleaner
   {
     if (!self::$singleton) self::$singleton = new self();
 
@@ -39,7 +37,7 @@ class TidyCleaner implements Cleaner
    *
    * @return string
    */
-  private static function getTidyEncoding()
+  private static function getTidyEncoding(): string
   {
     switch (Html::$encoding)
     {

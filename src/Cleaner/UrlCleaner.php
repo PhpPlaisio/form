@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Cleaner;
 
 use SetBased\Abc\Helper\Url;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Cleaner for normalizing URLs.
  */
@@ -24,7 +23,7 @@ class UrlCleaner implements Cleaner
    *
    * @return UrlCleaner
    */
-  public static function get()
+  public static function get(): UrlCleaner
   {
     if (!self::$singleton) self::$singleton = new self();
 

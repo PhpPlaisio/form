@@ -1,8 +1,7 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Cleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Cleaner for replacing ambiguous characters.
  *
@@ -137,7 +136,7 @@ class AmbiguityCleaner implements Cleaner
    *
    * @return AmbiguityCleaner
    */
-  public static function get()
+  public static function get(): AmbiguityCleaner
   {
     if (!self::$singleton) self::$singleton = new self();
 

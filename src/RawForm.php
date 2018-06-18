@@ -1,8 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form;
 
 use SetBased\Abc\Form\Control\ComplexControl;
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\CompoundControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Validator\CompoundValidator;
@@ -68,7 +69,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function __construct($name = '')
+  public function __construct(string $name = '')
   {
     $this->attributes['action'] = $_SERVER['REQUEST_URI'] ?? '';
     $this->attributes['method'] = 'post';
@@ -84,7 +85,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @return bool
    */
-  public static function hasScalars($array)
+  public static function hasScalars(array $array): bool
   {
     $ret = false;
     foreach ($array as $tmp)
@@ -105,16 +106,12 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param FieldSet $fieldSet
    *
-   * @return FieldSet
-   *
    * @since 1.0.0
    * @api
    */
-  public function addFieldSet($fieldSet)
+  public function addFieldSet(FieldSet $fieldSet): void
   {
     $this->fieldSets->addFormControl($fieldSet);
-
-    return $fieldSet;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -126,7 +123,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function addValidator($validator)
+  public function addValidator(CompoundValidator $validator): void
   {
     $this->fieldSets->addValidator($validator);
   }
@@ -138,7 +135,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function findFormControlByName($name)
+  public function findFormControlByName(string $name): ?Control
   {
     return $this->fieldSets->findFormControlByName($name);
   }
@@ -150,7 +147,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function findFormControlByPath($path)
+  public function findFormControlByPath(string $path): ?Control
   {
     return $this->fieldSets->findFormControlByPath($path);
   }
@@ -164,7 +161,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function generate()
+  public function generate(): string
   {
     $html = $this->generateStartTag();
 
@@ -186,7 +183,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getChangedControls()
+  public function getChangedControls(): array
   {
     return $this->changedControls;
   }
@@ -198,7 +195,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getFormControlByName($name)
+  public function getFormControlByName(string $name): Control
   {
     return $this->fieldSets->getFormControlByName($name);
   }
@@ -210,7 +207,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getFormControlByPath($path)
+  public function getFormControlByPath(string $path): Control
   {
     return $this->fieldSets->getFormControlByPath($path);
   }
@@ -226,7 +223,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getInvalidControls()
+  public function getInvalidControls(): array
   {
     return $this->invalidControls;
   }
@@ -240,7 +237,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @return array
    */
-  public function getSetValues()
+  public function getSetValues(): array
   {
     $ret = [];
     $this->fieldSets->getSetValuesBase($ret);
@@ -254,7 +251,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @returns array
    */
-  public function getSubmittedValue()
+  public function getSubmittedValue(): array
   {
     return $this->getValues();
   }
@@ -270,7 +267,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getValues()
+  public function getValues(): array
   {
     return $this->values;
   }
@@ -281,7 +278,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @note This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
    */
-  public function haveChangedInputs()
+  public function haveChangedInputs(): bool
   {
     return !empty($this->changedControls);
   }
@@ -293,7 +290,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function loadSubmittedValues()
+  public function loadSubmittedValues(): void
   {
     switch ($this->attributes['method'])
     {
@@ -318,9 +315,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * Sets the values of the form controls of this form. The values of form controls for which no explicit value is set
    * are left on changed
    *
-   * @param mixed $values The values as a nested array.
+   * @param array $values The values as a nested array.
    */
-  public function mergeValues($values)
+  public function mergeValues(array $values): void
   {
     $this->fieldSets->mergeValuesBase($values);
   }
@@ -332,7 +329,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function prepare()
+  public function prepare(): void
   {
     $this->fieldSets->prepare('');
   }
@@ -342,29 +339,26 @@ class RawForm extends HtmlElement implements CompoundControl
    * Sets the attribute [action](http://www.w3schools.com/tags/att_form_action.asp). The default value is the URI which
    * was given the access the current page, i.e. $_SERVER['REQUEST_URI'].
    *
-   * @param string $url The URL to send the form-data when this form is submitted.
+   * @param string|null $url The URL to send the form-data when this form is submitted.
    *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAction($url)
+  public function setAttrAction(?string $url): void
   {
     $this->attributes['action'] = $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the attribute [autocomplete](http://www.w3schools.com/tags/att_form_autocomplete.asp). Possible values:
-   * * Any value that evaluates to true will set the attribute to 'on'.
-   * * Any value that evaluates to false will set the attribute to 'off'.
-   * * Null will unset the attribute.
+   * Sets the attribute [autocomplete](http://www.w3schools.com/tags/att_form_autocomplete.asp).
    *
-   * @param mixed $autoComplete The auto complete.
+   * @param bool|null $autoComplete The auto complete value.
    *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAutoComplete($autoComplete)
+  public function setAttrAutoComplete(?bool $autoComplete): void
   {
     $this->attributes['autocomplete'] = $autoComplete;
   }
@@ -376,12 +370,12 @@ class RawForm extends HtmlElement implements CompoundControl
    * * multipart/form-data
    * * text/plain
    *
-   * @param string $encType The encoding type.
+   * @param string|null $encType The encoding type.
    *
    * @since 1.0.0
    * @api
    */
-  public function setAttrEncType($encType)
+  public function setAttrEncType(?string $encType): void
   {
     $this->attributes['enctype'] = $encType;
   }
@@ -392,12 +386,12 @@ class RawForm extends HtmlElement implements CompoundControl
    * * post (default)
    * * get
    *
-   * @param string $method The method.
+   * @param string|null $method The method.
    *
    * @since 1.0.0
    * @api
    */
-  public function setAttrMethod($method)
+  public function setAttrMethod(?string $method): void
   {
     $this->attributes['method'] = $method;
   }
@@ -408,7 +402,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param string $message The error message.
    */
-  public function setErrorMessage($message)
+  public function setErrorMessage(string $message): void
   {
     $this->errorMessages[] = $message;
   }
@@ -418,9 +412,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * Sets the values of the form controls of this form. The values of form controls for which no explicit value is set
    * are set to null.
    *
-   * @param mixed $values The values as a nested array.
+   * @param array $values The values as a nested array.
    */
-  public function setValues($values)
+  public function setValues(array $values): void
   {
     $this->fieldSets->setValuesBase($values);
   }
@@ -435,7 +429,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function validate()
+  public function validate(): bool
   {
     return $this->fieldSets->validateBase($this->invalidControls);
   }
@@ -449,7 +443,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  protected function generateBody()
+  protected function generateBody(): string
   {
     return $this->fieldSets->generate();
   }
@@ -463,7 +457,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  protected function generateEndTag()
+  protected function generateEndTag(): string
   {
     return '</form>';
   }
@@ -477,7 +471,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  protected function generateStartTag()
+  protected function generateStartTag(): string
   {
     return Html::generateTag('form', $this->attributes);
   }

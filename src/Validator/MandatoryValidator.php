@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Validator;
 
 use SetBased\Abc\Form\Control\Control;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Validates if a form control has a value. Can be applied on any form control object.
  */
@@ -22,7 +21,7 @@ class MandatoryValidator implements Validator
    *
    * @return bool
    */
-  public function validate($control)
+  public function validate(Control $control): bool
   {
     $value = $control->getSubmittedValue();
 
@@ -47,7 +46,7 @@ class MandatoryValidator implements Validator
    *
    * @return bool
    */
-  private function validateArray($array)
+  private function validateArray(array $array): bool
   {
     foreach ($array as $element)
     {

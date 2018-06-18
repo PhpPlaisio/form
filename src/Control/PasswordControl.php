@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
@@ -14,7 +14,7 @@ class PasswordControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  public function __construct($name)
+  public function __construct(?string $name)
   {
     parent::__construct($name);
 
@@ -28,7 +28,7 @@ class PasswordControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type']  = 'password';
     $this->attributes['name']  = $this->submitName;
@@ -47,7 +47,9 @@ class PasswordControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 

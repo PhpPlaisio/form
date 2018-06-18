@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Legend;
@@ -47,7 +47,7 @@ class FieldSet extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $ret = $this->generateStartTag();
 
@@ -66,7 +66,7 @@ class FieldSet extends ComplexControl
    *
    * @return string
    */
-  protected function generateEndTag()
+  protected function generateEndTag(): string
   {
     return '</fieldset>';
   }
@@ -77,7 +77,7 @@ class FieldSet extends ComplexControl
    *
    * @return string
    */
-  protected function generateLegend()
+  protected function generateLegend(): string
   {
     if ($this->legend)
     {
@@ -97,7 +97,7 @@ class FieldSet extends ComplexControl
    *
    * @return string
    */
-  protected function generateStartTag()
+  protected function generateStartTag(): string
   {
     return Html::generateTag('fieldset', $this->attributes);
   }

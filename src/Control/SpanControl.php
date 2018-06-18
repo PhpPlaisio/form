@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -19,10 +19,11 @@ class SpanControl extends Control
   protected $innerHtml;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $html = $this->prefix;
     $html .= Html::generateElement('span', $this->attributes, $this->innerHtml, true);
@@ -66,7 +67,18 @@ class SpanControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  public function setValuesBase(array $values): void
+  {
+    // Nothing to do.
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     // Nothing to do.
   }
@@ -77,7 +89,7 @@ class SpanControl extends Control
    *
    * @return bool
    */
-  protected function validateBase(&$invalidFormControls)
+  protected function validateBase(array &$invalidFormControls): bool
   {
     return true;
   }

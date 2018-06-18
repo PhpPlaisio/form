@@ -1,8 +1,7 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Cleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Interface for defining classes for cleaning submitted values and translating formatted values to machine values.
  */

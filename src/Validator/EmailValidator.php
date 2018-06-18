@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Validator;
 
 use SetBased\Abc\Form\Control\Control;
@@ -21,7 +21,7 @@ class EmailValidator implements Validator
    *
    * @return bool
    */
-  public function validate($control)
+  public function validate(Control $control): bool
   {
     $value = $control->getSubmittedValue();
 

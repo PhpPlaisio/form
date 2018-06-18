@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -37,7 +37,7 @@ class CheckboxControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type']    = 'checkbox';
     $this->attributes['name']    = $this->submitName;
@@ -58,7 +58,7 @@ class CheckboxControl extends SimpleControl
    *
    * @return string
    */
-  public function getHtmlTableCell()
+  public function getHtmlTableCell(): string
   {
     return '<td class="control checkbox">'.$this->generate().'</td>';
   }
@@ -75,7 +75,7 @@ class CheckboxControl extends SimpleControl
    * @param mixed $checked   The value that must be used when the submitted value is checked.
    * @param mixed $unchecked The value that must be used when the submitted value is not checked.
    */
-  public function useValues($checked, $unchecked)
+  public function useValues($checked, $unchecked): void
   {
     $this->valueChecked   = $checked;
     $this->valueUnchecked = $unchecked;
@@ -85,7 +85,9 @@ class CheckboxControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 

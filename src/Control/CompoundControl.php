@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 /**
@@ -14,9 +14,9 @@ interface CompoundControl
    *
    * @param string $name The name of the searched form control.
    *
-   * @return Control|ComplexControl|CompoundControl
+   * @return Control|null
    */
-  public function findFormControlByName($name);
+  public function findFormControlByName(string $name): ?Control;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -25,9 +25,9 @@ interface CompoundControl
    *
    * @param string $path The path of the searched form control.
    *
-   * @return Control|ComplexControl|CompoundControl
+   * @return Control|null
    */
-  public function findFormControlByPath($path);
+  public function findFormControlByPath(string $path): ?Control;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -36,9 +36,9 @@ interface CompoundControl
    *
    * @param string $name The name of the searched form control.
    *
-   * @return Control|ComplexControl|CompoundControl
+   * @return Control
    */
-  public function getFormControlByName($name);
+  public function getFormControlByName(string $name): Control;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -47,9 +47,9 @@ interface CompoundControl
    *
    * @param string $path The path of the searched form control.
    *
-   * @return Control|ComplexControl|CompoundControl
+   * @return Control
    */
-  public function getFormControlByPath($path);
+  public function getFormControlByPath(string $path): Control;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -57,7 +57,7 @@ interface CompoundControl
    *
    * @return array
    */
-  public function getSubmittedValue();
+  public function getSubmittedValue(): array;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -67,7 +67,7 @@ interface CompoundControl
    *
    * @return void
    */
-  public function setErrorMessage($message);
+  public function setErrorMessage(string $message): void;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

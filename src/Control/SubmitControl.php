@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 /**
@@ -9,9 +9,9 @@ class SubmitControl extends PushMeControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param string $name
+   * @inheritdoc
    */
-  public function __construct($name)
+  public function __construct(?string $name)
   {
     parent::__construct($name);
 
@@ -22,9 +22,9 @@ class SubmitControl extends PushMeControl
   /**
    * Sets the attribute [formaction](http://www.w3schools.com/tags/att_input_formaction.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormAction($value)
+  public function setAttrFormAction(?string $value): void
   {
     $this->attributes['formaction'] = $value;
   }
@@ -36,9 +36,9 @@ class SubmitControl extends PushMeControl
    * * multipart/form-data
    * * text/plain
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormEncType($value)
+  public function setAttrFormEncType(?string $value): void
   {
     $this->attributes['formenctype'] = $value;
   }
@@ -49,9 +49,9 @@ class SubmitControl extends PushMeControl
    * * post (default)
    * * get
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormMethod($value)
+  public function setAttrFormMethod(?string $value): void
   {
     $this->attributes['formmethod'] = $value;
   }
@@ -60,9 +60,9 @@ class SubmitControl extends PushMeControl
   /**
    * Sets the attribute [formtarget](http://www.w3schools.com/tags/att_input_formtarget.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrFormTarget($value)
+  public function setAttrFormTarget(?string $value): void
   {
     $this->attributes['formtarget'] = $value;
   }

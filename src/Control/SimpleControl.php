@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\Cleaner;
@@ -28,21 +28,21 @@ abstract class SimpleControl extends Control
   /**
    * The cleaner to clean and/or translate (to machine format) the submitted value.
    *
-   * @var Cleaner
+   * @var Cleaner|null
    */
   protected $cleaner;
 
   /**
    * The formatter to format the value (from machine format) to the displayed value.
    *
-   * @var Formatter
+   * @var Formatter|null
    */
   protected $formatter;
 
   /**
    * The label of this form control.
    *
-   * @var string A HTML snippet.
+   * @var string|null
    */
   protected $label;
 
@@ -74,12 +74,13 @@ abstract class SimpleControl extends Control
   protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
-   * @param string $name The name of the form control.
+   * @param string|null $name The name of the form control.
    */
-  public function __construct($name)
+  public function __construct(?string $name)
   {
     parent::__construct($name);
 
@@ -96,7 +97,7 @@ abstract class SimpleControl extends Control
    *
    * @param array $values
    */
-  public function getSetValuesBase(&$values)
+  public function getSetValuesBase(array &$values): void
   {
     $values[$this->name] = $this->value;
   }
@@ -114,9 +115,9 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param array $values
+   * @inheritdoc
    */
-  public function mergeValuesBase($values)
+  public function mergeValuesBase(array $values): void
   {
     if (array_key_exists($this->name, $values))
     {
@@ -127,13 +128,10 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [autocomplete](http://www.w3schools.com/tags/att_input_autocomplete.asp).
-   * * Any value that evaluates to true will set the attribute to 'on'.
-   * * Any value that evaluates to false will set the attribute to 'off'.
-   * * Null will unset the attribute.
    *
-   * @param mixed $value The attribute value.
+   * @param bool|null $value The attribute value.
    */
-  public function setAttrAutoComplete($value)
+  public function setAttrAutoComplete(?bool $value): void
   {
     $this->attributes['autocomplete'] = $value;
   }
@@ -141,12 +139,10 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [autofocus](http://www.w3schools.com/tags/att_input_autofocus.asp).
-   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
-   * attribute to 'autofocus'. Any other value will unset the attribute.
    *
-   * @param mixed $value The attribute value.
+   * @param bool|null $value The attribute value.
    */
-  public function setAttrAutoFocus($value)
+  public function setAttrAutoFocus(?bool $value): void
   {
     $this->attributes['autofocus'] = $value;
   }
@@ -154,12 +150,10 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [disabled](http://www.w3schools.com/tags/att_input_disabled.asp).
-   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
-   * attribute to 'disabled'. Any other value will unset the attribute.
    *
-   * @param mixed $value The attribute value.
+   * @param bool|null $value The attribute value.
    */
-  public function setAttrDisabled($value)
+  public function setAttrDisabled(?bool $value): void
   {
     $this->attributes['disabled'] = $value;
   }
@@ -168,9 +162,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [form](http://www.w3schools.com/tags/att_input_form.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrForm($value)
+  public function setAttrForm(?string $value): void
   {
     $this->attributes['form'] = $value;
   }
@@ -179,9 +173,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [list](http://www.w3schools.com/tags/att_input_list.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrList($value)
+  public function setAttrList(?String $value): void
   {
     $this->attributes['list'] = $value;
   }
@@ -190,9 +184,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [max](http://www.w3schools.com/tags/att_input_max.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrMax($value)
+  public function setAttrMax(?string $value): void
   {
     $this->attributes['max'] = $value;
   }
@@ -201,9 +195,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [maxlength](http://www.w3schools.com/tags/att_input_maxlength.asp).
    *
-   * @param int $value The attribute value.
+   * @param int|null $value The attribute value.
    */
-  public function setAttrMaxLength($value)
+  public function setAttrMaxLength(?int $value): void
   {
     $this->attributes['maxlength'] = $value;
   }
@@ -212,9 +206,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [min](http://www.w3schools.com/tags/att_input_min.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrMin($value)
+  public function setAttrMin(?string $value): void
   {
     $this->attributes['min'] = $value;
   }
@@ -223,9 +217,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [pattern](http://www.w3schools.com/tags/att_input_pattern.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrPattern($value)
+  public function setAttrPattern(?string $value): void
   {
     $this->attributes['pattern'] = $value;
   }
@@ -234,9 +228,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [placeholder](http://www.w3schools.com/tags/att_input_placeholder.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrPlaceHolder($value)
+  public function setAttrPlaceHolder(?String $value): void
   {
     $this->attributes['placeholder'] = $value;
   }
@@ -244,12 +238,10 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [readonly](http://www.w3schools.com/tags/att_input_readonly.asp).
-   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
-   * attribute to 'readonly'. Any other value will unset the attribute.
    *
-   * @param mixed $value The attribute value.
+   * @param bool|null $value The attribute value.
    */
-  public function setAttrReadOnly($value)
+  public function setAttrReadOnly(?bool $value): void
   {
     $this->attributes['readonly'] = $value;
   }
@@ -257,12 +249,10 @@ abstract class SimpleControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the attribute [required](http://www.w3schools.com/tags/att_input_required.asp).
-   * This is a boolean attribute. Any [non-empty](http://php.net/manual/function.empty.php) value will set the
-   * attribute to 'required'. Any other value will unset the attribute.
    *
-   * @param mixed $value The attribute value.
+   * @param bool|null $value The attribute value.
    */
-  public function setAttrRequired($value)
+  public function setAttrRequired(?bool $value): void
   {
     $this->attributes['required'] = $value;
   }
@@ -271,9 +261,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [size](http://www.w3schools.com/tags/att_input_size.asp).
    *
-   * @param int $value The attribute value.
+   * @param int|null $value The attribute value.
    */
-  public function setAttrSize($value)
+  public function setAttrSize(?int $value): void
   {
     $this->attributes['size'] = $value;
   }
@@ -282,9 +272,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [step](http://www.w3schools.com/tags/att_input_step.asp).
    *
-   * @param string $value The attribute value.
+   * @param string|null $value The attribute value.
    */
-  public function setAttrStep($value)
+  public function setAttrStep(?string $value): void
   {
     $this->attributes['step'] = $value;
   }
@@ -293,9 +283,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the cleaner for this form control.
    *
-   * @param Cleaner $cleaner The cleaner.
+   * @param Cleaner|null $cleaner The cleaner.
    */
-  public function setCleaner($cleaner)
+  public function setCleaner(?Cleaner $cleaner)
   {
     $this->cleaner = $cleaner;
   }
@@ -304,9 +294,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the formatter for this form control.
    *
-   * @param Formatter $formatter The formatter.
+   * @param Formatter|null $formatter The formatter.
    */
-  public function setFormatter($formatter)
+  public function setFormatter(?Formatter $formatter)
   {
     $this->formatter = $formatter;
   }
@@ -324,12 +314,12 @@ abstract class SimpleControl extends Control
    *
    * If attribute name is 'class' then the value is appended to the space separated list of classes.
    *
-   * @param string $name  The name of the attribute.
-   * @param string $value The value for the attribute.
+   * @param string      $name  The name of the attribute.
+   * @param string|null $value The value for the attribute.
    */
-  public function setLabelAttribute($name, $value)
+  public function setLabelAttribute(string $name, ?string $value)
   {
-    if ($value==='' || $value===null || $value===false)
+    if ($value==='' || $value===null)
     {
       unset($this->labelAttributes[$name]);
     }
@@ -351,10 +341,10 @@ abstract class SimpleControl extends Control
   /**
    * Sets the inner HTML of the label for this form control.
    *
-   * @param string $htmlSnippet    The (inner) label HTML snippet. It is the developer's responsibility that it is
-   *                               valid HTML code.
+   * @param string $htmlSnippet The (inner) label HTML snippet. It is the developer's responsibility that it is
+   *                            valid HTML code.
    */
-  public function setLabelHtml($htmlSnippet)
+  public function setLabelHtml(?string $htmlSnippet): void
   {
     $this->label = $htmlSnippet;
   }
@@ -370,7 +360,7 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $position
    */
-  public function setLabelPosition($position)
+  public function setLabelPosition(?string $position): void
   {
     $this->labelPosition = $position;
   }
@@ -379,9 +369,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the inner HTML of the abel for this form control.
    *
-   * @param string $text The (inner) label text. Special characters are converted to HTML entities.
+   * @param string|null $text The (inner) label text. Special characters are converted to HTML entities.
    */
-  public function setLabelText($text)
+  public function setLabelText(?string $text): void
   {
     $this->label = Html::txt2Html($text);
   }
@@ -390,9 +380,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the value of this form control.
    *
-   * @param mixed $value The new value for the form control.
+   * @param string|null $value The new value for the form control.
    */
-  public function setValue($value)
+  public function setValue($value): void
   {
     $this->value = $value;
   }
@@ -401,7 +391,7 @@ abstract class SimpleControl extends Control
   /**
    * @inheritdoc
    */
-  public function setValuesBase($values)
+  public function setValuesBase(array $values): void
   {
     $this->setValue($values[$this->name] ?? null);
   }
@@ -412,7 +402,7 @@ abstract class SimpleControl extends Control
    *
    * @return string
    */
-  protected function generateLabel()
+  protected function generateLabel(): string
   {
     return Html::generateElement('label', $this->labelAttributes, $this->label, true);
   }
@@ -423,7 +413,7 @@ abstract class SimpleControl extends Control
    *
    * @return string
    */
-  protected function generatePostfixLabel()
+  protected function generatePostfixLabel(): string
   {
     // Generate a postfix label, if required.
     if ($this->labelPosition=='post')
@@ -444,7 +434,7 @@ abstract class SimpleControl extends Control
    *
    * @return string
    */
-  protected function generatePrefixLabel()
+  protected function generatePrefixLabel(): string
   {
     // If a label must be generated make sure the form control and the label have matching 'id' and 'for' attributes.
     if (isset($this->labelPosition))
@@ -478,7 +468,7 @@ abstract class SimpleControl extends Control
   /**
    * @inheritdoc
    */
-  protected function validateBase(&$invalidFormControls)
+  protected function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
 

@@ -1,8 +1,7 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Formatter;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Interface for defining classes for formatting values from machine values the human readable values.
  */

@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 /**
@@ -13,7 +13,7 @@ class ConstantControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     return '';
   }
@@ -22,11 +22,11 @@ class ConstantControl extends SimpleControl
   /**
    * A constant control must never be shown in a table.
    *
-   * @return null
+   * @return string
    */
-  public function getHtmlTableCell()
+  public function getHtmlTableCell(): string
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -37,7 +37,9 @@ class ConstantControl extends SimpleControl
    * Always sets the white listed value to the value of this constant form control.
    * Never uses $whiteListValue and never sets the $changedInputs.
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $whiteListValues[$this->name] = $this->value;
   }

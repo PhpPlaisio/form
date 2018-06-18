@@ -21,7 +21,7 @@ class MaxLengthCleaner implements Cleaner
    *
    * @param int $maxLength The maximum length.
    */
-  public function __construct($maxLength)
+  public function __construct(int $maxLength)
   {
     $this->maxLength = $maxLength;
   }

@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
@@ -15,7 +15,7 @@ class SilentControl extends SimpleControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     $this->attributes['type'] = 'hidden';
     $this->attributes['name'] = $this->submitName;
@@ -36,7 +36,7 @@ class SilentControl extends SimpleControl
    *
    * @return string An empty string.
    */
-  public function getHtmlTableCell()
+  public function getHtmlTableCell(): string
   {
     return '';
   }
@@ -45,7 +45,9 @@ class SilentControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 

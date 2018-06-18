@@ -1,8 +1,7 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Cleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Cleaner for removing leading and training whitespace.
  */
@@ -22,7 +21,7 @@ class TrimWhitespaceCleaner implements Cleaner
    *
    * @return TrimWhitespaceCleaner
    */
-  public static function get()
+  public static function get(): TrimWhitespaceCleaner
   {
     if (!self::$singleton) self::$singleton = new self();
 

@@ -1,8 +1,7 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Cleaner;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Cleaner for removing leading and training whitespace and replacing intermediate whitespace and multiple
  * intermediate whitespaces (including new lines and tabs) with a single space.
@@ -23,7 +22,7 @@ class PruneWhitespaceCleaner implements Cleaner
    *
    * @return PruneWhitespaceCleaner
    */
-  public static function get()
+  public static function get(): PruneWhitespaceCleaner
   {
     if (!self::$singleton) self::$singleton = new self();
 
