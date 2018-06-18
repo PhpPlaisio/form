@@ -27,6 +27,7 @@ class ComplexControlTest extends AbcTestCase
   private $originControl;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test find FormControl by name.
    */
@@ -217,6 +218,27 @@ class ComplexControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test setValues with null.
+   */
+  public function testSetValues1()
+  {
+    $form = $this->setForm2();
+
+    /** @var SimpleControl $input4 */
+    $input4 = $form->getFormControlByName('field_4');
+    $input4->setValue('four');
+
+    $values = $form->getSetValues();
+    self::assertSame('four', $values['complex_name']['complex_name2']['field_4']);
+
+    $form->setValues(null);
+
+    $values = $form->getSetValues();
+    self::assertNull($values['complex_name']['complex_name2']['field_4']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    */
   public function testSubmitValues()
   {
@@ -253,7 +275,8 @@ class ComplexControlTest extends AbcTestCase
       // Create form with control inside of complex control.
       $form = $this->setForm3($name);
 
-      // Firs find complex control by name.
+      // First find complex control by name.
+      /** @var ComplexControl $complexControl */
       $complexControl = $form->findFormControlByName($name);
 
       // Test for complex control.

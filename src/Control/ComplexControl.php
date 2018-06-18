@@ -378,12 +378,9 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
-   * value is set are set to null.
-   *
-   * @param array $values The values as a nested array.
+   * @inheritdoc
    */
-  public function setValuesBase(array $values): void
+  public function setValuesBase(?array $values): void
   {
     if ($this->name==='')
     {

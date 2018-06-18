@@ -57,7 +57,7 @@ class PushMeControl extends SimpleControl
    *
    * @param array $values Not used.
    */
-  public function setValuesBase(array $values): void
+  public function setValuesBase(?array $values): void
   {
     // Nothing to do.
   }

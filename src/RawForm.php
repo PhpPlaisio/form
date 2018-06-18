@@ -412,9 +412,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * Sets the values of the form controls of this form. The values of form controls for which no explicit value is set
    * are set to null.
    *
-   * @param array $values The values as a nested array.
+   * @param array|null $values The values as a nested array.
    */
-  public function setValues(array $values): void
+  public function setValues(?array $values): void
   {
     $this->fieldSets->setValuesBase($values);
   }

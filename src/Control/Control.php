@@ -225,11 +225,11 @@ abstract class Control extends HtmlElement
    *
    * @see mergeValuesBase
    *
-   * @param array $values The initial values as nested arrays.
+   * @param array|null $values The initial values as nested arrays.
    *
    * @return void
    */
-  abstract public function setValuesBase(array $values): void;
+  abstract public function setValuesBase(?array $values): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

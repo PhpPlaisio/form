@@ -296,9 +296,9 @@ class CheckboxesControl extends Control
    * Sets the values of the checkboxes, a [non-empty](http://php.net/manual/function.empty.php) value will check a
    * checkbox.
    *
-   * @param array $values The values.
+   * @param array|null $values The values.
    */
-  public function setValuesBase(array $values): void
+  public function setValuesBase(?array $values): void
   {
     if ($this->name==='')
     {

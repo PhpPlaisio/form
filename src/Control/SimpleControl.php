@@ -391,7 +391,7 @@ abstract class SimpleControl extends Control
   /**
    * @inheritdoc
    */
-  public function setValuesBase(array $values): void
+  public function setValuesBase(?array $values): void
   {
     $this->setValue($values[$this->name] ?? null);
   }

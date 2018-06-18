@@ -79,7 +79,7 @@ class HtmlControl extends Control
   /**
    * @inheritdoc
    */
-  public function setValuesBase(array $values): void
+  public function setValuesBase(?array $values): void
   {
     $this->value = $values[$this->name] ?? null;
   }

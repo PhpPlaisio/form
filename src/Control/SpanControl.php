@@ -67,7 +67,7 @@ class SpanControl extends Control
   /**
    * @inheritdoc
    */
-  public function setValuesBase(array $values): void
+  public function setValuesBase(?array $values): void
   {
     // Nothing to do.
   }
