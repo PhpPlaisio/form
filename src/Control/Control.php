@@ -160,7 +160,14 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param mixed $values
+   * Sets the initial value(s) of this form control. The values of form controls for which no explicit value is set are
+   * left unchanged.
+   *
+   * @see mergeValuesBase
+   *
+   * @param array $values The initial values as nested arrays.
+   *
+   * @return void
    */
   public function mergeValuesBase(array $values): void
   {
@@ -213,7 +220,14 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Sets the initial value(s) of this form control. If a value for a form control is not specified the value of this
+   * form control will be set to null.
+   *
+   * @see mergeValuesBase
+   *
+   * @param array $values The initial values as nested arrays.
+   *
+   * @return void
    */
   abstract public function setValuesBase(array $values): void;
 
