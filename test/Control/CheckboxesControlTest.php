@@ -288,7 +288,7 @@ class CheckboxesControlTest extends AbcTestCase
   {
     $_POST['cnt_id']['2'] = 'on';
 
-    $form   = $this->setupForm2();
+    $form   = $this->setupForm1();
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
@@ -306,14 +306,14 @@ class CheckboxesControlTest extends AbcTestCase
   {
     $_POST['cnt_id']['2'] = 'on';
 
-    $form   = $this->setupForm2('hello', 'world');
+    $form   = $this->setupForm1();
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
-    self::assertSame('hello', $values['cnt_id']['2']);
+    self::assertSame(true, $values['cnt_id']['2']);
 
     // Test checkbox with index 1 has not been checked.
-    self::assertSame('world', $values['cnt_id']['1']);
+    self::assertSame(false, $values['cnt_id']['1']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -324,7 +324,7 @@ class CheckboxesControlTest extends AbcTestCase
   {
     $_POST['cnt_id']['0.1'] = 'on';
 
-    $form   = $this->setupForm2();
+    $form   = $this->setupForm1();
     $values = $form->getValues();
 
     // Test checkbox with index 0.1 has been checked.
@@ -369,37 +369,6 @@ class CheckboxesControlTest extends AbcTestCase
 
     $input = new CheckboxesControl('cnt_id');
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
-    $fieldset->addFormControl($input);
-
-    $form->loadSubmittedValues();
-
-    return $form;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Setups a form with a select form control. Difference between this function
-   * and SetupForm1 are the cnt_id are numbers.
-   *
-   * @param bool $checked   The value that must be used when the submitted value is checked.
-   * @param bool $unchecked The value that must be used when the submitted value is not checked.
-   *
-   * @return RawForm
-   */
-  private function setupForm2($checked = true, $unchecked = false)
-  {
-    $countries[] = ['cnt_id' => 0, 'cnt_name' => 'NL'];
-    $countries[] = ['cnt_id' => 1, 'cnt_name' => 'BE'];
-    $countries[] = ['cnt_id' => 2, 'cnt_name' => 'LU'];
-    $countries[] = ['cnt_id' => 0.1, 'cnt_name' => 'UA'];
-
-    $form     = new RawForm();
-    $fieldset = new FieldSet('');
-    $form->addFieldSet($fieldset);
-
-    $input = new CheckboxesControl('cnt_id');
-    $input->setOptions($countries, 'cnt_id', 'cnt_name');
-    $input->useValues($checked, $unchecked);
     $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();

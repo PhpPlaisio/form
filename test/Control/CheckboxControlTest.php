@@ -159,7 +159,6 @@ class CheckboxControlTest extends AbcTestCase
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test5');
-    $input->useValues(1, 0);
     $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
@@ -167,7 +166,7 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value has not set.
-    self::assertSame(0, $values['test5']);
+    self::assertSame(false, $values['test5']);
     // Value has not change.
     self::assertArrayNotHasKey('test5', $changed);
   }
@@ -188,7 +187,6 @@ class CheckboxControlTest extends AbcTestCase
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test6');
-    $input->useValues('1', '0');
     $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
@@ -196,7 +194,7 @@ class CheckboxControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     // Value has not set.
-    self::assertSame('1', $values['test6']);
+    self::assertSame(true, $values['test6']);
 
     // Value has changed.
     self::assertArrayHasKey('test6', $changed);
