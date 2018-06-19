@@ -16,7 +16,6 @@ abstract class CleanerTest extends TestCase
   protected $zeroValues = ['0', ' 0 ', "\t 0 \n"];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Creates a cleaner.
    *
