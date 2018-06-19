@@ -11,37 +11,13 @@ class CheckboxControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The value of this form control.
-   *
-   * @var bool
-   */
-  protected $value;
-
-  /**
-   * The value that must be used when the submitted value is checked.
-   *
-   * @var mixed
-   */
-  protected $valueChecked = true;
-
-  /**
-   * The value that must be used when the submitted value is not checked.
-   *
-   * @var mixed
-   */
-  protected $valueUnchecked = false;
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the HTML code for this form control.
-   *
-   * @return string
+   * @inheritdoc
    */
   public function generate(): string
   {
     $this->attributes['type']    = 'checkbox';
     $this->attributes['name']    = $this->submitName;
-    $this->attributes['checked'] = $this->value;
+    $this->attributes['checked'] = !empty($this->value);
 
     $html = $this->prefix;
     $html .= $this->generatePrefixLabel();
@@ -54,31 +30,11 @@ class CheckboxControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code for this form control in a table cell.
-   *
-   * @return string
+   * @inheritdoc
    */
   public function getHtmlTableCell(): string
   {
     return '<td class="control checkbox">'.$this->generate().'</td>';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the values that must be used when the submitted value is checked and not checked.
-   *
-   * By default values true (checked) and false (not checked) are used.
-   *
-   * If the value of this checkbox is stored as not nullable integer in a database one might use 1 for checked and 0
-   * for not checked.
-   *
-   * @param mixed $checked   The value that must be used when the submitted value is checked.
-   * @param mixed $unchecked The value that must be used when the submitted value is not checked.
-   */
-  public function useValues($checked, $unchecked): void
-  {
-    $this->valueChecked   = $checked;
-    $this->valueUnchecked = $unchecked;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -98,13 +54,13 @@ class CheckboxControl extends SimpleControl
 
     if (!empty($submittedValues[$submitName]))
     {
-      $this->value                  = $this->valueChecked;
-      $whiteListValues[$this->name] = $this->valueChecked;
+      $this->value                  = true;
+      $whiteListValues[$this->name] = true;
     }
     else
     {
-      $this->value                  = $this->valueUnchecked;
-      $whiteListValues[$this->name] = $this->valueUnchecked;
+      $this->value                  = false;
+      $whiteListValues[$this->name] = false;
     }
   }
 

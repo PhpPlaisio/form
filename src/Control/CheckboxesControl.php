@@ -89,20 +89,6 @@ class CheckboxesControl extends Control
    */
   protected $value;
 
-  /**
-   * The value that must be used when a submitted value is checked.
-   *
-   * @var mixed
-   */
-  protected $valueChecked = true;
-
-  /**
-   * The value that must be used when a submitted value is not checked.
-   *
-   * @var mixed
-   */
-  protected $valueUnchecked = false;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
@@ -322,24 +308,6 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values that must be used when the submitted value is checked and not checked.
-   *
-   * By default values true (checked) and false (not checked) are used.
-   *
-   * If the values of this checkboxes are stored as not nullable integers in a database one might use 1 for checked
-   * and 0 for not checked.
-   *
-   * @param mixed $checked   The value that must be used when the submitted value is checked.
-   * @param mixed $unchecked The value that must be used when the submitted value is not checked.
-   */
-  public function useValues($checked, $unchecked)
-  {
-    $this->valueChecked   = $checked;
-    $this->valueUnchecked = $unchecked;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * @inheritdoc
    */
   protected function loadSubmittedValuesBase(array $submittedValues,
@@ -369,13 +337,13 @@ class CheckboxesControl extends Control
 
         if (!empty($newValue))
         {
-          $this->value[$key]                  = $this->valueChecked;
-          $whiteListValues[$this->name][$key] = $this->valueChecked;
+          $this->value[$key]                  = true;
+          $whiteListValues[$this->name][$key] = true;
         }
         else
         {
-          $this->value[$key]                  = $this->valueUnchecked;
-          $whiteListValues[$this->name][$key] = $this->valueUnchecked;
+          $this->value[$key]                  = false;
+          $whiteListValues[$this->name][$key] = false;
         }
       }
       else
@@ -388,13 +356,13 @@ class CheckboxesControl extends Control
 
         if (!empty($newValue))
         {
-          $this->value[$key]     = $this->valueChecked;
-          $whiteListValues[$key] = $this->valueChecked;
+          $this->value[$key]     = true;
+          $whiteListValues[$key] = true;
         }
         else
         {
-          $this->value[$key]     = $this->valueUnchecked;
-          $whiteListValues[$key] = $this->valueUnchecked;
+          $this->value[$key]     = false;
+          $whiteListValues[$key] = false;
         }
       }
 
