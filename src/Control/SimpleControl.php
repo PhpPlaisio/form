@@ -69,12 +69,11 @@ abstract class SimpleControl extends Control
    *
    * Only for a MultipleFileControl the value can be an array.
    *
-   * @var string|array|null
+   * @var mixed
    */
   protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -380,7 +379,7 @@ abstract class SimpleControl extends Control
   /**
    * Sets the value of this form control.
    *
-   * @param string|null $value The new value for the form control.
+   * @param mixed $value The new value for the form control.
    */
   public function setValue($value): void
   {
