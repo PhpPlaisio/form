@@ -174,7 +174,7 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    */
-  public function setAttrList(?String $value): void
+  public function setAttrList(?string $value): void
   {
     $this->attributes['list'] = $value;
   }
@@ -229,7 +229,7 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    */
-  public function setAttrPlaceHolder(?String $value): void
+  public function setAttrPlaceHolder(?string $value): void
   {
     $this->attributes['placeholder'] = $value;
   }
