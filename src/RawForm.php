@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form;
 
+use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\CompoundControl;
@@ -71,7 +72,6 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function __construct(string $name = '')
   {
-    $this->attributes['action'] = $_SERVER['REQUEST_URI'] ?? '';
     $this->attributes['method'] = 'post';
 
     $this->fieldSets = new ComplexControl($name);
@@ -163,6 +163,11 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   public function generate(): string
   {
+    if (!isset($this->attributes['action']))
+    {
+      $this->attributes['action'] = Abc::$request->getRequestUri();
+    }
+
     $html = $this->generateStartTag();
 
     $html .= $this->generateBody();

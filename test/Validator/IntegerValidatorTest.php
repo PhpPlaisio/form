@@ -2,16 +2,16 @@
 
 namespace SetBased\Abc\Form\Test\Validator;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Validator\IntegerValidator;
 
 /**
  * Test cases for class IntegerValidator.
  */
-class IntegerValidatorTest extends TestCase
+class IntegerValidatorTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -210,7 +210,7 @@ class IntegerValidatorTest extends TestCase
    */
   private function setupForm1()
   {
-    $form = new RawForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -229,7 +229,7 @@ class IntegerValidatorTest extends TestCase
    */
   private function setupForm2()
   {
-    $form = new RawForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

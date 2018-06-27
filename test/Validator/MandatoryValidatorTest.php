@@ -2,7 +2,6 @@
 
 namespace SetBased\Abc\Form\Test\Validator;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
@@ -11,12 +10,13 @@ use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Control\TextAreaControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
 /**
  * Test cases for class MandatoryValidator.
  */
-class MandatoryValidatorTest extends TestCase
+class MandatoryValidatorTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -59,7 +59,7 @@ class MandatoryValidatorTest extends TestCase
         $form = $this->setupForm1($control);
 
         self::assertFalse($form->validate(),
-                           sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
+                          sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
       }
     }
   }
@@ -108,7 +108,7 @@ class MandatoryValidatorTest extends TestCase
         $form = $this->setupForm1($control);
 
         self::assertFalse($form->validate(),
-                           sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
+                          sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
       }
     }
   }

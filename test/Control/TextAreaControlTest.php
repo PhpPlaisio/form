@@ -7,6 +7,7 @@ use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextAreaControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 
 class TextAreaControlTest extends AbcTestCase
 {

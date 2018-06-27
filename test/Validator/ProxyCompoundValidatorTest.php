@@ -2,17 +2,17 @@
 
 namespace SetBased\Abc\Form\Test\Validator;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\CompoundControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Validator\ProxyCompoundValidator;
 
 /**
  * Test cases for class ProxyCompoundValidator.
  */
-class ProxyCompoundValidatorTest extends TestCase
+class ProxyCompoundValidatorTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

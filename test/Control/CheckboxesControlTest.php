@@ -5,6 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
  * Class CheckboxesControlTest Test class for testing SatBased\Html\Form\CheckboxesControl class.

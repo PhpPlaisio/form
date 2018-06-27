@@ -2,13 +2,13 @@
 
 namespace SetBased\Abc\Form\Test\Cleaner;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Cleaner\Cleaner;
+use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
  * Abstract parent test cases for cleaners.
  */
-abstract class CleanerTest extends TestCase
+abstract class CleanerTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   protected $emptyValues = ['', false, null, ' ', '  ', "\n", "\n \n", "\n \t"];

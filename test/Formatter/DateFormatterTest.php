@@ -2,13 +2,13 @@
 
 namespace SetBased\Abc\Form\Test\Formatter;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Formatter\DateFormatter;
+use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
  * Test cases for class DateFormatter.
  */
-class DateFormatterTest extends TestCase
+class DateFormatterTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testInvalidDate1()

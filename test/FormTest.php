@@ -2,7 +2,6 @@
 
 namespace SetBased\Abc\Form\Test;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\FieldSet;
@@ -12,7 +11,7 @@ use SetBased\Abc\Form\RawForm;
 /**
  * Test cases for class RawForm.
  */
-class FormTest extends TestCase
+class FormTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -88,11 +87,11 @@ class FormTest extends TestCase
 
     $input = new TextControl('name2');
     $fieldset->addFormControl($input);
-      
+
     $input = new CheckboxesControl('options');
     $input->setOptions($options, 'id', 'label');
     $fieldset->addFormControl($input);
-    
+
     $values['name1']      = 'name1';
     $values['name2']      = 'name2';
     $values['options'][1] = true;
@@ -199,7 +198,7 @@ class FormTest extends TestCase
 
     $input = new TextControl('name2');
     $fieldset->addFormControl($input);
-    
+
     $input = new CheckboxesControl('options');
     $input->setOptions($options, 'id', 'label');
     $fieldset->addFormControl($input);
@@ -293,16 +292,14 @@ class FormTest extends TestCase
     $fieldset = new FieldSet($fieldSetName);
     $form->addFieldSet($fieldset);
 
-    
     $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
-    
+
     $input = new TextControl('street');
     $complex->addFormControl($input);
     $input = new TextControl('city');
     $complex->addFormControl($input);
 
-    
     $complex = new ComplexControl('post');
     $fieldset->addFormControl($complex);
 
@@ -310,7 +307,6 @@ class FormTest extends TestCase
     $complex->addFormControl($input);
     $input = new TextControl('city');
     $complex->addFormControl($input);
-
 
     $complex = new ComplexControl('post');
     $fieldset->addFormControl($complex);
@@ -320,10 +316,8 @@ class FormTest extends TestCase
     $input = new TextControl('state');
     $complex->addFormControl($input);
 
-    
     $fieldset = new FieldSet('vacation');
     $form->addFieldSet($fieldset);
-
 
     $complex = new ComplexControl();
     $fieldset->addFormControl($complex);
@@ -333,7 +327,6 @@ class FormTest extends TestCase
     $input = new TextControl('city');
     $complex->addFormControl($input);
 
-
     $complex = new ComplexControl($complexControlName);
     $fieldset->addFormControl($complex);
 
@@ -341,7 +334,6 @@ class FormTest extends TestCase
     $complex->addFormControl($input);
     $input = new TextControl($textControlName);
     $complex->addFormControl($input);
-
 
     $complex = new ComplexControl();
     $fieldset->addFormControl($complex);

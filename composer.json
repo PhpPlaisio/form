@@ -10,14 +10,16 @@
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
-    "setbased/exception": "^1.0.0",
+    "setbased/abc": "*",
     "setbased/abc-html": "^1.0.0 || ^2.0.1",
     "setbased/abc-obfuscator": "^1.0.0 || ^2.0.0",
-    "setbased/abc-url": "^1.0.0 || ^2.0.0"
+    "setbased/abc-url": "^1.0.0 || ^2.0.0",
+    "setbased/exception": "^1.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
-    "phpunit/phpunit": "^6.0.0"
+    "phpunit/phpunit": "^6.0.0",
+    "setbased/abc-request-core": "*"
   },
   "autoload": {
     "psr-4": {

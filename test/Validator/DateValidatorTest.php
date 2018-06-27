@@ -2,16 +2,16 @@
 
 namespace SetBased\Abc\Form\Test\Validator;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\DateControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Validator\DateValidator;
 
 /**
  * Test cases for class DateValidator.
  */
-class DateValidatorTest extends TestCase
+class DateValidatorTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

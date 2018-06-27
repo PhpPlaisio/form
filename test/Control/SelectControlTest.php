@@ -5,6 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
  * Test cases for SelectControl.
@@ -61,7 +62,7 @@ class SelectControlTest extends AbcTestCase
   {
     $_POST['cnt_id'] = '-';
 
-    $form    = $this->setupForm1('-');
+    $form = $this->setupForm1('-');
 
     $changed = $form->getChangedControls();
 
@@ -143,7 +144,7 @@ class SelectControlTest extends AbcTestCase
    *
    * @return RawForm
    */
-  private function setupForm1($emptyOption=' ')
+  private function setupForm1($emptyOption = ' ')
   {
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];

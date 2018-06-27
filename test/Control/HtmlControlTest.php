@@ -5,6 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HtmlControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
  * Test cases for class HtmlControl.

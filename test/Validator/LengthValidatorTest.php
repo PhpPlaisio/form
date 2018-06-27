@@ -2,16 +2,16 @@
 
 namespace SetBased\Abc\Form\Test\Validator;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Validator\LengthValidator;
 
 /**
  * Test cases for class LengthValidator.
  */
-class LengthValidatorTest extends TestCase
+class LengthValidatorTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

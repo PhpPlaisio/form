@@ -2,16 +2,16 @@
 
 namespace SetBased\Abc\Form\Test\Validator;
 
-use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Validator\EmailValidator;
 
 /**
  * Test cases for class EmailValidator.
  */
-class EmailValidatorTest extends TestCase
+class EmailValidatorTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -228,7 +228,7 @@ class EmailValidatorTest extends TestCase
    */
   private function setupForm1()
   {
-    $form = new RawForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
