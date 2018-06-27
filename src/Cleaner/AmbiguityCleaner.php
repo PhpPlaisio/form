@@ -150,6 +150,9 @@ class AmbiguityCleaner implements Cleaner
    * @param string|null $value The submitted value.
    *
    * @return string|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function clean($value)
   {

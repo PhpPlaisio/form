@@ -15,6 +15,9 @@ interface CompoundControl
    * @param string $name The name of the searched form control.
    *
    * @return Control|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function findFormControlByName(string $name): ?Control;
 
@@ -26,6 +29,9 @@ interface CompoundControl
    * @param string $path The path of the searched form control.
    *
    * @return Control|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function findFormControlByPath(string $path): ?Control;
 
@@ -37,6 +43,9 @@ interface CompoundControl
    * @param string $name The name of the searched form control.
    *
    * @return Control
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getFormControlByName(string $name): Control;
 
@@ -48,6 +57,9 @@ interface CompoundControl
    * @param string $path The path of the searched form control.
    *
    * @return Control
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getFormControlByPath(string $path): Control;
 
@@ -56,6 +68,9 @@ interface CompoundControl
    * Returns the submitted value of this form control.
    *
    * @return array
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSubmittedValue(): array;
 
@@ -66,6 +81,9 @@ interface CompoundControl
    * @param string $message The error message.
    *
    * @return void
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setErrorMessage(string $message): void;
 

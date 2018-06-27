@@ -86,6 +86,9 @@ class RadiosControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -144,6 +147,9 @@ class RadiosControl extends Control
    * Returns the value of the check radio button.
    *
    * @returns string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSubmittedValue()
   {
@@ -169,6 +175,9 @@ class RadiosControl extends Control
    * Sets whether labels are HTML code.
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelIsHtml(bool $labelIsHtml = true): void
   {
@@ -180,6 +189,9 @@ class RadiosControl extends Control
    * Sets the label postfix., e.g. the HTML code that is appended after the HTML code of each label of the checkboxes.
    *
    * @param string|null $htmlSnippet The label postfix.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelPostfix(?string $htmlSnippet): void
   {
@@ -208,6 +220,9 @@ class RadiosControl extends Control
    *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the radio
    *                                 button is disabled.
    * @param string|null $idKey       The key holding the HTML ID attribute of the radios.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOptions(array &$options,
                              string $keyKey,
@@ -228,6 +243,9 @@ class RadiosControl extends Control
    * buttons are database IDs.
    *
    * @param Obfuscator|null $obfuscator The obfuscator for the radio buttons values.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOptionsObfuscator(?Obfuscator $obfuscator): void
   {
@@ -239,6 +257,9 @@ class RadiosControl extends Control
    * Sets the value of this form control.
    *
    * @param string $value The new value for the form control.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setValue(string $value): void
   {

@@ -241,6 +241,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * After {@link loadSubmittedValues} has been invoked use {@link getValues}.
    *
    * @return array
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSetValues(): array
   {
@@ -255,6 +258,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * Returns the submitted value of all form controls. This method is an alias of {@link getValues}.
    *
    * @returns array
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSubmittedValue(): array
   {
@@ -282,6 +288,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * Returns true if and only if the value of one or more submitted form controls have changed. Otherwise returns false.
    *
    * @note This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function haveChangedInputs(): bool
   {
@@ -321,6 +330,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * are left unchanged.
    *
    * @param array $values The values as a nested array.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function mergeValues(array $values): void
   {
@@ -418,6 +430,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * are set to null.
    *
    * @param array|null $values The values as a nested array.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setValues(?array $values): void
   {

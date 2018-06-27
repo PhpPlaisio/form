@@ -27,6 +27,9 @@ class DateFormatter implements Formatter
    * Object constructor.
    *
    * @param string $format The date format, see <http://www.php.net/manual/function.date.php>.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(string $format)
   {
@@ -41,6 +44,9 @@ class DateFormatter implements Formatter
    * @param string $value The machine value.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function format($value)
   {
@@ -65,6 +71,9 @@ class DateFormatter implements Formatter
    * Sets the open date. An open date will be shown as an empty field.
    *
    * @param string $openDate The open date in YYYY-MM-DD format.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOpenDate(?string $openDate): void
   {

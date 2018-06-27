@@ -44,6 +44,9 @@ class ComplexControl extends Control implements CompoundControl
    * Object constructor.
    *
    * @param string|null $name The (local) name of this complex form control.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?string $name='')
   {
@@ -55,6 +58,9 @@ class ComplexControl extends Control implements CompoundControl
    * Adds a form control to this complex form control.
    *
    * @param Control $control The from control added.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function addFormControl(Control $control): void
   {
@@ -64,6 +70,9 @@ class ComplexControl extends Control implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function findFormControlByName(string $name): ?Control
   {
@@ -87,6 +96,9 @@ class ComplexControl extends Control implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function findFormControlByPath(string $path): ?Control
   {
@@ -137,6 +149,9 @@ class ComplexControl extends Control implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -158,6 +173,9 @@ class ComplexControl extends Control implements CompoundControl
    *                        also.
    *
    * @return array|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getErrorMessages($recursive = false): ?array
   {
@@ -187,6 +205,9 @@ class ComplexControl extends Control implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getFormControlByName(string $name): Control
   {
@@ -202,6 +223,9 @@ class ComplexControl extends Control implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getFormControlByPath(string $path): Control
   {
@@ -241,6 +265,9 @@ class ComplexControl extends Control implements CompoundControl
    * Returns the submitted value of this form control.
    *
    * @returns array
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSubmittedValue(): array
   {
@@ -339,6 +366,9 @@ class ComplexControl extends Control implements CompoundControl
    * Prepares this form complex control for HTML code generation or loading submitted values.
    *
    * @param string $parentSubmitName The submit name of the parent control.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function prepare(string $parentSubmitName): void
   {
@@ -355,6 +385,9 @@ class ComplexControl extends Control implements CompoundControl
    * Sets the cleaner for this form control.
    *
    * @param Cleaner|null $cleaner The cleaner.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setCleaner(?Cleaner $cleaner): void
   {
@@ -367,6 +400,9 @@ class ComplexControl extends Control implements CompoundControl
    * value is set are set to null.
    *
    * @param mixed $values The values as a nested array.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setValue($values): void
   {

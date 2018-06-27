@@ -13,6 +13,9 @@ class TextControl extends SimpleControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?string $name)
   {
@@ -25,6 +28,9 @@ class TextControl extends SimpleControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {

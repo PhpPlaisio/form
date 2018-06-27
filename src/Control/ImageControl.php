@@ -15,6 +15,9 @@ class ImageControl extends SimpleControl
    * Returns the HTML code for this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -35,6 +38,9 @@ class ImageControl extends SimpleControl
    * Sets the attribute [alt](http://www.w3schools.com/tags/att_input_alt.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrAlt(?string $value): void
   {
@@ -46,6 +52,9 @@ class ImageControl extends SimpleControl
    * Sets the attribute [formaction](http://www.w3schools.com/tags/att_input_formaction.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormAction(?string $value): void
   {
@@ -60,6 +69,9 @@ class ImageControl extends SimpleControl
    * * text/plain
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormEncType(?string $value): void
   {
@@ -73,6 +85,9 @@ class ImageControl extends SimpleControl
    * * get
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormMethod(?string $value): void
   {
@@ -84,6 +99,9 @@ class ImageControl extends SimpleControl
    * Sets the attribute [formtarget](http://www.w3schools.com/tags/att_input_formtarget.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormTarget(?string $value): void
   {
@@ -95,6 +113,9 @@ class ImageControl extends SimpleControl
    * Sets the attribute [height](http://www.w3schools.com/tags/att_input_height.asp).
    *
    * @param int|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrHeight(?int $value): void
   {
@@ -106,6 +127,9 @@ class ImageControl extends SimpleControl
    * Sets the attribute [src](http://www.w3schools.com/tags/att_input_src.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrSrc(?string $value): void
   {
@@ -117,6 +141,9 @@ class ImageControl extends SimpleControl
    * Sets the attribute [width](http://www.w3schools.com/tags/att_input_width.asp).
    *
    * @param int|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrWidth(?int $value): void
   {
@@ -128,6 +155,9 @@ class ImageControl extends SimpleControl
    * Does nothing. It is not possible the set the value of an image form control.
    *
    * @param mixed $value Not used.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setValue($value): void
   {

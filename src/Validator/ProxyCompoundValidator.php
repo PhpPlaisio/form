@@ -30,6 +30,9 @@ class ProxyCompoundValidator implements CompoundValidator
    *
    * @param callable $callable The callable to which the validation must be delegated.
    * @param mixed    $data     If not null the additional data passed to the callable as second argument.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(callable $callable, $data = null)
   {
@@ -44,6 +47,9 @@ class ProxyCompoundValidator implements CompoundValidator
    * @param CompoundControl $control The compound control to be validated.
    *
    * @return bool On Successful validation returns true, otherwise false.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate(CompoundControl $control): bool
   {

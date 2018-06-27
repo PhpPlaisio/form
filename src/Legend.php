@@ -23,6 +23,9 @@ class Legend extends HtmlElement
    * Returns the HTML code for this legend.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -34,6 +37,9 @@ class Legend extends HtmlElement
    * Sets the inner HTML of this legend.
    *
    * @param string|null $html The HTML of legend. It is the developer's responsibility that it is valid HTML code.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLegendHtml(?string $html): void
   {
@@ -45,6 +51,9 @@ class Legend extends HtmlElement
    * Sets the inner HTML of this legend.
    *
    * @param string|null $text The text of legend. Special characters will be converted to HTML entities.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLegendText(?string $text): void
   {

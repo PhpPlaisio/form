@@ -31,6 +31,9 @@ class LengthValidator implements Validator
    *
    * @param int $minLength The minimum length.
    * @param int $maxLength The maximum length.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(int $minLength = 0, int $maxLength = PHP_INT_MAX)
   {
@@ -48,6 +51,9 @@ class LengthValidator implements Validator
    * @param Control $control The form control.
    *
    * @return bool
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate(Control $control): bool
   {

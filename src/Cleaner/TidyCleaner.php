@@ -79,6 +79,9 @@ class TidyCleaner implements Cleaner
    * @param string|null $value The submitted HTML snippet.
    *
    * @return string|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function clean($value)
   {

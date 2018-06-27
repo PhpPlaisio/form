@@ -15,6 +15,9 @@ class FileControl extends SimpleControl
    * Returns the HTML code for this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -35,6 +38,9 @@ class FileControl extends SimpleControl
    * Sets the attribute [accept](http://www.w3schools.com/tags/att_input_accept.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrAccept(?string $value): void
   {
@@ -46,6 +52,9 @@ class FileControl extends SimpleControl
    * Does nothing. It is not possible the set the value of a file form control.
    *
    * @param string $value Not used.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setValue($value): void
   {

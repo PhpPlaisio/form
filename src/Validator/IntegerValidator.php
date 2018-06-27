@@ -30,6 +30,9 @@ class IntegerValidator implements Validator
    *
    * @param int|null $minValue The minimum required value.
    * @param int      $maxValue The maximum required value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?int $minValue = null, int $maxValue = PHP_INT_MAX)
   {
@@ -47,6 +50,9 @@ class IntegerValidator implements Validator
    * @param Control $control The form control.
    *
    * @return bool
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate(Control $control): bool
   {

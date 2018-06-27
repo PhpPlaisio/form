@@ -12,6 +12,9 @@ class ConstantControl extends SimpleControl
    * Returns an empty string.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -23,6 +26,9 @@ class ConstantControl extends SimpleControl
    * A constant control must never be shown in a table.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getHtmlTableCell(): string
   {

@@ -29,6 +29,9 @@ class DateControl extends TextControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?string $name)
   {
@@ -49,6 +52,9 @@ class DateControl extends TextControl
    * an empty field.
    *
    * @param string $openDate The open date in YYYY-MM-DD format.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOpenDate(string $openDate): void
   {

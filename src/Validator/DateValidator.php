@@ -20,6 +20,9 @@ class DateValidator implements Validator
    * @param Control $control The DateControl.
    *
    * @return bool
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate(Control $control): bool
   {

@@ -16,6 +16,9 @@ interface CompoundValidator
    * @param CompoundControl $control The compound control to be validated.
    *
    * @return bool On Successful validation returns true, otherwise false.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate(CompoundControl $control): bool;
 

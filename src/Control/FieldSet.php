@@ -46,6 +46,9 @@ class FieldSet extends ComplexControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -65,6 +68,9 @@ class FieldSet extends ComplexControl
    * Returns the end tag of this fieldset.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generateEndTag(): string
   {
@@ -76,6 +82,9 @@ class FieldSet extends ComplexControl
    * Returns the legend for this fieldset.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generateLegend(): string
   {
@@ -96,6 +105,9 @@ class FieldSet extends ComplexControl
    * Returns the start tag of the fieldset.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generateStartTag(): string
   {

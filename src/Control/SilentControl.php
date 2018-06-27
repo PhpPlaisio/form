@@ -14,6 +14,9 @@ class SilentControl extends SimpleControl
    * Returns the HTML code for this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -35,6 +38,9 @@ class SilentControl extends SimpleControl
    * A silent control must never be shown in a table.
    *
    * @return string An empty string.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getHtmlTableCell(): string
   {

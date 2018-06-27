@@ -10,6 +10,9 @@ class SubmitControl extends PushMeControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?string $name)
   {
@@ -23,6 +26,9 @@ class SubmitControl extends PushMeControl
    * Sets the attribute [formaction](http://www.w3schools.com/tags/att_input_formaction.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormAction(?string $value): void
   {
@@ -37,6 +43,9 @@ class SubmitControl extends PushMeControl
    * * text/plain
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormEncType(?string $value): void
   {
@@ -50,6 +59,9 @@ class SubmitControl extends PushMeControl
    * * get
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormMethod(?string $value): void
   {
@@ -61,6 +73,9 @@ class SubmitControl extends PushMeControl
    * Sets the attribute [formtarget](http://www.w3schools.com/tags/att_input_formtarget.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrFormTarget(?string $value): void
   {

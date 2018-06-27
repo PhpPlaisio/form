@@ -78,6 +78,9 @@ abstract class SimpleControl extends Control
    * Object constructor.
    *
    * @param string|null $name The name of the form control.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?string $name)
   {
@@ -106,6 +109,9 @@ abstract class SimpleControl extends Control
    * Returns the submitted value of this form control.
    *
    * @return string|array|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSubmittedValue()
   {
@@ -129,6 +135,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [autocomplete](http://www.w3schools.com/tags/att_input_autocomplete.asp).
    *
    * @param bool|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrAutoComplete(?bool $value): void
   {
@@ -140,6 +149,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [autofocus](http://www.w3schools.com/tags/att_input_autofocus.asp).
    *
    * @param bool|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrAutoFocus(?bool $value): void
   {
@@ -151,6 +163,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [disabled](http://www.w3schools.com/tags/att_input_disabled.asp).
    *
    * @param bool|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrDisabled(?bool $value): void
   {
@@ -162,6 +177,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [form](http://www.w3schools.com/tags/att_input_form.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrForm(?string $value): void
   {
@@ -173,6 +191,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [list](http://www.w3schools.com/tags/att_input_list.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrList(?string $value): void
   {
@@ -184,6 +205,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [max](http://www.w3schools.com/tags/att_input_max.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrMax(?string $value): void
   {
@@ -195,6 +219,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [maxlength](http://www.w3schools.com/tags/att_input_maxlength.asp).
    *
    * @param int|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrMaxLength(?int $value): void
   {
@@ -206,6 +233,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [min](http://www.w3schools.com/tags/att_input_min.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrMin(?string $value): void
   {
@@ -217,6 +247,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [pattern](http://www.w3schools.com/tags/att_input_pattern.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrPattern(?string $value): void
   {
@@ -228,6 +261,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [placeholder](http://www.w3schools.com/tags/att_input_placeholder.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrPlaceHolder(?string $value): void
   {
@@ -239,6 +275,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [readonly](http://www.w3schools.com/tags/att_input_readonly.asp).
    *
    * @param bool|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrReadOnly(?bool $value): void
   {
@@ -250,6 +289,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [required](http://www.w3schools.com/tags/att_input_required.asp).
    *
    * @param bool|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrRequired(?bool $value): void
   {
@@ -261,6 +303,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [size](http://www.w3schools.com/tags/att_input_size.asp).
    *
    * @param int|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrSize(?int $value): void
   {
@@ -272,6 +317,9 @@ abstract class SimpleControl extends Control
    * Sets the attribute [step](http://www.w3schools.com/tags/att_input_step.asp).
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrStep(?string $value): void
   {
@@ -283,6 +331,9 @@ abstract class SimpleControl extends Control
    * Sets the cleaner for this form control.
    *
    * @param Cleaner|null $cleaner The cleaner.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setCleaner(?Cleaner $cleaner)
   {
@@ -294,6 +345,9 @@ abstract class SimpleControl extends Control
    * Sets the formatter for this form control.
    *
    * @param Formatter|null $formatter The formatter.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setFormatter(?Formatter $formatter)
   {
@@ -315,6 +369,9 @@ abstract class SimpleControl extends Control
    *
    * @param string      $name  The name of the attribute.
    * @param string|null $value The value for the attribute.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelAttribute(string $name, ?string $value)
   {
@@ -342,6 +399,9 @@ abstract class SimpleControl extends Control
    *
    * @param string $htmlSnippet The (inner) label HTML snippet. It is the developer's responsibility that it is
    *                            valid HTML code.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelHtml(?string $htmlSnippet): void
   {
@@ -358,6 +418,9 @@ abstract class SimpleControl extends Control
    * </ul>
    *
    * @param string|null $position
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelPosition(?string $position): void
   {
@@ -369,6 +432,9 @@ abstract class SimpleControl extends Control
    * Sets the inner HTML of the abel for this form control.
    *
    * @param string|null $text The (inner) label text. Special characters are converted to HTML entities.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelText(?string $text): void
   {
@@ -380,6 +446,9 @@ abstract class SimpleControl extends Control
    * Sets the value of this form control.
    *
    * @param mixed $value The new value for the form control.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setValue($value): void
   {
@@ -400,6 +469,9 @@ abstract class SimpleControl extends Control
    * Returns the HTML code for the label for this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generateLabel(): string
   {
@@ -411,6 +483,9 @@ abstract class SimpleControl extends Control
    * Returns HTML code for a label for this form control to be appended after the HTML code of this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generatePostfixLabel(): string
   {
@@ -432,6 +507,9 @@ abstract class SimpleControl extends Control
    * Returns HTML code for a label for this form control te be inserted before the HTML code of this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function generatePrefixLabel(): string
   {

@@ -10,6 +10,9 @@ class ResetControl extends PushMeControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?string $name)
   {

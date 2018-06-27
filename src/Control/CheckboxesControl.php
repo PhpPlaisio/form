@@ -92,6 +92,9 @@ class CheckboxesControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -162,6 +165,9 @@ class CheckboxesControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSubmittedValue()
   {
@@ -207,6 +213,9 @@ class CheckboxesControl extends Control
    * Sets whether labels are HTML code.
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelIsHtml(bool $labelIsHtml = true): void
   {
@@ -218,6 +227,9 @@ class CheckboxesControl extends Control
    * Sets the label prefix, e.g. the HTML code that is inserted before the HTML code of each label of the checkboxes.
    *
    * @param string $htmlSnippet The label prefix.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelPostfix(string $htmlSnippet): void
   {
@@ -229,6 +241,9 @@ class CheckboxesControl extends Control
    * Sets the label postfix., e.g. the HTML code that is appended after the HTML code of each label of the checkboxes.
    *
    * @param string $htmlSnippet The label postfix.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setLabelPrefix(string $htmlSnippet): void
   {
@@ -249,6 +264,9 @@ class CheckboxesControl extends Control
    *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
    *                                   checkbox is disabled.
    * @param string|null $idKey         The key holding the HTML ID attribute of the checkboxes.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOptions(array &$options,
                              string $keyKey,
@@ -271,6 +289,9 @@ class CheckboxesControl extends Control
    * are database IDs.
    *
    * @param Obfuscator $obfuscator The obfuscator for the checkbox names.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOptionsObfuscator(Obfuscator $obfuscator): void
   {

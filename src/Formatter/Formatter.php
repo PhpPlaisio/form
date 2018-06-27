@@ -14,6 +14,9 @@ interface Formatter
    * @param mixed $value The machine value.
    *
    * @return mixed
+   *
+   * @since 1.0.0
+   * @api
    */
   public function format($value);
 }

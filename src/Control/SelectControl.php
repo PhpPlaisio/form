@@ -63,6 +63,9 @@ class SelectControl extends SimpleControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -114,6 +117,9 @@ class SelectControl extends SimpleControl
    * Returns the options of this select box as set by {@link setOptions}.
    *
    * @return array[]
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getOptions(): array
   {
@@ -125,6 +131,9 @@ class SelectControl extends SimpleControl
    * Adds an option with empty label as first option to this select box.
    *
    * @param string|null $emptyOption The value for the empty option. This value will not be obfuscated.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setEmptyOption(?string $emptyOption = ' '): void
   {
@@ -142,6 +151,9 @@ class SelectControl extends SimpleControl
    *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the option
    *                                 is disabled.
    * @param string|null $idKey       The key holding the HTML ID attribute of the options.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOptions(array &$options,
                              string $keyKey,
@@ -161,6 +173,9 @@ class SelectControl extends SimpleControl
    * Sets the obfuscator for the names (most likely the names are databases IDs) of the radio buttons.
    *
    * @param Obfuscator|null $obfuscator The obfuscator for the radio buttons.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOptionsObfuscator(?Obfuscator $obfuscator): void
   {

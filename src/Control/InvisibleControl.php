@@ -15,6 +15,9 @@ class InvisibleControl extends SimpleControl
    * Returns the HTML code for this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {

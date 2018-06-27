@@ -21,6 +21,9 @@ class DivControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -34,6 +37,9 @@ class DivControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns null.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getSubmittedValue()
   {
@@ -45,6 +51,9 @@ class DivControl extends Control
    * Set the inner HTML of this div element.
    *
    * @param string|null $htmlSnippet The inner HTML. It is the developer's responsibility that it is valid HTML code.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setInnerHtml(?string $htmlSnippet): void
   {
@@ -56,6 +65,9 @@ class DivControl extends Control
    * Set the inner HTML of this div element.
    *
    * @param string|null $text The inner HTML. Special characters will be converted to HTML entities.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setInnerText(?string $text): void
   {

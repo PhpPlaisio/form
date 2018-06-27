@@ -13,6 +13,9 @@ class TextAreaControl extends SimpleControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(?string $name)
   {
@@ -25,6 +28,9 @@ class TextAreaControl extends SimpleControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -42,6 +48,9 @@ class TextAreaControl extends SimpleControl
    * Sets the attribute [cols](http://www.w3schools.com/tags/att_textarea_cols.asp).
    *
    * @param int|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrCols(?int $value): void
   {
@@ -53,6 +62,9 @@ class TextAreaControl extends SimpleControl
    * Sets the attribute [rows](http://www.w3schools.com/tags/att_textarea_rows.asp).
    *
    * @param int|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrRows(?int $value): void
   {
@@ -66,6 +78,9 @@ class TextAreaControl extends SimpleControl
    * * hard
    *
    * @param string|null $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrWrap(?string $value): void
   {

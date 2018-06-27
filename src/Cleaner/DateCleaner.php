@@ -45,6 +45,9 @@ class DateCleaner implements Cleaner
    *                                           for the formatting options.
    * @param string|null $separator             The separator (a single character) in the expected format.
    * @param string|null $alternativeSeparators Alternative separators (each character is an alternative separator).
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct(string $format, ?string $separator = null, ?string $alternativeSeparators = null)
   {
@@ -61,6 +64,9 @@ class DateCleaner implements Cleaner
    * @param string|null $value The submitted date.
    *
    * @return string|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function clean($value)
   {
@@ -109,6 +115,9 @@ class DateCleaner implements Cleaner
    * Sets the open date. An empty submitted value will be replaced with the open date.
    *
    * @param string $openDate The open date in YYYY-MM-DD format.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setOpenDate(?string $openDate): void
   {

@@ -14,6 +14,9 @@ class RadioControl extends SimpleControl
    * Returns the HTML code for this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function generate(): string
   {
@@ -44,6 +47,9 @@ class RadioControl extends SimpleControl
    * Sets the attribute [value](http://www.w3schools.com/tags/att_input_value.asp).
    *
    * @param mixed $value The attribute value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setAttrValue($value): void
   {

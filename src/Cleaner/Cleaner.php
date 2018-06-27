@@ -14,6 +14,9 @@ interface Cleaner
    * @param mixed $value The submitted value.
    *
    * @return mixed The cleaned submitted value.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function clean($value);
 }

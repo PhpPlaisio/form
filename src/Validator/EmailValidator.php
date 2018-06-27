@@ -20,6 +20,9 @@ class EmailValidator implements Validator
    * @param Control $control The form control.
    *
    * @return bool
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate(Control $control): bool
   {

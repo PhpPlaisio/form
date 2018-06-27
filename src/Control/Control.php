@@ -63,12 +63,16 @@ abstract class Control extends HtmlElement
   protected $validators = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
    * @param string|null $name The (local) name of this form control.
+   *
+   * @since 1.0.0
+   * @api
    */
-  public function __construct(?string $name)
+  public function __construct(?string $name = '')
   {
     $this->name = $name ?? '';
   }
@@ -78,6 +82,9 @@ abstract class Control extends HtmlElement
    * Adds a compound validator for this form control.
    *
    * @param Validator|CompoundValidator $validator
+   *
+   * @since 1.0.0
+   * @api
    */
   public function addValidator($validator): void
   {
@@ -89,6 +96,9 @@ abstract class Control extends HtmlElement
    * Returns the HTML code for this form control.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   abstract public function generate(): string;
 
@@ -99,6 +109,9 @@ abstract class Control extends HtmlElement
    * @param bool $recursive
    *
    * @return string[]|null
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getErrorMessages(/** @noinspection PhpUnusedParameterInspection */
     $recursive = false): ?array
@@ -111,6 +124,9 @@ abstract class Control extends HtmlElement
    * Returns the HTML code for this form control in a table cell.
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getHtmlTableCell(): string
   {
@@ -122,6 +138,9 @@ abstract class Control extends HtmlElement
    * Returns the local name of this form control
    *
    * @return string
+   *
+   * @since 1.0.0
+   * @api
    */
   public function getLocalName(): string
   {
@@ -155,6 +174,9 @@ abstract class Control extends HtmlElement
    * Returns the submitted value of this form control.
    *
    * @return mixed
+   *
+   * @since 1.0.0
+   * @api
    */
   abstract public function getSubmittedValue();
 
@@ -168,6 +190,9 @@ abstract class Control extends HtmlElement
    * @param array $values The initial values as nested arrays.
    *
    * @return void
+   *
+   * @since 1.0.0
+   * @api
    */
   public function mergeValuesBase(array $values): void
   {
@@ -179,6 +204,9 @@ abstract class Control extends HtmlElement
    * Adds an error message to the list of error messages for this form control.
    *
    * @param string $message The error message.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setErrorMessage(string $message): void
   {
@@ -190,6 +218,9 @@ abstract class Control extends HtmlElement
    * Sets the obfuscator for the name of this form control.
    *
    * @param Obfuscator $obfuscator The obfuscator.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setObfuscator(Obfuscator $obfuscator): void
   {
@@ -201,6 +232,9 @@ abstract class Control extends HtmlElement
    * Sets the HTML code that is inserted before the HTML code of this form control.
    *
    * @param string $htmlSnippet The HTML prefix.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setPostfix(string $htmlSnippet): void
   {
@@ -212,6 +246,9 @@ abstract class Control extends HtmlElement
    * Sets the HTML code that is appended after the HTML code of this form control.
    *
    * @param string $htmlSnippet The HTML postfix.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setPrefix(string $htmlSnippet): void
   {
@@ -250,6 +287,9 @@ abstract class Control extends HtmlElement
    * Prepares this form control for HTML code generation or loading submitted values.
    *
    * @param string $parentSubmitName The submit name of the parent control.
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function prepare(string $parentSubmitName): void
   {
