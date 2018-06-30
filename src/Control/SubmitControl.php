@@ -5,7 +5,7 @@ namespace SetBased\Abc\Form\Control;
 /**
  * Class for form controls of type [input:submit](http://www.w3schools.com/tags/tag_input.asp).
  */
-class SubmitControl extends PushMeControl
+class SubmitControl extends PushControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

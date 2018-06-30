@@ -7,7 +7,7 @@ use SetBased\Abc\Form\Control\ResetControl;
 /**
  * Unit tests for class ResetControl.
  */
-class ResetControlTest extends PushMeControlTest
+class ResetControlTest extends PushControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -5,7 +5,7 @@ namespace SetBased\Abc\Form\Control;
 /**
  * Class for form controls of type [input:reset](http://www.w3schools.com/tags/tag_input.asp).
  */
-class ResetControl extends PushMeControl
+class ResetControl extends PushControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

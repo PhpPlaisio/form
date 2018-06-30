@@ -7,7 +7,7 @@ use SetBased\Abc\Form\Control\SubmitControl;
 /**
  * Unit tests for class SubmitControl.
  */
-class SubmitControlTest extends PushMeControlTest
+class SubmitControlTest extends PushControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

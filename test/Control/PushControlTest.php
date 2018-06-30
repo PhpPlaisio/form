@@ -3,14 +3,14 @@
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\PushMeControl;
+use SetBased\Abc\Form\Control\PushControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
- * Abstract parent class for unit tests for child classes of PushMeControl.
+ * Abstract parent class for unit tests for child classes of PushControl.
  */
-abstract class PushMeControlTest extends AbcTestCase
+abstract class PushControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
@@ -80,11 +80,11 @@ abstract class PushMeControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a concrete instance of PushMeControl.
+   * Returns a concrete instance of PushControl.
    *
    * @param string $name The of the control.
    *
-   * @return PushMeControl
+   * @return PushControl
    */
   abstract protected function getControl($name);
 

@@ -7,7 +7,7 @@ use SetBased\Abc\Form\Control\ButtonControl;
 /**
  * Unit tests for class ButtonControl.
  */
-class ButtonControlTest extends PushMeControlTest
+class ButtonControlTest extends PushControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

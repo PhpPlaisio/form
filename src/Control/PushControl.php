@@ -5,9 +5,9 @@ namespace SetBased\Abc\Form\Control;
 use SetBased\Abc\Helper\Html;
 
 /**
- * parent class for form controls submit, reset, and button.
+ * Parent class for form controls submit, reset, and button.
  */
-class PushMeControl extends SimpleControl
+class PushControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /** The type of this button. Valid values are:
