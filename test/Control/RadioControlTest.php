@@ -4,9 +4,7 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadioControl;
-use SetBased\Abc\Form\Control\RadiosControl;
-use SetBased\Abc\Form\RawForm;
-use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class PasswordControl.
@@ -14,9 +12,19 @@ use SetBased\Abc\Form\Test\AbcTestCase;
 class RadioControlTest extends RadioControl
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new RadioControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
+  //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -33,16 +41,6 @@ class RadioControlTest extends RadioControl
 
     $pos = strpos($html, '/>World');
     self::assertNotEquals(false, $pos);
-  }
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test control is hidden.
-   */
-  public function testIsHidden()
-  {
-    $control = new RadioControl('hidden');
-
-    self::assertSame(false, $control->isHidden());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -141,7 +139,7 @@ class RadioControlTest extends RadioControl
    */
   private function setForm1()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -167,7 +165,7 @@ class RadioControlTest extends RadioControl
   //--------------------------------------------------------------------------------------------------------------------
   private function setForm2()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -194,7 +192,7 @@ class RadioControlTest extends RadioControl
   //--------------------------------------------------------------------------------------------------------------------
   private function setForm3()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

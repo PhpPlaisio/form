@@ -2,23 +2,12 @@
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Html;
-
 /**
- * Parent class for form controls submit, reset, and button.
+ * Class for mimicking a hidden button.
  */
-class PushControl extends SimpleControl
+class HiddenButtonControl extends HiddenControl
 {
   //--------------------------------------------------------------------------------------------------------------------
-  /** The type of this button. Valid values are:
-   *  <ul>
-   *  <li> submit
-   *  <li> reset
-   *  <li> button
-   *  </ul>
-   */
-  protected $buttonType;
-
   /**
    * The name of the method for handling the form when the form submit is triggered by this control.
    *
@@ -28,31 +17,19 @@ class PushControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Returns true.
    *
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function isSubmitTrigger(): bool
   {
-    $this->attributes['type'] = $this->buttonType;
-    $this->attributes['name'] = $this->submitName;
-
-    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
-    else                  $this->attributes['value'] = $this->value;
-
-    $ret = $this->prefix;
-    $ret .= $this->generatePrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->generatePostfixLabel();
-    $ret .= $this->postfix;
-
-    return $ret;
+    return true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Has no effect. The value of a button is not set by this method.
+   * Has no effect. The value of a hidden button is not set by this method.
    *
    * @param array $values Not used.
    */
@@ -74,7 +51,7 @@ class PushControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Has no effect. The value of a button is not set by this method.
+   * Has no effect. The value of a hidden button is not set by this method.
    *
    * @param array $values Not used.
    */

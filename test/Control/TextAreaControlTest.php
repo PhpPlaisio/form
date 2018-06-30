@@ -3,11 +3,10 @@
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
-use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextAreaControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class TextAreaControl.
@@ -17,7 +16,7 @@ class TextAreaControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -44,7 +43,7 @@ class TextAreaControlTest extends AbcTestCase
   {
     $_POST['test'] = '  Hello    World!   ';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -75,7 +74,7 @@ class TextAreaControlTest extends AbcTestCase
   {
     $_POST['test'] = 'Hello World!';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

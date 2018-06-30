@@ -2,17 +2,49 @@
 
 namespace SetBased\Abc\Form\Test;
 
+use SetBased\Abc\Form\Control\ButtonControl;
 use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\ComplexControl;
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\HiddenButtonControl;
+use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 
 /**
  * Test cases for class RawForm.
  */
-class FormTest extends AbcTestCase
+class RawFormTest extends AbcTestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Base test for testing searchSubmitHandler.
+   *
+   * @param Control $trigger  The control that will trigger the form submit.
+   * @param string  $expected The expected value.
+   */
+  public function searchSubmitHandlerTest($trigger, $expected)
+  {
+    $form      = new TestForm('form1');
+    $fieldset1 = new FieldSet('fieldset1');
+    $form->addFieldSet($fieldset1);
+
+    $complex1 = new ComplexControl('complex1');
+    $fieldset1->addFormControl($complex1);
+
+    $input1 = new TextControl('name1');
+    $complex1->addFormControl($input1);
+
+    $complex1->addFormControl($trigger);
+
+    $_POST['form1']['fieldset1']['complex1']['button1'] = 'knob';
+
+    $handler = $form->execute();
+
+    self::assertSame($expected, $handler);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test for finding a complex control with different types of names.
@@ -119,7 +151,7 @@ class FormTest extends AbcTestCase
     $_POST = [];
 
     $form = $this->setupForm1();
-    $form->loadSubmittedValues();
+    $form->execute();
     $changed     = $form->getChangedControls();
     $has_scalars = $form::hasScalars($changed);
 
@@ -132,11 +164,12 @@ class FormTest extends AbcTestCase
    */
   public function testHasScalars2()
   {
-    $_POST          = [];
-    $_POST['name1'] = 'Hello world';
+    $_POST           = [];
+    $_POST['name1']  = 'Hello world';
+    $_POST['submit'] = 'submit';
 
     $form = $this->setupForm1();
-    $form->loadSubmittedValues();
+    $form->execute();
     $changed     = $form->getChangedControls();
     $has_scalars = $form::hasScalars($changed);
 
@@ -152,9 +185,10 @@ class FormTest extends AbcTestCase
     $_POST              = [];
     $_POST['name1']     = 'Hello world';
     $_POST['option'][2] = 'on';
+    $_POST['submit']    = 'submit';
 
     $form = $this->setupForm1();
-    $form->loadSubmittedValues();
+    $form->execute();
     $changed     = $form->getChangedControls();
     $has_scalars = $form::hasScalars($changed);
 
@@ -169,9 +203,10 @@ class FormTest extends AbcTestCase
   {
     $_POST              = [];
     $_POST['option'][2] = 'on';
+    $_POST['submit']    = 'submit';
 
     $form = $this->setupForm1();
-    $form->loadSubmittedValues();
+    $form->execute();
     $changed     = $form->getChangedControls();
     $has_scalars = $form::hasScalars($changed);
 
@@ -189,7 +224,7 @@ class FormTest extends AbcTestCase
     $options[] = ['id' => 2, 'label' => 'label2'];
     $options[] = ['id' => 3, 'label' => 'label3'];
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('name');
     $form->addFieldSet($fieldset);
 
@@ -220,7 +255,7 @@ class FormTest extends AbcTestCase
     $form->mergeValues($merge);
 
     // Generate HTML.
-    $form->prepare();
+    $form->execute();
     $html = $form->generate();
 
     $doc = new \DOMDocument();
@@ -250,7 +285,85 @@ class FormTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @return RawForm
+   * Test for testing searchSubmitHandler with SubmitControl.
+   */
+  public function testSearchSubmitHandler01()
+  {
+    $trigger = new SubmitControl('button1');
+    $trigger->setValue('knob');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handler');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with ButtonControl.
+   */
+  public function testSearchSubmitHandler02()
+  {
+    $trigger = new ButtonControl('button1');
+    $trigger->setValue('knob');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handler');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with HiddenButtonControl.
+   */
+  public function testSearchSubmitHandler03()
+  {
+    $trigger = new HiddenButtonControl('button1');
+    $trigger->setValue('knob');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handler');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with SubmitControl.
+   */
+  public function testSearchSubmitHandler11()
+  {
+    $trigger = new SubmitControl('button1');
+    $trigger->setValue('door');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with ButtonControl.
+   */
+  public function testSearchSubmitHandler12()
+  {
+    $trigger = new ButtonControl('button1');
+    $trigger->setValue('door');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with HiddenButtonControl.
+   */
+  public function testSearchSubmitHandler13()
+  {
+    $trigger = new HiddenButtonControl('button1');
+    $trigger->setValue('door');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @return TestForm
    */
   private function setupForm1()
   {
@@ -259,7 +372,7 @@ class FormTest extends AbcTestCase
     $options[] = ['id' => 2, 'label' => 'label2'];
     $options[] = ['id' => 2, 'label' => 'label3'];
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
     $input = new TextControl('name1');
@@ -270,6 +383,11 @@ class FormTest extends AbcTestCase
 
     $input = new CheckboxesControl('options');
     $input->setOptions($options, 'id', 'label');
+    $fieldset->addFormControl($input);
+
+    $input = new SubmitControl('submit');
+    $input->setValue('submit');
+    $input->setMethod('handler');
     $fieldset->addFormControl($input);
 
     return $form;

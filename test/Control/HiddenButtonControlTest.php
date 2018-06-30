@@ -2,24 +2,22 @@
 
 namespace SetBased\Abc\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\SubmitControl;
+use SetBased\Abc\Form\Control\HiddenButtonControl;
 
 /**
- * Unit tests for class SubmitControl.
+ * Unit tests for class HiddenButtonControl.
  */
-class SubmitControlTest extends PushControlTest
+class HiddenButtonControlTest extends PushControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  public function testAttributes()
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
   {
-    $attributes = ['formaction'  => 'setAttrFormAction',
-                   'formenctype' => 'setAttrFormEncType',
-                   'formmethod'  => 'setAttrFormMethod',
-                   'formtarget'  => 'setAttrFormTarget'];
+    $control = new HiddenButtonControl('hidden-button');
 
-    $input = $this->getControl('button');
-
-    $this->htmlAttributesTest($input, $attributes);
+    self::assertSame(true, $control->isHidden());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -28,18 +26,18 @@ class SubmitControlTest extends PushControlTest
    */
   protected function getControl($name)
   {
-    return new SubmitControl($name);
+    return new HiddenButtonControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Return submit type for form control.
+   * Returns input type for form control.
    *
    * @return string
    */
   protected function getControlType()
   {
-    return 'submit';
+    return 'hidden';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

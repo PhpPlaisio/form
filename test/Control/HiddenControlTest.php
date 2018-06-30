@@ -5,7 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
-use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class HiddenControl.
@@ -14,13 +14,23 @@ class HiddenControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new HiddenControl('hidden');
+
+    self::assertSame(true, $control->isHidden());
+  }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test change value.
    */
   public function testValue()
   {
     $_POST['test'] = 'New value';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -35,16 +45,6 @@ class HiddenControlTest extends SimpleControlTest
     // Value is change.
     self::assertNotEmpty($changed['test']);
   }
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test control is hidden.
-   */
-  public function testIsHidden()
-  {
-    $control = new HiddenControl('hidden');
-
-    self::assertSame(true, $control->isHidden());
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -54,7 +54,7 @@ class HiddenControlTest extends SimpleControlTest
   {
     $_POST['test'] = '  Hello    World!   ';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

@@ -4,8 +4,8 @@ namespace SetBased\Abc\Form\Test\Validator;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 use SetBased\Abc\Form\Validator\HttpValidator;
 
 /**
@@ -124,10 +124,12 @@ class HttpValidatorTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a text form control (which must be a valid url address).
+   *
+   * @return TestForm
    */
   private function setupForm1()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

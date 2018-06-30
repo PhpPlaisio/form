@@ -4,8 +4,8 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\InvisibleControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class InvisibleControl.
@@ -41,7 +41,7 @@ class InvisibleControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -63,7 +63,7 @@ class InvisibleControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   private function setupForm1()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

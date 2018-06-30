@@ -4,8 +4,8 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HtmlControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class HtmlControl.
@@ -18,11 +18,11 @@ class HtmlControlTest extends AbcTestCase
    *
    * @param string|null $html The value of the HtmlControl.
    *
-   * @return RawForm
+   * @return TestForm
    */
   public function setupForm1($html = null)
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -32,17 +32,6 @@ class HtmlControlTest extends AbcTestCase
 
     return $form;
   }
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test control is hidden.
-   */
-  public function testIsHidden()
-  {
-    $control = new HtmlControl('hidden');
-
-    self::assertSame(false, $control->isHidden());
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The value of a HtmlControl must be independent of the posted values.
@@ -59,6 +48,17 @@ class HtmlControlTest extends AbcTestCase
     $values = $form->getValues();
 
     self::assertSame($html, $values['snippet']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new HtmlControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

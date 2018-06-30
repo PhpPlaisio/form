@@ -10,11 +10,6 @@ use SetBased\Abc\Form\Control\PasswordControl;
 class PasswordControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getControl($name)
-  {
-    return new PasswordControl($name);
-  }
-  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test control is hidden.
    */
@@ -23,6 +18,11 @@ class PasswordControlTest extends SimpleControlTest
     $control = new PasswordControl('hidden');
 
     self::assertSame(false, $control->isHidden());
+  }
+  //--------------------------------------------------------------------------------------------------------------------
+  protected function getControl($name)
+  {
+    return new PasswordControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

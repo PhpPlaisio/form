@@ -21,14 +21,14 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * The child form controls of this form control.
    *
-   * @var ComplexControl[]|Control[]
+   * @var Control[]
    */
   protected $controls = [];
 
   /**
    * The child form controls of this form control with invalid submitted values.
    *
-   * @var ComplexControl[]|Control[]
+   * @var Control[]
    */
   protected $invalidControls;
 
@@ -48,7 +48,7 @@ class ComplexControl extends Control implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function __construct(?string $name='')
+  public function __construct(?string $name = '')
   {
     parent::__construct($name);
   }
@@ -378,6 +378,39 @@ class ComplexControl extends Control implements CompoundControl
     {
       $control->prepare($this->submitName);
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function searchSubmitHandler(array $submittedValues): ?string
+  {
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+
+    if ($this->name==='')
+    {
+      $tmp1 = $submittedValues;
+    }
+    else
+    {
+      if (!isset($submittedValues[$submitName])) $submittedValues[$submitName] = [];
+
+      $tmp1 = $submittedValues[$submitName];
+    }
+
+    foreach ($this->controls as $control)
+    {
+      if ($this->cleaner) $tmp1 = $this->cleaner->clean($tmp1);
+      $method = $control->searchSubmitHandler($tmp1);
+
+      if ($method!==null)
+      {
+        return $method;
+      }
+    }
+
+    return null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

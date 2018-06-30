@@ -7,8 +7,8 @@ use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
 /**
@@ -311,7 +311,7 @@ class ComplexControlTest extends AbcTestCase
    */
   public function testValidate()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -361,10 +361,12 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a select form control.
+   *
+   * @return TestForm
    */
   private function setForm1()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -445,7 +447,7 @@ class ComplexControlTest extends AbcTestCase
    */
   private function setForm2()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -484,11 +486,11 @@ class ComplexControlTest extends AbcTestCase
    *
    * @param string $name The name of the form control.
    *
-   * @return RawForm
+   * @return TestForm
    */
   private function setForm3($name)
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

@@ -4,8 +4,9 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  *  Abstract parent class for unit tests for child classes of SimpleControl.
@@ -18,8 +19,9 @@ abstract class SimpleControlTest extends AbcTestCase
    */
   public function test1Empty1()
   {
-    $name          = 0;
-    $_POST['name'] = $name;
+    $name            = 0;
+    $_POST['name']   = $name;
+    $_POST['submit'] = 'submit';
 
     $form    = $this->setupForm1(null);
     $values  = $form->getValues();
@@ -35,8 +37,9 @@ abstract class SimpleControlTest extends AbcTestCase
    */
   public function test1Empty2()
   {
-    $name          = '0.0';
-    $_POST['name'] = $name;
+    $name            = '0.0';
+    $_POST['name']   = $name;
+    $_POST['submit'] = 'submit';
 
     $form    = $this->setupForm1('');
     $values  = $form->getValues();
@@ -47,9 +50,20 @@ abstract class SimpleControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test is submit trigger.
+   */
+  public function testIsSubmitTrigger()
+  {
+    $input = $this->getControl('trigger');
+
+    self::assertFalse($input->isSubmitTrigger());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -59,7 +73,7 @@ abstract class SimpleControlTest extends AbcTestCase
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
+    $form->execute();
     $html = $form->generate();
 
     $pos = strpos($html, 'Hello<input');
@@ -75,8 +89,10 @@ abstract class SimpleControlTest extends AbcTestCase
    */
   public function testValid101()
   {
-    $name          = 'Set Based IT Consultancy';
-    $_POST['name'] = $name;
+    $name = 'Set Based IT Consultancy';
+
+    $_POST['name']   = $name;
+    $_POST['submit'] = 'submit';
 
     $form    = $this->setupForm1(null);
     $values  = $form->getValues();
@@ -92,8 +108,9 @@ abstract class SimpleControlTest extends AbcTestCase
    */
   public function testValid102()
   {
-    $name          = 'Set Based IT Consultancy';
-    $_POST['name'] = '';
+    $name            = 'Set Based IT Consultancy';
+    $_POST['name']   = '';
+    $_POST['submit'] = 'submit';
 
     $form    = $this->setupForm1($name);
     $values  = $form->getValues();
@@ -111,6 +128,7 @@ abstract class SimpleControlTest extends AbcTestCase
   {
     $name                = 'Set Based IT Consultancy';
     $_POST['other_name'] = '';
+    $_POST['submit']     = 'submit';
 
     $form    = $this->setupForm1($name);
     $values  = $form->getValues();
@@ -134,11 +152,11 @@ abstract class SimpleControlTest extends AbcTestCase
    *
    * @param string $value The value of the form control
    *
-   * @return RawForm
+   * @return TestForm
    */
   private function setupForm1($value)
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -146,7 +164,12 @@ abstract class SimpleControlTest extends AbcTestCase
     if (isset($value)) $input->setValue($value);
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new SubmitControl('submit');
+    $input->setValue('submit');
+    $input->setMethod('handler');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

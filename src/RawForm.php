@@ -4,8 +4,8 @@ namespace SetBased\Abc\Form;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\ComplexControl;
-use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\CompoundControl;
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Validator\CompoundValidator;
 use SetBased\Abc\Helper\Html;
@@ -287,7 +287,7 @@ class RawForm extends HtmlElement implements CompoundControl
   /**
    * Returns true if and only if the value of one or more submitted form controls have changed. Otherwise returns false.
    *
-   * @note This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
+   * @note  This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
    *
    * @since 1.0.0
    * @api
@@ -295,33 +295,6 @@ class RawForm extends HtmlElement implements CompoundControl
   public function haveChangedInputs(): bool
   {
     return !empty($this->changedControls);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Loads the submitted values. The white listed values can be obtained with method {@link getValues).
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function loadSubmittedValues(): void
-  {
-    switch ($this->attributes['method'])
-    {
-      case 'post':
-        $values = &$_POST;
-        break;
-
-      case 'get':
-        $values = &$_GET;
-        break;
-
-      default:
-        throw new FallenException('method', $this->attributes['method']);
-    }
-
-    // For all field sets load all submitted values.
-    $this->fieldSets->loadSubmittedValuesBase($values, $this->values, $this->changedControls);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -337,18 +310,6 @@ class RawForm extends HtmlElement implements CompoundControl
   public function mergeValues(array $values): void
   {
     $this->fieldSets->mergeValuesBase($values);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Prepares this form for HTML code generation or loading submitted values.
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function prepare(): void
-  {
-    $this->fieldSets->prepare('');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -441,21 +402,6 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Validates all form controls of this form against all their installed validation checks. After all form controls
-   * passed their validations validates the form itself against all its installed validation checks.
-   *
-   * @return bool True if the submitted values are valid, false otherwise.
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function validate(): bool
-  {
-    return $this->fieldSets->validateBase($this->invalidControls);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the inner HTML code of this form.
    *
    * @return string
@@ -494,6 +440,88 @@ class RawForm extends HtmlElement implements CompoundControl
   protected function generateStartTag(): string
   {
     return Html::generateTag('form', $this->attributes);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Loads the submitted values. The white listed values can be obtained with method {@link getValues).
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function loadSubmittedValues(): void
+  {
+    switch ($this->attributes['method'])
+    {
+      case 'post':
+        $values = &$_POST;
+        break;
+
+      case 'get':
+        $values = &$_GET;
+        break;
+
+      default:
+        throw new FallenException('method', $this->attributes['method']);
+    }
+
+    // For all field sets load all submitted values.
+    $this->fieldSets->loadSubmittedValuesBase($values, $this->values, $this->changedControls);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Prepares this form for HTML code generation or loading submitted values.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function prepare(): void
+  {
+    $this->fieldSets->prepare('');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * If this form has been submitted returns the name of the method for handling this form. Otherwise, returns null.
+   *
+   * @since 1.0.0
+   * @api
+   *
+   * @return string|null
+   */
+  protected function searchSubmitHandler(): ?string
+  {
+    switch ($this->attributes['method'])
+    {
+      case 'post':
+        $values = &$_POST;
+        break;
+
+      case 'get':
+        $values = &$_GET;
+        break;
+
+      default:
+        throw new FallenException('method', $this->attributes['method']);
+    }
+
+    return $this->fieldSets->searchSubmitHandler($values);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Validates all form controls of this form against all their installed validation checks. After all form controls
+   * passed their validations validates the form itself against all its installed validation checks.
+   *
+   * @return bool True if the submitted values are valid, false otherwise.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function validate(): bool
+  {
+    return $this->fieldSets->validateBase($this->invalidControls);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

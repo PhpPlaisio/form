@@ -23,6 +23,18 @@ class SubmitControl extends PushControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns true.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function isSubmitTrigger(): bool
+  {
+    return true;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets the attribute [formaction](http://www.w3schools.com/tags/att_input_formaction.asp).
    *
    * @param string|null $value The attribute value.

@@ -11,6 +11,7 @@ use SetBased\Abc\Form\Control\TextAreaControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
 /**
@@ -173,11 +174,11 @@ class MandatoryValidatorTest extends AbcTestCase
    *
    * @param SimpleControl $control
    *
-   * @return RawForm
+   * @return TestForm
    */
   private function setupForm1($control)
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -193,10 +194,12 @@ class MandatoryValidatorTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a checkbox form control.
+   *
+   * @return TestForm
    */
   private function setupForm2()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

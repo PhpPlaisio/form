@@ -63,7 +63,6 @@ abstract class Control extends HtmlElement
   protected $validators = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -182,7 +181,7 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if and only if the control is a hidden control (e.g. hidden, invisible, and constant control).
+   * Returns true if and only if this control is a hidden control (e.g. hidden, invisible, and constant control).
    * Otherwise, returns false.
    *
    * @since 1.0.0
@@ -195,10 +194,22 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns true if and only if this control can trigger a form submit.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function isSubmitTrigger(): bool
+  {
+    return false;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets the initial value(s) of this form control. The values of form controls for which no explicit value is set are
    * left unchanged.
    *
-   * @see mergeValuesBase
+   * @see   mergeValuesBase
    *
    * @param array $values The initial values as nested arrays.
    *
@@ -307,6 +318,20 @@ abstract class Control extends HtmlElement
   protected function prepare(string $parentSubmitName): void
   {
     $this->setSubmitName($parentSubmitName);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the name of the method for handling the form when the form submit is triggered by this control. Otherwise,
+   * return null.
+   *
+   * @param array $submittedValues The submitted values.
+   *
+   * @return string|null
+   */
+  protected function searchSubmitHandler(array $submittedValues): ?string
+  {
+    return null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

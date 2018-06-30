@@ -4,8 +4,8 @@ namespace SetBased\Abc\Form\Test\Validator;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 use SetBased\Abc\Form\Validator\LengthValidator;
 
 /**
@@ -80,11 +80,11 @@ class LengthValidatorTest extends AbcTestCase
    * @param int $min The minimum valid length.
    * @param int $max The maximum valid length.
    *
-   * @return RawForm
+   * @return TestForm
    */
   private function setupForm1($min, $max)
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

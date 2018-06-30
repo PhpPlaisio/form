@@ -4,8 +4,8 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class CheckboxesControl.
@@ -166,7 +166,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => 4, 'cnt_name' => 'GB'];
 
     // Create a form with checkboxes.
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -214,7 +214,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => 4, 'cnt_name' => 'GB'];
 
     // Create a form with checkboxes.
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -375,7 +375,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
     $countries[] = ['cnt_id' => '0.1', 'cnt_name' => 'UA'];
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -397,7 +397,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => '0', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '0.0', 'cnt_name' => 'BE'];
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -419,7 +419,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => 0, 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'BE'];
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

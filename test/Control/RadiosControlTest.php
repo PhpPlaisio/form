@@ -4,14 +4,24 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadiosControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class RadiosControl.
  */
 class RadiosControlTest extends AbcTestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new RadiosControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test special characters in the labels are replaced with HTML entities.
@@ -28,16 +38,6 @@ class RadiosControlTest extends AbcTestCase
 
     self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
     self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
-  }
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test control is hidden.
-   */
-  public function testIsHidden()
-  {
-    $control = new RadiosControl('hidden');
-
-    self::assertSame(false, $control->isHidden());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ class RadiosControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -138,7 +138,7 @@ class RadiosControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => 2, 'cnt_name' => 'BE'];
     $countries[] = ['cnt_id' => 3, 'cnt_name' => 'LU'];
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

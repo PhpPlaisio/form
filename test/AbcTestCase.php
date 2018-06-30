@@ -22,6 +22,23 @@ class AbcTestCase extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Base test for testing setting attributes.
+   *
+   * @param Object $object     The HTML child class.
+   * @param array  $attributes The attribute names.
+   */
+  protected function htmlAttributesTest($object, array $attributes): void
+  {
+    foreach ($attributes as $attribute => $method)
+    {
+      $object->$method('some value');
+
+      self::assertSame('some value', $object->getAttribute($attribute));
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    */
   protected function setUp()

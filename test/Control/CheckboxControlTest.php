@@ -4,8 +4,8 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class CheckboxControl.
@@ -14,11 +14,22 @@ class CheckboxControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new CheckboxControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test prefix and postfix labels.
    */
   public function testPrefixAndPostfix()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -39,24 +50,13 @@ class CheckboxControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is hidden.
-   */
-  public function testIsHidden()
-  {
-    $control = new CheckboxControl('hidden');
-
-    self::assertSame(false, $control->isHidden());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Test submit value.
    * In form unchecked.
    * In POST unchecked.
    */
   public function testSubmittedValue1()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -83,7 +83,7 @@ class CheckboxControlTest extends AbcTestCase
   {
     $_POST['test2'] = 'on';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -109,7 +109,7 @@ class CheckboxControlTest extends AbcTestCase
    */
   public function testSubmittedValue3()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -138,7 +138,7 @@ class CheckboxControlTest extends AbcTestCase
   {
     $_POST['test4'] = 'on';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -166,7 +166,7 @@ class CheckboxControlTest extends AbcTestCase
    */
   public function testSubmittedValue5()
   {
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -194,7 +194,7 @@ class CheckboxControlTest extends AbcTestCase
   {
     $_POST['test6'] = 'on';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 

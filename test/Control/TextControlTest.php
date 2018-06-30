@@ -6,7 +6,7 @@ use SetBased\Abc\Form\Cleaner\DateCleaner;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Formatter\DateFormatter;
-use SetBased\Abc\Form\RawForm;
+use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class TextControl.
@@ -22,7 +22,7 @@ class TextControlTest extends SimpleControlTest
   {
     $_POST['birthday'] = '10.04.1966';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -53,7 +53,7 @@ class TextControlTest extends SimpleControlTest
   {
     $_POST['test'] = '  Hello    World!   ';
 
-    $form     = new RawForm();
+    $form     = new TestForm();
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
@@ -74,6 +74,9 @@ class TextControlTest extends SimpleControlTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
   protected function getControl($name)
   {
     return new TextControl($name);
