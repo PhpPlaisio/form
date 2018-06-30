@@ -29,10 +29,10 @@ class TextAreaControlTest extends AbcTestCase
     $form->prepare();
     $html = $form->generate();
 
-    $pos = strpos($html, 'Hello<input');
+    $pos = strpos($html, 'Hello<textarea');
     self::assertNotEquals(false, $pos);
 
-    $pos = strpos($html, '/>World');
+    $pos = strpos($html, '/textarea>World');
     self::assertNotEquals(false, $pos);
   }
 
