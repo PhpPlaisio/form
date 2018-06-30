@@ -2,6 +2,8 @@
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Exception\LogicException;
+
 /**
  * Class for mimicking a hidden submit button.
  */
@@ -90,6 +92,11 @@ class HiddenSubmitControl extends HiddenControl
 
     if (isset($submittedValues[$submitName]) && $submittedValues[$submitName]===$this->value)
     {
+      if ($this->method===null)
+      {
+        throw new LogicException('Submit handler method not set');
+      }
+
       return $this->method;
     }
 

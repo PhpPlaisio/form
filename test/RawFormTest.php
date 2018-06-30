@@ -363,6 +363,48 @@ class RawFormTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test for testing searchSubmitHandler with SubmitControl without setting submit handler method.
+   *
+   * @expectedException \LogicException
+   */
+  public function testSearchSubmitHandler21()
+  {
+    $trigger = new SubmitControl('button1');
+    $trigger->setValue('knob');
+
+    $this->searchSubmitHandlerTest($trigger, null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with ButtonControl without setting submit handler method.
+   *
+   * @expectedException \LogicException
+   */
+  public function testSearchSubmitHandler22()
+  {
+    $trigger = new ButtonControl('button1');
+    $trigger->setValue('knob');
+
+    $this->searchSubmitHandlerTest($trigger, null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with HiddenSubmitControl without setting submit handler method.
+   *
+   * @expectedException \LogicException
+   */
+  public function testSearchSubmitHandler23()
+  {
+    $trigger = new HiddenSubmitControl('button1');
+    $trigger->setValue('knob');
+
+    $this->searchSubmitHandlerTest($trigger, null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @return TestForm
    */
   private function setupForm1()
@@ -403,8 +445,7 @@ class RawFormTest extends AbcTestCase
    */
   private function setupFormFind($fieldSetName = 'vacation',
                                  $complexControlName = 'post',
-                                 $textControlName = 'city'
-  )
+                                 $textControlName = 'city')
   {
     $form     = new RawForm();
     $fieldset = new FieldSet($fieldSetName);

@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
+use SetBased\Exception\LogicException;
 
 /**
  * Parent class for form controls submit, reset, and button.
@@ -113,6 +114,11 @@ class PushControl extends SimpleControl
 
     if (isset($submittedValues[$submitName]) && $submittedValues[$submitName]===$this->value)
     {
+      if ($this->method===null)
+      {
+        throw new LogicException('Submit handler method not set');
+      }
+
       return $this->method;
     }
 
