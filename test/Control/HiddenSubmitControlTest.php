@@ -2,12 +2,12 @@
 
 namespace SetBased\Abc\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\HiddenButtonControl;
+use SetBased\Abc\Form\Control\HiddenSubmitControl;
 
 /**
- * Unit tests for class HiddenButtonControl.
+ * Unit tests for class HiddenSubmitControl.
  */
-class HiddenButtonControlTest extends PushControlTest
+class HiddenSubmitControlTest extends PushControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -15,7 +15,7 @@ class HiddenButtonControlTest extends PushControlTest
    */
   public function testIsHidden()
   {
-    $control = new HiddenButtonControl('hidden-button');
+    $control = new HiddenSubmitControl('hidden-button');
 
     self::assertSame(true, $control->isHidden());
   }
@@ -26,7 +26,7 @@ class HiddenButtonControlTest extends PushControlTest
    */
   protected function getControl($name)
   {
-    return new HiddenButtonControl($name);
+    return new HiddenSubmitControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

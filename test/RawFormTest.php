@@ -7,7 +7,7 @@ use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\HiddenButtonControl;
+use SetBased\Abc\Form\Control\HiddenSubmitControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\RawForm;
@@ -311,11 +311,11 @@ class RawFormTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test for testing searchSubmitHandler with HiddenButtonControl.
+   * Test for testing searchSubmitHandler with HiddenSubmitControl.
    */
   public function testSearchSubmitHandler03()
   {
-    $trigger = new HiddenButtonControl('button1');
+    $trigger = new HiddenSubmitControl('button1');
     $trigger->setValue('knob');
     $trigger->setMethod('handler');
 
@@ -350,11 +350,11 @@ class RawFormTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test for testing searchSubmitHandler with HiddenButtonControl.
+   * Test for testing searchSubmitHandler with HiddenSubmitControl.
    */
   public function testSearchSubmitHandler13()
   {
-    $trigger = new HiddenButtonControl('button1');
+    $trigger = new HiddenSubmitControl('button1');
     $trigger->setValue('door');
     $trigger->setMethod('handler');
 

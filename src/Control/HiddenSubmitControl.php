@@ -3,9 +3,9 @@
 namespace SetBased\Abc\Form\Control;
 
 /**
- * Class for mimicking a hidden button.
+ * Class for mimicking a hidden submit button.
  */
-class HiddenButtonControl extends HiddenControl
+class HiddenSubmitControl extends HiddenControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
