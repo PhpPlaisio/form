@@ -28,6 +28,16 @@ class ResetControlTest extends PushMeControlTest
   {
     return 'reset';
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new ResetControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
 }

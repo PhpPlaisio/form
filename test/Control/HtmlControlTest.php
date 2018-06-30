@@ -32,6 +32,16 @@ class HtmlControlTest extends AbcTestCase
 
     return $form;
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new HtmlControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -4,6 +4,7 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadioControl;
+use SetBased\Abc\Form\Control\RadiosControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
@@ -29,6 +30,16 @@ class RadioControlTest extends AbcTestCase
 
     $pos = strpos($html, '/>World');
     self::assertNotEquals(false, $pos);
+  }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new RadioControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

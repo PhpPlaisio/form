@@ -46,6 +46,18 @@ class HiddenControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns true.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function isHidden(): bool
+  {
+    return true;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    */
   protected function loadSubmittedValuesBase(array $submittedValues,

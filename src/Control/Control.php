@@ -182,6 +182,19 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns true if and only if the control is a hidden control (e.g. hidden, invisible, and constant control).
+   * Otherwise, returns false.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function isHidden(): bool
+  {
+    return false;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets the initial value(s) of this form control. The values of form controls for which no explicit value is set are
    * left unchanged.
    *

@@ -39,6 +39,17 @@ class CheckboxControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new CheckboxControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test submit value.
    * In form unchecked.
    * In POST unchecked.

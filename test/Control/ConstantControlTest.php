@@ -24,6 +24,16 @@ class ConstantControlTest extends AbcTestCase
     // Assert "name" has not be recoded as a changed value.
     self::assertArrayNotHasKey('name', $changed);
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new ConstantControl('hidden');
+
+    self::assertSame(true, $control->isHidden());
+  }
 
   //-------------------------------------------------------------------------------------------------------------------
   private function setupForm1()

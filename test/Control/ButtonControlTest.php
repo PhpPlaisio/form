@@ -11,6 +11,17 @@ class ButtonControlTest extends PushMeControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new ButtonControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    */
   protected function getControl($name)

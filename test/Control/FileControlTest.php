@@ -30,6 +30,16 @@ class FileControlTest extends AbcTestCase
     $pos = strpos($html, '/>World');
     self::assertNotEquals(false, $pos);
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new FileControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
 }

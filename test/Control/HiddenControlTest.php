@@ -32,6 +32,16 @@ class HiddenControlTest extends SimpleControlTest
     // Value is change.
     self::assertNotEmpty($changed['test']);
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new HiddenControl('hidden');
+
+    self::assertSame(true, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

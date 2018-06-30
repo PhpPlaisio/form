@@ -29,6 +29,16 @@ class RadiosControlTest extends AbcTestCase
     self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
     self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new RadiosControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

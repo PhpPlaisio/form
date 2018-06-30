@@ -104,6 +104,17 @@ class CheckboxesControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new CheckboxesControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test special characters in the labels are replaced with HTML entities.
    */
   public function testLabels1()

@@ -11,6 +11,16 @@ class PasswordControlTest extends SimpleControlTest
   {
     return new PasswordControl($name);
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new PasswordControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
 }

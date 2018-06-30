@@ -37,6 +37,17 @@ abstract class PushMeControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = $this->getControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Method SetValue() has no effect for buttons.
    */
   public function testSetValues()

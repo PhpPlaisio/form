@@ -24,6 +24,16 @@ class InvisibleControlTest extends AbcTestCase
     // Assert "name" has not be recorded as a changed value.
     self::assertArrayNotHasKey('name', $changed);
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new InvisibleControl('hidden');
+
+    self::assertSame(true, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()

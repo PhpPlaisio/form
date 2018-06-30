@@ -30,6 +30,16 @@ class LinkControlTest extends AbcTestCase
     $pos = strpos($html, '</a>World');
     self::assertNotEquals(false, $pos);
   }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new LinkControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
 }

@@ -105,7 +105,6 @@ class ComplexControlTest extends AbcTestCase
     self::assertEquals('city2', $input->getLocalName());
   }
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test get FormControl by path.
@@ -130,6 +129,7 @@ class ComplexControlTest extends AbcTestCase
     $input = $form->getFormControlByPath('/vacation/post/street');
     self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
   }
+
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -191,7 +191,6 @@ class ComplexControlTest extends AbcTestCase
     $form->getFormControlByPath('street');
   }
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by path what does not exist. Must trow exception.
@@ -204,6 +203,7 @@ class ComplexControlTest extends AbcTestCase
     $form->getFormControlByPath('/no_path/not_exists');
   }
 
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by path what does not exist. Must trow exception.
@@ -214,6 +214,17 @@ class ComplexControlTest extends AbcTestCase
   {
     $form = $this->setForm1();
     $form->getFormControlByPath('/vacation/not_exists');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden()
+  {
+    $control = new ComplexControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
