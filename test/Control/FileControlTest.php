@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\FileControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class FileControl.
+ */
 class FileControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

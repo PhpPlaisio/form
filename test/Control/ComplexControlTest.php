@@ -12,7 +12,7 @@ use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
 
 /**
- * Class ButtonControlTest
+ * Unit tests for class ComplexControl.
  */
 class ComplexControlTest extends AbcTestCase
 {

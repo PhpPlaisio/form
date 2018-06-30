@@ -8,7 +8,7 @@ use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
- * Test cases for class HtmlControl.
+ * Unit tests for class HtmlControl.
  */
 class HtmlControlTest extends AbcTestCase
 {

@@ -7,10 +7,8 @@ use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
-//----------------------------------------------------------------------------------------------------------------------
-
 /**
- * Abstract super class for test for TextControl, HiddenControl, and PasswordControl.
+ *  Abstract parent class for unit tests for child classes of SimpleControl.
  */
 abstract class SimpleControlTest extends AbcTestCase
 {

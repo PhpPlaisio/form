@@ -8,7 +8,7 @@ use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
- * Class CheckboxesControlTest Test class for testing SatBased\Html\Form\CheckboxesControl class.
+ * Unit tests for class CheckboxesControl.
  */
 class CheckboxesControlTest extends AbcTestCase
 {

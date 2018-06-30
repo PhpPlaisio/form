@@ -5,7 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 use SetBased\Abc\Form\Control\ResetControl;
 
 /**
- * Class ResetControlTest
+ * Unit tests for class ResetControl.
  */
 class ResetControlTest extends PushMeControlTest
 {

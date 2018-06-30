@@ -9,6 +9,9 @@ use SetBased\Abc\Form\Control\TextAreaControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class TextAreaControl.
+ */
 class TextAreaControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
@@ -18,7 +21,7 @@ class TextAreaControlTest extends AbcTestCase
     $fieldset = new FieldSet('');
     $form->addFieldSet($fieldset);
 
-    $input = new CheckboxControl('name');
+    $input = new TextAreaControl('name');
     $input->setPrefix('Hello');
     $input->setPostfix('World');
     $fieldset->addFormControl($input);

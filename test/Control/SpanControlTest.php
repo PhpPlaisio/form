@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class SpanControl.
+ */
 class SpanControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

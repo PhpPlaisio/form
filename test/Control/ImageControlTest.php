@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\ImageControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class ImageControl.
+ */
 class ImageControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

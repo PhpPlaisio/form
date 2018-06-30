@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\MultipleFileControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class MultipleFileControl.
+ */
 class MultipleFileControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

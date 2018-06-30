@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\InvisibleControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class InvisibleControl.
+ */
 class InvisibleControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

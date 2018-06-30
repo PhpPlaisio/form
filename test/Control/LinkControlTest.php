@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\LinkControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class LinkControl.
+ */
 class LinkControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

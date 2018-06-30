@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
+/**
+ * Unit tests for class ConstantControl.
+ */
 class ConstantControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------

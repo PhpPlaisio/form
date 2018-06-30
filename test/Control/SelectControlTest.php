@@ -8,7 +8,7 @@ use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
- * Test cases for SelectControl.
+ * Unit tests for class SelectControl.
  */
 class SelectControlTest extends AbcTestCase
 {

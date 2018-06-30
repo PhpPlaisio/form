@@ -8,7 +8,10 @@ use SetBased\Abc\Form\Control\RadiosControl;
 use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
-class RadioControlTest extends AbcTestCase
+/**
+ * Unit tests for class PasswordControl.
+ */
+class RadioControlTest extends RadioControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()

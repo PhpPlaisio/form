@@ -7,6 +7,9 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\RawForm;
 
+/**
+ * Unit tests for class HiddenControl.
+ */
 class HiddenControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------

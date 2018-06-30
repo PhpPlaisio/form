@@ -8,6 +8,9 @@ use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Formatter\DateFormatter;
 use SetBased\Abc\Form\RawForm;
 
+/**
+ * Unit tests for class TextControl.
+ */
 class TextControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------

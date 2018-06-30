@@ -8,7 +8,7 @@ use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
- * Test cases for class RadiosControl
+ * Unit tests for class RadiosControl.
  */
 class RadiosControlTest extends AbcTestCase
 {

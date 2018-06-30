@@ -5,7 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 use SetBased\Abc\Form\Control\ButtonControl;
 
 /**
- * Class ButtonControlTest
+ * Unit tests for class ButtonControl.
  */
 class ButtonControlTest extends PushMeControlTest
 {

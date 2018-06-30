@@ -8,7 +8,7 @@ use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 
 /**
- * Class PushMeControlTest
+ * Abstract parent class for unit tests for child classes of PushMeControl.
  */
 abstract class PushMeControlTest extends AbcTestCase
 {

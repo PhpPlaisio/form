@@ -5,7 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 use SetBased\Abc\Form\Control\SubmitControl;
 
 /**
- * Class SubmitControlTest
+ * Unit tests for class SubmitControl.
  */
 class SubmitControlTest extends PushMeControlTest
 {
