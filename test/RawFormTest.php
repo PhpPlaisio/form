@@ -7,6 +7,7 @@ use SetBased\Abc\Form\Control\CheckboxesControl;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\ForceSubmitControl;
 use SetBased\Abc\Form\Control\HiddenSubmitControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Form\Control\TextControl;
@@ -324,6 +325,19 @@ class RawFormTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test for testing searchSubmitHandler with ForceSubmitControl.
+   */
+  public function testSearchSubmitHandler04()
+  {
+    $trigger = new ForceSubmitControl('button1', true);
+    $trigger->setValue('knob');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handler');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test for testing searchSubmitHandler with SubmitControl.
    */
   public function testSearchSubmitHandler11()
@@ -363,6 +377,32 @@ class RawFormTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test for testing searchSubmitHandler with ForceSubmitControl.
+   */
+  public function testSearchSubmitHandler14a()
+  {
+    $trigger = new ForceSubmitControl('button1', false);
+    $trigger->setValue('door');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with ForceSubmitControl.
+   */
+  public function testSearchSubmitHandler14b()
+  {
+    $trigger = new ForceSubmitControl('button1', true);
+    $trigger->setValue('door');
+    $trigger->setMethod('handler');
+
+    $this->searchSubmitHandlerTest($trigger, 'handler');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test for testing searchSubmitHandler with SubmitControl without setting submit handler method.
    *
    * @expectedException \LogicException
@@ -398,6 +438,20 @@ class RawFormTest extends AbcTestCase
   public function testSearchSubmitHandler23()
   {
     $trigger = new HiddenSubmitControl('button1');
+    $trigger->setValue('knob');
+
+    $this->searchSubmitHandlerTest($trigger, null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for testing searchSubmitHandler with ForceSubmitControl without setting submit handler method.
+   *
+   * @expectedException \LogicException
+   */
+  public function testSearchSubmitHandler24()
+  {
+    $trigger = new ForceSubmitControl('button1', true);
     $trigger->setValue('knob');
 
     $this->searchSubmitHandlerTest($trigger, null);
