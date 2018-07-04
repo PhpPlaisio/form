@@ -106,6 +106,52 @@ class RadiosControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test setValues.
+   */
+  public function setValuesTest($value)
+  {
+    $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
+    $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
+    $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new RadiosControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
+
+    // Set value to empty string.
+    $input->setValue($value);
+    self::assertSame($value, $form->getSetValues()['cnt_id']);
+
+    $form->loadSubmittedValues();
+
+    $values = $form->getValues();
+    self::assertNull($values['cnt_id']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test setValues with null.
+   */
+  public function testSetValues01()
+  {
+    $this->setValuesTest(null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test setValues with null.
+   */
+  public function testSetValues02()
+  {
+    $this->setValuesTest('');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Setups a form with a select form control.
    */
   private function setupForm1()

@@ -79,7 +79,7 @@ class RadiosControl extends Control
   /**
    * The value of the checked radio button.
    *
-   * @var string
+   * @var string|null
    */
   protected $value;
 
@@ -146,12 +146,12 @@ class RadiosControl extends Control
   /**
    * Returns the value of the check radio button.
    *
-   * @returns string
+   * @returns string|null
    *
    * @since 1.0.0
    * @api
    */
-  public function getSubmittedValue()
+  public function getSubmittedValue(): ?string
   {
     return $this->value;
   }
@@ -228,7 +228,7 @@ class RadiosControl extends Control
                              string $keyKey,
                              string $labelKey,
                              ?string $disabledKey = null,
-                             ?string $idKey = null)
+                             ?string $idKey = null): void
   {
     $this->options     = $options;
     $this->keyKey      = $keyKey;
@@ -256,12 +256,12 @@ class RadiosControl extends Control
   /**
    * Sets the value of this form control.
    *
-   * @param string $value The new value for the form control.
+   * @param string|null $value The new value for the form control.
    *
    * @since 1.0.0
    * @api
    */
-  public function setValue(string $value): void
+  public function setValue(?string $value): void
   {
     $this->value = $value;
   }
