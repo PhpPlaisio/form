@@ -72,12 +72,12 @@ class RawForm extends HtmlElement implements CompoundControl
   /**
    * Object constructor.
    *
-   * @param string $name The name of the form.
+   * @param string|null $name The name of the form.
    *
    * @since 1.0.0
    * @api
    */
-  public function __construct(string $name = '')
+  public function __construct(?string $name = '')
   {
     $this->attributes['method'] = 'post';
 
