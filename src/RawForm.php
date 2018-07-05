@@ -55,6 +55,13 @@ class RawForm extends HtmlElement implements CompoundControl
   protected $invalidControls = [];
 
   /**
+   * If true the form has been prepared (for executing of getting the HTML code).
+   *
+   * @var bool
+   */
+  protected $prepared = false;
+
+  /**
    * After a call to {@link loadSubmittedValues} holds the white-listed submitted values.
    *
    * @var array
@@ -495,7 +502,12 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   protected function prepare(): void
   {
-    $this->fieldSets->prepare('');
+    if (!$this->prepared)
+    {
+      $this->fieldSets->prepare('');
+
+      $this->prepared = true;
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
