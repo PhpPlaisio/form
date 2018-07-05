@@ -51,7 +51,7 @@ class FileControl extends SimpleControl
   /**
    * Does nothing. It is not possible the set the value of a file form control.
    *
-   * @param string $value Not used.
+   * @param mixed $value Not used.
    *
    * @since 1.0.0
    * @api
