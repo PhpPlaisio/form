@@ -466,6 +466,45 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Alias of getHtmlLabel.
+   *
+   * @return string
+   *
+   * @deprecated
+   */
+  protected function generateLabel(): string
+  {
+    return $this->getHtmlLabel();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Alias of getHtmlPostfixLabel.
+   *
+   * @return string
+   *
+   * @deprecated
+   */
+  protected function generatePostfixLabel(): string
+  {
+    return $this->getHtmlPostfixLabel();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Alias of getHtmlPrefixLabel.
+   *
+   * @return string
+   *
+   * @deprecated
+   */
+  protected function generatePrefixLabel(): string
+  {
+    return $this->getHtmlPrefixLabel();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the HTML code for the label for this form control.
    *
    * @return string
@@ -473,7 +512,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  protected function generateLabel(): string
+  protected function getHtmlLabel(): string
   {
     return Html::generateElement('label', $this->labelAttributes, $this->label, true);
   }
@@ -487,12 +526,12 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  protected function generatePostfixLabel(): string
+  protected function getHtmlPostfixLabel(): string
   {
     // Generate a postfix label, if required.
     if ($this->labelPosition=='post')
     {
-      $ret = $this->generateLabel();
+      $ret = $this->getHtmlLabel();
     }
     else
     {
@@ -511,7 +550,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  protected function generatePrefixLabel(): string
+  protected function getHtmlPrefixLabel(): string
   {
     // If a label must be generated make sure the form control and the label have matching 'id' and 'for' attributes.
     if (isset($this->labelPosition))
@@ -531,7 +570,7 @@ abstract class SimpleControl extends Control
     // Generate a prefix label, if required.
     if ($this->labelPosition=='pre')
     {
-      $ret = $this->generateLabel();
+      $ret = $this->getHtmlLabel();
     }
     else
     {

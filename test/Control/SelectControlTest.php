@@ -81,8 +81,7 @@ class SelectControlTest extends AbcTestCase
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $pos = strpos($html, 'Hello<select');
     self::assertNotEquals(false, $pos);

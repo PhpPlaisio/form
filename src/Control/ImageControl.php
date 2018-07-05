@@ -19,7 +19,7 @@ class ImageControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $this->attributes['type'] = 'image';
     $this->attributes['name'] = $this->submitName;

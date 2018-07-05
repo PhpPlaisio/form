@@ -8,7 +8,7 @@
 
     <!-- Runs ApiGen -->
     <target name="apigen">
-        <exec command="apigen generate --todo --tree --source src --destination doc" passthru="true" checkreturn="true"/>
+        <exec command="apigen getHtml --todo --tree --source src --destination doc" passthru="true" checkreturn="true"/>
     </target>
 
     <!-- Runs all unit tests -->

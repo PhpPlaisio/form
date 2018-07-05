@@ -92,14 +92,16 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code for this form control.
+   * Alias for getHtml.
+   *
+   * @deprecated
    *
    * @return string
-   *
-   * @since 1.0.0
-   * @api
    */
-  abstract public function generate(): string;
+  public function generate(): string
+  {
+    return $this->getHtml();
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -120,6 +122,17 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the HTML code for this form control.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  abstract public function getHtml(): string;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the HTML code for this form control in a table cell.
    *
    * @return string
@@ -129,7 +142,7 @@ abstract class Control extends HtmlElement
    */
   public function getHtmlTableCell(): string
   {
-    return '<td class="control">'.$this->generate().'</td>';
+    return '<td class="control">'.$this->getHtml().'</td>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

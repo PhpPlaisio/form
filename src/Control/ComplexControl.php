@@ -148,25 +148,6 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function generate(): string
-  {
-    $ret = $this->prefix;
-    foreach ($this->controls as $control)
-    {
-      $ret .= $control->generate();
-    }
-    $ret .= $this->postfix;
-
-    return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns an array of all error messages of the child form controls of this complex form controls.
    *
    * @param bool $recursive If set error messages of complex child controls of this complex form controls are fetched
@@ -236,6 +217,25 @@ class ComplexControl extends Control implements CompoundControl
     }
 
     return $control;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getHtml(): string
+  {
+    $ret = $this->prefix;
+    foreach ($this->controls as $control)
+    {
+      $ret .= $control->getHtml();
+    }
+    $ret .= $this->postfix;
+
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -106,8 +106,7 @@ abstract class PushControlTest extends AbcTestCase
     $form->mergeValues($values);
 
     // Generate HTML.
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);
@@ -133,9 +132,7 @@ abstract class PushControlTest extends AbcTestCase
 
     $input->setPrefix('Hello');
     $input->setPostfix('World');
-    $form->prepare();
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);
@@ -164,8 +161,7 @@ abstract class PushControlTest extends AbcTestCase
     $form->setValues($values);
 
     // Generate HTML.
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);

@@ -34,8 +34,7 @@ class LinkControlTest extends AbcTestCase
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $pos = strpos($html, 'Hello<a>');
     self::assertNotEquals(false, $pos);

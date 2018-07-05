@@ -16,7 +16,7 @@ class CheckboxControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $this->attributes['type']    = 'checkbox';
     $this->attributes['name']    = $this->submitName;
@@ -37,7 +37,7 @@ class CheckboxControl extends SimpleControl
    */
   public function getHtmlTableCell(): string
   {
-    return '<td class="control checkbox">'.$this->generate().'</td>';
+    return '<td class="control checkbox">'.$this->getHtml().'</td>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

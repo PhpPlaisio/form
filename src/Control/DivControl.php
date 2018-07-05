@@ -25,7 +25,7 @@ class DivControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $html = $this->prefix;
     $html .= Html::generateElement('div', $this->attributes, $this->innerHtml, true);

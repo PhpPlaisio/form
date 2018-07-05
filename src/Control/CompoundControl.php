@@ -3,7 +3,7 @@
 namespace SetBased\Abc\Form\Control;
 
 /**
- * Interface for object that generate HTML elements holding one or more form control elements.
+ * Interface for object that getHtml HTML elements holding one or more form control elements.
  */
 interface CompoundControl
 {

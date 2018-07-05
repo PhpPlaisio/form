@@ -25,7 +25,7 @@ class LinkControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $ret = $this->prefix;
     $ret .= Html::generateElement('a', $this->attributes, $this->innerHtml, true);

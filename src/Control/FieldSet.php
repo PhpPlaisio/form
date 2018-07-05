@@ -50,13 +50,13 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $ret = $this->generateStartTag();
 
     $ret .= $this->generateLegend();
 
-    $ret .= parent::generate();
+    $ret .= parent::getHtml();
 
     $ret .= $this->generateEndTag();
 

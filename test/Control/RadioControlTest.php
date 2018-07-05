@@ -4,12 +4,13 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\RadioControl;
+use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Test\TestForm;
 
 /**
  * Unit tests for class PasswordControl.
  */
-class RadioControlTest extends RadioControl
+class RadioControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -21,6 +22,7 @@ class RadioControlTest extends RadioControl
 
     self::assertSame(false, $control->isHidden());
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
   {
@@ -33,8 +35,7 @@ class RadioControlTest extends RadioControl
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);
@@ -155,8 +156,7 @@ class RadioControlTest extends RadioControl
     $input->setAttrValue('3');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $form->generate();
+    $form->getHtml();
     $form->loadSubmittedValues();
 
     return $form;
@@ -182,8 +182,7 @@ class RadioControlTest extends RadioControl
     $input->setAttrValue(3);
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $form->generate();
+    $form->getHtml();
     $form->loadSubmittedValues();
 
     return $form;
@@ -209,8 +208,7 @@ class RadioControlTest extends RadioControl
     $input->setAttrValue(' ');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $form->generate();
+    $form->getHtml();
     $form->loadSubmittedValues();
 
     return $form;

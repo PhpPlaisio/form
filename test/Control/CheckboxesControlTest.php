@@ -125,7 +125,7 @@ class CheckboxesControlTest extends AbcTestCase
     $input = new CheckboxesControl('id');
     $input->setOptions($entities, 'id', 'name', null, null, 'id');
 
-    $html = $input->generate();
+    $html = $input->getHtml();
 
     self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
     self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
@@ -144,7 +144,7 @@ class CheckboxesControlTest extends AbcTestCase
     $input->setOptions($entities, 'id', 'name', null, null, 'id');
     $input->setLabelIsHtml();
 
-    $html = $input->generate();
+    $html = $input->getHtml();
 
     self::assertContains('<label for="0"><span>0</span></label>', $html);
     self::assertContains('<label for="1"><span>1</span></label>', $html);
@@ -177,8 +177,7 @@ class CheckboxesControlTest extends AbcTestCase
     $form->loadSubmittedValues();
 
     // Generate HTML code for the form.
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);
@@ -232,8 +231,7 @@ class CheckboxesControlTest extends AbcTestCase
     $form->setValues($values);
 
     // Generate HTML code for the form.
-    $form->prepare();
-    $form = $form->generate();
+    $form = $form->getHtml();
 
     $doc = new \DOMDocument();
     $doc->loadXML($form);

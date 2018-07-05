@@ -154,27 +154,15 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code of this form.
+   * Alias for getHtml.
+   *
+   * @deprecated
    *
    * @return string
-   *
-   * @since 1.0.0
-   * @api
    */
   public function generate(): string
   {
-    if (!isset($this->attributes['action']))
-    {
-      $this->attributes['action'] = Abc::$request->getRequestUri();
-    }
-
-    $html = $this->generateStartTag();
-
-    $html .= $this->generateBody();
-
-    $html .= $this->generateEndTag();
-
-    return $html;
+    return $this->getHtml();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -215,6 +203,35 @@ class RawForm extends HtmlElement implements CompoundControl
   public function getFormControlByPath(string $path): Control
   {
     return $this->fieldSets->getFormControlByPath($path);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the HTML code of this form.
+   *
+   * Note: This method will not load submitted values
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getHtml(): string
+  {
+    if (!isset($this->attributes['action']))
+    {
+      $this->attributes['action'] = Abc::$request->getRequestUri();
+    }
+
+    $this->prepare();
+
+    $html = $this->getHtmlStartTag();
+
+    $html .= $this->getHtmlBody();
+
+    $html .= $this->getHtmlEndTag();
+
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -409,9 +426,9 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  protected function generateBody(): string
+  protected function getHtmlBody(): string
   {
-    return $this->fieldSets->generate();
+    return $this->fieldSets->getHtml();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -423,7 +440,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  protected function generateEndTag(): string
+  protected function getHtmlEndTag(): string
   {
     return '</form>';
   }
@@ -437,7 +454,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  protected function generateStartTag(): string
+  protected function getHtmlStartTag(): string
   {
     return Html::generateTag('form', $this->attributes);
   }

@@ -96,7 +96,7 @@ class CheckboxesControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $html = $this->prefix;
     $html .= Html::generateTag('span', $this->attributes);

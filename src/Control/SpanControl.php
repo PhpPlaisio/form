@@ -25,7 +25,7 @@ class SpanControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $html = $this->prefix;
     $html .= Html::generateElement('span', $this->attributes, $this->innerHtml, true);

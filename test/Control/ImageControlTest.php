@@ -34,8 +34,7 @@ class ImageControlTest extends AbcTestCase
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);

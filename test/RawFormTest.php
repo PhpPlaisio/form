@@ -256,8 +256,7 @@ class RawFormTest extends AbcTestCase
     $form->mergeValues($merge);
 
     // Generate HTML.
-    $form->execute();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);

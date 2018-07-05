@@ -34,7 +34,7 @@ class RadiosControlTest extends AbcTestCase
     $input = new RadiosControl('id');
     $input->setOptions($entities, 'id', 'name', null, 'id');
 
-    $html = $input->generate();
+    $html = $input->getHtml();
 
     self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
     self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
@@ -53,7 +53,7 @@ class RadiosControlTest extends AbcTestCase
     $input->setOptions($entities, 'id', 'name', null, 'id');
     $input->setLabelIsHtml();
 
-    $html = $input->generate();
+    $html = $input->getHtml();
 
     self::assertContains('<label for="0"><span>0</span></label>', $html);
     self::assertContains('<label for="1"><span>1</span></label>', $html);

@@ -16,7 +16,7 @@ class ResetControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $this->attributes['type'] = 'reset';
     $this->attributes['name'] = $this->submitName;

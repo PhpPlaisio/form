@@ -18,7 +18,7 @@ class SilentControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $this->attributes['type'] = 'hidden';
     $this->attributes['name'] = $this->submitName;

@@ -22,6 +22,7 @@ class DivControlTest extends AbcTestCase
 
     self::assertSame(false, $control->isHidden());
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   public function testPrefixAndPostfix()
   {
@@ -33,9 +34,7 @@ class DivControlTest extends AbcTestCase
     $input->setPrefix('Hello');
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
-
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $pos = strpos($html, 'Hello<div>');
     self::assertNotEquals(false, $pos);

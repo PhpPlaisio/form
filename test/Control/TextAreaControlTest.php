@@ -25,8 +25,7 @@ class TextAreaControlTest extends AbcTestCase
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $html = $form->generate();
+    $html = $form->getHtml();
 
     $pos = strpos($html, 'Hello<textarea');
     self::assertNotEquals(false, $pos);
