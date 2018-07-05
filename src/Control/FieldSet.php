@@ -90,7 +90,7 @@ class FieldSet extends ComplexControl
   {
     if ($this->legend)
     {
-      $ret = $this->legend->generate();
+      $ret = $this->legend->getHtml();
     }
     else
     {

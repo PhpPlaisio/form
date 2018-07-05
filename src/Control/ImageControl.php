@@ -25,9 +25,9 @@ class ImageControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     $ret = $this->prefix;
-    $ret .= $this->generatePrefixLabel();
+    $ret .= $this->getHtmlPrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->generatePostfixLabel();
+    $ret .= $this->getHtmlPostfixLabel();
     $ret .= $this->postfix;
 
     return $ret;

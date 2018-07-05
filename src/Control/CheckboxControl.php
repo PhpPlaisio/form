@@ -23,9 +23,9 @@ class CheckboxControl extends SimpleControl
     $this->attributes['checked'] = !empty($this->value);
 
     $html = $this->prefix;
-    $html .= $this->generatePrefixLabel();
+    $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateVoidElement('input', $this->attributes);
-    $html .= $this->generatePostfixLabel();
+    $html .= $this->getHtmlPostfixLabel();
     $html .= $this->postfix;
 
     return $html;

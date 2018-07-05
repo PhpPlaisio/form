@@ -25,9 +25,9 @@ class ResetControl extends SimpleControl
     else                  $this->attributes['value'] = $this->value;
 
     $ret = $this->prefix;
-    $ret .= $this->generatePrefixLabel();
+    $ret .= $this->getHtmlPrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->generatePostfixLabel();
+    $ret .= $this->getHtmlPostfixLabel();
     $ret .= $this->postfix;
 
     return $ret;
