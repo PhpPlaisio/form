@@ -19,6 +19,7 @@ class FieldSet extends ComplexControl
   protected $legend;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Creates a legend for this fieldset.
    *
@@ -52,13 +53,10 @@ class FieldSet extends ComplexControl
    */
   public function getHtml(): string
   {
-    $ret = $this->generateStartTag();
-
-    $ret .= $this->generateLegend();
-
+    $ret = $this->getHtmlStartTag();
+    $ret .= $this->getHtmlLegend();
     $ret .= parent::getHtml();
-
-    $ret .= $this->generateEndTag();
+    $ret .= $this->getHtmlEndTag();
 
     return $ret;
   }
@@ -72,7 +70,7 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  protected function generateEndTag(): string
+  protected function getHtmlEndTag(): string
   {
     return '</fieldset>';
   }
@@ -86,7 +84,7 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  protected function generateLegend(): string
+  protected function getHtmlLegend(): string
   {
     if ($this->legend)
     {
@@ -109,7 +107,7 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  protected function generateStartTag(): string
+  protected function getHtmlStartTag(): string
   {
     return Html::generateTag('fieldset', $this->attributes);
   }
