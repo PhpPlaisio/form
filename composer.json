@@ -1,9 +1,8 @@
 {
-  "name": "setbased/abc-form-raw",
-  "description": "ABC-Framework: Raw Form",
+  "name": "setbased/abc-form",
+  "description": "ABC-Framework: Form",
   "keywords": [
     "ABC-Framework",
-    "Raw",
     "Form"
   ],
   "type": "library",
@@ -11,6 +10,7 @@
   "require": {
     "php": ">=7.1.0",
     "setbased/abc": "*",
+    "setbased/abc-exception": "^1.0.0",
     "setbased/abc-html": "^1.0.0 || ^2.0.1",
     "setbased/abc-obfuscator": "^1.0.0 || ^2.0.0",
     "setbased/abc-url": "^1.0.0 || ^2.0.0",
