@@ -92,19 +92,6 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Alias for getHtml.
-   *
-   * @deprecated
-   *
-   * @return string
-   */
-  public function generate(): string
-  {
-    return $this->getHtml();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the the error messages of this form control.
    *
    * @param bool $recursive

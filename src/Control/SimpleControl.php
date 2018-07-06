@@ -466,45 +466,6 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Alias of getHtmlLabel.
-   *
-   * @return string
-   *
-   * @deprecated
-   */
-  protected function generateLabel(): string
-  {
-    return $this->getHtmlLabel();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Alias of getHtmlPostfixLabel.
-   *
-   * @return string
-   *
-   * @deprecated
-   */
-  protected function generatePostfixLabel(): string
-  {
-    return $this->getHtmlPostfixLabel();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Alias of getHtmlPrefixLabel.
-   *
-   * @return string
-   *
-   * @deprecated
-   */
-  protected function generatePrefixLabel(): string
-  {
-    return $this->getHtmlPrefixLabel();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the HTML code for the label for this form control.
    *
    * @return string

@@ -161,19 +161,6 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Alias for getHtml.
-   *
-   * @deprecated
-   *
-   * @return string
-   */
-  public function generate(): string
-  {
-    return $this->getHtml();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns all form control names of which the value has been changed.
    *
    * @return array A nested array of form control names (keys are form control names and (for complex form controls)

@@ -20,19 +20,6 @@ class Legend extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Alias for getHtml.
-   *
-   * @deprecated
-   *
-   * @return string
-   */
-  public function generate(): string
-  {
-    return $this->getHtml();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the HTML code for this legend.
    *
    * @return string
