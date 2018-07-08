@@ -40,6 +40,7 @@ class ComplexControl extends Control implements CompoundControl
   protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -334,22 +335,13 @@ class ComplexControl extends Control implements CompoundControl
    * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
    * value is set are not affected.
    *
-   * @param mixed $values The values as a nested array.
+   * @param array|null $values The values as a nested array.
    */
-  public function mergeValuesBase(array $values): void
+  public function mergeValuesBase(?array $values): void
   {
-    if ($this->name==='')
+    if ($this->name!=='')
     {
-      // Nothing to do.
-      ;
-    }
-    elseif (isset($values[$this->name]))
-    {
-      $values = &$values[$this->name];
-    }
-    else
-    {
-      $values = null;
+      $values = $values[$this->name] ?? null;
     }
 
     if ($values!==null)
@@ -451,18 +443,9 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function setValuesBase(?array $values): void
   {
-    if ($this->name==='')
+    if ($this->name!=='')
     {
-      // Nothing to do.
-      ;
-    }
-    elseif (isset($values[$this->name]))
-    {
-      $values = &$values[$this->name];
-    }
-    else
-    {
-      $values = null;
+      $values = $values[$this->name] ?? null;
     }
 
     foreach ($this->controls as $control)

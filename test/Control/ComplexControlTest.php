@@ -100,6 +100,7 @@ class ComplexControlTest extends AbcTestCase
     $input = $form->getFormControlByName('vacation');
     self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
 
+    /** @var ComplexControl $input */
     $input = $input->getFormControlByName('city2');
     self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
     self::assertEquals('city2', $input->getLocalName());
@@ -229,6 +230,54 @@ class ComplexControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test mergeValues with null.
+   */
+  public function testMergeValues1()
+  {
+    $form = $this->setForm2();
+
+    /** @var SimpleControl $input4 */
+    $input4 = $form->getFormControlByName('field_4');
+    $input4->setValue('four');
+
+    $values = $form->getSetValues();
+    self::assertSame('four', $values['complex_name']['complex_name2']['field_4']);
+
+    $form->mergeValues(null);
+
+    $values = $form->getSetValues();
+    self::assertSame('four', $values['complex_name']['complex_name2']['field_4']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test mergeValues with value.
+   */
+  public function testMergeValues2()
+  {
+    $form = $this->setForm2();
+
+    /** @var SimpleControl $input3 */
+    $input3 = $form->getFormControlByName('field_3');
+    $input3->setValue('three');
+
+    /** @var SimpleControl $input4 */
+    $input4 = $form->getFormControlByName('field_4');
+    $input4->setValue('four');
+
+    $values = $form->getSetValues();
+    self::assertSame('three', $values['complex_name']['field_3']);
+    self::assertSame('four', $values['complex_name']['complex_name2']['field_4']);
+
+    $form->mergeValues(['complex_name' => ['complex_name2' => ['field_4' => '4']]]);
+
+    $values = $form->getSetValues();
+    self::assertSame('three', $values['complex_name']['field_3']);
+    self::assertSame('4', $values['complex_name']['complex_name2']['field_4']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test setValues with null.
    */
   public function testSetValues1()
@@ -246,6 +295,33 @@ class ComplexControlTest extends AbcTestCase
 
     $values = $form->getSetValues();
     self::assertNull($values['complex_name']['complex_name2']['field_4']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test setValues with value.
+   */
+  public function testSetValues2()
+  {
+    $form = $this->setForm2();
+
+    /** @var SimpleControl $input3 */
+    $input3 = $form->getFormControlByName('field_3');
+    $input3->setValue('three');
+
+    /** @var SimpleControl $input4 */
+    $input4 = $form->getFormControlByName('field_4');
+    $input4->setValue('four');
+
+    $values = $form->getSetValues();
+    self::assertSame('three', $values['complex_name']['field_3']);
+    self::assertSame('four', $values['complex_name']['complex_name2']['field_4']);
+
+    $form->setValues(['complex_name' => ['complex_name2' => ['field_4' => '4']]]);
+
+    $values = $form->getSetValues();
+    self::assertNull($values['complex_name']['field_3']);
+    self::assertSame('4', $values['complex_name']['complex_name2']['field_4']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
