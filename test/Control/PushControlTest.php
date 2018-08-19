@@ -88,6 +88,32 @@ abstract class PushControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Method loadSubmittedValuesBase must work int values too.
+   */
+  public function testLoadSubmittedValues3()
+  {
+    // Create form.
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = $this->getControl('button');
+    $input->setValue(123);
+    $fieldset->addFormControl($input);
+
+    $_POST['button'] = '123';
+
+    $form->loadSubmittedValues();
+
+    $values = $form->getValues();
+    self::assertEquals(123, $values['button']);
+
+    $changed = $form->getChangedControls();
+    self::assertArrayNotHasKey('button', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Method mergeValue() has no effect for buttons.
    */
   public function testMergeValues()
@@ -139,6 +165,52 @@ abstract class PushControlTest extends AbcTestCase
 
     $pos = strpos($html, '/>World');
     self::assertNotEquals(false, $pos);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Method searchSubmitHandler must return the appropriate handler.
+   */
+  public function testSearchSubmitHandler1()
+  {
+    // Create form.
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = $this->getControl('button');
+    $input->setValue('Do not push');
+    $input->setMethod('myMethod');
+    $fieldset->addFormControl($input);
+
+    $_POST['button'] = 'Do not push';
+
+    $handler = $form->execute();
+
+    self::assertEquals('myMethod', $handler);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Method searchSubmitHandler must return the appropriate handler with int values too.
+   */
+  public function testSearchSubmitHandler2()
+  {
+    // Create form.
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = $this->getControl(123);
+    $input->setValue(456);
+    $input->setMethod('myMethod');
+    $fieldset->addFormControl($input);
+
+    $_POST['123'] = '456';
+
+    $handler = $form->execute();
+
+    self::assertEquals('myMethod', $handler);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

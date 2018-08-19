@@ -72,7 +72,7 @@ class HiddenSubmitControl extends HiddenControl
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (isset($submittedValues[$submitName]) && $submittedValues[$submitName]===$this->value)
+    if (isset($submittedValues[$submitName]) && (string)$submittedValues[$submitName]===(string)$this->value)
     {
       // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
       // So, skip the following code.
@@ -90,7 +90,7 @@ class HiddenSubmitControl extends HiddenControl
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    if (isset($submittedValues[$submitName]) && $submittedValues[$submitName]===$this->value)
+    if (isset($submittedValues[$submitName]) && (string)$submittedValues[$submitName]===(string)$this->value)
     {
       if ($this->method===null)
       {
