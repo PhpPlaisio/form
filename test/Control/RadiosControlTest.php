@@ -14,6 +14,75 @@ class RadiosControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test setValues.
+   */
+  public function setValuesTest($value)
+  {
+    $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
+    $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
+    $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet('');
+    $form->addFieldSet($fieldset);
+
+    $input = new RadiosControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
+
+    // Set value to empty string.
+    $input->setValue($value);
+    self::assertSame($value, $form->getSetValues()['cnt_id']);
+
+    $form->loadSubmittedValues();
+
+    $values = $form->getValues();
+    self::assertNull($values['cnt_id']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test special characters in the labels are replaced with HTML entities.
+   */
+  public function testInputAttributesMap()
+  {
+    $entities[] = ['key' => 'R', 'label' => 'Red'];
+    $entities[] = ['key' => 'O', 'label' => 'Orange', 'extra' => 'blink', 'xxx' => 123];
+    $entities[] = ['key' => 'G', 'label' => 'Green'];
+
+    $input = new RadiosControl('traffic-light');
+    $input->setInputAttributesMap(['xxx' => 'id', 'extra' => 'class']);
+    $input->setOptions($entities, 'key', 'label');
+
+    $html = $input->getHtml();
+
+    self::assertContains('<input id="123" class="blink" type="radio" value="O"/>', $html);
+    self::assertContains('<label for="123">Orange</label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test special characters in the labels are replaced with HTML entities.
+   */
+  public function testLabelAttributesMap()
+  {
+    $entities[] = ['key' => 'R', 'label' => 'Red'];
+    $entities[] = ['key' => 'O', 'label' => 'Orange', 'extra' => 'blink', 'xxx' => 123];
+    $entities[] = ['key' => 'G', 'label' => 'Green'];
+
+    $input = new RadiosControl('traffic-light');
+    $input->setInputAttributesMap(['xxx' => 'id']);
+    $input->setLabelAttributesMap(['extra' => 'class']);
+    $input->setOptions($entities, 'key', 'label');
+
+    $html = $input->getHtml();
+
+    self::assertContains('<input id="123" type="radio" value="O"/>', $html);
+    self::assertContains('<label class="blink" for="123">Orange</label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test control is hidden.
    */
   public function testIsHidden()
@@ -22,17 +91,19 @@ class RadiosControlTest extends AbcTestCase
 
     self::assertSame(false, $control->isHidden());
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test special characters in the labels are replaced with HTML entities.
    */
   public function testLabels1()
   {
-    $entities[] = ['id' => 0, 'name' => '<&\';">'];
-    $entities[] = ['id' => 1, 'name' => '&nbsp;'];
+    $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<&\';">'];
+    $entities[] = ['no' => 1, 'key' => 'B', 'name' => '&nbsp;'];
 
     $input = new RadiosControl('id');
-    $input->setOptions($entities, 'id', 'name', null, 'id');
+    $input->setInputAttributesMap(['no' => 'id']);
+    $input->setOptions($entities, 'key', 'name');
 
     $html = $input->getHtml();
 
@@ -46,17 +117,36 @@ class RadiosControlTest extends AbcTestCase
    */
   public function testLabels2()
   {
-    $entities[] = ['id' => 0, 'name' => '<span>0</span>'];
-    $entities[] = ['id' => 1, 'name' => '<span>1</span>'];
+    $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<span>0</span>'];
+    $entities[] = ['no' => 1, 'key' => 'B', 'name' => '<span>1</span>'];
 
     $input = new RadiosControl('id');
-    $input->setOptions($entities, 'id', 'name', null, 'id');
+    $input->setInputAttributesMap(['no' => 'id']);
+    $input->setOptions($entities, 'key', 'name');
     $input->setLabelIsHtml();
 
     $html = $input->getHtml();
 
     self::assertContains('<label for="0"><span>0</span></label>', $html);
     self::assertContains('<label for="1"><span>1</span></label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test setValues with null.
+   */
+  public function testSetValues01()
+  {
+    $this->setValuesTest(null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test setValues with null.
+   */
+  public function testSetValues02()
+  {
+    $this->setValuesTest('');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -102,52 +192,6 @@ class RadiosControlTest extends AbcTestCase
     self::assertArrayHasKey('cnt_id', $values);
     self::assertNull($values['cnt_id']);
     self::assertEmpty($form->getChangedControls());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test setValues.
-   */
-  public function setValuesTest($value)
-  {
-    $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
-    $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
-    $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
-
-    $form     = new TestForm();
-    $fieldset = new FieldSet('');
-    $form->addFieldSet($fieldset);
-
-    $input = new RadiosControl('cnt_id');
-    $input->setOptions($countries, 'cnt_id', 'cnt_name');
-    $fieldset->addFormControl($input);
-
-    // Set value to empty string.
-    $input->setValue($value);
-    self::assertSame($value, $form->getSetValues()['cnt_id']);
-
-    $form->loadSubmittedValues();
-
-    $values = $form->getValues();
-    self::assertNull($values['cnt_id']);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test setValues with null.
-   */
-  public function testSetValues01()
-  {
-    $this->setValuesTest(null);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test setValues with null.
-   */
-  public function testSetValues02()
-  {
-    $this->setValuesTest('');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
