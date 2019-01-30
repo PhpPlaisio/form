@@ -30,7 +30,7 @@ class AmbiguityCleaner implements Cleaner
    *
    * Characters marked with * we have actually encountered in other databases.
    *
-   * @var array<str,string[]>
+   * @var array<string,string[]>
    */
   protected $ambiguities =
     // Spaces.

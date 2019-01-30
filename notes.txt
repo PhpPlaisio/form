@@ -1,0 +1,18 @@
+CheckboxControl
+ * @todo    Add attribute for label.
+ * @todo Decide whether to test submitted value is white listed, i.e. $this->myAttributes['value'] or 'on'
+
+RadioControl
+ * @todo  Add attribute for label.
+
+SelectControl
+ * @todo validate the default value is a white list value.
+
+RawForm
+ * @todo check value is white list.
+
+CheckboxesControl
+ * @todo Implement disabled hard (can not be changed via javascript) and disabled sort (can be changed via javascript).
+ * @todo validate the default value is a white list value
+
+
