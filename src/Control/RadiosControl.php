@@ -103,7 +103,7 @@ class RadiosControl extends Control
                           'value'    => '',
                           'checked'  => false,
                           'disabled' => false];
-      // Note: we use a reference to unsure that the for attribute of the label and the id attribute of the radio
+      // Note: we use a reference to ensure that the for attribute of the label and the id attribute of the radio
       // button match.
       $labelAttributes = ['for' => &$inputAttributes['id']];
 
