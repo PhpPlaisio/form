@@ -71,7 +71,7 @@ class CheckboxesControl extends Control
   /**
    * The options of this select box.
    *
-   * @var array[]
+   * @var array[]|null
    */
   protected $options;
 
@@ -254,21 +254,21 @@ class CheckboxesControl extends Control
   /**
    * Sets the options for the checkboxes box.
    *
-   * @param array[]     $options       An array of arrays with the options.
-   * @param string      $keyKey        The key holding the keys of the checkboxes.
-   * @param string      $labelKey      The key holding the labels for the checkboxes.
-   * @param string|null $checkedKey    The key holding the checked flag. Any
+   * @param array[]|null $options      An array of arrays with the options.
+   * @param string       $keyKey       The key holding the keys of the checkboxes.
+   * @param string       $labelKey     The key holding the labels for the checkboxes.
+   * @param string|null  $checkedKey   The key holding the checked flag. Any
    *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
    *                                   checkbox is checked.
-   * @param string|null $disabledKey   The key holding the disabled flag. Any
+   * @param string|null  $disabledKey  The key holding the disabled flag. Any
    *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
    *                                   checkbox is disabled.
-   * @param string|null $idKey         The key holding the HTML ID attribute of the checkboxes.
+   * @param string|null  $idKey        The key holding the HTML ID attribute of the checkboxes.
    *
    * @since 1.0.0
    * @api
    */
-  public function setOptions(array &$options,
+  public function setOptions(?array &$options,
                              string $keyKey,
                              string $labelKey,
                              ?string $checkedKey = 'abc_map_checked',

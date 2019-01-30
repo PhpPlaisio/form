@@ -64,7 +64,7 @@ class RadiosControl extends Control
   /**
    * The data for the radio buttons.
    *
-   * @var array[]
+   * @var array[]|null
    */
   protected $options;
 
@@ -212,18 +212,18 @@ class RadiosControl extends Control
   /**
    * Sets the options for this select box.
    *
-   * @param array[]     $options     An array of arrays with the options.
-   * @param string      $keyKey      The key holding the keys of the radio buttons.
-   * @param string      $labelKey    The key holding the labels for the radio buttons.
-   * @param string|null $disabledKey The key holding the disabled flag. Any
-   *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the radio
-   *                                 button is disabled.
-   * @param string|null $idKey       The key holding the HTML ID attribute of the radios.
+   * @param array[]|null $options     An array of arrays with the options.
+   * @param string       $keyKey      The key holding the keys of the radio buttons.
+   * @param string       $labelKey    The key holding the labels for the radio buttons.
+   * @param string|null  $disabledKey The key holding the disabled flag. Any
+   *                                  [non-empty](http://php.net/manual/function.empty.php) value results that the radio
+   *                                  button is disabled.
+   * @param string|null  $idKey       The key holding the HTML ID attribute of the radios.
    *
    * @since 1.0.0
    * @api
    */
-  public function setOptions(array &$options,
+  public function setOptions(?array &$options,
                              string $keyKey,
                              string $labelKey,
                              ?string $disabledKey = null,
