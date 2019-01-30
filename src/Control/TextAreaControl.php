@@ -37,7 +37,9 @@ class TextAreaControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     $html = $this->prefix;
+    $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateElement('textarea', $this->attributes, (string)$this->value);
+    $html .= $this->getHtmlPostfixLabel();
     $html .= $this->postfix;
 
     return $html;
@@ -97,15 +99,11 @@ class TextAreaControl extends SimpleControl
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
-    // Get the submitted value and cleaned (if required).
-    if ($this->cleaner)
-    {
-      $newValue = $this->cleaner->clean($submittedValues[$submitName]);
-    }
-    else
-    {
-      $newValue = $submittedValues[$submitName];
-    }
+    // Get the submitted value.
+    $newValue = $submittedValues[$submitName] ?? null;
+
+    // Clean the submitted value, if we have a cleaner.
+    if ($this->cleaner) $newValue = $this->cleaner->clean($newValue);
 
     if ((string)$this->value!==(string)$newValue)
     {
@@ -113,6 +111,7 @@ class TextAreaControl extends SimpleControl
       $this->value                = $newValue;
     }
 
+    // The user can enter any text in a textarea. So, any value is white listed.
     $whiteListValues[$this->name] = $newValue;
   }
 

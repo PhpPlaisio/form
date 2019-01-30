@@ -6,9 +6,8 @@ use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
 /**
- * Class RadiosControl
- *
- * @package SetBased\Form\Form\Control
+ * Class for an array of form controls of type [input:radio](http://www.w3schools.com/tags/tag_input.asp) with the same
+ * name.
  */
 class RadiosControl extends Control
 {
@@ -112,10 +111,10 @@ class RadiosControl extends Control
         $key   = (string)$option[$this->keyKey];
         $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
-        $inputAttributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
+        $inputAttributes['id']       = ($this->idKey!==null && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
         $inputAttributes['value']    = $value;
         $inputAttributes['checked']  = ((string)$this->value===(string)$key);
-        $inputAttributes['disabled'] = ($this->disabledKey && !empty($option[$this->disabledKey]));
+        $inputAttributes['disabled'] = ($this->disabledKey!==null && !empty($option[$this->disabledKey]));
 
         $html .= Html::generateVoidElement('input', $inputAttributes);
 
@@ -215,7 +214,7 @@ class RadiosControl extends Control
    *
    * @param array[]     $options     An array of arrays with the options.
    * @param string      $keyKey      The key holding the keys of the radio buttons.
-   * @param string      $labelKey    The key holding the labels for the radio buttons..
+   * @param string      $labelKey    The key holding the labels for the radio buttons.
    * @param string|null $disabledKey The key holding the disabled flag. Any
    *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the radio
    *                                 button is disabled.

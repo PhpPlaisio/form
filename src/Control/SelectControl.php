@@ -72,6 +72,7 @@ class SelectControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     $html = $this->prefix;
+    $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateTag('select', $this->attributes);
 
     // Add an empty option, if necessary.
@@ -107,6 +108,7 @@ class SelectControl extends SimpleControl
     }
 
     $html .= '</select>';
+    $html .= $this->getHtmlPostfixLabel();
     $html .= $this->postfix;
 
     return $html;
