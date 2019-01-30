@@ -342,7 +342,7 @@ abstract class Control extends HtmlElement
    */
   protected function setSubmitName(string $parentSubmitName): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     if ($parentSubmitName!=='')
     {

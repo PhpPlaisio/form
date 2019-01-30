@@ -64,7 +64,7 @@ class HiddenControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     // Get the submitted value.
     $newValue = $submittedValues[$submitName] ?? null;

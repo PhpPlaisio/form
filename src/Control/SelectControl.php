@@ -192,7 +192,7 @@ class SelectControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     // Normalize default value as a string.
     $value = (string)$this->value;

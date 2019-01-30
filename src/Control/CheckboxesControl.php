@@ -357,7 +357,7 @@ class CheckboxesControl extends Control
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     foreach ($this->options as $i => $option)
     {

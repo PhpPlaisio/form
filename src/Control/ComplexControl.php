@@ -123,7 +123,7 @@ class ComplexControl extends Control implements CompoundControl
 
       if ($control->name==$parts[0])
       {
-        if (count($parts)==1)
+        if (sizeof($parts)==1)
         {
           return $control;
         }
@@ -295,7 +295,7 @@ class ComplexControl extends Control implements CompoundControl
                                           array &$whiteListValues,
                                           array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     if ($this->name==='')
     {
@@ -378,7 +378,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function searchSubmitHandler(array $submittedValues): ?string
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     if ($this->name==='')
     {

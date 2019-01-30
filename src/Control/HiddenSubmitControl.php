@@ -70,7 +70,7 @@ class HiddenSubmitControl extends HiddenControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     if (isset($submittedValues[$submitName]) && (string)$submittedValues[$submitName]===(string)$this->value)
     {
@@ -88,7 +88,7 @@ class HiddenSubmitControl extends HiddenControl
    */
   protected function searchSubmitHandler(array $submittedValues): ?string
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
 
     if (isset($submittedValues[$submitName]) && (string)$submittedValues[$submitName]===(string)$this->value)
     {
