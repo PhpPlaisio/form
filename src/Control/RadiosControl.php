@@ -103,8 +103,8 @@ class RadiosControl extends Control
 
         $labelAttributes['for'] = $inputAttributes['id'];
 
-        $key   = (string)$option[$this->keyKey];
-        $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
+        $key   = $option[$this->keyKey];
+        $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
 
         $inputAttributes['value']   = $value;
         $inputAttributes['checked'] = ((string)$this->value===(string)$key);

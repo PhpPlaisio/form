@@ -49,7 +49,7 @@ class SelectControl extends SimpleControl
   /**
    * The options of this select box.
    *
-   * @var array[]
+   * @var array[]|null
    */
   protected $options;
 
@@ -93,13 +93,13 @@ class SelectControl extends SimpleControl
       foreach ($this->options as $option)
       {
         // Get the (database) key of the option.
-        $key = (string)$option[$this->keyKey];
+        $key = $option[$this->keyKey];
 
         // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
 
         $optionAttributes['value']    = $code;
-        $optionAttributes['selected'] = ((string)$this->value===$key);
+        $optionAttributes['selected'] = ((string)$this->value===(string)$key);
         $optionAttributes['disabled'] = (isset($this->disabledKey) && !empty($option[$this->disabledKey]));
         $optionAttributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : null;
 
@@ -125,7 +125,7 @@ class SelectControl extends SimpleControl
    */
   public function getOptions(): array
   {
-    return $this->options;
+    return $this->options ?? [];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -146,18 +146,18 @@ class SelectControl extends SimpleControl
   /**
    * Sets the options for this select box.
    *
-   * @param array[]     $options     The options of this select box.
-   * @param string      $keyKey      The key holding the keys of the options.
-   * @param string      $labelKey    The key holding the labels for the options.
-   * @param string|null $disabledKey The key holding the disabled flag. Any
-   *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the option
-   *                                 is disabled.
-   * @param string|null $idKey       The key holding the HTML ID attribute of the options.
+   * @param array[]|null $options     The options of this select box.
+   * @param string       $keyKey      The key holding the keys of the options.
+   * @param string       $labelKey    The key holding the labels for the options.
+   * @param string|null  $disabledKey The key holding the disabled flag. Any
+   *                                  [non-empty](http://php.net/manual/function.empty.php) value results that the
+   *                                  option is disabled.
+   * @param string|null  $idKey       The key holding the HTML ID attribute of the options.
    *
    * @since 1.0.0
    * @api
    */
-  public function setOptions(array &$options,
+  public function setOptions(?array &$options,
                              string $keyKey,
                              string $labelKey,
                              ?string $disabledKey = null,
