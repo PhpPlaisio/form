@@ -19,18 +19,11 @@ class CheckboxesControl extends Control
   protected $checkedKey;
 
   /**
-   * The key in $options holding the disabled flag for the checkboxes.
+   * The map from the keys in the options to attribute names of the input elements.
    *
-   * @var string|null
+   * @var array|null
    */
-  protected $disabledKey;
-
-  /**
-   * The key in $options holding the HTML ID attribute of the checkboxes.   *
-   *
-   * @var string|null
-   */
-  protected $idKey;
+  protected $inputAttributesMap;
 
   /**
    * The key in $options holding the keys for the checkboxes.
@@ -38,6 +31,13 @@ class CheckboxesControl extends Control
    * @var string
    */
   protected $keyKey;
+
+  /**
+   * The map from the keys in the options to attribute names of the label elements.
+   *
+   * @var array|null
+   */
+  protected $labelAttributesMap;
 
   /**
    * If true and only if true labels are HTML code. Otherwise special characters in the labels will be replaced with
@@ -103,22 +103,18 @@ class CheckboxesControl extends Control
 
     if (is_array($this->options))
     {
-      $inputAttributes = ['type'     => 'checkbox',
-                          'name'     => '',
-                          'id'       => '',
-                          'checked'  => false,
-                          'disabled' => false];
-      $labelAttributes = ['for' => &$inputAttributes['id']];
-
       foreach ($this->options as $option)
       {
+        $inputAttributes = $this->inputAttributes($option);
+        $labelAttributes = $this->labelAttributes($option);
+
+        $labelAttributes['for'] = $inputAttributes['id'];
+
         $code = ($this->optionsObfuscator) ?
           $this->optionsObfuscator->encode($option[$this->keyKey]) : $option[$this->keyKey];
 
-        $inputAttributes['name']     = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
-        $inputAttributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
-        $inputAttributes['checked']  = (isset($this->checkedKey) && !empty($option[$this->checkedKey]));
-        $inputAttributes['disabled'] = (isset($this->disabledKey) && !empty($option[$this->disabledKey]));
+        $inputAttributes['name']    = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
+        $inputAttributes['checked'] = ($this->checkedKey!==null && !empty($option[$this->checkedKey]));
 
         $html .= Html::generateVoidElement('input', $inputAttributes);
 
@@ -210,6 +206,40 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the map from the keys in the options to attribute names of the input element.
+   *
+   * Note the following attributes will ignored:
+   * <ul>
+   * <li> type
+   * <li> name
+   * <li> checked
+   * </ul>
+   *
+   * @param array|null $map The map.
+   */
+  public function setInputAttributesMap(?array $map)
+  {
+    $this->inputAttributesMap = $map;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the map from the keys in the options to attribute names of the label element.
+   *
+   * Note the following attribute will ignored:
+   * <ul>
+   * <li> for
+   * </ul>
+   *
+   * @param array|null $map The map.
+   */
+  public function setLabelAttributesMap(?array $map)
+  {
+    $this->labelAttributesMap = $map;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets whether labels are HTML code.
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
@@ -254,16 +284,12 @@ class CheckboxesControl extends Control
   /**
    * Sets the options for the checkboxes box.
    *
-   * @param array[]|null $options      An array of arrays with the options.
-   * @param string       $keyKey       The key holding the keys of the checkboxes.
-   * @param string       $labelKey     The key holding the labels for the checkboxes.
-   * @param string|null  $checkedKey   The key holding the checked flag. Any
-   *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
-   *                                   checkbox is checked.
-   * @param string|null  $disabledKey  The key holding the disabled flag. Any
-   *                                   [non-empty](http://php.net/manual/function.empty.php) value results that the
-   *                                   checkbox is disabled.
-   * @param string|null  $idKey        The key holding the HTML ID attribute of the checkboxes.
+   * @param array[]|null $options    An array of arrays with the options.
+   * @param string       $keyKey     The key holding the keys of the checkboxes.
+   * @param string       $labelKey   The key holding the labels for the checkboxes.
+   * @param string       $checkedKey The key holding the checked flag. Any
+   *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the
+   *                                 checkbox is checked.
    *
    * @since 1.0.0
    * @api
@@ -271,16 +297,12 @@ class CheckboxesControl extends Control
   public function setOptions(?array &$options,
                              string $keyKey,
                              string $labelKey,
-                             ?string $checkedKey = 'abc_map_checked',
-                             ?string $disabledKey = null,
-                             ?string $idKey = null): void
+                             string $checkedKey = 'abc_map_checked'): void
   {
-    $this->options     = $options;
-    $this->keyKey      = $keyKey;
-    $this->labelKey    = $labelKey;
-    $this->checkedKey  = $checkedKey;
-    $this->disabledKey = $disabledKey;
-    $this->idKey       = $idKey;
+    $this->options    = $options;
+    $this->keyKey     = $keyKey;
+    $this->labelKey   = $labelKey;
+    $this->checkedKey = $checkedKey;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -410,6 +432,56 @@ class CheckboxesControl extends Control
     }
 
     return $valid;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the attributes for the input element.
+   *
+   * @param array The option.
+   *
+   * @return array
+   */
+  private function inputAttributes(array $option): array
+  {
+    $attributes = [];
+
+    if (is_array($this->inputAttributesMap))
+    {
+      foreach ($this->inputAttributesMap as $key => $name)
+      {
+        if (isset($option[$key])) $attributes[$name] = $option[$key];
+      }
+    }
+
+    $attributes['type'] = 'checkbox';
+
+    if (!isset($attributes['id'])) $attributes['id'] = Html::getAutoId();
+
+    return $attributes;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the attributes for the label element.
+   *
+   * @param array The option.
+   *
+   * @return array
+   */
+  private function labelAttributes(array $option): array
+  {
+    $attributes = [];
+
+    if (is_array($this->labelAttributesMap))
+    {
+      foreach ($this->labelAttributesMap as $key => $name)
+      {
+        if (isset($option[$key])) $attributes[$name] = $option[$key];
+      }
+    }
+
+    return $attributes;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

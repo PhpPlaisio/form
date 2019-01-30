@@ -13,18 +13,11 @@ class RadiosControl extends Control
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The key in $options holding the disabled flag for the radio buttons.
+   * The map from the keys in the options to attribute names of the input elements.
    *
-   * @var string
+   * @var array|null
    */
-  protected $disabledKey;
-
-  /**
-   * The key in $options holding the HTML ID attribute of the radios.
-   *
-   * @var string|null
-   */
-  protected $idKey;
+  protected $inputAttributesMap;
 
   /**
    * The key in $options holding the keys for the radio buttons.
@@ -32,6 +25,13 @@ class RadiosControl extends Control
    * @var string
    */
   protected $keyKey;
+
+  /**
+   * The map from the keys in the options to attribute names of the label elements.
+   *
+   * @var array|null
+   */
+  protected $labelAttributesMap;
 
   /**
    * If true and only if true labels are HTML code.
@@ -96,25 +96,18 @@ class RadiosControl extends Control
 
     if (is_array($this->options))
     {
-      $inputAttributes = ['type'     => 'radio',
-                          'name'     => $this->submitName,
-                          'id'       => '',
-                          'value'    => '',
-                          'checked'  => false,
-                          'disabled' => false];
-      // Note: we use a reference to ensure that the for attribute of the label and the id attribute of the radio
-      // button match.
-      $labelAttributes = ['for' => &$inputAttributes['id']];
-
       foreach ($this->options as $option)
       {
+        $inputAttributes = $this->inputAttributes($option);
+        $labelAttributes = $this->labelAttributes($option);
+
+        $labelAttributes['for'] = $inputAttributes['id'];
+
         $key   = (string)$option[$this->keyKey];
         $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
 
-        $inputAttributes['id']       = ($this->idKey!==null && isset($option[$this->idKey])) ? $option[$this->idKey] : Html::getAutoId();
-        $inputAttributes['value']    = $value;
-        $inputAttributes['checked']  = ((string)$this->value===(string)$key);
-        $inputAttributes['disabled'] = ($this->disabledKey!==null && !empty($option[$this->disabledKey]));
+        $inputAttributes['value']   = $value;
+        $inputAttributes['checked'] = ((string)$this->value===(string)$key);
 
         $html .= Html::generateVoidElement('input', $inputAttributes);
 
@@ -171,6 +164,41 @@ class RadiosControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the map from the keys in the options to attribute names of the input element.
+   *
+   * Note the following attributes will ignored:
+   * <ul>
+   * <li> type
+   * <li> name
+   * <li> value
+   * <li> checked
+   * </ul>
+   *
+   * @param array|null $map The map.
+   */
+  public function setInputAttributesMap(?array $map)
+  {
+    $this->inputAttributesMap = $map;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the map from the keys in the options to attribute names of the label element.
+   *
+   * Note the following attribute will ignored:
+   * <ul>
+   * <li> for
+   * </ul>
+   *
+   * @param array|null $map The map.
+   */
+  public function setLabelAttributesMap(?array $map)
+  {
+    $this->labelAttributesMap = $map;
+  }
+
+//--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets whether labels are HTML code.
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
@@ -183,7 +211,7 @@ class RadiosControl extends Control
     $this->labelIsHtml = $labelIsHtml;
   }
 
-//--------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the label postfix., e.g. the HTML code that is appended after the HTML code of each label of the checkboxes.
    *
@@ -212,28 +240,18 @@ class RadiosControl extends Control
   /**
    * Sets the options for this select box.
    *
-   * @param array[]|null $options     An array of arrays with the options.
-   * @param string       $keyKey      The key holding the keys of the radio buttons.
-   * @param string       $labelKey    The key holding the labels for the radio buttons.
-   * @param string|null  $disabledKey The key holding the disabled flag. Any
-   *                                  [non-empty](http://php.net/manual/function.empty.php) value results that the radio
-   *                                  button is disabled.
-   * @param string|null  $idKey       The key holding the HTML ID attribute of the radios.
+   * @param array[]|null $options  An array of arrays with the options.
+   * @param string       $keyKey   The key holding the keys of the radio buttons.
+   * @param string       $labelKey The key holding the labels for the radio buttons.
    *
    * @since 1.0.0
    * @api
    */
-  public function setOptions(?array &$options,
-                             string $keyKey,
-                             string $labelKey,
-                             ?string $disabledKey = null,
-                             ?string $idKey = null): void
+  public function setOptions(?array &$options, string $keyKey, string $labelKey): void
   {
-    $this->options     = $options;
-    $this->keyKey      = $keyKey;
-    $this->labelKey    = $labelKey;
-    $this->disabledKey = $disabledKey;
-    $this->idKey       = $idKey;
+    $this->options  = $options;
+    $this->keyKey   = $keyKey;
+    $this->labelKey = $labelKey;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -348,6 +366,57 @@ class RadiosControl extends Control
     }
 
     return $valid;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the attributes for the input element.
+   *
+   * @param array The option.
+   *
+   * @return array
+   */
+  private function inputAttributes(array $option): array
+  {
+    $attributes = [];
+
+    if (is_array($this->inputAttributesMap))
+    {
+      foreach ($this->inputAttributesMap as $key => $name)
+      {
+        if (isset($option[$key])) $attributes[$name] = $option[$key];
+      }
+    }
+
+    $attributes['type'] = 'radio';
+    $attributes['name'] = $this->submitName;
+
+    if (!isset($attributes['id'])) $attributes['id'] = Html::getAutoId();
+
+    return $attributes;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the attributes for the label element.
+   *
+   * @param array The option.
+   *
+   * @return array
+   */
+  private function labelAttributes(array $option): array
+  {
+    $attributes = [];
+
+    if (is_array($this->labelAttributesMap))
+    {
+      foreach ($this->labelAttributesMap as $key => $name)
+      {
+        if (isset($option[$key])) $attributes[$name] = $option[$key];
+      }
+    }
+
+    return $attributes;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

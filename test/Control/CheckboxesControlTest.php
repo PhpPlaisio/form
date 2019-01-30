@@ -104,6 +104,26 @@ class CheckboxesControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test special characters in the labels are replaced with HTML entities.
+   */
+  public function testInputAttributesMap()
+  {
+    $entities[] = ['key' => 'R', 'label' => 'Red'];
+    $entities[] = ['key' => 'O', 'label' => 'Orange', 'extra' => 'blink', 'xxx' => 123];
+    $entities[] = ['key' => 'G', 'label' => 'Green'];
+
+    $input = new CheckboxesControl('traffic-light');
+    $input->setInputAttributesMap(['xxx' => 'id', 'extra' => 'class']);
+    $input->setOptions($entities, 'key', 'label');
+
+    $html = $input->getHtml();
+
+    self::assertContains('<input id="123" class="blink" type="checkbox" name="[O]"/>', $html);
+    self::assertContains('<label for="123">Orange</label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test control is hidden.
    */
   public function testIsHidden()
@@ -117,13 +137,35 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test special characters in the labels are replaced with HTML entities.
    */
+  public function testLabelAttributesMap()
+  {
+    $entities[] = ['key' => 'R', 'label' => 'Red'];
+    $entities[] = ['key' => 'O', 'label' => 'Orange', 'extra' => 'blink', 'xxx' => 123];
+    $entities[] = ['key' => 'G', 'label' => 'Green'];
+
+    $input = new CheckboxesControl('traffic-light');
+    $input->setInputAttributesMap(['xxx' => 'id']);
+    $input->setLabelAttributesMap(['extra' => 'class']);
+    $input->setOptions($entities, 'key', 'label');
+
+    $html = $input->getHtml();
+
+    self::assertContains('<input id="123" type="checkbox" name="[O]"/>', $html);
+    self::assertContains('<label class="blink" for="123">Orange</label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test special characters in the labels are replaced with HTML entities.
+   */
   public function testLabels1()
   {
-    $entities[] = ['id' => 0, 'name' => '<&\';">'];
-    $entities[] = ['id' => 1, 'name' => '&nbsp;'];
+    $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<&\';">'];
+    $entities[] = ['no' => 1, 'key' => 'B', 'name' => '&nbsp;'];
 
     $input = new CheckboxesControl('id');
-    $input->setOptions($entities, 'id', 'name', null, null, 'id');
+    $input->setInputAttributesMap(['no' => 'id']);
+    $input->setOptions($entities, 'key', 'name');
 
     $html = $input->getHtml();
 
@@ -137,11 +179,12 @@ class CheckboxesControlTest extends AbcTestCase
    */
   public function testLabels2()
   {
-    $entities[] = ['id' => 0, 'name' => '<span>0</span>'];
-    $entities[] = ['id' => 1, 'name' => '<span>1</span>'];
+    $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<span>0</span>'];
+    $entities[] = ['no' => 1, 'key' => 'B', 'name' => '<span>1</span>'];
 
     $input = new CheckboxesControl('id');
-    $input->setOptions($entities, 'id', 'name', null, null, 'id');
+    $input->setInputAttributesMap(['no' => 'id']);
+    $input->setOptions($entities, 'key', 'name');
     $input->setLabelIsHtml();
 
     $html = $input->getHtml();
