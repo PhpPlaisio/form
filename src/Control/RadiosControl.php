@@ -372,7 +372,7 @@ class RadiosControl extends Control
   /**
    * Returns the attributes for the input element.
    *
-   * @param array The option.
+   * @param array $option The option.
    *
    * @return array
    */
@@ -400,7 +400,7 @@ class RadiosControl extends Control
   /**
    * Returns the attributes for the label element.
    *
-   * @param array The option.
+   * @param array $option The option.
    *
    * @return array
    */

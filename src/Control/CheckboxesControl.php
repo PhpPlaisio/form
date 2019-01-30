@@ -438,7 +438,7 @@ class CheckboxesControl extends Control
   /**
    * Returns the attributes for the input element.
    *
-   * @param array The option.
+   * @param array $option The option.
    *
    * @return array
    */
@@ -465,7 +465,7 @@ class CheckboxesControl extends Control
   /**
    * Returns the attributes for the label element.
    *
-   * @param array The option.
+   * @param array $option The option.
    *
    * @return array
    */
