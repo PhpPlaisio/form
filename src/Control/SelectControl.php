@@ -218,15 +218,15 @@ class SelectControl extends SimpleControl
           foreach ($this->options as $option)
           {
             // Get the key of the option.
-            $key = (string)$option[$this->keyKey];
+            $key = $option[$this->keyKey];
 
             // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
+            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
 
             if ($newValue===(string)$code)
             {
               // If the original value differs from the submitted value then the form control has been changed.
-              if ($value!==$key)
+              if ($value!==(string)$key)
               {
                 $changedInputs[$this->name] = $this;
               }

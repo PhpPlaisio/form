@@ -362,10 +362,10 @@ class CheckboxesControl extends Control
     foreach ($this->options as $i => $option)
     {
       // Get the (database) ID of the option.
-      $key = (string)$option[$this->keyKey];
+      $key = $option[$this->keyKey];
 
       // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-      $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode($key) : $key;
+      $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
 
       // Get the original value (i.e. the option is checked or not).
       $value = $option[$this->checkedKey] ?? false;
