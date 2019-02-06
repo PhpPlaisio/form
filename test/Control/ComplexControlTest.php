@@ -103,7 +103,7 @@ class ComplexControlTest extends AbcTestCase
     /** @var ComplexControl $input */
     $input = $input->getFormControlByName('city2');
     self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
-    self::assertEquals('city2', $input->getLocalName());
+    self::assertEquals('city2', $input->getName());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -369,7 +369,7 @@ class ComplexControlTest extends AbcTestCase
       // Test for complex control.
       self::assertNotEmpty($complexControl);
       self::assertEquals($this->originComplexControl, $complexControl);
-      self::assertEquals($name, $complexControl->getLocalName());
+      self::assertEquals($name, $complexControl->getName());
 
       // Find control by name.
       $input = $complexControl->findFormControlByName($name);
@@ -377,7 +377,7 @@ class ComplexControlTest extends AbcTestCase
       // Test for control.
       self::assertNotEmpty($input);
       self::assertEquals($this->originControl, $input);
-      self::assertEquals($name, $input->getLocalName());
+      self::assertEquals($name, $input->getName());
     }
   }
 

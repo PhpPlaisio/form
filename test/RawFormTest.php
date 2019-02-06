@@ -60,7 +60,7 @@ class RawFormTest extends AbcTestCase
 
       $input = $form->findFormControlByName($name);
       self::assertNotEmpty($input);
-      self::assertEquals($name, $input->getLocalName());
+      self::assertEquals($name, $input->getName());
     }
   }
 
@@ -78,7 +78,7 @@ class RawFormTest extends AbcTestCase
 
       $input = $form->findFormControlByName($name);
       self::assertNotEmpty($input);
-      self::assertEquals($name, $input->getLocalName());
+      self::assertEquals($name, $input->getName());
     }
   }
 
@@ -96,7 +96,7 @@ class RawFormTest extends AbcTestCase
 
       $input = $form->findFormControlByName($name);
       self::assertNotEmpty($input);
-      self::assertEquals($name, $input->getLocalName());
+      self::assertEquals($name, $input->getName());
     }
   }
 

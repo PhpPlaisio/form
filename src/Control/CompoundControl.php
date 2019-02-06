@@ -65,6 +65,17 @@ interface CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the name of this form control
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getName(): string;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the submitted value of this form control.
    *
    * @return array

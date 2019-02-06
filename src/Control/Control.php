@@ -21,7 +21,7 @@ abstract class Control extends HtmlElement
   protected $errorMessages;
 
   /**
-   * The (local) name of this form control.
+   * The name of this form control.
    *
    * @var string
    */
@@ -63,6 +63,7 @@ abstract class Control extends HtmlElement
   protected $validators = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -134,14 +135,30 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the local name of this form control
+   * Returns the name of this form control
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   *
+   * @deprecated
+   */
+  public function getLocalName(): string
+  {
+    return $this->name;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the name of this form control
    *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  public function getLocalName(): string
+  public function getName(): string
   {
     return $this->name;
   }
