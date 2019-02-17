@@ -113,7 +113,10 @@ class AmbiguityCleanerTest extends CleanerTest
   //--------------------------------------------------------------------------------------------------------------------
   private function checkEncoding($var): void
   {
-    self::assertTrue(mb_check_encoding($var), sprintf("%s is not valid UTF-8", $var));
+    if ($var!==null)
+    {
+      self::assertTrue(mb_check_encoding($var), sprintf("%s is not valid UTF-8", $var));
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
