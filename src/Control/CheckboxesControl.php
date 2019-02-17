@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
@@ -357,7 +358,7 @@ class CheckboxesControl extends Control
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
 
     foreach ($this->options as $i => $option)
     {
@@ -365,7 +366,7 @@ class CheckboxesControl extends Control
       $key = $option[$this->keyKey];
 
       // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-      $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
+      $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
       // Get the original value (i.e. the option is checked or not).
       $value = $option[$this->checkedKey] ?? false;

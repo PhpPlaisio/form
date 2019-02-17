@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
@@ -96,7 +97,7 @@ class SelectControl extends SimpleControl
         $key = $option[$this->keyKey];
 
         // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
         $optionAttributes['value']    = $code;
         $optionAttributes['selected'] = ((string)$this->value===(string)$key);
@@ -192,7 +193,7 @@ class SelectControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
 
     // Normalize default value as a string.
     $value = (string)$this->value;
@@ -221,7 +222,7 @@ class SelectControl extends SimpleControl
             $key = $option[$this->keyKey];
 
             // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
+            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
             if ($newValue===(string)$code)
             {

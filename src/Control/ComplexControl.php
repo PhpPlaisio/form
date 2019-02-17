@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\Cleaner;
+use SetBased\Abc\Helper\Cast;
 use SetBased\Exception\LogicException;
 
 /**
@@ -295,7 +296,7 @@ class ComplexControl extends Control implements CompoundControl
                                           array &$whiteListValues,
                                           array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
 
     if ($this->name==='')
     {
@@ -378,7 +379,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function searchSubmitHandler(array $submittedValues): ?string
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
 
     if ($this->name==='')
     {

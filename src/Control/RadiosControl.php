@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
@@ -104,7 +105,7 @@ class RadiosControl extends Control
         $labelAttributes['for'] = $inputAttributes['id'];
 
         $key   = $option[$this->keyKey];
-        $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
+        $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
         $inputAttributes['value']   = $value;
         $inputAttributes['checked'] = ((string)$this->value===(string)$key);
@@ -300,7 +301,7 @@ class RadiosControl extends Control
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
 
     if (isset($submittedValues[$submitName]))
     {
@@ -313,7 +314,7 @@ class RadiosControl extends Control
         $key = $option[$this->keyKey];
 
         // If an obfuscator is installed compute the obfuscated code of the radio button name.
-        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode((int)$key) : $key;
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
         if ($newValue===(string)$code)
         {

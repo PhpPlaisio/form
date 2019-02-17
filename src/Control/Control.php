@@ -4,6 +4,7 @@ namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Validator\CompoundValidator;
 use SetBased\Abc\Form\Validator\Validator;
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\HtmlElement;
 use SetBased\Abc\Obfuscator\Obfuscator;
 
@@ -49,7 +50,7 @@ abstract class Control extends HtmlElement
   protected $prefix;
 
   /**
-   * The submit name or name in the generated HTMl code of this form control.
+   * The submit name or name in the generated HTML code of this form control.
    *
    * @var string
    */
@@ -151,7 +152,7 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the name of this form control
+   * Returns the name of this form control.
    *
    * @return string
    *
@@ -173,7 +174,6 @@ abstract class Control extends HtmlElement
   {
     // Nothing to do.
   }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the submit name of this form control
@@ -311,6 +311,21 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the obfuscated name of this form control. If this form control has no obfuscator the name of this form
+   * control is returned.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function getObfuscatedName(): string
+  {
+    return ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Loads the submitted values.
    *
    * @param array $submittedValues The submitted values.
@@ -359,7 +374,7 @@ abstract class Control extends HtmlElement
    */
   protected function setSubmitName(string $parentSubmitName): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode((int)$this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
 
     if ($parentSubmitName!=='')
     {
