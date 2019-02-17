@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -14,7 +15,10 @@ use SetBased\Abc\Form\Test\TestForm;
 class TextAreaControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  public function testPrefixAndPostfix()
+  /**
+   * Tests for methods setPrefix() and setPostfix().
+   */
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -38,7 +42,7 @@ class TextAreaControlTest extends AbcTestCase
   /**
    * Test cleaning is done before testing value of the form control has changed.
    */
-  public function testPruneWhitespaceNoChanged()
+  public function testPruneWhitespaceNoChanged(): void
   {
     $_POST['test'] = '  Hello    World!   ';
 
@@ -69,7 +73,7 @@ class TextAreaControlTest extends AbcTestCase
   /**
    * Test submit value.
    */
-  public function testSubmittedValue()
+  public function testSubmittedValue(): void
   {
     $_POST['test'] = 'Hello World!';
 

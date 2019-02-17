@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Cleaner;
 
+use SetBased\Abc\Form\Cleaner\Cleaner;
 use SetBased\Abc\Form\Cleaner\UrlCleaner;
 
 /**
@@ -13,13 +15,13 @@ class UrlCleanerTest extends CleanerTest
   /**
    * @inheritdoc
    */
-  public function makeCleaner()
+  public function makeCleaner(): Cleaner
   {
     return UrlCleaner::get();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testFtp()
+  public function testFtp(): void
   {
     $cleaner = UrlCleaner::get();
 
@@ -33,7 +35,7 @@ class UrlCleanerTest extends CleanerTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testHttp()
+  public function testHttp(): void
   {
     $cleaner = UrlCleaner::get();
 
@@ -91,7 +93,7 @@ class UrlCleanerTest extends CleanerTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testMailTo()
+  public function testMailTo(): void
   {
     $cleaner = UrlCleaner::get();
 
@@ -104,7 +106,7 @@ class UrlCleanerTest extends CleanerTest
   /**
    * UrlCleaner must return 'http://0/' (instead of '0').
    */
-  public function testZeroValues()
+  public function testZeroValues(): void
   {
     $cleaner = $this->makeCleaner();
 

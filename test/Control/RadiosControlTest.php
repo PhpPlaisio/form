@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -16,7 +17,7 @@ class RadiosControlTest extends AbcTestCase
   /**
    * Test setValues.
    */
-  public function setValuesTest($value)
+  public function setValuesTest($value): void
   {
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
@@ -44,7 +45,7 @@ class RadiosControlTest extends AbcTestCase
   /**
    * Test special characters in the labels are replaced with HTML entities.
    */
-  public function testInputAttributesMap()
+  public function testInputAttributesMap(): void
   {
     $entities[] = ['key' => 'R', 'label' => 'Red'];
     $entities[] = ['key' => 'O', 'label' => 'Orange', 'extra' => 'blink', 'xxx' => 123];
@@ -56,8 +57,19 @@ class RadiosControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<input id="123" class="blink" type="radio" value="O"/>', $html);
-    self::assertContains('<label for="123">Orange</label>', $html);
+    self::assertStringContainsString('<input id="123" class="blink" type="radio" value="O"/>', $html);
+    self::assertStringContainsString('<label for="123">Orange</label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test control is hidden.
+   */
+  public function testIsHidden(): void
+  {
+    $control = new RadiosControl('hidden');
+
+    self::assertSame(false, $control->isHidden());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -77,26 +89,15 @@ class RadiosControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<input id="123" type="radio" value="O"/>', $html);
-    self::assertContains('<label class="blink" for="123">Orange</label>', $html);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test control is hidden.
-   */
-  public function testIsHidden()
-  {
-    $control = new RadiosControl('hidden');
-
-    self::assertSame(false, $control->isHidden());
+    self::assertStringContainsString('<input id="123" type="radio" value="O"/>', $html);
+    self::assertStringContainsString('<label class="blink" for="123">Orange</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test special characters in the labels are replaced with HTML entities.
    */
-  public function testLabels1()
+  public function testLabels1(): void
   {
     $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<&\';">'];
     $entities[] = ['no' => 1, 'key' => 'B', 'name' => '&nbsp;'];
@@ -107,15 +108,15 @@ class RadiosControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
-    self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
+    self::assertStringContainsString('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
+    self::assertStringContainsString('<label for="1">&amp;nbsp;</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test special characters in the labels are not replaced with HTML entities.
    */
-  public function testLabels2()
+  public function testLabels2(): void
   {
     $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<span>0</span>'];
     $entities[] = ['no' => 1, 'key' => 'B', 'name' => '<span>1</span>'];
@@ -127,15 +128,15 @@ class RadiosControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<label for="0"><span>0</span></label>', $html);
-    self::assertContains('<label for="1"><span>1</span></label>', $html);
+    self::assertStringContainsString('<label for="0"><span>0</span></label>', $html);
+    self::assertStringContainsString('<label for="1"><span>1</span></label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test setValues with null.
    */
-  public function testSetValues01()
+  public function testSetValues01(): void
   {
     $this->setValuesTest(null);
   }
@@ -144,7 +145,7 @@ class RadiosControlTest extends AbcTestCase
   /**
    * Test setValues with null.
    */
-  public function testSetValues02()
+  public function testSetValues02(): void
   {
     $this->setValuesTest('');
   }
@@ -153,7 +154,7 @@ class RadiosControlTest extends AbcTestCase
   /**
    * A white listed value must be valid.
    */
-  public function testValid1()
+  public function testValid1(): void
   {
     $_POST['cnt_id'] = '3';
 
@@ -167,7 +168,7 @@ class RadiosControlTest extends AbcTestCase
   /**
    * A white listed value must be valid (even whens string and integers are mixed).
    */
-  public function testValid2()
+  public function testValid2(): void
   {
     $_POST['cnt_id'] = '3';
 
@@ -181,7 +182,7 @@ class RadiosControlTest extends AbcTestCase
   /**
    * Only white listed values must be loaded.
    */
-  public function testWhiteListed1()
+  public function testWhiteListed1(): void
   {
     // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
     $_POST['cnt_id'] = 99;
@@ -198,7 +199,7 @@ class RadiosControlTest extends AbcTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm1()
+  private function setupForm1(): TestForm
   {
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
@@ -222,7 +223,7 @@ class RadiosControlTest extends AbcTestCase
    * Setups a form with a select form control. Difference between this function
    * and SetupForm1 are the cnt_id are integers.
    */
-  private function setupForm2()
+  private function setupForm2(): TestForm
   {
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => 2, 'cnt_name' => 'BE'];

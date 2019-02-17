@@ -1,10 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
+use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Test\TestForm;
 
 /**
@@ -16,7 +18,7 @@ class HiddenControlTest extends SimpleControlTest
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new HiddenControl('hidden');
 
@@ -26,7 +28,7 @@ class HiddenControlTest extends SimpleControlTest
   /**
    * Test change value.
    */
-  public function testValue()
+  public function testValue(): void
   {
     $_POST['test'] = 'New value';
 
@@ -50,7 +52,7 @@ class HiddenControlTest extends SimpleControlTest
   /**
    * Test cleaning is done before testing value of the form control has changed.
    */
-  public function testWhitespace()
+  public function testWhitespace(): void
   {
     $_POST['test'] = '  Hello    World!   ';
 
@@ -78,7 +80,10 @@ class HiddenControlTest extends SimpleControlTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  protected function getControl($name)
+  /**
+   * @inheritdoc
+   */
+  protected function getControl(string $name):SimpleControl
   {
     return new HiddenControl($name);
   }

@@ -1,11 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Validator;
 
 use SetBased\Abc\Form\Control\CompoundControl;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Test\TestForm;
 use SetBased\Abc\Form\Validator\ProxyCompoundValidator;
@@ -19,7 +19,7 @@ class ProxyCompoundValidatorTest extends AbcTestCase
   /**
    * Test with valid data.
    */
-  public function test01()
+  public function test01(): void
   {
     $_POST['input'] = 'valid';
     $form           = $this->setupForm1('valid');
@@ -31,7 +31,7 @@ class ProxyCompoundValidatorTest extends AbcTestCase
   /**
    * Test with invalid data.
    */
-  public function test02()
+  public function test02(): void
   {
     $_POST['input'] = 'invalid';
     $form           = $this->setupForm1('valid');
@@ -43,7 +43,7 @@ class ProxyCompoundValidatorTest extends AbcTestCase
   /**
    * Test with valid data and no additional data.
    */
-  public function test03()
+  public function test03(): void
   {
     $_POST['input'] = '';
     $form           = $this->setupForm1();
@@ -55,7 +55,7 @@ class ProxyCompoundValidatorTest extends AbcTestCase
   /**
    * Test with invalid data and no additional data.
    */
-  public function test04()
+  public function test04(): void
   {
     $_POST['input'] = 'invalid';
     $form           = $this->setupForm1();
@@ -72,7 +72,7 @@ class ProxyCompoundValidatorTest extends AbcTestCase
    *
    * @return bool
    */
-  public function validate($control, $data = null)
+  public function validate(CompoundControl $control, $data = null): bool
   {
     $input = $control->getFormControlByName('input');
 
@@ -87,7 +87,7 @@ class ProxyCompoundValidatorTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setupForm1($data = null)
+  private function setupForm1($data = null): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

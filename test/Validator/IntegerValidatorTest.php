@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Validator;
 
@@ -17,7 +18,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * A string must be invalid.
    */
-  public function testInvalidInteger1()
+  public function testInvalidInteger1(): void
   {
     $_POST['integer'] = 'string';
     $form             = $this->setupForm1();
@@ -29,7 +30,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * A float must be invalid.
    */
-  public function testInvalidInteger2()
+  public function testInvalidInteger2(): void
   {
     $_POST['integer'] = '0.1';
     $form             = $this->setupForm1();
@@ -41,7 +42,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * A mix of numeric and alpha numeric must be invalid.
    */
-  public function testInvalidInteger3()
+  public function testInvalidInteger3(): void
   {
     $_POST['integer'] = '123abc'; // My favorite password ;-)
     $form             = $this->setupForm1();
@@ -53,7 +54,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An integer misses the specified range must be invalid.
    */
-  public function testInvalidInteger4()
+  public function testInvalidInteger4(): void
   {
     $_POST['integer'] = '-9';
     $form             = $this->setupForm2();
@@ -65,7 +66,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An integer misses the specified range must be invalid.
    */
-  public function testInvalidInteger5()
+  public function testInvalidInteger5(): void
   {
     $_POST['integer'] = '-2';
     $form             = $this->setupForm2();
@@ -77,7 +78,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An integer misses the specified range must be invalid.
    */
-  public function testInvalidInteger6()
+  public function testInvalidInteger6(): void
   {
     $_POST['integer'] = '11';
     $form             = $this->setupForm2();
@@ -89,7 +90,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An integer misses the specified range must be invalid.
    */
-  public function testInvalidInteger7()
+  public function testInvalidInteger7(): void
   {
     $_POST['integer'] = '23';
     $form             = $this->setupForm2();
@@ -101,7 +102,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * A zero must be valid.
    */
-  public function testValidInteger1()
+  public function testValidInteger1(): void
   {
     $_POST['integer'] = 0;
     $form             = $this->setupForm1();
@@ -113,7 +114,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An integer (posted as string) must be valid.
    */
-  public function testValidInteger2()
+  public function testValidInteger2(): void
   {
     $_POST['integer'] = '56';
     $form             = $this->setupForm1();
@@ -125,7 +126,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An integer (posted as integer) must be valid.
    */
-  public function testValidInteger3()
+  public function testValidInteger3(): void
   {
     $_POST['integer'] = 37;
     $form             = $this->setupForm1();
@@ -137,7 +138,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An negative integer (posted as string) must be valid.
    */
-  public function testValidInteger4()
+  public function testValidInteger4(): void
   {
     $_POST['integer'] = '-11';
     $form             = $this->setupForm1();
@@ -149,7 +150,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An negative integer (posted as integer) must be valid.
    */
-  public function testValidInteger5()
+  public function testValidInteger5(): void
   {
     $_POST['integer'] = -45;
     $form             = $this->setupForm1();
@@ -161,7 +162,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An minimal integer is within a predetermined range must be valid.
    */
-  public function testValidInteger6()
+  public function testValidInteger6(): void
   {
     $_POST['integer'] = '-1';
     $form             = $this->setupForm2();
@@ -173,7 +174,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * If zero is within a predetermined range must be valid.
    */
-  public function testValidInteger7()
+  public function testValidInteger7(): void
   {
     $_POST['integer'] = '0';
     $form             = $this->setupForm2();
@@ -184,7 +185,7 @@ class IntegerValidatorTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /** An integer is within a predetermined range must be valid.
    */
-  public function testValidInteger8()
+  public function testValidInteger8(): void
   {
     $_POST['integer'] = '3';
     $form             = $this->setupForm2();
@@ -196,7 +197,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * An maximum integer is within a predetermined range must be valid.
    */
-  public function testValidInteger9()
+  public function testValidInteger9(): void
   {
     $_POST['integer'] = '10';
     $form             = $this->setupForm2();
@@ -208,7 +209,7 @@ class IntegerValidatorTest extends AbcTestCase
   /**
    * Setups a form with a text form control (which must be a valid inter) values.
    */
-  private function setupForm1()
+  private function setupForm1(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -229,7 +230,7 @@ class IntegerValidatorTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setupForm2()
+  private function setupForm2(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

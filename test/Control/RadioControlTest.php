@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -16,7 +17,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new RadioControl('hidden');
 
@@ -24,7 +25,10 @@ class RadioControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testPrefixAndPostfix()
+  /**
+   * Tests for methods setPrefix() and setPostfix().
+   */
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -48,7 +52,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * A white list values must be valid.
    */
-  public function testValid1()
+  public function testValid1(): void
   {
     $_POST['name'] = '2';
 
@@ -62,7 +66,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * A white list values must be valid.
    */
-  public function testValid2()
+  public function testValid2(): void
   {
     $_POST['name'] = '2';
 
@@ -76,7 +80,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * A white listed value must be valid (even whens string and integers are mixed).
    */
-  public function testValid3()
+  public function testValid3(): void
   {
     $_POST['name'] = '3';
 
@@ -90,7 +94,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * A white listed value must be valid (even whens string and integers are mixed).
    */
-  public function testValid4()
+  public function testValid4(): void
   {
     $_POST['name'] = '0.0';
 
@@ -104,7 +108,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * Only white list values must be value.
    */
-  public function testWhiteList1()
+  public function testWhiteList1(): void
   {
     $_POST['name'] = 'ten';
 
@@ -120,7 +124,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * Only white list values must be value.
    */
-  public function testWhiteList2()
+  public function testWhiteList2(): void
   {
     $_POST['name'] = '10';
 
@@ -138,7 +142,7 @@ class RadioControlTest extends AbcTestCase
   /**
    * Test form for radio.
    */
-  private function setForm1()
+  private function setForm1(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -163,7 +167,7 @@ class RadioControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function setForm2()
+  private function setForm2(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -189,7 +193,7 @@ class RadioControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function setForm3()
+  private function setForm3(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

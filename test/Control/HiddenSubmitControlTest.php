@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\HiddenSubmitControl;
+use SetBased\Abc\Form\Control\SimpleControl;
 
 /**
  * Unit tests for class HiddenSubmitControl.
@@ -13,7 +15,7 @@ class HiddenSubmitControlTest extends PushControlTest
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new HiddenSubmitControl('hidden-button');
 
@@ -24,7 +26,7 @@ class HiddenSubmitControlTest extends PushControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl($name)
+  protected function getControl(string $name): SimpleControl
   {
     return new HiddenSubmitControl($name);
   }
@@ -35,7 +37,7 @@ class HiddenSubmitControlTest extends PushControlTest
    *
    * @return string
    */
-  protected function getControlType()
+  protected function getControlType(): string
   {
     return 'hidden';
   }

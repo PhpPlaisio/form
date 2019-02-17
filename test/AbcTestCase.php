@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test;
 
@@ -15,7 +16,7 @@ class AbcTestCase extends TestCase
   /**
    * @inheritdoc
    */
-  public static function setUpBeforeClass()
+  public static function setUpBeforeClass(): void
   {
     Abc::$request = new CoreRequest();
   }
@@ -41,7 +42,7 @@ class AbcTestCase extends TestCase
   /**
    * @inheritdoc
    */
-  protected function setUp()
+  protected function setUp(): void
   {
     parent::setUp();
 

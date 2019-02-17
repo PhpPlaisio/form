@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -16,7 +17,7 @@ class SelectControlTest extends AbcTestCase
   /**
    * Test control is not marked changed when the empty value is submitted.
    */
-  public function testChangedControls1()
+  public function testChangedControls1(): void
   {
     $_POST['cnt_id'] = ' ';
 
@@ -30,7 +31,7 @@ class SelectControlTest extends AbcTestCase
   /**
    * Test control is marked changed when a valid value is submitted.
    */
-  public function testChangedControls2()
+  public function testChangedControls2(): void
   {
     $_POST['cnt_id'] = '2';
 
@@ -44,7 +45,7 @@ class SelectControlTest extends AbcTestCase
   /**
    * Test control is not marked changed when a none valid value is submitted.
    */
-  public function testChangedControls3()
+  public function testChangedControls3(): void
   {
     $_POST['cnt_id'] = '123';
 
@@ -58,7 +59,7 @@ class SelectControlTest extends AbcTestCase
   /**
    * Test control is not marked changed when the none default empty value is submitted.
    */
-  public function testChangedControls4()
+  public function testChangedControls4(): void
   {
     $_POST['cnt_id'] = '-';
 
@@ -70,7 +71,10 @@ class SelectControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testPrefixAndPostfix()
+  /**
+   * Tests for methods setPrefix() and setPostfix().
+   */
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -94,7 +98,7 @@ class SelectControlTest extends AbcTestCase
   /**
    * A white listed value must be valid.
    */
-  public function testValid1()
+  public function testValid1(): void
   {
     $_POST['cnt_id'] = '3';
 
@@ -108,7 +112,7 @@ class SelectControlTest extends AbcTestCase
   /**
    * A white listed value must be valid (even whens string and integers are mixed).
    */
-  public function testValid2()
+  public function testValid2(): void
   {
     $_POST['cnt_id'] = '3';
 
@@ -122,7 +126,7 @@ class SelectControlTest extends AbcTestCase
   /**
    * Only white listed values must be loaded.
    */
-  public function testWhiteListed1()
+  public function testWhiteListed1(): void
   {
     // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
     $_POST['cnt_id'] = 99;
@@ -143,7 +147,7 @@ class SelectControlTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setupForm1($emptyOption = ' ')
+  private function setupForm1(string $emptyOption = ' '): TestForm
   {
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
@@ -168,7 +172,7 @@ class SelectControlTest extends AbcTestCase
    * Setups a form with a select form control. Difference between this function and SetupForm1 are the cnt_id are
    * integers.
    */
-  private function setupForm2()
+  private function setupForm2(): TestForm
   {
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => 2, 'cnt_name' => 'BE'];

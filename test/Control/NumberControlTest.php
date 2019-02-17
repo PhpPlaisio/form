@@ -5,6 +5,7 @@ namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\NumberControl;
+use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Test\TestForm;
 
 /**
@@ -16,7 +17,7 @@ class NumberControlTest extends SimpleControlTest
   /**
    * Test with illegal submitted value.
    */
-  public function testInvalidSubmittedValue01()
+  public function testInvalidSubmittedValue01(): void
   {
     $_POST['year'] = 'Hello, world';
 
@@ -46,7 +47,7 @@ class NumberControlTest extends SimpleControlTest
   /**
    * Test with illegal submitted value.
    */
-  public function testInvalidSubmittedValue02()
+  public function testInvalidSubmittedValue02(): void
   {
     $_POST['year'] = 1900;
 
@@ -77,7 +78,7 @@ class NumberControlTest extends SimpleControlTest
    * Test cleaning and formatting is done before testing value of the form control has changed.
    * For text field whitespace cleaner set default.
    */
-  public function testValidSubmittedValue()
+  public function testValidSubmittedValue(): void
   {
     $_POST['year'] = '2018';
 
@@ -107,7 +108,7 @@ class NumberControlTest extends SimpleControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl($name)
+  protected function getControl(string $name): SimpleControl
   {
     return new NumberControl($name);
   }

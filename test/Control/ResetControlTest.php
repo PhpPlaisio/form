@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -16,7 +17,7 @@ class ResetControlTest extends AbcTestCase
   /**
    * Method loadSubmittedValuesBase must set the white list value but not the change controls.
    */
-  public function testLoadSubmittedValues1()
+  public function testLoadSubmittedValues1(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -42,7 +43,7 @@ class ResetControlTest extends AbcTestCase
   /**
    * Method mergeValue() has no effect for buttons.
    */
-  public function testMergeValues()
+  public function testMergeValues(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -71,9 +72,9 @@ class ResetControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test pre- and postfix.
+   * Tests for methods setPrefix() and setPostfix().
    */
-  public function testPrefixAndPostfix()
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -98,7 +99,7 @@ class ResetControlTest extends AbcTestCase
   /**
    * Method setValue() has no effect for buttons.
    */
-  public function testSetValues()
+  public function testSetValues(): void
   {
     // Create form.
     $form     = new TestForm();

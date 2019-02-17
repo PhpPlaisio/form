@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Cleaner;
 
+use SetBased\Abc\Form\Cleaner\Cleaner;
 use SetBased\Abc\Form\Cleaner\DateCleaner;
 
 /**
@@ -13,7 +15,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * @inheritdoc
    */
-  public function makeCleaner()
+  public function makeCleaner(): Cleaner
   {
     return new DateCleaner('d-m-Y');
   }
@@ -22,7 +24,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * Test against ISO 8601 format.
    */
-  public function testClean1()
+  public function testClean1(): void
   {
     // Test ISO 8601.
     $cleaner = new DateCleaner('d-m-Y');
@@ -35,7 +37,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * Test against illegal dates.
    */
-  public function testClean10()
+  public function testClean10(): void
   {
     // String with 3 parts.
     $cleaner = new DateCleaner('d-m-Y');
@@ -78,7 +80,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * Test against Dutch format 'd-m-Y'.
    */
-  public function testClean2()
+  public function testClean2(): void
   {
     $cleaner = new DateCleaner('d-m-Y');
 
@@ -97,7 +99,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * Test against English format 'm/d/Y'.
    */
-  public function testClean3()
+  public function testClean3(): void
   {
     $cleaner = new DateCleaner('m/d/Y');
 
@@ -121,7 +123,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * Test against English format 'm/d/Y' with alternative separators.
    */
-  public function testClean4()
+  public function testClean4(): void
   {
     $cleaner = new DateCleaner('m-d-Y', '-', '/-. ');
 
@@ -160,7 +162,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * Test against Dutch format 'd-m-Y' with illegal date, alternative separators and whitespace.
    */
-  public function testClean5()
+  public function testClean5(): void
   {
     $cleaner = new DateCleaner('m/d/Y', '-', '/-. ');
 
@@ -174,7 +176,7 @@ class DateCleanerTest extends CleanerTest
   /**
    * Test against English format 'm/d/Y' with illegal date and alternative separators.
    */
-  public function testClean6()
+  public function testClean6(): void
   {
     $cleaner = new DateCleaner('m/d/Y', '/', '/-. ');
 

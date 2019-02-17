@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -17,7 +18,7 @@ abstract class SimpleControlTest extends AbcTestCase
   /**
    * Test a submitted value '0'.
    */
-  public function test1Empty1()
+  public function test1Empty1(): void
   {
     $name            = 0;
     $_POST['name']   = $name;
@@ -35,7 +36,7 @@ abstract class SimpleControlTest extends AbcTestCase
   /**
    * Test a submitted value '0.0'.
    */
-  public function test1Empty2()
+  public function test1Empty2(): void
   {
     $name            = '0.0';
     $_POST['name']   = $name;
@@ -53,7 +54,7 @@ abstract class SimpleControlTest extends AbcTestCase
   /**
    * Test is submit trigger.
    */
-  public function testIsSubmitTrigger()
+  public function testIsSubmitTrigger(): void
   {
     $input = $this->getControl('trigger');
 
@@ -61,7 +62,10 @@ abstract class SimpleControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testPrefixAndPostfix()
+  /**
+   * Tests for methods setPrefix() and setPostfix().
+   */
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -86,7 +90,7 @@ abstract class SimpleControlTest extends AbcTestCase
   /**
    * Test a submitted value.
    */
-  public function testValid101()
+  public function testValid101(): void
   {
     $name = 'Set Based IT Consultancy';
 
@@ -105,7 +109,7 @@ abstract class SimpleControlTest extends AbcTestCase
   /**
    * Test a submitted empty value.
    */
-  public function testValid102()
+  public function testValid102(): void
   {
     $name            = 'Set Based IT Consultancy';
     $_POST['name']   = '';
@@ -123,7 +127,7 @@ abstract class SimpleControlTest extends AbcTestCase
   /**
    * Test with missing submitted value.
    */
-  public function testValid103()
+  public function testValid103(): void
   {
     $name                = 'Set Based IT Consultancy';
     $_POST['other_name'] = '';
@@ -139,21 +143,19 @@ abstract class SimpleControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param $name
-   *
-   * @return SimpleControl
+   * @inheritdoc
    */
-  abstract protected function getControl($name);
+  abstract protected function getControl(string $name): SimpleControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a text form control.
    *
-   * @param string $value The value of the form control
+   * @param string|null $value The value of the form control
    *
    * @return TestForm
    */
-  private function setupForm1($value)
+  private function setupForm1(?string $value): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

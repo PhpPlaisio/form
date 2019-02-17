@@ -1,9 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\ForceSubmitControl;
 use SetBased\Abc\Form\Control\PushControl;
+use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Test\TestForm;
 
@@ -16,7 +19,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = $this->getControl('hidden');
 
@@ -27,7 +30,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Test is submit trigger.
    */
-  public function testIsSubmitTrigger()
+  public function testIsSubmitTrigger(): void
   {
     $input = $this->getControl('trigger');
 
@@ -38,7 +41,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Method loadSubmittedValuesBase must set the white list value but not the change controls.
    */
-  public function testLoadSubmittedValues1()
+  public function testLoadSubmittedValues1(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -64,7 +67,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Method loadSubmittedValuesBase must only load white listed values.
    */
-  public function testLoadSubmittedValues2()
+  public function testLoadSubmittedValues2(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -80,7 +83,14 @@ abstract class PushControlTest extends AbcTestCase
     $form->loadSubmittedValues();
 
     $values = $form->getValues();
-    self::assertArrayNotHasKey('button', $values);
+    if (get_class($input)!=ForceSubmitControl::class)
+    {
+      self::assertArrayNotHasKey('button', $values);
+    }
+    else
+    {
+      self::assertArrayHasKey('button', $values);
+    }
 
     $changed = $form->getChangedControls();
     self::assertArrayNotHasKey('button', $changed);
@@ -90,7 +100,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Method loadSubmittedValuesBase must work int values too.
    */
-  public function testLoadSubmittedValues3()
+  public function testLoadSubmittedValues3(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -116,7 +126,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Method mergeValue() has no effect for buttons.
    */
-  public function testMergeValues()
+  public function testMergeValues(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -145,9 +155,9 @@ abstract class PushControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test prefix and postfix.
+   * Tests for methods setPrefix() and setPostfix().
    */
-  public function testPrefixAndPostfix()
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet();
@@ -171,7 +181,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Method searchSubmitHandler must return the appropriate handler.
    */
-  public function testSearchSubmitHandler1()
+  public function testSearchSubmitHandler1(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -194,14 +204,14 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Method searchSubmitHandler must return the appropriate handler with int values too.
    */
-  public function testSearchSubmitHandler2()
+  public function testSearchSubmitHandler2(): void
   {
     // Create form.
     $form     = new TestForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
-    $input = $this->getControl(123);
+    $input = $this->getControl('123');
     $input->setValue(456);
     $input->setMethod('myMethod');
     $fieldset->addFormControl($input);
@@ -217,7 +227,7 @@ abstract class PushControlTest extends AbcTestCase
   /**
    * Method setValue() has no effect for buttons.
    */
-  public function testSetValues()
+  public function testSetValues(): void
   {
     // Create form.
     $form     = new TestForm();
@@ -252,7 +262,7 @@ abstract class PushControlTest extends AbcTestCase
    *
    * @return PushControl
    */
-  abstract protected function getControl($name);
+  abstract protected function getControl(string $name): SimpleControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -260,7 +270,7 @@ abstract class PushControlTest extends AbcTestCase
    *
    * @return string
    */
-  abstract protected function getControlType();
+  abstract protected function getControlType(): string;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Cleaner;
 
@@ -21,13 +22,13 @@ abstract class CleanerTest extends AbcTestCase
    *
    * @return Cleaner
    */
-  abstract public function makeCleaner();
+  abstract public function makeCleaner(): Cleaner;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * All cleaners must return null when cleaning empty (i.e. only whitespace) values.
    */
-  public function testEmptyValues()
+  public function testEmptyValues(): void
   {
     $cleaner = $this->makeCleaner();
 
@@ -35,7 +36,7 @@ abstract class CleanerTest extends AbcTestCase
     {
       $cleaned = $cleaner->clean($value);
 
-      self::assertNull($cleaned, sprintf("Cleaning '%s' must return null.", addslashes($value)));
+      self::assertNull($cleaned, sprintf("Cleaning '%s' must return null.", $value));
     }
   }
 
@@ -43,7 +44,7 @@ abstract class CleanerTest extends AbcTestCase
   /**
    * Most cleaners must return '0' when cleaning '0' values.
    */
-  public function testZeroValues()
+  public function testZeroValues(): void
   {
     $cleaner = $this->makeCleaner();
 
@@ -51,7 +52,7 @@ abstract class CleanerTest extends AbcTestCase
     {
       $cleaned = $cleaner->clean($value);
 
-      self::assertEquals('0', $cleaned, sprintf("Cleaning '%s' must return '0'.", addslashes($value)));
+      self::assertEquals('0', $cleaned, sprintf("Cleaning '%s' must return '0'.", $value));
     }
   }
 

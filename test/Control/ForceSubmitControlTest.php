@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Control\ForceSubmitControl;
-use SetBased\Abc\Form\Control\HiddenSubmitControl;
+use SetBased\Abc\Form\Control\SimpleControl;
 
 /**
  * Unit tests for class ForceSubmitControl.
@@ -14,7 +15,7 @@ class ForceSubmitControlTest extends PushControlTest
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new ForceSubmitControl('hidden-button', true);
 
@@ -25,9 +26,9 @@ class ForceSubmitControlTest extends PushControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl($name)
+  protected function getControl(string $name): SimpleControl
   {
-    return new HiddenSubmitControl($name);
+    return new ForceSubmitControl($name, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ class ForceSubmitControlTest extends PushControlTest
    *
    * @return string
    */
-  protected function getControlType()
+  protected function getControlType(): string
   {
     return 'hidden';
   }

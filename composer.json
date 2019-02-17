@@ -21,7 +21,7 @@
   "require-dev": {
     "ext-dom": "*",
     "phing/phing": "^2.0.0",
-    "phpunit/phpunit": "^6.0.0",
+    "phpunit/phpunit": "^7.0.0 || ^8.0.0",
     "setbased/abc-request-core": "*"
   },
   "autoload": {

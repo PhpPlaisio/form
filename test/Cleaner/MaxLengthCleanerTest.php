@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Cleaner;
 
+use SetBased\Abc\Form\Cleaner\Cleaner;
 use SetBased\Abc\Form\Cleaner\MaxLengthCleaner;
 
 /**
@@ -13,7 +15,7 @@ class MaxLengthCleanerTest extends CleanerTest
   /**
    * @inheritdoc
    */
-  public function makeCleaner()
+  public function makeCleaner(): Cleaner
   {
     return new MaxLengthCleaner(10);
   }
@@ -22,7 +24,7 @@ class MaxLengthCleanerTest extends CleanerTest
   /**
    * Tests within maximum length.
    */
-  public function testClean1()
+  public function testClean1(): void
   {
     $cleaner = new MaxLengthCleaner(8);
     $raw     = 'hot';
@@ -34,7 +36,7 @@ class MaxLengthCleanerTest extends CleanerTest
   /**
    * Tests equal to maximum length.
    */
-  public function testClean2()
+  public function testClean2(): void
   {
     $cleaner = new MaxLengthCleaner(8);
     $raw     = 'buttered';
@@ -46,7 +48,7 @@ class MaxLengthCleanerTest extends CleanerTest
   /**
    * Tests exceeding maximum length.
    */
-  public function testClean3()
+  public function testClean3(): void
   {
     $cleaner = new MaxLengthCleaner(10);
     $raw     = 'Hyperbolicsyllabicsesquedalymistic';

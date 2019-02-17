@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Validator;
 
@@ -17,7 +18,7 @@ class LengthValidatorTest extends AbcTestCase
   /**
    * Tests a too long string.
    */
-  public function testInvalidString1()
+  public function testInvalidString1(): void
   {
     $_POST['value'] = 'Hyperbolicsyllabicsesquedalymistic';
     $form           = $this->setupForm1(10, 20);
@@ -29,7 +30,7 @@ class LengthValidatorTest extends AbcTestCase
   /**
    * Tests a too short string.
    */
-  public function testInvalidString2()
+  public function testInvalidString2(): void
   {
     $_POST['value'] = 'Isaac';
     $form           = $this->setupForm1(10, 20);
@@ -41,7 +42,7 @@ class LengthValidatorTest extends AbcTestCase
   /**
    * Tests valid string with minimum length.
    */
-  public function testValidString1()
+  public function testValidString1(): void
   {
     $_POST['value'] = 'hot';
     $form           = $this->setupForm1(3, 8);
@@ -53,7 +54,7 @@ class LengthValidatorTest extends AbcTestCase
   /**
    * Tests valid string with maximum length.
    */
-  public function testValidString2()
+  public function testValidString2(): void
   {
     $_POST['value'] = 'buttered';
     $form           = $this->setupForm1(3, 8);
@@ -65,7 +66,7 @@ class LengthValidatorTest extends AbcTestCase
   /**
    * Tests a valid string.
    */
-  public function testValidString3()
+  public function testValidString3(): void
   {
     $_POST['value'] = 'soul';
     $form           = $this->setupForm1(3, 8);
@@ -82,7 +83,7 @@ class LengthValidatorTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setupForm1($min, $max)
+  private function setupForm1(int $min, int $max): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

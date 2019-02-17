@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Validator;
 
@@ -9,7 +10,6 @@ use SetBased\Abc\Form\Control\PasswordControl;
 use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Control\TextAreaControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\RawForm;
 use SetBased\Abc\Form\Test\AbcTestCase;
 use SetBased\Abc\Form\Test\TestForm;
 use SetBased\Abc\Form\Validator\MandatoryValidator;
@@ -23,7 +23,7 @@ class MandatoryValidatorTest extends AbcTestCase
   /**
    * A mandatory text, password, hidden or textarea form control with value @c null, @c false, or @c '', is invalid.
    */
-  public function testInvalidEmpty()
+  public function testInvalidEmpty(): void
   {
     $types  = ['text', 'password', 'hidden', 'textarea', 'checkbox'];
     $values = [null, false, ''];
@@ -68,7 +68,7 @@ class MandatoryValidatorTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /** A mandatory unchecked checked box is invalid.
    */
-  public function testInvalidUncheckedCheckbox()
+  public function testInvalidUncheckedCheckbox(): void
   {
     $_POST = [];
     $form  = $this->setupForm2();
@@ -80,7 +80,7 @@ class MandatoryValidatorTest extends AbcTestCase
   /**
    * A mandatory text, password, or textarea form control with whitespace is invalid.
    */
-  public function testInvalidWhitespace()
+  public function testInvalidWhitespace(): void
   {
     $types  = ['text', 'password', 'textarea'];
     $values = [' ', '  ', " \n  "];
@@ -118,7 +118,7 @@ class MandatoryValidatorTest extends AbcTestCase
   /**
    * A mandatory checked checked box is valid.
    */
-  public function testValidCheckedCheckbox()
+  public function testValidCheckedCheckbox(): void
   {
     $_POST['box'] = 'on';
     $form         = $this->setupForm2();
@@ -136,7 +136,7 @@ class MandatoryValidatorTest extends AbcTestCase
   /**
    * A mandatory non-empty text, password, hidden, or textarea form control is valid.
    */
-  public function testValidNoneEmptyText()
+  public function testValidNoneEmptyText(): void
   {
     $types = ['text', 'password', 'hidden', 'textarea'];
 
@@ -176,7 +176,7 @@ class MandatoryValidatorTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setupForm1($control)
+  private function setupForm1($control): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -197,7 +197,7 @@ class MandatoryValidatorTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setupForm2()
+  private function setupForm2(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

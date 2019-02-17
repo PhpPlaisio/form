@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -16,7 +17,7 @@ class DivControlTest extends AbcTestCase
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new DivControl('hidden');
 
@@ -24,7 +25,10 @@ class DivControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testPrefixAndPostfix()
+  /**
+   * Tests for methods setPrefix() and setPostfix().
+   */
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

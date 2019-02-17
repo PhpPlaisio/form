@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Validator;
 
@@ -17,7 +18,7 @@ class DateValidatorTest extends AbcTestCase
   /**
    * Test against invalid dates.
    */
-  public function testInvalidDates()
+  public function testInvalidDates(): void
   {
     $dates = ['15- 7 -20', '10-april-1966', 'Hello world.', '15- 7 -20', '2015-02-29'];
 
@@ -34,7 +35,7 @@ class DateValidatorTest extends AbcTestCase
   /**
    * Test against valid dates.
    */
-  public function testValidDates()
+  public function testValidDates(): void
   {
     $dates = ['1966-04-10', '1970-01-01', '1900-01-01', '9999-12-31', '2020-02-29'];
 
@@ -53,7 +54,7 @@ class DateValidatorTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setupForm1()
+  private function setupForm1(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -16,7 +17,7 @@ class CheckboxControlTest extends AbcTestCase
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new CheckboxControl('hidden');
 
@@ -25,9 +26,9 @@ class CheckboxControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test prefix and postfix labels.
+   * Tests for methods setPrefix() and setPostfix().
    */
-  public function testPrefixAndPostfix()
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -53,7 +54,7 @@ class CheckboxControlTest extends AbcTestCase
    * In form unchecked.
    * In POST unchecked.
    */
-  public function testSubmittedValue1()
+  public function testSubmittedValue1(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -78,7 +79,7 @@ class CheckboxControlTest extends AbcTestCase
    * In form unchecked.
    * In POST checked
    */
-  public function testSubmittedValue2()
+  public function testSubmittedValue2(): void
   {
     $_POST['test2'] = 'on';
 
@@ -106,7 +107,7 @@ class CheckboxControlTest extends AbcTestCase
    * In form checked.
    * In POST unchecked.
    */
-  public function testSubmittedValue3()
+  public function testSubmittedValue3(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -133,7 +134,7 @@ class CheckboxControlTest extends AbcTestCase
    * In form unchecked.
    * In POST checked
    */
-  public function testSubmittedValue4()
+  public function testSubmittedValue4(): void
   {
     $_POST['test4'] = 'on';
 
@@ -163,7 +164,7 @@ class CheckboxControlTest extends AbcTestCase
    * In form unchecked.
    * In POST unchecked.
    */
-  public function testSubmittedValue5()
+  public function testSubmittedValue5(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -189,7 +190,7 @@ class CheckboxControlTest extends AbcTestCase
    * In form unchecked.
    * In POST checked.
    */
-  public function testSubmittedValue6()
+  public function testSubmittedValue6(): void
   {
     $_POST['test6'] = 'on';
 

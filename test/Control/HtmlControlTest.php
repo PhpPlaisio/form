@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -20,7 +21,7 @@ class HtmlControlTest extends AbcTestCase
    *
    * @return TestForm
    */
-  public function setupForm1($html = null)
+  public function setupForm1($html = null): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -36,7 +37,7 @@ class HtmlControlTest extends AbcTestCase
   /**
    * The value of a HtmlControl must be independent of the posted values.
    */
-  public function testGetValues1()
+  public function testGetValues1(): void
   {
     $html = '<h1>Hello World</h1>';
 
@@ -54,7 +55,7 @@ class HtmlControlTest extends AbcTestCase
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new HtmlControl('hidden');
 
@@ -65,7 +66,7 @@ class HtmlControlTest extends AbcTestCase
   /**
    * It must be possible to set the value of a HtmlControl by Form::mergeValues.
    */
-  public function testMergeValues1()
+  public function testMergeValues1(): void
   {
     $html = '<h1>Hello World</h1>';
 
@@ -85,7 +86,7 @@ class HtmlControlTest extends AbcTestCase
   /**
    * The value of a HtmlControl must not be changes if the name of the form control is not in the values.
    */
-  public function testMergeValues2()
+  public function testMergeValues2(): void
   {
     $html = '<h1>Hello World</h1>';
 
@@ -106,7 +107,7 @@ class HtmlControlTest extends AbcTestCase
   /**
    * Html spacial characters must be replaced with HTMl entities.
    */
-  public function testSetText()
+  public function testSetText(): void
   {
     $form = $this->setupForm1();
 
@@ -125,7 +126,7 @@ class HtmlControlTest extends AbcTestCase
   /**
    * It must be possible to set the value of a HtmlControl by Form::setValues.
    */
-  public function testSetValues1()
+  public function testSetValues1(): void
   {
     $html = '<h1>Hello World</h1>';
 
@@ -145,7 +146,7 @@ class HtmlControlTest extends AbcTestCase
   /**
    * @inheritdoc
    */
-  protected function setUp()
+  protected function setUp(): void
   {
     parent::setUp();
 

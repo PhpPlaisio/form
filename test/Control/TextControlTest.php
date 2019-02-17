@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
 use SetBased\Abc\Form\Cleaner\DateCleaner;
 use SetBased\Abc\Form\Control\FieldSet;
+use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Formatter\DateFormatter;
 use SetBased\Abc\Form\Test\TestForm;
@@ -18,7 +20,7 @@ class TextControlTest extends SimpleControlTest
    * Test cleaning and formatting is done before testing value of the form control has changed.
    * For text field whitespace cleaner set default.
    */
-  public function testDateFormattingAndCleaning()
+  public function testDateFormattingAndCleaning(): void
   {
     $_POST['birthday'] = '10.04.1966';
 
@@ -49,7 +51,7 @@ class TextControlTest extends SimpleControlTest
    * Test cleaning is done before testing value of the form control has changed.
    * For text field whitespace cleaner set default.
    */
-  public function testPruneWhitespaceNoChanged()
+  public function testPruneWhitespaceNoChanged(): void
   {
     $_POST['test'] = '  Hello    World!   ';
 
@@ -77,7 +79,7 @@ class TextControlTest extends SimpleControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl($name)
+  protected function getControl(string $name): SimpleControl
   {
     return new TextControl($name);
   }

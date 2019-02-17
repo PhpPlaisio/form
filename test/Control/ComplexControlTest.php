@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -28,10 +29,11 @@ class ComplexControlTest extends AbcTestCase
   private $originControl;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test find FormControl by name.
    */
-  public function testFindFormControlByName()
+  public function testFindFormControlByName(): void
   {
     $form = $this->setForm1();
 
@@ -54,7 +56,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test find FormControl by path.
    */
-  public function testFindFormControlByPath()
+  public function testFindFormControlByPath(): void
   {
     $form = $this->setForm1();
 
@@ -92,7 +94,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test get FormControl by name.
    */
-  public function testGetFormControlByName()
+  public function testGetFormControlByName(): void
   {
     $form = $this->setForm1();
 
@@ -110,7 +112,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test get FormControl by path.
    */
-  public function testGetFormControlByPath()
+  public function testGetFormControlByPath(): void
   {
     $form = $this->setForm1();
 
@@ -135,11 +137,11 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by name what does not exist. Must trow exception.
-   *
-   * @expectedException \Exception
    */
-  public function testGetNotExistsFormControlByName1()
+  public function testGetNotExistsFormControlByName1(): void
   {
+    $this->expectException(\LogicException::class);
+
     $form = $this->setForm1();
     $form->getFormControlByName('not_exists');
   }
@@ -147,11 +149,11 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by name what does not exist. Must trow exception.
-   *
-   * @expectedException \Exception
    */
-  public function testGetNotExistsFormControlByName2()
+  public function testGetNotExistsFormControlByName2(): void
   {
+    $this->expectException(\LogicException::class);
+
     $form = $this->setForm1();
     $form->getFormControlByName('/no_path/not_exists');
   }
@@ -159,11 +161,11 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by name what does not exist. Must trow exception.
-   *
-   * @expectedException \Exception
    */
-  public function testGetNotExistsFormControlByName3()
+  public function testGetNotExistsFormControlByName3(): void
   {
+    $this->expectException(\LogicException::class);
+
     $form = $this->setForm1();
     $form->getFormControlByName('/vacation/not_exists');
   }
@@ -171,11 +173,11 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by path what does not exist. Must trow exception.
-   *
-   * @expectedException \Exception
    */
-  public function testGetNotExistsFormControlByPath1()
+  public function testGetNotExistsFormControlByPath1(): void
   {
+    $this->expectException(\LogicException::class);
+
     $form = $this->setForm1();
     $form->getFormControlByPath('/not_exists');
   }
@@ -183,11 +185,11 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by path what does not exist. Must trow exception.
-   *
-   * @expectedException \Exception
    */
-  public function testGetNotExistsFormControlByPath2()
+  public function testGetNotExistsFormControlByPath2(): void
   {
+    $this->expectException(\LogicException::class);
+
     $form = $this->setForm1();
     $form->getFormControlByPath('street');
   }
@@ -195,11 +197,11 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by path what does not exist. Must trow exception.
-   *
-   * @expectedException \Exception
    */
-  public function testGetNotExistsFormControlByPath3()
+  public function testGetNotExistsFormControlByPath3(): void
   {
+    $this->expectException(\LogicException::class);
+
     $form = $this->setForm1();
     $form->getFormControlByPath('/no_path/not_exists');
   }
@@ -208,11 +210,11 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Get form control by path what does not exist. Must trow exception.
-   *
-   * @expectedException \Exception
    */
-  public function testGetNotExistsFormControlByPath4()
+  public function testGetNotExistsFormControlByPath4(): void
   {
+    $this->expectException(\LogicException::class);
+
     $form = $this->setForm1();
     $form->getFormControlByPath('/vacation/not_exists');
   }
@@ -221,7 +223,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new ComplexControl('hidden');
 
@@ -232,7 +234,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test mergeValues with null.
    */
-  public function testMergeValues1()
+  public function testMergeValues1(): void
   {
     $form = $this->setForm2();
 
@@ -253,7 +255,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test mergeValues with value.
    */
-  public function testMergeValues2()
+  public function testMergeValues2(): void
   {
     $form = $this->setForm2();
 
@@ -280,7 +282,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test setValues with null.
    */
-  public function testSetValues1()
+  public function testSetValues1(): void
   {
     $form = $this->setForm2();
 
@@ -301,7 +303,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Test setValues with value.
    */
-  public function testSetValues2()
+  public function testSetValues2(): void
   {
     $form = $this->setForm2();
 
@@ -327,7 +329,7 @@ class ComplexControlTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    */
-  public function testSubmitValues()
+  public function testSubmitValues(): void
   {
     $_POST['field_1']                                  = 'value';
     $_POST['field_3']                                  = 'value';
@@ -353,9 +355,9 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Find a control test with alphanumeric name of the control in the complex control.
    */
-  public function testValid4()
+  public function testValid4(): void
   {
-    $names = ['test01', 10, 0, '0.0'];
+    $names = ['test01', '10', '0', '0.0'];
 
     foreach ($names as $name)
     {
@@ -385,7 +387,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Each form controls in form must validate and add to invalid controls if it not valid.
    */
-  public function testValidate()
+  public function testValidate(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -417,7 +419,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Only white listed values must be loaded.
    */
-  public function testWhiteList()
+  public function testWhiteList(): void
   {
     $_POST['unknown_field']                    = 'value';
     $_POST['unknown_complex']['unknown_field'] = 'value';
@@ -440,7 +442,7 @@ class ComplexControlTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setForm1()
+  private function setForm1(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -521,7 +523,7 @@ class ComplexControlTest extends AbcTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setForm2()
+  private function setForm2(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -564,10 +566,10 @@ class ComplexControlTest extends AbcTestCase
    *
    * @return TestForm
    */
-  private function setForm3($name)
+  private function setForm3(string $name): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $complex = new ComplexControl($name);

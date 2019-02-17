@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test;
 
@@ -22,10 +23,10 @@ class RawFormTest extends AbcTestCase
   /**
    * Base test for testing searchSubmitHandler.
    *
-   * @param Control $trigger  The control that will trigger the form submit.
-   * @param string  $expected The expected value.
+   * @param Control     $trigger  The control that will trigger the form submit.
+   * @param string|null $expected The expected value.
    */
-  public function searchSubmitHandlerTest($trigger, $expected)
+  public function searchSubmitHandlerTest(Control $trigger, ?string $expected): void
   {
     $form      = new TestForm('form1');
     $fieldset1 = new FieldSet('fieldset1');
@@ -50,9 +51,9 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for finding a complex control with different types of names.
    */
-  public function testFindComplexControl()
+  public function testFindComplexControl(): void
   {
-    $names = ['hello', 10, 0, '0', '0.0'];
+    $names = ['hello', '10', '0', '0.0'];
 
     foreach ($names as $name)
     {
@@ -68,9 +69,9 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for finding a fieldset with different types of names.
    */
-  public function testFindFieldSet()
+  public function testFindFieldSet(): void
   {
-    $names = ['hello', 10, 0, '0', '0.0'];
+    $names = ['hello', '10', '0', '0.0'];
 
     foreach ($names as $name)
     {
@@ -86,9 +87,9 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for finding a complex with with different types of names.
    */
-  public function testFindSimpleControl()
+  public function testFindSimpleControl(): void
   {
-    $names = ['hello', 10, 0, '0', '0.0'];
+    $names = ['hello', '10', '0', '0.0'];
 
     foreach ($names as $name)
     {
@@ -104,7 +105,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for getCurrentValues values.
    */
-  public function testGetSetValues()
+  public function testGetSetValues(): void
   {
     $options   = [];
     $options[] = ['id' => 1, 'label' => 'label1'];
@@ -147,7 +148,7 @@ class RawFormTest extends AbcTestCase
   /**
    *  Test method hasScalars
    */
-  public function testHasScalars1()
+  public function testHasScalars1(): void
   {
     $_POST = [];
 
@@ -163,7 +164,7 @@ class RawFormTest extends AbcTestCase
   /**
    *  Test method hasScalars
    */
-  public function testHasScalars2()
+  public function testHasScalars2(): void
   {
     $_POST           = [];
     $_POST['name1']  = 'Hello world';
@@ -181,7 +182,7 @@ class RawFormTest extends AbcTestCase
   /**
    *  Test method hasScalars
    */
-  public function testHasScalars3()
+  public function testHasScalars3(): void
   {
     $_POST              = [];
     $_POST['name1']     = 'Hello world';
@@ -200,7 +201,7 @@ class RawFormTest extends AbcTestCase
   /**
    *  Test method hasScalars
    */
-  public function testHasScalars4()
+  public function testHasScalars4(): void
   {
     $_POST              = [];
     $_POST['option'][2] = 'on';
@@ -218,7 +219,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for merging values.
    */
-  public function testMergeValues()
+  public function testMergeValues(): void
   {
     $options   = [];
     $options[] = ['id' => 1, 'label' => 'label1'];
@@ -287,7 +288,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with SubmitControl.
    */
-  public function testSearchSubmitHandler01()
+  public function testSearchSubmitHandler01(): void
   {
     $trigger = new SubmitControl('button1');
     $trigger->setValue('knob');
@@ -300,7 +301,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with ButtonControl.
    */
-  public function testSearchSubmitHandler02()
+  public function testSearchSubmitHandler02(): void
   {
     $trigger = new ButtonControl('button1');
     $trigger->setValue('knob');
@@ -326,7 +327,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with ForceSubmitControl.
    */
-  public function testSearchSubmitHandler04()
+  public function testSearchSubmitHandler04(): void
   {
     $trigger = new ForceSubmitControl('button1', true);
     $trigger->setValue('knob');
@@ -339,7 +340,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with SubmitControl.
    */
-  public function testSearchSubmitHandler11()
+  public function testSearchSubmitHandler11(): void
   {
     $trigger = new SubmitControl('button1');
     $trigger->setValue('door');
@@ -352,7 +353,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with ButtonControl.
    */
-  public function testSearchSubmitHandler12()
+  public function testSearchSubmitHandler12(): void
   {
     $trigger = new ButtonControl('button1');
     $trigger->setValue('door');
@@ -365,7 +366,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with HiddenSubmitControl.
    */
-  public function testSearchSubmitHandler13()
+  public function testSearchSubmitHandler13(): void
   {
     $trigger = new HiddenSubmitControl('button1');
     $trigger->setValue('door');
@@ -378,7 +379,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with ForceSubmitControl.
    */
-  public function testSearchSubmitHandler14a()
+  public function testSearchSubmitHandler14a(): void
   {
     $trigger = new ForceSubmitControl('button1', false);
     $trigger->setValue('door');
@@ -391,7 +392,7 @@ class RawFormTest extends AbcTestCase
   /**
    * Test for testing searchSubmitHandler with ForceSubmitControl.
    */
-  public function testSearchSubmitHandler14b()
+  public function testSearchSubmitHandler14b(): void
   {
     $trigger = new ForceSubmitControl('button1', true);
     $trigger->setValue('door');
@@ -403,11 +404,11 @@ class RawFormTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test for testing searchSubmitHandler with SubmitControl without setting submit handler method.
-   *
-   * @expectedException \LogicException
    */
-  public function testSearchSubmitHandler21()
+  public function testSearchSubmitHandler21(): void
   {
+    $this->expectException(\LogicException::class);
+
     $trigger = new SubmitControl('button1');
     $trigger->setValue('knob');
 
@@ -417,11 +418,11 @@ class RawFormTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test for testing searchSubmitHandler with ButtonControl without setting submit handler method.
-   *
-   * @expectedException \LogicException
    */
-  public function testSearchSubmitHandler22()
+  public function testSearchSubmitHandler22(): void
   {
+    $this->expectException(\LogicException::class);
+
     $trigger = new ButtonControl('button1');
     $trigger->setValue('knob');
 
@@ -431,11 +432,11 @@ class RawFormTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test for testing searchSubmitHandler with HiddenSubmitControl without setting submit handler method.
-   *
-   * @expectedException \LogicException
    */
-  public function testSearchSubmitHandler23()
+  public function testSearchSubmitHandler23(): void
   {
+    $this->expectException(\LogicException::class);
+
     $trigger = new HiddenSubmitControl('button1');
     $trigger->setValue('knob');
 
@@ -445,11 +446,11 @@ class RawFormTest extends AbcTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test for testing searchSubmitHandler with ForceSubmitControl without setting submit handler method.
-   *
-   * @expectedException \LogicException
    */
-  public function testSearchSubmitHandler24()
+  public function testSearchSubmitHandler24(): void
   {
+    $this->expectException(\LogicException::class);
+
     $trigger = new ForceSubmitControl('button1', true);
     $trigger->setValue('knob');
 
@@ -460,7 +461,7 @@ class RawFormTest extends AbcTestCase
   /**
    * @return TestForm
    */
-  private function setupForm1()
+  private function setupForm1(): TestForm
   {
     $options   = [];
     $options[] = ['id' => 1, 'label' => 'label1'];
@@ -496,9 +497,9 @@ class RawFormTest extends AbcTestCase
    *
    * @return RawForm
    */
-  private function setupFormFind($fieldSetName = 'vacation',
-                                 $complexControlName = 'post',
-                                 $textControlName = 'city')
+  private function setupFormFind(string $fieldSetName = 'vacation',
+                                 string $complexControlName = 'post',
+                                 string $textControlName = 'city'): RawForm
   {
     $form     = new RawForm();
     $fieldset = new FieldSet($fieldSetName);

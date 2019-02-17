@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -16,7 +17,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    *  Option with index 0 (string or int) equals 0 (string or int) and not equals 0.0 (string).
    */
-  public function testEmptyValues1()
+  public function testEmptyValues1(): void
   {
     $_POST['cnt_id']['0'] = 'on';
 
@@ -34,7 +35,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    *  Option with index 0 (string or int) equals 0 (string or int) and not equals '0.0' (string).
    */
-  public function testEmptyValues2()
+  public function testEmptyValues2(): void
   {
     $_POST['cnt_id'][0] = 'on';
 
@@ -52,7 +53,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    *  Option with index '0.0' (string) equals '0.0' (string) and not equals 0 (string or int).
    */
-  public function testEmptyValues3()
+  public function testEmptyValues3(): void
   {
     $_POST['cnt_id']['0.0'] = 'on';
 
@@ -70,7 +71,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    *  Option with index 0 (string or int) equals 0 (string or int) and not equals '1' (string or int).
    */
-  public function testEmptyValues4()
+  public function testEmptyValues4(): void
   {
     $_POST['cnt_id']['0'] = 'on';
 
@@ -88,7 +89,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    *  Option with index 0 (string or int) equals 0 (string or int) and not equals '1' (string or int).
    */
-  public function testEmptyValues5()
+  public function testEmptyValues5(): void
   {
     $_POST['cnt_id'][0] = 'on';
 
@@ -106,7 +107,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test special characters in the labels are replaced with HTML entities.
    */
-  public function testInputAttributesMap()
+  public function testInputAttributesMap(): void
   {
     $entities[] = ['key' => 'R', 'label' => 'Red'];
     $entities[] = ['key' => 'O', 'label' => 'Orange', 'extra' => 'blink', 'xxx' => 123];
@@ -118,15 +119,15 @@ class CheckboxesControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<input id="123" class="blink" type="checkbox" name="[O]"/>', $html);
-    self::assertContains('<label for="123">Orange</label>', $html);
+    self::assertStringContainsString('<input id="123" class="blink" type="checkbox" name="[O]"/>', $html);
+    self::assertStringContainsString('<label for="123">Orange</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new CheckboxesControl('hidden');
 
@@ -137,7 +138,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test special characters in the labels are replaced with HTML entities.
    */
-  public function testLabelAttributesMap()
+  public function testLabelAttributesMap(): void
   {
     $entities[] = ['key' => 'R', 'label' => 'Red'];
     $entities[] = ['key' => 'O', 'label' => 'Orange', 'extra' => 'blink', 'xxx' => 123];
@@ -150,15 +151,15 @@ class CheckboxesControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<input id="123" type="checkbox" name="[O]"/>', $html);
-    self::assertContains('<label class="blink" for="123">Orange</label>', $html);
+    self::assertStringContainsString('<input id="123" type="checkbox" name="[O]"/>', $html);
+    self::assertStringContainsString('<label class="blink" for="123">Orange</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test special characters in the labels are replaced with HTML entities.
    */
-  public function testLabels1()
+  public function testLabels1(): void
   {
     $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<&\';">'];
     $entities[] = ['no' => 1, 'key' => 'B', 'name' => '&nbsp;'];
@@ -169,15 +170,15 @@ class CheckboxesControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
-    self::assertContains('<label for="1">&amp;nbsp;</label>', $html);
+    self::assertStringContainsString('<label for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
+    self::assertStringContainsString('<label for="1">&amp;nbsp;</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test special characters in the labels are not replaced with HTML entities.
    */
-  public function testLabels2()
+  public function testLabels2(): void
   {
     $entities[] = ['no' => 0, 'key' => 'A', 'name' => '<span>0</span>'];
     $entities[] = ['no' => 1, 'key' => 'B', 'name' => '<span>1</span>'];
@@ -189,15 +190,15 @@ class CheckboxesControlTest extends AbcTestCase
 
     $html = $input->getHtml();
 
-    self::assertContains('<label for="0"><span>0</span></label>', $html);
-    self::assertContains('<label for="1"><span>1</span></label>', $html);
+    self::assertStringContainsString('<label for="0"><span>0</span></label>', $html);
+    self::assertStringContainsString('<label for="1"><span>1</span></label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test checkboxes are set of unset when was submitted.
    */
-  public function testPreserveSubmitValues()
+  public function testPreserveSubmitValues(): void
   {
     // Simulate submitted values.
     $_POST['cnt_id'] = ['0' => 'on', '2' => 'on', '3' => 'on'];
@@ -247,7 +248,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test checkboxes are set or unset correctly with values().
    */
-  public function testSetValues2()
+  public function testSetValues2(): void
   {
     $countries[] = ['cnt_id' => 0, 'cnt_name' => 'NL', 'checked' => true];
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'BE', 'checked' => true];
@@ -301,7 +302,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test a check/unchecked checkboxes are added correctly to the values.
    */
-  public function testSubmittedValues1()
+  public function testSubmittedValues1(): void
   {
     $_POST['cnt_id']['2'] = 'on';
 
@@ -319,7 +320,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test a check/unchecked checkboxes are added correctly to the values.
    */
-  public function testSubmittedValues2()
+  public function testSubmittedValues2(): void
   {
     $_POST['cnt_id']['0.1'] = 'on';
 
@@ -337,7 +338,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test a check/unchecked checkboxes are added correctly to the values.
    */
-  public function testSubmittedValues3a()
+  public function testSubmittedValues3a(): void
   {
     $_POST['cnt_id']['2'] = 'on';
 
@@ -355,7 +356,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test a check/unchecked checkboxes are added correctly to the values with alternative values.
    */
-  public function testSubmittedValues3b()
+  public function testSubmittedValues3b(): void
   {
     $_POST['cnt_id']['2'] = 'on';
 
@@ -373,7 +374,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Test a check/unchecked checkboxes are added correctly to the values.
    */
-  public function testSubmittedValues4()
+  public function testSubmittedValues4(): void
   {
     $_POST['cnt_id']['0.1'] = 'on';
 
@@ -391,7 +392,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Only white listed values must be loaded.
    */
-  public function testWhiteListed1()
+  public function testWhiteListed1(): void
   {
     // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
     $_POST['cnt_id']['99'] = 'on';
@@ -408,7 +409,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm1()
+  private function setupForm1(): TestForm
   {
     $countries[] = ['cnt_id' => '0', 'cnt_name' => '-'];
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
@@ -433,7 +434,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm3()
+  private function setupForm3(): TestForm
   {
     $countries[] = ['cnt_id' => '0', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '0.0', 'cnt_name' => 'BE'];
@@ -455,7 +456,7 @@ class CheckboxesControlTest extends AbcTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm4()
+  private function setupForm4(): TestForm
   {
     $countries[] = ['cnt_id' => 0, 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'BE'];

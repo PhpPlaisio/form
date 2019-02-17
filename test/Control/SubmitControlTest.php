@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
+use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 
 /**
@@ -10,7 +12,7 @@ use SetBased\Abc\Form\Control\SubmitControl;
 class SubmitControlTest extends PushControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  public function testAttributes()
+  public function testAttributes(): void
   {
     $attributes = ['formaction'  => 'setAttrFormAction',
                    'formenctype' => 'setAttrFormEncType',
@@ -26,7 +28,7 @@ class SubmitControlTest extends PushControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl($name)
+  protected function getControl(string $name): SimpleControl
   {
     return new SubmitControl($name);
   }
@@ -37,7 +39,7 @@ class SubmitControlTest extends PushControlTest
    *
    * @return string
    */
-  protected function getControlType()
+  protected function getControlType(): string
   {
     return 'submit';
   }

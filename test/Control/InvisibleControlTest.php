@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Test\Control;
 
@@ -13,7 +14,7 @@ use SetBased\Abc\Form\Test\TestForm;
 class InvisibleControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  public function testForm1()
+  public function testForm1(): void
   {
     $_POST['name'] = '2';
 
@@ -31,7 +32,7 @@ class InvisibleControlTest extends AbcTestCase
   /**
    * Test control is hidden.
    */
-  public function testIsHidden()
+  public function testIsHidden(): void
   {
     $control = new InvisibleControl('hidden');
 
@@ -39,7 +40,10 @@ class InvisibleControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function testPrefixAndPostfix()
+  /**
+   * Tests for methods setPrefix() and setPostfix().
+   */
+  public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
@@ -60,7 +64,7 @@ class InvisibleControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function setupForm1()
+  private function setupForm1(): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet('');
