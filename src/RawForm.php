@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form;
 
@@ -69,7 +70,6 @@ class RawForm extends HtmlElement implements CompoundControl
   protected $values = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

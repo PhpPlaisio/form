@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form;
 
@@ -19,7 +20,6 @@ class Legend extends HtmlElement
   protected $legend;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Returns the HTML code for this legend.
    *

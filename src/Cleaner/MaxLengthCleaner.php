@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Cleaner;
 
@@ -48,11 +49,12 @@ class MaxLengthCleaner implements Cleaner
     }
 
     $tmp = PruneWhitespaceCleaner::get()->clean($value);
+    if ($tmp==='' || $tmp===null)
+    {
+      return null;
+    }
 
-    $tmp = mb_substr($tmp, 0, $this->maxLength);
-    if ($tmp==='') $tmp = null;
-
-    return $tmp;
+    return mb_substr($tmp, 0, $this->maxLength);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

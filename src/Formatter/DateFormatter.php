@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Formatter;
 
@@ -23,7 +24,6 @@ class DateFormatter implements Formatter
   private $openDate;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -52,7 +52,7 @@ class DateFormatter implements Formatter
   public function format($value)
   {
     $match = preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value, $parts);
-    $valid = ($match && checkdate($parts[2], $parts[3], $parts[1]));
+    $valid = ($match && checkdate((int)$parts[2], (int)$parts[3], (int)$parts[1]));
     if ($valid)
     {
       if ($value===$this->openDate) return '';

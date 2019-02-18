@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Validator;
 
@@ -25,7 +26,6 @@ class IntegerValidator implements Validator
   private $minValue;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
