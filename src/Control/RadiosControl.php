@@ -140,12 +140,10 @@ class RadiosControl extends Control
   /**
    * Returns the value of the check radio button.
    *
-   * @returns string|null
-   *
    * @since 1.0.0
    * @api
    */
-  public function getSubmittedValue(): ?string
+  public function getSubmittedValue()
   {
     return $this->value;
   }

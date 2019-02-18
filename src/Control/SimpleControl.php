@@ -109,8 +109,6 @@ abstract class SimpleControl extends Control
   /**
    * Returns the submitted value of this form control.
    *
-   * @return string|array|null
-   *
    * @since 1.0.0
    * @api
    */
