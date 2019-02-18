@@ -378,17 +378,15 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function searchSubmitHandler(array $submittedValues): ?string
   {
-    $submitKey = $this->submitKey();
-
     if ($this->name==='')
     {
       $tmp1 = $submittedValues;
     }
     else
     {
-      if (!isset($submittedValues[$submitKey])) $submittedValues[$submitKey] = [];
+      $submitKey = $this->submitKey();
 
-      $tmp1 = $submittedValues[$submitKey];
+      $tmp1 = $submittedValues[$submitKey] ?? [];
     }
 
     foreach ($this->controls as $control)
