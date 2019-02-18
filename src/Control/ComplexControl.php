@@ -393,9 +393,7 @@ class ComplexControl extends Control implements CompoundControl
 
     foreach ($this->controls as $control)
     {
-      if ($this->cleaner) $tmp1 = $this->cleaner->clean($tmp1);
       $method = $control->searchSubmitHandler($tmp1);
-
       if ($method!==null)
       {
         return $method;
