@@ -301,12 +301,12 @@ class RadiosControl extends Control
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
-    if (isset($submittedValues[$submitName]))
+    if (isset($submittedValues[$submitKey]))
     {
       // Normalize the submitted value as a string.
-      $newValue = (string)$submittedValues[$submitName];
+      $newValue = (string)$submittedValues[$submitKey];
 
       foreach ($this->options as $option)
       {

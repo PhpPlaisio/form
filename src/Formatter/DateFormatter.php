@@ -23,6 +23,7 @@ class DateFormatter implements Formatter
   private $openDate;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *

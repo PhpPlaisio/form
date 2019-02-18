@@ -2,7 +2,6 @@
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -56,18 +55,18 @@ class SilentControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
     // Get the submitted value and clean it (if required).
-    if (isset($submittedValues[$submitName]))
+    if (isset($submittedValues[$submitKey]))
     {
       if ($this->cleaner)
       {
-        $newValue = $this->cleaner->clean($submittedValues[$submitName]);
+        $newValue = $this->cleaner->clean($submittedValues[$submitKey]);
       }
       else
       {
-        $newValue = $submittedValues[$submitName];
+        $newValue = $submittedValues[$submitKey];
       }
     }
     else

@@ -358,7 +358,7 @@ class CheckboxesControl extends Control
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
     foreach ($this->options as $i => $option)
     {
@@ -371,10 +371,10 @@ class CheckboxesControl extends Control
       // Get the original value (i.e. the option is checked or not).
       $value = $option[$this->checkedKey] ?? false;
 
-      if ($submitName!=='')
+      if ($submitKey!=='')
       {
         // Get the submitted value (i.e. the option is checked or not).
-        $newValue = $submittedValues[$submitName][$code] ?? false;
+        $newValue = $submittedValues[$submitKey][$code] ?? false;
 
         // If the original value differs from the submitted value then the form control has been changed.
         if (empty($value)!==empty($newValue)) $changedInputs[$this->name][$key] = $this;

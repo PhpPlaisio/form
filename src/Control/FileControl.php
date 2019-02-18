@@ -2,7 +2,6 @@
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -70,7 +69,7 @@ class FileControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitName = $this->submitKey();
 
     if (isset($_FILES[$submitName]['error']) && $_FILES[$submitName]['error']===0)
     {

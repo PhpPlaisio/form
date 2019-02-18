@@ -26,6 +26,7 @@ class LengthValidator implements Validator
   private $minLength;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -73,7 +74,7 @@ class LengthValidator implements Validator
 
     $length = mb_strlen($value, Html::$encoding);
 
-    return (($this->minLength <= $length) && ($length <= $this->maxLength));
+    return (($this->minLength<=$length) && ($length<=$this->maxLength));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

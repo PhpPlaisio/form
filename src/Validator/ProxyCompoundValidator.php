@@ -25,6 +25,7 @@ class ProxyCompoundValidator implements CompoundValidator
   private $data;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *

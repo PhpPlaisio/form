@@ -64,7 +64,6 @@ abstract class Control extends HtmlElement
   protected $validators = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -311,21 +310,6 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the obfuscated name of this form control. If this form control has no obfuscator the name of this form
-   * control is returned.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function getObfuscatedName(): string
-  {
-    return ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Loads the submitted values.
    *
    * @param array $submittedValues The submitted values.
@@ -374,17 +358,31 @@ abstract class Control extends HtmlElement
    */
   protected function setSubmitName(string $parentSubmitName): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
     if ($parentSubmitName!=='')
     {
-      if ($submitName!=='') $this->submitName = $parentSubmitName.'['.$submitName.']';
-      else                  $this->submitName = $parentSubmitName;
+      if ($submitKey!=='') $this->submitName = $parentSubmitName.'['.$submitKey.']';
+      else                 $this->submitName = $parentSubmitName;
     }
     else
     {
-      $this->submitName = $submitName;
+      $this->submitName = $submitKey;
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the key under which the control is submitted in the submitted values.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function submitKey(): string
+  {
+    return ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

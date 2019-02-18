@@ -2,7 +2,6 @@
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -71,22 +70,22 @@ class MultipleFileControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
-    if (isset($_FILES[$submitName]['name']))
+    if (isset($_FILES[$submitKey]['name']))
     {
       $changedInputs[$this->name]   = $this;
       $whiteListValues[$this->name] = [];
       $this->value                  = [];
 
-      foreach ($_FILES[$submitName]['name'] as $i => $dummy)
+      foreach ($_FILES[$submitKey]['name'] as $i => $dummy)
       {
-        if ($_FILES[$submitName]['error'][$i]===UPLOAD_ERR_OK)
+        if ($_FILES[$submitKey]['error'][$i]===UPLOAD_ERR_OK)
         {
-          $tmp = ['name'     => $_FILES[$submitName]['name'][$i],
-                  'type'     => $_FILES[$submitName]['type'][$i],
-                  'tmp_name' => $_FILES[$submitName]['tmp_name'][$i],
-                  'size'     => $_FILES[$submitName]['size'][$i]];
+          $tmp = ['name'     => $_FILES[$submitKey]['name'][$i],
+                  'type'     => $_FILES[$submitKey]['type'][$i],
+                  'tmp_name' => $_FILES[$submitKey]['tmp_name'][$i],
+                  'size'     => $_FILES[$submitKey]['size'][$i]];
 
           $whiteListValues[$this->name][] = $tmp;
           $this->value[]                  = $tmp;

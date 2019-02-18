@@ -3,7 +3,6 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\Cleaner;
-use SetBased\Abc\Helper\Cast;
 use SetBased\Exception\LogicException;
 
 /**
@@ -41,7 +40,6 @@ class ComplexControl extends Control implements CompoundControl
   protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -296,7 +294,7 @@ class ComplexControl extends Control implements CompoundControl
                                           array &$whiteListValues,
                                           array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
     if ($this->name==='')
     {
@@ -306,11 +304,11 @@ class ComplexControl extends Control implements CompoundControl
     }
     else
     {
-      if (!isset($submittedValues[$submitName])) $submittedValues[$submitName] = [];
+      if (!isset($submittedValues[$submitKey])) $submittedValues[$submitKey] = [];
       if (!isset($whiteListValues[$this->name])) $whiteListValues[$this->name] = [];
       if (!isset($changedInputs[$this->name])) $changedInputs[$this->name] = [];
 
-      $tmp1 = $submittedValues[$submitName];
+      $tmp1 = $submittedValues[$submitKey];
       $tmp2 = &$whiteListValues[$this->name];
       $tmp3 = &$changedInputs[$this->name];
     }
@@ -379,7 +377,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function searchSubmitHandler(array $submittedValues): ?string
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
     if ($this->name==='')
     {
@@ -387,9 +385,9 @@ class ComplexControl extends Control implements CompoundControl
     }
     else
     {
-      if (!isset($submittedValues[$submitName])) $submittedValues[$submitName] = [];
+      if (!isset($submittedValues[$submitKey])) $submittedValues[$submitKey] = [];
 
-      $tmp1 = $submittedValues[$submitName];
+      $tmp1 = $submittedValues[$submitKey];
     }
 
     foreach ($this->controls as $control)

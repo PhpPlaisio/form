@@ -25,6 +25,7 @@ class ProxyValidator implements Validator
   private $data;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *

@@ -2,7 +2,6 @@
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -65,8 +64,8 @@ class RadioControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
-    $newValue   = $submittedValues[$submitName] ?? '';
+    $submitKey = $this->submitKey();
+    $newValue  = $submittedValues[$submitKey] ?? '';
 
     if (isset($this->attributes['value']) && (string)$newValue===(string)$this->attributes['value'])
     {

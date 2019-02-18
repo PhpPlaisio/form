@@ -19,7 +19,6 @@ class FieldSet extends ComplexControl
   protected $legend;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Creates a legend for this fieldset.
    *

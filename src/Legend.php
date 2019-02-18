@@ -19,6 +19,7 @@ class Legend extends HtmlElement
   protected $legend;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Returns the HTML code for this legend.
    *

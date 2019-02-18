@@ -3,7 +3,6 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\TrimWhitespaceCleaner;
-use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -98,10 +97,10 @@ class TextAreaControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
     // Get the submitted value.
-    $newValue = $submittedValues[$submitName] ?? null;
+    $newValue = $submittedValues[$submitKey] ?? null;
 
     // Clean the submitted value, if we have a cleaner.
     if ($this->cleaner) $newValue = $this->cleaner->clean($newValue);

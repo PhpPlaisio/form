@@ -2,7 +2,6 @@
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Cast;
 use SetBased\Exception\LogicException;
 
 /**
@@ -71,9 +70,9 @@ class HiddenSubmitControl extends HiddenControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
-    if (isset($submittedValues[$submitName]) && (string)$submittedValues[$submitName]===(string)$this->value)
+    if (isset($submittedValues[$submitKey]) && (string)$submittedValues[$submitKey]===(string)$this->value)
     {
       // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
       // So, skip the following code.
@@ -89,9 +88,9 @@ class HiddenSubmitControl extends HiddenControl
    */
   protected function searchSubmitHandler(array $submittedValues): ?string
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
+    $submitKey = $this->submitKey();
 
-    if (isset($submittedValues[$submitName]) && (string)$submittedValues[$submitName]===(string)$this->value)
+    if (isset($submittedValues[$submitKey]) && (string)$submittedValues[$submitKey]===(string)$this->value)
     {
       if ($this->method===null)
       {
