@@ -193,7 +193,7 @@ class SelectControl extends SimpleControl
   {
     $submitKey = $this->submitKey();
 
-    // Normalize default value as a string.
+    // Normalize current value as a string.
     $value = (string)$this->value;
 
     if (isset($submittedValues[$submitKey]))
@@ -240,22 +240,16 @@ class SelectControl extends SimpleControl
         }
       }
     }
-    else
+
+    if (!isset($whiteListValues[$this->name]))
     {
-      // No value has been submitted.
+      // No value has been submitted or a none white listed value has been submitted
       $this->value                  = null;
       $whiteListValues[$this->name] = null;
       if ($value!=='' && $value!==(string)$this->emptyOption)
       {
         $changedInputs[$this->name] = $this;
       }
-    }
-
-    if (!array_key_exists($this->name, $whiteListValues))
-    {
-      // The white listed value has not been set. This can only happen when a none white listed value has been submitted.
-      // In this case we ignore this and assume the default value has been submitted.
-      $whiteListValues[$this->name] = $this->value;
     }
   }
 

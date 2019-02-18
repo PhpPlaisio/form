@@ -239,6 +239,23 @@ class RadiosControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Only white listed values must be loaded.
+   */
+  public function testWhiteListed2(): void
+  {
+    // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
+    $_POST['cnt_id'] = 99;
+
+    $form   = $this->setupForm2();
+    $values = $form->getValues();
+
+    self::assertArrayHasKey('cnt_id', $values);
+    self::assertNull($values['cnt_id']);
+    self::assertArrayHasKey('cnt_id', $form->getChangedControls());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Setups a form with a select form control.
    */
   private function setupForm1(): TestForm

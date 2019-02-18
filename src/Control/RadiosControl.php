@@ -304,6 +304,9 @@ class RadiosControl extends Control
   {
     $submitKey = $this->submitKey();
 
+    // Normalize current value as a string.
+    $value = (string)$this->value;
+
     if (isset($submittedValues[$submitKey]))
     {
       // Normalize the submitted value as a string.
@@ -315,12 +318,12 @@ class RadiosControl extends Control
         $key = $option[$this->keyKey];
 
         // If an obfuscator is installed compute the obfuscated code of the radio button name.
-        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : (string)$key;
 
-        if ($newValue===(string)$code)
+        if ($newValue===$code)
         {
           // If the original value differs from the submitted value then the form control has been changed.
-          if ((string)$this->value!==(string)$key)
+          if ($value!==(string)$key)
           {
             $changedInputs[$this->name] = $this;
           }
@@ -334,18 +337,16 @@ class RadiosControl extends Control
         }
       }
     }
-    else
-    {
-      // No radio button has been checked.
-      $whiteListValues[$this->name] = null;
-      $this->value                  = null;
-    }
 
-    if (!array_key_exists($this->name, $whiteListValues))
+    if (!isset($whiteListValues[$this->name]))
     {
-      // The white listed value has not been set. This can only happen when a none white listed value has been submitted.
-      // In this case we ignore this and assume the default value has been submitted.
-      $whiteListValues[$this->name] = $this->value;
+      // No value has been submitted or a none white listed value has been submitted
+      $this->value                  = null;
+      $whiteListValues[$this->name] = null;
+      if ($value!=='')
+      {
+        $changedInputs[$this->name] = $this;
+      }
     }
   }
 

@@ -15,6 +15,58 @@ class SelectControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test cases for setValue.
+   *
+   * @return array[]
+   */
+  public function setValueCases()
+  {
+    $cases = [];
+
+    // Setting the value to null and no value is been posted must result in null for the value of the form control.
+    $cases[] = ['value'     => null,
+                'submitted' => null,
+                'expected'  => null];
+
+    // Setting the value to empty string and no value is been posted must result in null for the value of the form
+    // control.
+    $cases[] = ['value'     => '',
+                'submitted' => null,
+                'expected'  => null];
+
+    // The type of the key must be returned not the type passed to setValue or the type of the submitted value.
+    $cases[] = ['value'     => '2',
+                'submitted' => '2',
+                'expected'  => '2'];
+    $cases[] = ['value'     => 2,
+                'submitted' => '2',
+                'expected'  => '2'];
+    $cases[] = ['value'     => '2',
+                'submitted' => 2,
+                'expected'  => '2'];
+    $cases[] = ['value'     => 2,
+                'submitted' => 2,
+                'expected'  => '2'];
+
+    // The type of the key must be returned not the type passed to setValue nor the type of the submitted value.
+    $cases[] = ['value'     => '4',
+                'submitted' => '4',
+                'expected'  => 4];
+    $cases[] = ['value'     => 4,
+                'submitted' => '4',
+                'expected'  => 4];
+    $cases[] = ['value'     => '4',
+                'submitted' => 4,
+                'expected'  => 4];
+    $cases[] = ['value'     => 4,
+                'submitted' => 4,
+                'expected'  => 4];
+
+    return $cases;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test control is not marked changed when the empty value is submitted.
    */
   public function testChangedControls1(): void
@@ -28,7 +80,7 @@ class SelectControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  /**
+    /**
    * Test control is marked changed when a valid value is submitted.
    */
   public function testChangedControls2(): void
@@ -39,10 +91,8 @@ class SelectControlTest extends AbcTestCase
     $changed = $form->getChangedControls();
 
     self::assertNotEmpty($changed);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
+  }  //--------------------------------------------------------------------------------------------------------------------
+/**
    * Test control is not marked changed when a none valid value is submitted.
    */
   public function testChangedControls3(): void
@@ -96,6 +146,42 @@ class SelectControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Tests for setValue.
+   *
+   * @param mixed $value     The new value for the radios form control.
+   * @param mixed $submitted The submitted value.
+   * @param mixed $expected  The expected value.
+   *
+   * @dataProvider setValueCases
+   */
+  public function testSetValue($value, $submitted, $expected)
+  {
+    $_POST['cnt_id'] = $submitted;
+
+    $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
+    $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
+    $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
+    $countries[] = ['cnt_id' => 4, 'cnt_name' => 'DE'];
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new SelectControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
+
+    $input->setValue($value);
+    self::assertSame($value, $form->getSetValues()['cnt_id']);
+
+    $form->loadSubmittedValues();
+
+    $values = $form->getValues();
+    self::assertSame($expected, $values['cnt_id']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * A white listed value must be valid.
    */
   public function testValid1(): void
@@ -137,6 +223,23 @@ class SelectControlTest extends AbcTestCase
     self::assertArrayHasKey('cnt_id', $values);
     self::assertNull($values['cnt_id']);
     self::assertEmpty($form->getChangedControls());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Only white listed values must be loaded.
+   */
+  public function testWhiteListed2(): void
+  {
+    // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
+    $_POST['cnt_id'] = 99;
+
+    $form   = $this->setupForm2();
+    $values = $form->getValues();
+
+    self::assertArrayHasKey('cnt_id', $values);
+    self::assertNull($values['cnt_id']);
+    self::assertArrayHasKey('cnt_id', $form->getChangedControls());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
