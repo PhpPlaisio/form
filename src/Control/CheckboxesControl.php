@@ -112,8 +112,11 @@ class CheckboxesControl extends Control
 
         $labelAttributes['for'] = $inputAttributes['id'];
 
-        $code = ($this->optionsObfuscator) ?
-          $this->optionsObfuscator->encode($option[$this->keyKey]) : $option[$this->keyKey];
+        // Get the (database) key of the option.
+        $key  = $option[$this->keyKey];
+
+        // If an obfuscator is installed compute the obfuscated code of the (database) ID.
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
         $inputAttributes['name']    = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
         $inputAttributes['checked'] = ($this->checkedKey!==null && !empty($option[$this->checkedKey]));
