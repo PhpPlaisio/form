@@ -211,7 +211,7 @@ class CheckboxesControlTest extends AbcTestCase
 
     // Create a form with checkboxes.
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxesControl('cnt_id');
@@ -258,7 +258,7 @@ class CheckboxesControlTest extends AbcTestCase
 
     // Create a form with checkboxes.
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxesControl('cnt_id');
@@ -418,7 +418,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => '0.1', 'cnt_name' => 'UA'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxesControl('cnt_id');
@@ -440,7 +440,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => '0.0', 'cnt_name' => 'BE'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxesControl('cnt_id');
@@ -462,7 +462,7 @@ class CheckboxesControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'BE'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxesControl('cnt_id');

@@ -179,7 +179,7 @@ class MandatoryValidatorTest extends AbcTestCase
   private function setupForm1($control): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $control;
@@ -200,7 +200,7 @@ class MandatoryValidatorTest extends AbcTestCase
   private function setupForm2(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('box');

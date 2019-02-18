@@ -43,7 +43,7 @@ class ConstantControlTest extends AbcTestCase
   private function setupForm1(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new ConstantControl('name');

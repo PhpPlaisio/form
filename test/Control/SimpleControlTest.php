@@ -68,7 +68,7 @@ abstract class SimpleControlTest extends AbcTestCase
   public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('name');
@@ -158,7 +158,7 @@ abstract class SimpleControlTest extends AbcTestCase
   private function setupForm1(?string $value): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('name');

@@ -24,7 +24,7 @@ class HtmlControlTest extends AbcTestCase
   public function setupForm1($html = null): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new HtmlControl('snippet');

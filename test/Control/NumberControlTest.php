@@ -22,7 +22,7 @@ class NumberControlTest extends SimpleControlTest
     $_POST['year'] = 'Hello, world';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new NumberControl('year');
@@ -52,7 +52,7 @@ class NumberControlTest extends SimpleControlTest
     $_POST['year'] = 1900;
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new NumberControl('year');
@@ -83,7 +83,7 @@ class NumberControlTest extends SimpleControlTest
     $_POST['year'] = '2018';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new NumberControl('year');

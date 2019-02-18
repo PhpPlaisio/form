@@ -113,7 +113,7 @@ class RawFormTest extends AbcTestCase
     $options[] = ['id' => 3, 'label' => 'label3'];
 
     $form     = new RawForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextControl('name1');
@@ -469,7 +469,7 @@ class RawFormTest extends AbcTestCase
     $options[] = ['id' => 2, 'label' => 'label3'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
     $input = new TextControl('name1');
     $fieldset->addFormControl($input);

@@ -86,7 +86,7 @@ class LengthValidatorTest extends AbcTestCase
   private function setupForm1(int $min, int $max): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextControl('value');

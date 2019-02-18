@@ -31,7 +31,7 @@ class CheckboxControlTest extends AbcTestCase
   public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('name');
@@ -57,7 +57,7 @@ class CheckboxControlTest extends AbcTestCase
   public function testSubmittedValue1(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test1');
@@ -84,7 +84,7 @@ class CheckboxControlTest extends AbcTestCase
     $_POST['test2'] = 'on';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test2');
@@ -110,7 +110,7 @@ class CheckboxControlTest extends AbcTestCase
   public function testSubmittedValue3(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test3');
@@ -139,7 +139,7 @@ class CheckboxControlTest extends AbcTestCase
     $_POST['test4'] = 'on';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test4');
@@ -167,7 +167,7 @@ class CheckboxControlTest extends AbcTestCase
   public function testSubmittedValue5(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test5');
@@ -195,7 +195,7 @@ class CheckboxControlTest extends AbcTestCase
     $_POST['test6'] = 'on';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test6');

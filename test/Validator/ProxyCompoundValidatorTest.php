@@ -90,7 +90,7 @@ class ProxyCompoundValidatorTest extends AbcTestCase
   private function setupForm1($data = null): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextControl('input');

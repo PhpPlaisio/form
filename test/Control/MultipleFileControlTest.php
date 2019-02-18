@@ -30,7 +30,7 @@ class MultipleFileControlTest extends AbcTestCase
   public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new MultipleFileControl('name');

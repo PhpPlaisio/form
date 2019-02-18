@@ -31,7 +31,7 @@ class RadioControlTest extends AbcTestCase
   public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadioControl('name');
@@ -145,7 +145,7 @@ class RadioControlTest extends AbcTestCase
   private function setForm1(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadioControl('name');
@@ -170,7 +170,7 @@ class RadioControlTest extends AbcTestCase
   private function setForm2(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadioControl('name');
@@ -196,7 +196,7 @@ class RadioControlTest extends AbcTestCase
   private function setForm3(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadioControl('name');

@@ -390,7 +390,7 @@ class ComplexControlTest extends AbcTestCase
   public function testValidate(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     // Create mandatory control.
@@ -445,7 +445,7 @@ class ComplexControlTest extends AbcTestCase
   private function setForm1(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $complex = new ComplexControl();
@@ -526,7 +526,7 @@ class ComplexControlTest extends AbcTestCase
   private function setForm2(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $complex1 = new ComplexControl();

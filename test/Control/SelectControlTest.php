@@ -77,7 +77,7 @@ class SelectControlTest extends AbcTestCase
   public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new SelectControl('name');
@@ -154,7 +154,7 @@ class SelectControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new SelectControl('cnt_id');
@@ -179,7 +179,7 @@ class SelectControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => 3, 'cnt_name' => 'LU'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new SelectControl('cnt_id');

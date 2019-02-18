@@ -46,7 +46,7 @@ class InvisibleControlTest extends AbcTestCase
   public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new InvisibleControl('name');
@@ -67,7 +67,7 @@ class InvisibleControlTest extends AbcTestCase
   private function setupForm1(): TestForm
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new InvisibleControl('name');

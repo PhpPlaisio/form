@@ -21,7 +21,7 @@ class TextAreaControlTest extends AbcTestCase
   public function testPrefixAndPostfix(): void
   {
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextAreaControl('name');
@@ -47,7 +47,7 @@ class TextAreaControlTest extends AbcTestCase
     $_POST['test'] = '  Hello    World!   ';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextAreaControl('test');
@@ -78,7 +78,7 @@ class TextAreaControlTest extends AbcTestCase
     $_POST['test'] = 'Hello World!';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextAreaControl('test');

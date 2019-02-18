@@ -33,7 +33,7 @@ class HiddenControlTest extends SimpleControlTest
     $_POST['test'] = 'New value';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new HiddenControl('test');
@@ -57,7 +57,7 @@ class HiddenControlTest extends SimpleControlTest
     $_POST['test'] = '  Hello    World!   ';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new HiddenControl('test');

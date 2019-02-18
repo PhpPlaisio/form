@@ -248,7 +248,7 @@ class RadiosControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadiosControl('cnt_id');
@@ -272,7 +272,7 @@ class RadiosControlTest extends AbcTestCase
     $countries[] = ['cnt_id' => 3, 'cnt_name' => 'LU'];
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadiosControl('cnt_id');

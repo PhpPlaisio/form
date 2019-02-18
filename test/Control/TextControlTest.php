@@ -25,7 +25,7 @@ class TextControlTest extends SimpleControlTest
     $_POST['birthday'] = '10.04.1966';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextControl('birthday');
@@ -56,7 +56,7 @@ class TextControlTest extends SimpleControlTest
     $_POST['test'] = '  Hello    World!   ';
 
     $form     = new TestForm();
-    $fieldset = new FieldSet('');
+    $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new TextControl('test');
