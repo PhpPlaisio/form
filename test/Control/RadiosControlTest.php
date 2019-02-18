@@ -15,30 +15,54 @@ class RadiosControlTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test setValues.
+   * Test cases for setValue.
+   *
+   * @return array[]
    */
-  public function setValuesTest($value): void
+  public function setValueCases()
   {
-    $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
-    $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
-    $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
+    $cases = [];
 
-    $form     = new TestForm();
-    $fieldset = new FieldSet('');
-    $form->addFieldSet($fieldset);
+    // Setting the value to null and no value is been posted must result in null for the value of the form control.
+    $cases[] = ['value'     => null,
+                'submitted' => null,
+                'expected'  => null];
 
-    $input = new RadiosControl('cnt_id');
-    $input->setOptions($countries, 'cnt_id', 'cnt_name');
-    $fieldset->addFormControl($input);
+    // Setting the value to empty string and no value is been posted must result in null for the value of the form
+    // control.
+    $cases[] = ['value'     => '',
+                'submitted' => null,
+                'expected'  => null];
 
-    // Set value to empty string.
-    $input->setValue($value);
-    self::assertSame($value, $form->getSetValues()['cnt_id']);
+    // The type of the key must be returned not the type passed to setValue or the type of the submitted value.
+    $cases[] = ['value'     => '2',
+                'submitted' => '2',
+                'expected'  => '2'];
+    $cases[] = ['value'     => 2,
+                'submitted' => '2',
+                'expected'  => '2'];
+    $cases[] = ['value'     => '2',
+                'submitted' => 2,
+                'expected'  => '2'];
+    $cases[] = ['value'     => 2,
+                'submitted' => 2,
+                'expected'  => '2'];
 
-    $form->loadSubmittedValues();
+    // The type of the key must be returned not the type passed to setValue nor the type of the submitted value.
+    $cases[] = ['value'     => '4',
+                'submitted' => '4',
+                'expected'  => 4];
+    $cases[] = ['value'     => 4,
+                'submitted' => '4',
+                'expected'  => 4];
+    $cases[] = ['value'     => '4',
+                'submitted' => 4,
+                'expected'  => 4];
+    $cases[] = ['value'     => 4,
+                'submitted' => 4,
+                'expected'  => 4];
 
-    $values = $form->getValues();
-    self::assertNull($values['cnt_id']);
+    return $cases;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -134,20 +158,38 @@ class RadiosControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test setValues with null.
+   * Tests for setValue.
+   *
+   * @param mixed $value     The new value for the radios form control.
+   * @param mixed $submitted The submitted value.
+   * @param mixed $expected  The expected value.
+   *
+   * @dataProvider setValueCases
    */
-  public function testSetValues01(): void
+  public function testSetValue($value, $submitted, $expected)
   {
-    $this->setValuesTest(null);
-  }
+    $_POST['cnt_id'] = $submitted;
 
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test setValues with null.
-   */
-  public function testSetValues02(): void
-  {
-    $this->setValuesTest('');
+    $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
+    $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
+    $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
+    $countries[] = ['cnt_id' => 4, 'cnt_name' => 'DE'];
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new RadiosControl('cnt_id');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $fieldset->addFormControl($input);
+
+    $input->setValue($value);
+    self::assertSame($value, $form->getSetValues()['cnt_id']);
+
+    $form->loadSubmittedValues();
+
+    $values = $form->getValues();
+    self::assertSame($expected, $values['cnt_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

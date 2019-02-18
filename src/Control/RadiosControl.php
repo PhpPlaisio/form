@@ -274,12 +274,12 @@ class RadiosControl extends Control
   /**
    * Sets the value of this form control.
    *
-   * @param string|null $value The new value for the form control.
+   * @param mixed $value The new value for the form control.
    *
    * @since 1.0.0
    * @api
    */
-  public function setValue(?string $value): void
+  public function setValue($value): void
   {
     $this->value = $value;
   }
