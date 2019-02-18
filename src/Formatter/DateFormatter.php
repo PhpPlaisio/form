@@ -42,15 +42,17 @@ class DateFormatter implements Formatter
    * If the machine value is a valid date returns the date formatted according the format specifier. Otherwise,
    * returns the machine value unchanged.
    *
-   * @param string $value The machine value.
+   * @param string|null $value The machine value.
    *
-   * @return string
+   * @return string|null
    *
    * @since 1.0.0
    * @api
    */
   public function format($value)
   {
+    if ($value===null) return null;
+
     $match = preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value, $parts);
     $valid = ($match && checkdate((int)$parts[2], (int)$parts[3], (int)$parts[1]));
     if ($valid)
@@ -61,10 +63,8 @@ class DateFormatter implements Formatter
 
       return $date->format($this->format);
     }
-    else
-    {
-      return $value;
-    }
+
+    return $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

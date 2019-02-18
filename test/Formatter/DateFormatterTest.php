@@ -12,6 +12,9 @@ use SetBased\Abc\Form\Test\AbcTestCase;
 class DateFormatterTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * A formatter must return the original value when the value is not valid.
+   */
   public function testInvalidDate1(): void
   {
     $text      = '1966-11-31';
@@ -22,6 +25,9 @@ class DateFormatterTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * A formatter must return the original value when the value is not valid.
+   */
   public function testInvalidDate2(): void
   {
     $text      = 'This not a date.';
@@ -32,12 +38,39 @@ class DateFormatterTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with valid date.
+   */
   public function testValidDate(): void
   {
     $formatter = new DateFormatter('d-m-Y');
     $value     = $formatter->format('1966-04-10');
 
     self::assertEquals('10-04-1966', $value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with valid date.
+   */
+  public function testEmptyDate(): void
+  {
+    $formatter = new DateFormatter('d-m-Y');
+    $value     = $formatter->format('');
+
+    self::assertEquals('', $value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with valid date.
+   */
+  public function testNullDate(): void
+  {
+    $formatter = new DateFormatter('d-m-Y');
+    $value     = $formatter->format(null);
+
+    self::assertNull($value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
