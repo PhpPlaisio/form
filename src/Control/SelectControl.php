@@ -14,25 +14,11 @@ class SelectControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The key in $options holding the disabled flag for the options in this select box.
-   *
-   * @var string|null
-   */
-  protected $disabledKey;
-
-  /**
    * If set the first option in the select box with be an option with an empty label with value $emptyOption.
    *
    * @var string|null
    */
   protected $emptyOption;
-
-  /**
-   * The key in $options holding the HTML ID for the options in this select box.
-   *
-   * @var string|null
-   */
-  protected $idKey;
 
   /**
    * The key in $options holding the keys for the options in this select box.
@@ -49,6 +35,13 @@ class SelectControl extends SimpleControl
   protected $labelKey;
 
   /**
+   * The map from the keys in the options to attribute names of the option elements.
+   *
+   * @var array|null
+   */
+  protected $optionAttributesMap;
+
+  /**
    * The options of this select box.
    *
    * @var array[]|null
@@ -63,6 +56,7 @@ class SelectControl extends SimpleControl
   protected $optionsObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    *
@@ -78,22 +72,20 @@ class SelectControl extends SimpleControl
     $html .= Html::generateTag('select', $this->attributes);
 
     // Add an empty option, if necessary.
-    if (isset($this->emptyOption))
+    if ($this->emptyOption!==null)
     {
-      $html .= '<option';
-      $html .= Html::generateAttribute('value', $this->emptyOption);
-      $html .= '> </option>';
+      $optionAttributes = ['value'    => $this->emptyOption,
+                           'selected' => ((string)$this->value===(string)$this->emptyOption)];
+
+      $html .= Html::generateElement('option', $optionAttributes, ' ');
     }
 
     if (is_array($this->options))
     {
-      $optionAttributes = ['value'    => '',
-                           'selected' => false,
-                           'disabled' => false,
-                           'id'       => null];
-
       foreach ($this->options as $option)
       {
+        $optionAttributes = $this->optionAttributes($option);
+
         // Get the (database) key of the option.
         $key = $option[$this->keyKey];
 
@@ -102,8 +94,6 @@ class SelectControl extends SimpleControl
 
         $optionAttributes['value']    = $code;
         $optionAttributes['selected'] = ((string)$this->value===(string)$key);
-        $optionAttributes['disabled'] = (isset($this->disabledKey) && !empty($option[$this->disabledKey]));
-        $optionAttributes['id']       = (isset($this->idKey) && isset($option[$this->idKey])) ? $option[$this->idKey] : null;
 
         $html .= Html::generateElement('option', $optionAttributes, $option[$this->labelKey]);
       }
@@ -146,30 +136,37 @@ class SelectControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the map from the keys in the options to attribute names of the option element.
+   *
+   * Note the following attributes will ignored:
+   * <ul>
+   * <li> checked
+   * <li> value
+   * </ul>
+   *
+   * @param array|null $map The map.
+   */
+  public function setOptionAttributesMap(?array $map)
+  {
+    $this->optionAttributesMap = $map;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets the options for this select box.
    *
-   * @param array[]|null $options     The options of this select box.
-   * @param string       $keyKey      The key holding the keys of the options.
-   * @param string       $labelKey    The key holding the labels for the options.
-   * @param string|null  $disabledKey The key holding the disabled flag. Any
-   *                                  [non-empty](http://php.net/manual/function.empty.php) value results that the
-   *                                  option is disabled.
-   * @param string|null  $idKey       The key holding the HTML ID attribute of the options.
+   * @param array[]|null $options  The options of this select box.
+   * @param string       $keyKey   The key holding the keys of the options.
+   * @param string       $labelKey The key holding the labels for the options.
    *
    * @since 1.0.0
    * @api
    */
-  public function setOptions(?array &$options,
-                             string $keyKey,
-                             string $labelKey,
-                             ?string $disabledKey = null,
-                             ?string $idKey = null)
+  public function setOptions(?array &$options, string $keyKey, string $labelKey)
   {
-    $this->options     = $options;
-    $this->keyKey      = $keyKey;
-    $this->labelKey    = $labelKey;
-    $this->disabledKey = $disabledKey;
-    $this->idKey       = $idKey;
+    $this->options  = $options;
+    $this->keyKey   = $keyKey;
+    $this->labelKey = $labelKey;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -204,11 +201,11 @@ class SelectControl extends SimpleControl
       // Normalize the submitted value as a string.
       $newValue = (string)$submittedValues[$submitKey];
 
-      if (isset($this->emptyOption) && $newValue===(string)$this->emptyOption)
+      if ($this->emptyOption!==null && $newValue===$this->emptyOption)
       {
         $this->value                  = null;
         $whiteListValues[$this->name] = null;
-        if ($value!=='')
+        if ($value!=='' && $value!==$this->emptyOption)
         {
           $changedInputs[$this->name] = $this;
         }
@@ -223,9 +220,9 @@ class SelectControl extends SimpleControl
             $key = $option[$this->keyKey];
 
             // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
+            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : (string)$key;
 
-            if ($newValue===(string)$code)
+            if ($newValue===$code)
             {
               // If the original value differs from the submitted value then the form control has been changed.
               if ($value!==(string)$key)
@@ -237,7 +234,6 @@ class SelectControl extends SimpleControl
               $this->value                  = $key;
               $whiteListValues[$this->name] = $key;
 
-              // Leave the loop.
               break;
             }
           }
@@ -249,7 +245,7 @@ class SelectControl extends SimpleControl
       // No value has been submitted.
       $this->value                  = null;
       $whiteListValues[$this->name] = null;
-      if ($value!==(string)$this->emptyOption)
+      if ($value!=='' && $value!==(string)$this->emptyOption)
       {
         $changedInputs[$this->name] = $this;
       }
@@ -261,6 +257,29 @@ class SelectControl extends SimpleControl
       // In this case we ignore this and assume the default value has been submitted.
       $whiteListValues[$this->name] = $this->value;
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the attributes for the option element.
+   *
+   * @param array $option The option.
+   *
+   * @return array
+   */
+  private function optionAttributes(array $option): array
+  {
+    $attributes = [];
+
+    if (is_array($this->optionAttributesMap))
+    {
+      foreach ($this->optionAttributesMap as $key => $name)
+      {
+        if (isset($option[$key])) $attributes[$name] = $option[$key];
+      }
+    }
+
+    return $attributes;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
