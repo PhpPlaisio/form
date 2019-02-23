@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\TrimWhitespaceCleaner;
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -39,7 +40,7 @@ class TextAreaControl extends SimpleControl
 
     $html = $this->prefix;
     $html .= $this->getHtmlPrefixLabel();
-    $html .= Html::generateElement('textarea', $this->attributes, (string)$this->value);
+    $html .= Html::generateElement('textarea', $this->attributes, Cast::toOptString($this->value));
     $html .= $this->getHtmlPostfixLabel();
     $html .= $this->postfix;
 

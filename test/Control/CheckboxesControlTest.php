@@ -407,6 +407,29 @@ class CheckboxesControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test labels are casted to strings.
+   */
+  public function testWithNumericValues(): void
+  {
+    $days[] = ['day_id' => '1', 'days' => 1];
+    $days[] = ['day_id' => '2', 'days' => 2];
+    $days[] = ['day_id' => '3', 'days' => 3];
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxesControl('day_id');
+    $input->setOptions($days, 'day_id', 'days');
+    $fieldset->addFormControl($input);
+
+    $html = $form->getHtml();
+
+    self::assertNotEmpty($html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Setups a form with a select form control.
    */
   private function setupForm1(): TestForm

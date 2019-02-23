@@ -97,6 +97,25 @@ class TextAreaControlTest extends AbcTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test labels are casted to strings.
+   */
+  public function testWithNumericValues(): void
+  {
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new TextAreaControl('day_id');
+    $input->setValue(pi());
+    $fieldset->addFormControl($input);
+
+    $html = $form->getHtml();
+
+    self::assertNotEmpty($html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
