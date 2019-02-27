@@ -77,9 +77,6 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function findFormControlByName(string $name): ?Control
   {
-    // Name must be string. Convert name to the string.
-    $name = (string)$name;
-
     foreach ($this->controls as $control)
     {
       if ($control->name===$name) return $control;

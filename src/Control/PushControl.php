@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 use SetBased\Exception\LogicException;
 
@@ -95,7 +96,8 @@ class PushControl extends SimpleControl
   {
     $submitKey = $this->submitKey();
 
-    if (isset($submittedValues[$submitKey]) && (string)$submittedValues[$submitKey]===(string)$this->value)
+    if (isset($submittedValues[$submitKey]) &&
+      Cast::toManString($submittedValues[$submitKey], '')===Cast::toManString($this->value, ''))
     {
       // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
       // So, skip the following code.
@@ -113,7 +115,8 @@ class PushControl extends SimpleControl
   {
     $submitKey = $this->submitKey();
 
-    if (isset($submittedValues[$submitKey]) && (string)$submittedValues[$submitKey]===(string)$this->value)
+    if (isset($submittedValues[$submitKey]) &&
+      Cast::toManString($submittedValues[$submitKey], '')===Cast::toManString($this->value, ''))
     {
       if ($this->method===null)
       {

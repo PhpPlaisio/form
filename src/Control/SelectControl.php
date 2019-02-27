@@ -56,7 +56,6 @@ class SelectControl extends SimpleControl
   protected $optionsObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritdoc
    *
@@ -71,11 +70,14 @@ class SelectControl extends SimpleControl
     $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateTag('select', $this->attributes);
 
+    // Normalize current value as a string.
+    $valueAsString = Cast::toManString($this->value, '');
+
     // Add an empty option, if necessary.
     if ($this->emptyOption!==null)
     {
       $optionAttributes = ['value'    => $this->emptyOption,
-                           'selected' => ((string)$this->value===(string)$this->emptyOption)];
+                           'selected' => ($valueAsString===Cast::toManString($this->emptyOption, ''))];
 
       $html .= Html::generateElement('option', $optionAttributes, ' ');
     }
@@ -87,13 +89,14 @@ class SelectControl extends SimpleControl
         $optionAttributes = $this->optionAttributes($option);
 
         // Get the (database) key of the option.
-        $key = $option[$this->keyKey];
+        $key         = $option[$this->keyKey];
+        $keyAsString = Cast::toManString($key, '');
 
         // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
 
         $optionAttributes['value']    = $code;
-        $optionAttributes['selected'] = ((string)$this->value===(string)$key);
+        $optionAttributes['selected'] = ($valueAsString===$keyAsString);
 
         $html .= Html::generateElement('option', $optionAttributes, Cast::toOptString($option[$this->labelKey]));
       }
@@ -194,18 +197,18 @@ class SelectControl extends SimpleControl
     $submitKey = $this->submitKey();
 
     // Normalize current value as a string.
-    $value = (string)$this->value;
+    $valueAsString = Cast::toManString($this->value, '');
 
     if (isset($submittedValues[$submitKey]))
     {
       // Normalize the submitted value as a string.
-      $newValue = (string)$submittedValues[$submitKey];
+      $newValueAsString = Cast::toManString($submittedValues[$submitKey], '');
 
-      if ($this->emptyOption!==null && $newValue===$this->emptyOption)
+      if ($this->emptyOption!==null && $newValueAsString===$this->emptyOption)
       {
         $this->value                  = null;
         $whiteListValues[$this->name] = null;
-        if ($value!=='' && $value!==$this->emptyOption)
+        if ($valueAsString!=='' && $valueAsString!==$this->emptyOption)
         {
           $changedInputs[$this->name] = $this;
         }
@@ -217,15 +220,16 @@ class SelectControl extends SimpleControl
           foreach ($this->options as $option)
           {
             // Get the key of the option.
-            $key = $option[$this->keyKey];
+            $key         = $option[$this->keyKey];
+            $keyAsString = Cast::toManString($key, '');
 
             // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : (string)$key;
+            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
 
-            if ($newValue===$code)
+            if ($newValueAsString===$code)
             {
               // If the original value differs from the submitted value then the form control has been changed.
-              if ($value!==(string)$key)
+              if ($valueAsString!==$keyAsString)
               {
                 $changedInputs[$this->name] = $this;
               }
@@ -246,7 +250,7 @@ class SelectControl extends SimpleControl
       // No value has been submitted or a none white listed value has been submitted
       $this->value                  = null;
       $whiteListValues[$this->name] = null;
-      if ($value!=='' && $value!==(string)$this->emptyOption)
+      if ($valueAsString!=='' && $valueAsString!==Cast::toManString($this->emptyOption, ''))
       {
         $changedInputs[$this->name] = $this;
       }

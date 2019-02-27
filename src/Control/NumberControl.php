@@ -5,6 +5,7 @@ namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
 use SetBased\Abc\Form\Validator\NumberValidator;
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -68,7 +69,7 @@ class NumberControl extends SimpleControl
     // Clean the submitted value, if we have a cleaner.
     if ($this->cleaner) $newValue = $this->cleaner->clean($newValue);
 
-    if ((string)$this->value!==(string)$newValue)
+    if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
     {
       $changedInputs[$this->name] = $this;
       $this->value                = $newValue;

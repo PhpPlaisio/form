@@ -85,6 +85,7 @@ class RadiosControl extends Control
   protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    *
@@ -98,6 +99,9 @@ class RadiosControl extends Control
 
     if (is_array($this->options))
     {
+      // Normalize current value as a string.
+      $valueAsString = Cast::toManString($this->value, '');
+
       foreach ($this->options as $option)
       {
         $inputAttributes = $this->inputAttributes($option);
@@ -105,11 +109,12 @@ class RadiosControl extends Control
 
         $labelAttributes['for'] = $inputAttributes['id'];
 
-        $key   = $option[$this->keyKey];
-        $value = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
+        $key         = $option[$this->keyKey];
+        $keyAsString = Cast::toManString($key, '');
+        $value       = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
         $inputAttributes['value']   = $value;
-        $inputAttributes['checked'] = ((string)$this->value===(string)$key);
+        $inputAttributes['checked'] = ($valueAsString===$keyAsString);
 
         $html .= Html::generateVoidElement('input', $inputAttributes);
 
@@ -306,25 +311,26 @@ class RadiosControl extends Control
     $submitKey = $this->submitKey();
 
     // Normalize current value as a string.
-    $value = (string)$this->value;
+    $valueAsString = Cast::toManString($this->value, '');
 
     if (isset($submittedValues[$submitKey]))
     {
       // Normalize the submitted value as a string.
-      $newValue = (string)$submittedValues[$submitKey];
+      $newValueAsString = Cast::toManString($submittedValues[$submitKey], '');
 
       foreach ($this->options as $option)
       {
         // Get the (database) ID of the option.
-        $key = $option[$this->keyKey];
+        $key         = $option[$this->keyKey];
+        $keyAsString = Cast::toManString($key, '');
 
         // If an obfuscator is installed compute the obfuscated code of the radio button name.
-        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : (string)$key;
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
 
-        if ($newValue===$code)
+        if ($newValueAsString===$code)
         {
           // If the original value differs from the submitted value then the form control has been changed.
-          if ($value!==(string)$key)
+          if ($valueAsString!==$keyAsString)
           {
             $changedInputs[$this->name] = $this;
           }
@@ -344,7 +350,7 @@ class RadiosControl extends Control
       // No value has been submitted or a none white listed value has been submitted
       $this->value                  = null;
       $whiteListValues[$this->name] = null;
-      if ($value!=='')
+      if ($valueAsString!=='')
       {
         $changedInputs[$this->name] = $this;
       }

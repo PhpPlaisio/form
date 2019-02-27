@@ -159,7 +159,7 @@ class CheckboxesControl extends Control
     foreach ($this->options as $i => $option)
     {
       // Get the (database) ID of the option.
-      $key = (string)$option[$this->keyKey];
+      $key = $option[$this->keyKey];
 
       // Get the original value (i.e. the option is checked or not).
       $tmp[$key] = (!empty($option[$this->checkedKey]));

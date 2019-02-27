@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -25,7 +26,8 @@ class RadioControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     // A radio button is checked if and only if its value equals to the value of attribute value.
-    if (isset($this->attributes['value']) && ((string)$this->value===(string)$this->attributes['value']))
+    if (isset($this->attributes['value']) &&
+      (Cast::toManString($this->value, '')===Cast::toManString($this->attributes['value'], '')))
     {
       $this->attributes['checked'] = true;
     }
@@ -68,7 +70,8 @@ class RadioControl extends SimpleControl
     $submitKey = $this->submitKey();
     $newValue  = $submittedValues[$submitKey] ?? '';
 
-    if (isset($this->attributes['value']) && (string)$newValue===(string)$this->attributes['value'])
+    if (isset($this->attributes['value']) &&
+      Cast::toManString($newValue, '')===Cast::toManString($this->attributes['value'], ''))
     {
       if (empty($this->attributes['checked']))
       {

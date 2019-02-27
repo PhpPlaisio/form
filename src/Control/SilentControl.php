@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 
 /**
@@ -58,28 +59,13 @@ class SilentControl extends SimpleControl
   {
     $submitKey = $this->submitKey();
 
-    // Get the submitted value and clean it (if required).
-    if (isset($submittedValues[$submitKey]))
-    {
-      if ($this->cleaner)
-      {
-        $newValue = $this->cleaner->clean($submittedValues[$submitKey]);
-      }
-      else
-      {
-        $newValue = $submittedValues[$submitKey];
-      }
-    }
-    else
-    {
-      $newValue = null;
-    }
+    // Get the submitted value.
+    $newValue = $submittedValues[$submitKey] ?? null;
 
-    // Normalize old (original) value and new (submitted) value.
-    $oldValue = (string)$this->value;
-    $newValue = (string)$newValue;
+    // Clean the submitted value, if we have a cleaner.
+    if ($this->cleaner) $newValue = $this->cleaner->clean($newValue);
 
-    if ($oldValue!==$newValue)
+    if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
     {
       $this->value = $newValue;
     }
