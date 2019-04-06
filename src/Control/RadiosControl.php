@@ -6,7 +6,6 @@ namespace SetBased\Abc\Form\Control;
 use SetBased\Abc\Helper\Cast;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
-use SetBased\Exception\LogicException;
 
 /**
  * Class for an array of form controls of type [input:radio](http://www.w3schools.com/tags/tag_input.asp) with the same
@@ -92,12 +91,6 @@ class RadiosControl extends Control
   public function __construct(?string $name)
   {
     parent::__construct($name);
-
-    // A radios form control must have a name.
-    if ($this->name==='')
-    {
-      throw new LogicException('Name is empty');
-    }
 
     $this->attributes['class'] = 'radios';
   }
