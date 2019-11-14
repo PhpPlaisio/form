@@ -83,7 +83,7 @@ class HiddenControlTest extends SimpleControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name):SimpleControl
+  protected function getControl(string $name): SimpleControl
   {
     return new HiddenControl($name);
   }

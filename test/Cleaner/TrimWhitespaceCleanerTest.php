@@ -15,7 +15,7 @@ class TrimWhitespaceCleanerTest extends CleanerTest
   /**
    * @inheritdoc
    */
-  public function makeCleaner():Cleaner
+  public function makeCleaner(): Cleaner
   {
     return TrimWhitespaceCleaner::get();
   }

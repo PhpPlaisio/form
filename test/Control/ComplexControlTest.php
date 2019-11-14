@@ -29,7 +29,6 @@ class ComplexControlTest extends AbcTestCase
   private $originControl;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Test find FormControl by name.
    */

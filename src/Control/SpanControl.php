@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
 
 /**
  * A class for pseudo form controls for generating [span](http://www.w3schools.com/tags/tag_span.asp) elements inside

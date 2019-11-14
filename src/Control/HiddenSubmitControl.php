@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Cast;
 use SetBased\Exception\LogicException;
+use SetBased\Helper\Cast;
 
 /**
  * Class for mimicking a hidden submit button.

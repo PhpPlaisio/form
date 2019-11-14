@@ -13,6 +13,18 @@ class DateFormatterTest extends AbcTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test with valid date.
+   */
+  public function testEmptyDate(): void
+  {
+    $formatter = new DateFormatter('d-m-Y');
+    $value     = $formatter->format('');
+
+    self::assertEquals('', $value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * A formatter must return the original value when the value is not valid.
    */
   public function testInvalidDate1(): void
@@ -41,36 +53,24 @@ class DateFormatterTest extends AbcTestCase
   /**
    * Test with valid date.
    */
-  public function testValidDate(): void
-  {
-    $formatter = new DateFormatter('d-m-Y');
-    $value     = $formatter->format('1966-04-10');
-
-    self::assertEquals('10-04-1966', $value);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with valid date.
-   */
-  public function testEmptyDate(): void
-  {
-    $formatter = new DateFormatter('d-m-Y');
-    $value     = $formatter->format('');
-
-    self::assertEquals('', $value);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with valid date.
-   */
   public function testNullDate(): void
   {
     $formatter = new DateFormatter('d-m-Y');
     $value     = $formatter->format(null);
 
     self::assertNull($value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with valid date.
+   */
+  public function testValidDate(): void
+  {
+    $formatter = new DateFormatter('d-m-Y');
+    $value     = $formatter->format('1966-04-10');
+
+    self::assertEquals('10-04-1966', $value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

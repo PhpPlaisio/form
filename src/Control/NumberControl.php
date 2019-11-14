@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use Plaisio\Helper\Html;
 use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
 use SetBased\Abc\Form\Validator\NumberValidator;
-use SetBased\Abc\Helper\Cast;
-use SetBased\Abc\Helper\Html;
+use SetBased\Helper\Cast;
 
 /**
  * Class for form controls of type [input:number](http://www.w3schools.com/tags/tag_input.asp).

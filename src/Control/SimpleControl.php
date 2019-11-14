@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use Plaisio\Helper\Html;
 use SetBased\Abc\Form\Cleaner\Cleaner;
 use SetBased\Abc\Form\Formatter\Formatter;
-use SetBased\Abc\Helper\Html;
 use SetBased\Exception\LogicException;
 
 /**

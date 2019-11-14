@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use Plaisio\Helper\Html;
 use SetBased\Abc\Form\Legend;
-use SetBased\Abc\Helper\Html;
 
 /**
  * Class for [fieldsets](http://www.w3schools.com/tags/tag_fieldset.asp).

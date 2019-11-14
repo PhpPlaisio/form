@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
 
 /**
  * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp), however the submitted

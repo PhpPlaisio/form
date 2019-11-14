@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Cleaner;
 
-use SetBased\Abc\Helper\Url;
+use Plaisio\Helper\Url;
 
 /**
  * Cleaner for normalizing URLs.

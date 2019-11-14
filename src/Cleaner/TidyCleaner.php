@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Cleaner;
 
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
 use SetBased\Exception\FallenException;
 
 /**
@@ -107,7 +107,7 @@ class TidyCleaner implements Cleaner
     $value = trim(tidy_get_output($tidy));
 
     // In some cases Tidy returns an empty paragraph only.
-    if (preg_match('/^(([\ \r\n\t])|(<p>)|(<\/p>)|(&nbsp;))*$/', $value)==1)
+    if (preg_match('/^(([ \r\n\t])|(<p>)|(<\/p>)|(&nbsp;))*$/', $value)==1)
     {
       $value = null;
     }

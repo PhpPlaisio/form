@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Cast;
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
 use SetBased\Abc\Obfuscator\Obfuscator;
+use SetBased\Helper\Cast;
 
 /**
  * Class for form controls of with multiple checkboxes.
@@ -124,7 +124,7 @@ class CheckboxesControl extends Control
         $labelAttributes['for'] = $inputAttributes['id'];
 
         // Get the (database) key of the option.
-        $key  = $option[$this->keyKey];
+        $key = $option[$this->keyKey];
 
         // If an obfuscator is installed compute the obfuscated code of the (database) ID.
         $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;

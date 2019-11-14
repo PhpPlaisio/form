@@ -222,29 +222,6 @@ class RadiosControlTest extends AbcTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test labels are casted to strings.
-   */
-  public function testWithNumericValues():void
-  {
-    $days[] = ['day_id' => '1', 'days' => 1];
-    $days[] = ['day_id' => '2', 'days' => 2];
-    $days[] = ['day_id' => '3', 'days' => 3];
-
-    $form     = new TestForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new RadiosControl('day_id');
-    $input->setOptions($days, 'day_id', 'days');
-    $fieldset->addFormControl($input);
-
-    $html = $form->getHtml();
-
-    self::assertNotEmpty($html);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Only white listed values must be loaded.
    */
   public function testWhiteListed1(): void
@@ -275,6 +252,29 @@ class RadiosControlTest extends AbcTestCase
     self::assertArrayHasKey('cnt_id', $values);
     self::assertNull($values['cnt_id']);
     self::assertArrayHasKey('cnt_id', $form->getChangedControls());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test labels are casted to strings.
+   */
+  public function testWithNumericValues(): void
+  {
+    $days[] = ['day_id' => '1', 'days' => 1];
+    $days[] = ['day_id' => '2', 'days' => 2];
+    $days[] = ['day_id' => '3', 'days' => 3];
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new RadiosControl('day_id');
+    $input->setOptions($days, 'day_id', 'days');
+    $fieldset->addFormControl($input);
+
+    $html = $form->getHtml();
+
+    self::assertNotEmpty($html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

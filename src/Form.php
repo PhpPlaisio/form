@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form;
 
+use Plaisio\Exception\BadRequestException;
 use SetBased\Abc\Abc;
-use SetBased\Abc\Exception\BadRequestException;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\SilentControl;

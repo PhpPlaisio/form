@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
 
 /**
  * A class for pseudo form controls for generating arbitrary HTML code inside forms.

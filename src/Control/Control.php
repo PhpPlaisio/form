@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use Plaisio\Helper\HtmlElement;
 use SetBased\Abc\Form\Validator\CompoundValidator;
 use SetBased\Abc\Form\Validator\Validator;
-use SetBased\Abc\Helper\Cast;
-use SetBased\Abc\HtmlElement;
 use SetBased\Abc\Obfuscator\Obfuscator;
+use SetBased\Helper\Cast;
 
 /**
  * Abstract parent class for form controls.
@@ -226,11 +226,11 @@ abstract class Control extends HtmlElement
    * Sets the initial value(s) of this form control. The values of form controls for which no explicit value is set are
    * left unchanged.
    *
-   * @see   mergeValuesBase
-   *
    * @param array $values The initial values as nested arrays.
    *
    * @return void
+   *
+   * @see   mergeValuesBase
    *
    * @since 1.0.0
    * @api
@@ -301,11 +301,11 @@ abstract class Control extends HtmlElement
    * Sets the initial value(s) of this form control. If a value for a form control is not specified the value of this
    * form control will be set to null.
    *
-   * @see mergeValuesBase
-   *
    * @param array|null $values The initial values as nested arrays.
    *
    * @return void
+   * @see mergeValuesBase
+   *
    */
   abstract public function setValuesBase(?array $values): void;
 

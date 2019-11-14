@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Validator;
 
+use Plaisio\Helper\Html;
 use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Helper\Html;
 
 /**
  * Validator for validating the string length of the value of a form control.

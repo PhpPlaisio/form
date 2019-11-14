@@ -15,7 +15,7 @@ class TidyCleanerTest extends CleanerTest
   /**
    * @inheritdoc
    */
-  public function makeCleaner():Cleaner
+  public function makeCleaner(): Cleaner
   {
     return TidyCleaner::get();
   }
