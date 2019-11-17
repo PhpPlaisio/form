@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\Html;
-use SetBased\Abc\Obfuscator\Obfuscator;
+use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
 
 /**

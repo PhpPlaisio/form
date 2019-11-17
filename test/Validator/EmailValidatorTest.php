@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Validator;
+namespace Plaisio\Form\Test\Validator;
 
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\Test\AbcTestCase;
-use SetBased\Abc\Form\Test\TestForm;
-use SetBased\Abc\Form\Validator\EmailValidator;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestForm;
+use Plaisio\Form\Validator\EmailValidator;
 
 /**
  * Test cases for class EmailValidator.
  */
-class EmailValidatorTest extends AbcTestCase
+class EmailValidatorTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

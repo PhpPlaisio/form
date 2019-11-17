@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Cleaner;
+namespace Plaisio\Form\Cleaner;
 
 use Plaisio\Helper\Url;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
 /**
  * Class for form controls of type [input:submit](http://www.w3schools.com/tags/tag_input.asp).

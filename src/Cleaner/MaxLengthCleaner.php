@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Cleaner;
+namespace Plaisio\Form\Cleaner;
 
 /**
  * Cleaner for trimming down the length of string to a maximum.

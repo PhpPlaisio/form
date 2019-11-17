@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Validator;
+namespace Plaisio\Form\Test\Validator;
 
-use SetBased\Abc\Form\Control\DateControl;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Test\AbcTestCase;
-use SetBased\Abc\Form\Test\TestForm;
-use SetBased\Abc\Form\Validator\DateValidator;
+use Plaisio\Form\Control\DateControl;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestForm;
+use Plaisio\Form\Validator\DateValidator;
 
 /**
  * Test cases for class DateValidator.
  */
-class DateValidatorTest extends AbcTestCase
+class DateValidatorTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

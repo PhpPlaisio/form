@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Cleaner;
+namespace Plaisio\Form\Cleaner;
 
 /**
  * Cleaner for cleaning and transforming dates to ISO 8601 machine format.

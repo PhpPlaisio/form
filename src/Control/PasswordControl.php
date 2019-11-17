@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\Html;
-use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
+use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use SetBased\Helper\Cast;
 
 /**

@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Validator;
+namespace Plaisio\Form\Test\Validator;
 
-use SetBased\Abc\Form\Control\CompoundControl;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\Test\AbcTestCase;
-use SetBased\Abc\Form\Test\TestForm;
-use SetBased\Abc\Form\Validator\ProxyCompoundValidator;
+use Plaisio\Form\Control\CompoundControl;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestForm;
+use Plaisio\Form\Validator\ProxyCompoundValidator;
 
 /**
  * Test cases for class ProxyCompoundValidator.
  */
-class ProxyCompoundValidatorTest extends AbcTestCase
+class ProxyCompoundValidatorTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

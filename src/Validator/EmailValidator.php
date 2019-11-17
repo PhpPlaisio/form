@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Validator;
+namespace Plaisio\Form\Validator;
 
-use SetBased\Abc\Form\Control\Control;
+use Plaisio\Form\Control\Control;
 
 /**
  * Validator for email addresses.

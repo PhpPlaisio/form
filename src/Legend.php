@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form;
+namespace Plaisio\Form;
 
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;

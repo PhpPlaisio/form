@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Control;
+namespace Plaisio\Form\Test\Control;
 
-use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\TextAreaControl;
-use SetBased\Abc\Form\Test\AbcTestCase;
-use SetBased\Abc\Form\Test\TestForm;
+use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\TextAreaControl;
+use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class TextAreaControl.
  */
-class TextAreaControlTest extends AbcTestCase
+class TextAreaControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

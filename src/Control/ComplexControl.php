@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
-use SetBased\Abc\Form\Cleaner\Cleaner;
+use Plaisio\Form\Cleaner\Cleaner;
 use SetBased\Exception\LogicException;
 
 /**

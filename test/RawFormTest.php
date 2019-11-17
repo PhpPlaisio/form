@@ -1,23 +1,23 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test;
+namespace Plaisio\Form\Test;
 
-use SetBased\Abc\Form\Control\ButtonControl;
-use SetBased\Abc\Form\Control\CheckboxesControl;
-use SetBased\Abc\Form\Control\ComplexControl;
-use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\ForceSubmitControl;
-use SetBased\Abc\Form\Control\HiddenSubmitControl;
-use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\RawForm;
+use Plaisio\Form\Control\ButtonControl;
+use Plaisio\Form\Control\CheckboxesControl;
+use Plaisio\Form\Control\ComplexControl;
+use Plaisio\Form\Control\Control;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
+use Plaisio\Form\Control\HiddenSubmitControl;
+use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 
 /**
  * Test cases for class RawForm.
  */
-class RawFormTest extends AbcTestCase
+class RawFormTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

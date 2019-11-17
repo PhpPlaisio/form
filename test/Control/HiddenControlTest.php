@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Control;
+namespace Plaisio\Form\Test\Control;
 
-use SetBased\Abc\Form\Cleaner\PruneWhitespaceCleaner;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\HiddenControl;
-use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\Test\TestForm;
+use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\HiddenControl;
+use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class HiddenControl.

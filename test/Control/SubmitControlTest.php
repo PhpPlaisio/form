@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Control;
+namespace Plaisio\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\Control\SubmitControl;
+use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Control\SubmitControl;
 
 /**
  * Unit tests for class SubmitControl.

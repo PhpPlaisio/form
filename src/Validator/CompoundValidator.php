@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Validator;
+namespace Plaisio\Form\Validator;
 
-use SetBased\Abc\Form\Control\CompoundControl;
+use Plaisio\Form\Control\CompoundControl;
 
 /**
  * Interface for defining classes that validate compound controls (e.g. a complex control or a form).

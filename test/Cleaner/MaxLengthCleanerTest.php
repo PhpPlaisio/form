@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Cleaner;
+namespace Plaisio\Form\Test\Cleaner;
 
-use SetBased\Abc\Form\Cleaner\Cleaner;
-use SetBased\Abc\Form\Cleaner\MaxLengthCleaner;
+use Plaisio\Form\Cleaner\Cleaner;
+use Plaisio\Form\Cleaner\MaxLengthCleaner;
 
 /**
  * Test cases for class MaxLengthCleaner.

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Cleaner;
+namespace Plaisio\Form\Test\Cleaner;
 
 use ReflectionClass;
-use SetBased\Abc\Form\Cleaner\AmbiguityCleaner;
-use SetBased\Abc\Form\Cleaner\Cleaner;
+use Plaisio\Form\Cleaner\AmbiguityCleaner;
+use Plaisio\Form\Cleaner\Cleaner;
 
 /**
  * Test cases for class AmbiguityCleaner.

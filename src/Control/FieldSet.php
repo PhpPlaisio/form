@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\Html;
-use SetBased\Abc\Form\Legend;
+use Plaisio\Form\Legend;
 
 /**
  * Class for [fieldsets](http://www.w3schools.com/tags/tag_fieldset.asp).

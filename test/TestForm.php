@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test;
+namespace Plaisio\Form\Test;
 
-use SetBased\Abc\Form\RawForm;
+use Plaisio\Form\RawForm;
 
 /**
  * Class for testing class RawForm.

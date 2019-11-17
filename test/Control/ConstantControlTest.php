@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Control;
+namespace Plaisio\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\ConstantControl;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Test\AbcTestCase;
-use SetBased\Abc\Form\Test\TestForm;
+use Plaisio\Form\Control\ConstantControl;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class ConstantControl.
  */
-class ConstantControlTest extends AbcTestCase
+class ConstantControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testForm1(): void

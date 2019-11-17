@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Cleaner;
+namespace Plaisio\Form\Test\Cleaner;
 
-use SetBased\Abc\Form\Cleaner\Cleaner;
-use SetBased\Abc\Form\Cleaner\TrimWhitespaceCleaner;
+use Plaisio\Form\Cleaner\Cleaner;
+use Plaisio\Form\Cleaner\TrimWhitespaceCleaner;
 
 /**
  * Test cases for class TrimWhitespaceCleaner.

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
-use SetBased\Abc\Form\Cleaner\DateCleaner;
-use SetBased\Abc\Form\Formatter\DateFormatter;
-use SetBased\Abc\Form\Validator\DateValidator;
+use Plaisio\Form\Cleaner\DateCleaner;
+use Plaisio\Form\Formatter\DateFormatter;
+use Plaisio\Form\Validator\DateValidator;
 
 /**
  * Class for form controls with jQuery UI datepicker.

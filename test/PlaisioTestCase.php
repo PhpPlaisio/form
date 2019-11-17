@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test;
+namespace Plaisio\Form\Test;
 
 use PHPUnit\Framework\TestCase;
-use SetBased\Abc\Abc;
-use SetBased\Abc\Request\CoreRequest;
+use Plaisio\Kernel\Nub;
+use Plaisio\Request\CoreRequest;
 
 /**
  * Parent class for all unit tests.
  */
-class AbcTestCase extends TestCase
+class PlaisioTestCase extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -18,7 +18,7 @@ class AbcTestCase extends TestCase
    */
   public static function setUpBeforeClass(): void
   {
-    Abc::$request = new CoreRequest();
+    Nub::$request = new CoreRequest();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

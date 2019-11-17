@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Cleaner;
+namespace Plaisio\Form\Test\Cleaner;
 
-use SetBased\Abc\Form\Cleaner\Cleaner;
-use SetBased\Abc\Form\Test\AbcTestCase;
+use Plaisio\Form\Cleaner\Cleaner;
+use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Abstract parent test cases for cleaners.
  */
-abstract class CleanerTest extends AbcTestCase
+abstract class CleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   protected $emptyValues = ['', false, null, ' ', '  ', "\n", "\n \n", "\n \t"];

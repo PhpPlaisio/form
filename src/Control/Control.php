@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\HtmlElement;
-use SetBased\Abc\Form\Validator\CompoundValidator;
-use SetBased\Abc\Form\Validator\Validator;
-use SetBased\Abc\Obfuscator\Obfuscator;
+use Plaisio\Form\Validator\CompoundValidator;
+use Plaisio\Form\Validator\Validator;
+use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
 
 /**

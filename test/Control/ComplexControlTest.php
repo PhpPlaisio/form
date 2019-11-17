@@ -1,21 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Control;
+namespace Plaisio\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\CheckboxControl;
-use SetBased\Abc\Form\Control\ComplexControl;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\Test\AbcTestCase;
-use SetBased\Abc\Form\Test\TestForm;
-use SetBased\Abc\Form\Validator\MandatoryValidator;
+use Plaisio\Form\Control\CheckboxControl;
+use Plaisio\Form\Control\ComplexControl;
+use Plaisio\Form\Control\Control;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestForm;
+use Plaisio\Form\Validator\MandatoryValidator;
 
 /**
  * Unit tests for class ComplexControl.
  */
-class ComplexControlTest extends AbcTestCase
+class ComplexControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,7 +39,7 @@ class ComplexControlTest extends AbcTestCase
 
     // Find form control by name. Must return object.
     $input = $form->findFormControlByName('street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     // Find form control by name what does not exist. Must return null.
     $input = $form->findFormControlByName('not_exists');
@@ -61,22 +62,22 @@ class ComplexControlTest extends AbcTestCase
 
     // Find form control by path. Must return object.
     $input = $form->findFormControlByPath('/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->findFormControlByPath('/post/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->findFormControlByPath('/post/zip-code');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->findFormControlByPath('/vacation/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->findFormControlByPath('/vacation/post/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->findFormControlByPath('/vacation/post/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     // Find form control by path what does not exist. Must return null.
     $input = $form->findFormControlByPath('/not_exists');
@@ -99,11 +100,11 @@ class ComplexControlTest extends AbcTestCase
 
     // Get form control by name. Must return object.
     $input = $form->getFormControlByName('vacation');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     /** @var ComplexControl $input */
     $input = $input->getFormControlByName('city2');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
     self::assertEquals('city2', $input->getName());
   }
 
@@ -117,19 +118,19 @@ class ComplexControlTest extends AbcTestCase
 
     // Get form control by path. Must return object.
     $input = $form->getFormControlByPath('/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->getFormControlByPath('/post/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->getFormControlByPath('/vacation/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->getFormControlByPath('/vacation/post/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
 
     $input = $form->getFormControlByPath('/vacation/post/street');
-    self::assertInstanceOf('\\SetBased\\Abc\\Form\\Control\\Control', $input);
+    self::assertInstanceOf(Control::class, $input);
   }
 
 

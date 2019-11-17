@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Control;
+namespace Plaisio\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Form\Test\AbcTestCase;
-use SetBased\Abc\Form\Test\TestForm;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestForm;
 
 /**
  *  Abstract parent class for unit tests for child classes of SimpleControl.
  */
-abstract class SimpleControlTest extends AbcTestCase
+abstract class SimpleControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

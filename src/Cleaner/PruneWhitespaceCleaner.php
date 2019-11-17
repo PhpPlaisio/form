@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Cleaner;
+namespace Plaisio\Form\Cleaner;
 
 /**
  * Cleaner for removing leading and training whitespace and replacing intermediate whitespace and multiple

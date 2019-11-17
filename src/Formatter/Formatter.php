@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Formatter;
+namespace Plaisio\Form\Formatter;
 
 /**
  * Interface for defining classes for formatting values from machine values the human readable values.

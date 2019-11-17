@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\Html;
-use SetBased\Abc\Form\Cleaner\Cleaner;
-use SetBased\Abc\Form\Formatter\Formatter;
+use Plaisio\Form\Cleaner\Cleaner;
+use Plaisio\Form\Formatter\Formatter;
 use SetBased\Exception\LogicException;
 
 /**

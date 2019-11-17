@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Cleaner;
+namespace Plaisio\Form\Cleaner;
 
 /**
  * Interface for defining classes for cleaning submitted values and translating formatted values to machine values.

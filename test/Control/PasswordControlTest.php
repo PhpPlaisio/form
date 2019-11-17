@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Control;
+namespace Plaisio\Form\Test\Control;
 
-use SetBased\Abc\Form\Control\PasswordControl;
-use SetBased\Abc\Form\Control\SimpleControl;
+use Plaisio\Form\Control\PasswordControl;
+use Plaisio\Form\Control\SimpleControl;
 
 /**
  * Unit tests for class PasswordControl.

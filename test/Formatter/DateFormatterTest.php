@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Test\Formatter;
+namespace Plaisio\Form\Test\Formatter;
 
-use SetBased\Abc\Form\Formatter\DateFormatter;
-use SetBased\Abc\Form\Test\AbcTestCase;
+use Plaisio\Form\Formatter\DateFormatter;
+use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Test cases for class DateFormatter.
  */
-class DateFormatterTest extends AbcTestCase
+class DateFormatterTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

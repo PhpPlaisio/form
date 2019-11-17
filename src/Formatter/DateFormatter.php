@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Formatter;
+namespace Plaisio\Form\Formatter;
 
 /**
  * Formatter for formatting dates.
