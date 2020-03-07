@@ -9,7 +9,6 @@
   "require": {
     "php": ">=7.1.0",
     "ext-mbstring": "*",
-    "ext-tidy": "*",
     "plaisio/exception": "^1.0.0",
     "plaisio/helper-html": "^1.0.0",
     "plaisio/helper-url": "^1.0.0",
