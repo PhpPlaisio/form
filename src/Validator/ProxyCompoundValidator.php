@@ -19,9 +19,9 @@ class ProxyCompoundValidator implements CompoundValidator
   private $callable;
 
   /**
-   * If not null the additional data passed to the callable as second argument.
+   * The additional data passed to the callable as second argument.
    *
-   * @var mixed|null
+   * @var mixed
    */
   private $data;
 
@@ -30,7 +30,7 @@ class ProxyCompoundValidator implements CompoundValidator
    * Object constructor.
    *
    * @param callable $callable The callable to which the validation must be delegated.
-   * @param mixed    $data     If not null the additional data passed to the callable as second argument.
+   * @param mixed    $data     The additional data passed to the callable as second argument.
    *
    * @since 1.0.0
    * @api

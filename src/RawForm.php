@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace Plaisio\Form;
 
-use Plaisio\Helper\Html;
-use Plaisio\Helper\HtmlElement;
+use Plaisio\Form\Cleaner\CompoundCleaner;
 use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\CompoundControl;
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Validator\CompoundValidator;
+use Plaisio\Helper\Html;
+use Plaisio\Helper\HtmlElement;
 use Plaisio\Kernel\Nub;
 use SetBased\Exception\FallenException;
 
@@ -28,6 +29,13 @@ class RawForm extends HtmlElement implements CompoundControl
   protected $changedControls = [];
 
   /**
+   * The cleaner to clean and/or translate (to machine format) the submitted values.
+   *
+   * @var CompoundCleaner|null
+   */
+  protected $cleaner;
+
+  /**
    * The list of error messages associated with this form control.
    *
    * @var string[]|null
@@ -40,13 +48,6 @@ class RawForm extends HtmlElement implements CompoundControl
    * @var ComplexControl
    */
   protected $fieldSets;
-
-  /**
-   * The (form) validators for validating the submitted values for this form.
-   *
-   * @var CompoundValidator[]
-   */
-  protected $formValidators = [];
 
   /**
    * After a call to {@link validate} holds the form controls which have failed one or more validations.
@@ -87,7 +88,7 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if array has one or more scalars. Otherwise, returns false.
+   * Returns true if an array has one or more scalars. Otherwise, returns false.
    *
    * @param array $array The array.
    *
@@ -402,6 +403,20 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the cleaner for this form control.
+   *
+   * @param CompoundCleaner|null $cleaner The cleaner.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setCleaner(?CompoundCleaner $cleaner): void
+  {
+    $this->cleaner = $cleaner;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Adds an error message to the list of error messages for this form control.
    *
    * @param string $message The error message.
@@ -480,18 +495,22 @@ class RawForm extends HtmlElement implements CompoundControl
     switch ($this->attributes['method'])
     {
       case 'post':
-        $values = &$_POST;
+        $values = $_POST;
         break;
 
       case 'get':
-        $values = &$_GET;
+        $values = $_GET;
         break;
 
       default:
         throw new FallenException('method', $this->attributes['method']);
     }
 
-    // For all field sets load all submitted values.
+    if ($this->cleaner!==null)
+    {
+      $values = $this->cleaner->clean($values);
+    }
+
     $this->fieldSets->loadSubmittedValuesBase($values, $this->values, $this->changedControls);
   }
 
@@ -526,11 +545,11 @@ class RawForm extends HtmlElement implements CompoundControl
     switch ($this->attributes['method'])
     {
       case 'post':
-        $values = &$_POST;
+        $values = $_POST;
         break;
 
       case 'get':
-        $values = &$_GET;
+        $values = $_GET;
         break;
 
       default:

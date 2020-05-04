@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Form\Cleaner\Cleaner;
+use Plaisio\Form\Cleaner\CompoundCleaner;
 use SetBased\Exception\LogicException;
 
 /**
@@ -15,7 +15,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * The cleaner to clean and/or translate (to machine format) the submitted values.
    *
-   * @var Cleaner|null
+   * @var CompoundCleaner|null
    */
   protected $cleaner;
 
@@ -31,28 +31,14 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @var Control[]
    */
-  protected $invalidControls;
+  protected $invalidControls = [];
 
   /**
    * The value of this form control, i.e. a nested array of the values of the child form controls.
    *
-   * @var mixed
+   * @var array
    */
-  protected $value;
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Object constructor.
-   *
-   * @param string|null $name The (local) name of this complex form control.
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function __construct(?string $name = '')
-  {
-    parent::__construct($name);
-  }
+  protected $values = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -269,7 +255,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function getSubmittedValue(): array
   {
-    return $this->value;
+    return $this->values;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -313,7 +299,10 @@ class ComplexControl extends Control implements CompoundControl
 
     foreach ($this->controls as $control)
     {
-      if ($this->cleaner) $tmp1 = $this->cleaner->clean($tmp1);
+      if ($this->cleaner)
+      {
+        $tmp1 = $this->cleaner->clean($tmp1);
+      }
       $control->loadSubmittedValuesBase($tmp1, $tmp2, $tmp3);
     }
 
@@ -323,8 +312,7 @@ class ComplexControl extends Control implements CompoundControl
       if (empty($changedInputs[$this->name])) unset($changedInputs[$this->name]);
     }
 
-    // Set the submitted values.
-    $this->value = $tmp2;
+    $this->values = $tmp2;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -402,12 +390,12 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Sets the cleaner for this form control.
    *
-   * @param Cleaner|null $cleaner The cleaner.
+   * @param CompoundCleaner|null $cleaner The cleaner.
    *
    * @since 1.0.0
    * @api
    */
-  public function setCleaner(?Cleaner $cleaner): void
+  public function setCleaner(?CompoundCleaner $cleaner): void
   {
     $this->cleaner = $cleaner;
   }
@@ -417,12 +405,12 @@ class ComplexControl extends Control implements CompoundControl
    * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
    * value is set are set to null.
    *
-   * @param mixed $values The values as a nested array.
+   * @param array|null $values The values as a nested array.
    *
    * @since 1.0.0
    * @api
    */
-  public function setValue($values): void
+  public function setValue(?array $values): void
   {
     foreach ($this->controls as $control)
     {

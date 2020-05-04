@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Cleaner\CompoundCleaner;
+
 /**
  * Interface for object that getHtml HTML elements holding one or more form control elements.
  */
@@ -85,6 +87,17 @@ interface CompoundControl
    * @api
    */
   public function getSubmittedValue(): array;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the cleaner for this form control.
+   *
+   * @param CompoundCleaner|null $cleaner The cleaner.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setCleaner(?CompoundCleaner $cleaner): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
