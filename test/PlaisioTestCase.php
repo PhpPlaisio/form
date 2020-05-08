@@ -5,7 +5,6 @@ namespace Plaisio\Form\Test;
 
 use PHPUnit\Framework\TestCase;
 use Plaisio\Kernel\Nub;
-use Plaisio\Request\CoreRequest;
 
 /**
  * Parent class for all unit tests.
@@ -14,12 +13,11 @@ class PlaisioTestCase extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Our concrete instance of Nub.
+   *
+   * @var Nub
    */
-  public static function setUpBeforeClass(): void
-  {
-    Nub::$request = new CoreRequest();
-  }
+  private $kernel;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -40,11 +38,11 @@ class PlaisioTestCase extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * @inheritDoc
    */
   protected function setUp(): void
   {
-    parent::setUp();
+    $this->kernel = new TestKernel();
 
     $_POST = [];
 

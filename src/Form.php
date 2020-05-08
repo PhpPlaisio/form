@@ -93,7 +93,7 @@ class Form extends RawForm
     $control = $this->hiddenFieldSet->getFormControlByName('ses_csrf_token');
 
     // If CSRF tokens (from session and from submitted form) don't match: possible CSRF attack.
-    $ses_csrf_token1 = Nub::$session->getCsrfToken();
+    $ses_csrf_token1 = Nub::$nub->session->getCsrfToken();
     $ses_csrf_token2 = $control->getSubmittedValue();
     if ($ses_csrf_token1!==$ses_csrf_token2)
     {

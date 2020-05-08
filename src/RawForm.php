@@ -216,7 +216,7 @@ class RawForm extends HtmlElement implements CompoundControl
   {
     if (!isset($this->attributes['action']))
     {
-      $this->attributes['action'] = Nub::$request->getRequestUri();
+      $this->attributes['action'] = Nub::$nub->request->getRequestUri();
     }
 
     $this->prepare();
