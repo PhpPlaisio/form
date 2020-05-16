@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test;
 
 use PHPUnit\Framework\TestCase;
-use Plaisio\Kernel\Nub;
+use Plaisio\PlaisioKernel;
 
 /**
  * Parent class for all unit tests.
@@ -15,7 +15,7 @@ class PlaisioTestCase extends TestCase
   /**
    * Our concrete instance of Nub.
    *
-   * @var Nub
+   * @var PlaisioKernel
    */
   private $kernel;
 
