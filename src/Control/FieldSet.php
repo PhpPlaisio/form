@@ -53,6 +53,8 @@ class FieldSet extends ComplexControl
    */
   public function getHtml(): string
   {
+    if (empty($this->controls)) return '';
+
     $ret = $this->getHtmlStartTag();
     $ret .= $this->getHtmlLegend();
     $ret .= parent::getHtml();
