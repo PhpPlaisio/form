@@ -25,9 +25,8 @@ class RadioControl extends SimpleControl
     $this->attributes['type'] = 'radio';
     $this->attributes['name'] = $this->submitName;
 
-    // A radio button is checked if and only if its value equals to the value of attribute value.
-    if (isset($this->attributes['value']) &&
-      (Cast::toManString($this->value, '')===Cast::toManString($this->attributes['value'], '')))
+    // A radio button is checked if its value (not to be confused with attribute value) is not empty.
+    if (!empty($this->value))
     {
       $this->attributes['checked'] = true;
     }
