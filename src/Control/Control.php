@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\HtmlElement;
 use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Validator\Validator;
+use Plaisio\Helper\Html;
+use Plaisio\Helper\HtmlElement;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
 
@@ -131,7 +132,9 @@ abstract class Control extends HtmlElement
    */
   public function getHtmlTableCell(): string
   {
-    return '<td class="control">'.$this->getHtml().'</td>';
+    $html = $this->getHtml();
+
+    return Html::generateElement('td', ['class' => ['control', $this->getAttribute('type')]], $html, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -348,6 +351,8 @@ abstract class Control extends HtmlElement
    */
   protected function searchSubmitHandler(array $submittedValues): ?string
   {
+    unset ($submittedValues);
+
     return null;
   }
 

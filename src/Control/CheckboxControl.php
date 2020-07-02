@@ -36,15 +36,6 @@ class CheckboxControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  public function getHtmlTableCell(): string
-  {
-    return '<td class="control checkbox">'.$this->getHtml().'</td>';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
   protected function loadSubmittedValuesBase(array $submittedValues,
                                              array &$whiteListValues,
                                              array &$changedInputs): void
