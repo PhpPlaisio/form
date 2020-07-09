@@ -1,0 +1,24 @@
+{
+  "name": "setbased-abc-form",
+  "homepage": "https://github.com/SetBased/js-abc-form",
+  "authors": [
+    "Set Based IT Consultancy <info@setbased.nl>"
+  ],
+  "description": "Form handling",
+  "main": "src/FormPackage.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": ["Form"],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "jquery": "2.*",
+    "setbased-abc-table-overview-table": "*"
+  }
+}
