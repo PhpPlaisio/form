@@ -25,7 +25,7 @@
     "ext-dom": "*",
     "phing/phing": "^2.0",
     "phpunit/phpunit": "^9.0",
-    "plaisio/console": "^2.4",
+    "plaisio/console": "^2.4.4",
     "plaisio/request-core": "^0.11"
   },
   "autoload": {
