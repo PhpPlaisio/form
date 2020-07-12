@@ -1,6 +1,6 @@
 build:
-  project_setup:
-    after:
+  dependencies:
+    before:
       - pecl install inotify
 
   tests:
