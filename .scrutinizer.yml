@@ -1,7 +1,8 @@
 build:
-  dependencies:
-    before:
-      - pecl install inotify
+  nodes:
+    dependencies:
+      before:
+        - pecl install inotify
 
   tests:
     override:
