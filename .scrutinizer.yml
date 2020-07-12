@@ -1,5 +1,7 @@
 build:
   tests:
+    before:
+      - pecl install inotify
     override:
       - command:      './bin/phing unit'
         idle_timeout: 500
