@@ -33,7 +33,7 @@ export class Form
       that.$form.find(':disabled').prop('disabled', false);
     });
 
-    this.$form.on('submit', this.setCsrfValue);
+    this.$form.on('submit', Form.setCsrfValue);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -67,9 +67,9 @@ export class Form
   /**
    * Sets the CSRF cookie.
    */
-  private setCsrfValue(): void
+  private static setCsrfValue(event: JQuery.TriggeredEvent): void
   {
-    this.$form.find('input[type=hidden][name=ses_csrf_token]').val(Cookies.get('ses_csrf_token'));
+    $(event.target).find('input[type=hidden][name=ses_csrf_token]').val(Cookies.get('ses_csrf_token'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
