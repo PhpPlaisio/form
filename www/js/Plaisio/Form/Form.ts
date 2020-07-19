@@ -1,3 +1,5 @@
+import * as Cookies from 'js-cookie';
+
 /**
  * Class for forms.
  */
@@ -10,9 +12,9 @@ export class Form
   protected static forms: Form[] = [];
 
   /**
-   * The jQuery object of this form.
+   * The jQuery object of the form.
    */
-  private $from: JQuery;
+  private $form: JQuery;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -20,17 +22,18 @@ export class Form
    *
    * @param $form The jQuery object of the form.
    */
-  public constructor($form)
+  public constructor($form: JQuery)
   {
-    let that = this;
-
-    this.$from = $form;
+    this.$form = $form;
 
     // Install event handlers.
-    this.$from.on('submit', function ()
+    let that = this;
+    this.$form.on('submit', function ()
     {
-      that.$from.find(':disabled').prop('disabled', false);
+      that.$form.find(':disabled').prop('disabled', false);
     });
+
+    this.$form.on('submit', this.setCsrfValue);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -58,6 +61,15 @@ export class Form
         $form.addClass('is-registered');
       }
     });
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the CSRF cookie.
+   */
+  private setCsrfValue(): void
+  {
+    this.$form.find('input[type=hidden][name=ses_csrf_token]').val(Cookies.get('ses_csrf_token'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
