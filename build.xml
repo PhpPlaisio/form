@@ -7,6 +7,10 @@
             <arg value="--ansi"/>
             <arg value="update"/>
         </exec>
+        <exec executable="npm" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="update"/>
+        </exec>
         <exec executable="bin/plaisio" checkreturn="true" passthru="true">
             <arg value="--ansi"/>
             <arg value="plaisio:assets"/>
