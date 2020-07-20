@@ -115,12 +115,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param FieldSet $fieldSet
    *
-   * @since 1.0.0
+   * @return self
+   *
    * @api
+   * @since 1.0.0
    */
-  public function addFieldSet(FieldSet $fieldSet): void
+  public function addFieldSet(FieldSet $fieldSet): self
   {
     $this->fieldSets->addFormControl($fieldSet);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -129,12 +133,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param CompoundValidator $validator
    *
+   * @return self
+   *
    * @since 1.0.0
    * @api
    */
-  public function addValidator(CompoundValidator $validator): void
+  public function addValidator(CompoundValidator $validator): self
   {
     $this->fieldSets->addValidator($validator);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -346,12 +354,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param string|null $url The URL to send the form-data when this form is submitted.
    *
+   * @return self
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAction(?string $url): void
+  public function setAttrAction(?string $url): self
   {
     $this->attributes['action'] = $url;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -360,12 +372,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param bool|null $autoComplete The auto complete value.
    *
+   * @return self
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAutoComplete(?bool $autoComplete): void
+  public function setAttrAutoComplete(?bool $autoComplete): self
   {
     $this->attributes['autocomplete'] = $autoComplete;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -377,12 +393,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param string|null $encType The encoding type.
    *
+   * @return self
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrEncType(?string $encType): void
+  public function setAttrEncType(?string $encType): self
   {
     $this->attributes['enctype'] = $encType;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -393,12 +413,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param string|null $method The method.
    *
+   * @return self
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrMethod(?string $method): void
+  public function setAttrMethod(?string $method): self
   {
     $this->attributes['method'] = $method;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -433,12 +457,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param array|null $values The values as a nested array.
    *
+   * @return self
+   *
    * @since 1.0.0
    * @api
    */
-  public function setValues(?array $values): void
+  public function setValues(?array $values): self
   {
     $this->fieldSets->setValuesBase($values);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

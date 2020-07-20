@@ -73,10 +73,14 @@ class Form extends RawForm
    * Adds a hidden form control to the fieldset for hidden form controls.
    *
    * @param Control $control The hidden form control.
+   *
+   * @return self
    */
-  public function addHiddenFormControl(Control $control): void
+  public function addHiddenFormControl(Control $control): self
   {
     $this->hiddenFieldSet->addFormControl($control);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
