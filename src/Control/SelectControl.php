@@ -165,7 +165,7 @@ class SelectControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function setOptions(?array &$options, string $keyKey, string $labelKey)
+  public function setOptions(?array $options, string $keyKey, string $labelKey)
   {
     $this->options  = $options;
     $this->keyKey   = $keyKey;

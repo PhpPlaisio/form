@@ -200,7 +200,6 @@ class CheckboxesControl extends Control
     if ($this->name==='')
     {
       // Nothing to do.
-      ;
     }
     elseif (isset($values[$this->name]))
     {
@@ -313,7 +312,7 @@ class CheckboxesControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setOptions(?array &$options,
+  public function setOptions(?array $options,
                              string $keyKey,
                              string $labelKey,
                              string $checkedKey = 'abc_map_checked'): void
@@ -351,7 +350,6 @@ class CheckboxesControl extends Control
     if ($this->name==='')
     {
       // Nothing to do.
-      ;
     }
     elseif (isset($values[$this->name]))
     {

@@ -265,7 +265,7 @@ class RadiosControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setOptions(?array &$options, string $keyKey, string $labelKey): void
+  public function setOptions(?array $options, string $keyKey, string $labelKey): void
   {
     $this->options  = $options;
     $this->keyKey   = $keyKey;
