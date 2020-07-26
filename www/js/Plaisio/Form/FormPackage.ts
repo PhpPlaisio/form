@@ -1,14 +1,14 @@
-import {Form} from "./Form";
+import {Form} from './Form';
 
-export {CheckboxTableColumn} from "./TableColumn/CheckboxTableColumn";
-export {HtmlTableColumn} from "./TableColumn/HtmlTableColumn";
-export {RadioTableColumn} from "./TableColumn/RadioTableColumn";
-export {RadiosTableColumn} from "./TableColumn/RadiosTableColumn";
-export {SelectTableColumn} from "./TableColumn/SelectTableColumn";
-export {TextAreaTableColumn} from "./TableColumn/TextAreaTableColumn";
-export {TextTableColumn} from "./TableColumn/TextTableColumn";
+import './TableColumn/CheckboxTableColumn';
+import './TableColumn/HtmlTableColumn';
+import './TableColumn/RadioTableColumn';
+import './TableColumn/RadiosTableColumn';
+import './TableColumn/SelectTableColumn';
+import './TableColumn/TextAreaTableColumn';
+import './TableColumn/TextTableColumn';
 
 export class FormPackage extends Form
 {
-    // Nothing to implement.
+  // Nothing to implement.
 }

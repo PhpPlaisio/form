@@ -10,4 +10,5 @@
 /test/report/
 /vendor/
 /www/js/**/*.js
+/www/js/**/*.map
 /www/js/Plaisio/Table
