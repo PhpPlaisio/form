@@ -85,6 +85,7 @@ class RadiosControl extends Control
   protected $value;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    */
@@ -129,10 +130,7 @@ class RadiosControl extends Control
         $html .= Html::generateVoidElement('input', $inputAttributes);
 
         $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label',
-                                       $labelAttributes,
-                                       Cast::toOptString($option[$this->labelKey]),
-                                       $this->labelIsHtml);
+        $html .= Html::generateElement('label', $labelAttributes, $option[$this->labelKey], $this->labelIsHtml);
         $html .= $this->labelPostfix;
       }
     }

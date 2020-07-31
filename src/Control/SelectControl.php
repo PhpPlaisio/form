@@ -98,7 +98,7 @@ class SelectControl extends SimpleControl
         $optionAttributes['value']    = $code;
         $optionAttributes['selected'] = ($valueAsString===$keyAsString);
 
-        $html .= Html::generateElement('option', $optionAttributes, Cast::toOptString($option[$this->labelKey]));
+        $html .= Html::generateElement('option', $optionAttributes, $option[$this->labelKey]);
       }
     }
 

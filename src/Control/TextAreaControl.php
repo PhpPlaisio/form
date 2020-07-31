@@ -40,7 +40,7 @@ class TextAreaControl extends SimpleControl
 
     $html = $this->prefix;
     $html .= $this->getHtmlPrefixLabel();
-    $html .= Html::generateElement('textarea', $this->attributes, Cast::toOptString($this->value));
+    $html .= Html::generateElement('textarea', $this->attributes, $this->value);
     $html .= $this->getHtmlPostfixLabel();
     $html .= $this->postfix;
 

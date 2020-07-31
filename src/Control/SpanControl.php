@@ -65,7 +65,7 @@ class SpanControl extends Control
   /**
    * Set the inner HTML of this span element.
    *
-   * @param string $text The inner text. Special characters will be converted to HTML entities.
+   * @param string|null $text The inner text. Special characters will be converted to HTML entities.
    *
    * @since 1.0.0
    * @api
