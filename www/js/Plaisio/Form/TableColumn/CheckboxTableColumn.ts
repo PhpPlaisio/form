@@ -24,7 +24,7 @@ export class CheckboxTableColumn extends TextTableColumn
   /**
    * @inheritDoc
    */
-  public getSortKey(tableCell): string
+  public getSortKey(tableCell: HTMLTableCellElement): string
   {
     if ($(tableCell).find('input:checkbox').prop('checked'))
     {

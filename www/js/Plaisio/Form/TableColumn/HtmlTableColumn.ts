@@ -19,7 +19,7 @@ export class HtmlTableColumn extends TextTableColumn
   /**
    * @inheritDoc
    */
-  public getSortKey(tableCell): string
+  public getSortKey(tableCell: HTMLTableCellElement): string
   {
     return OverviewTable.toLowerCaseNoDiacritics($(tableCell).children().text());
   }

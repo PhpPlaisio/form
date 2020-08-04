@@ -6,25 +6,25 @@ import {OverviewTable} from "../../Table/OverviewTable";
  */
 export class TextAreaTableColumn extends TextTableColumn
 {
-    //--------------------------------------------------------------------------------------------------------------------
-    /**
-     * @inheritDoc
-     */
-    public extractForFilter(tableCell: HTMLTableCellElement): string
-    {
-        return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('textarea').val());
-    }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  public extractForFilter(tableCell: HTMLTableCellElement): string
+  {
+    return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('textarea').val());
+  }
 
-    //--------------------------------------------------------------------------------------------------------------------
-    /**
-     * @inheritDoc
-     */
-    public getSortKey(tableCell): string
-    {
-        return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('textarea').val());
-    }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  public getSortKey(tableCell: HTMLTableCellElement): string
+  {
+    return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('textarea').val());
+  }
 
-    //--------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------

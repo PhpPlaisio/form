@@ -12,7 +12,7 @@ export class SelectTableColumn extends TextTableColumn
    */
   public extractForFilter(tableCell: HTMLTableCellElement): string
   {
-    let text = $(tableCell).find('select option:selected').text();
+    const text = $(tableCell).find('select option:selected').text();
 
     return OverviewTable.toLowerCaseNoDiacritics(text);
   }
@@ -21,9 +21,9 @@ export class SelectTableColumn extends TextTableColumn
   /**
    * @inheritDoc
    */
-  public getSortKey(tableCell): string
+  public getSortKey(tableCell: HTMLTableCellElement): string
   {
-    let text = $(tableCell).find('select option:selected').text();
+    const text = $(tableCell).find('select option:selected').text();
 
     return OverviewTable.toLowerCaseNoDiacritics(text);
   }

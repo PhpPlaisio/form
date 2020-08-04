@@ -27,7 +27,7 @@ export class Form
     this.$form = $form;
 
     // Install event handlers.
-    let that = this;
+    const that = this;
     this.$form.on('submit', function ()
     {
       that.$form.find(':disabled').prop('disabled', false);
@@ -44,7 +44,7 @@ export class Form
    */
   public static registerForm(selector: string): void
   {
-    let that = this;
+    const that = this;
 
     $(selector).each(function ()
     {

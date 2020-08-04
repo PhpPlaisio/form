@@ -12,7 +12,7 @@ export class RadiosTableColumn extends TextTableColumn
    */
   public extractForFilter(tableCell: HTMLTableCellElement): string
   {
-    let id = $(tableCell).find('input[type="radio"]:checked').prop('id');
+    const id = $(tableCell).find('input[type="radio"]:checked').prop('id');
 
     return OverviewTable.toLowerCaseNoDiacritics(($('label[for=' + $.escapeSelector(id) + ']').text()));
   }
@@ -21,9 +21,9 @@ export class RadiosTableColumn extends TextTableColumn
   /**
    * @inheritDoc
    */
-  public getSortKey(tableCell): string
+  public getSortKey(tableCell:HTMLTableCellElement): string
   {
-    let id = $(tableCell).find('input[type="radio"]:checked').prop('id');
+    const id = $(tableCell).find('input[type="radio"]:checked').prop('id');
 
     return OverviewTable.toLowerCaseNoDiacritics(($('label[for=' + $.escapeSelector(id) + ']').text()));
   }
