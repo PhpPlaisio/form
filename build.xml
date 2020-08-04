@@ -7,7 +7,6 @@
             <arg value="--ansi"/>
             <arg value="update"/>
         </exec>
-        <phing phingfile="build.xml" target="kernel" haltonfailure="true"/>
         <exec executable="npm" checkreturn="true" passthru="true">
             <arg value="--ansi"/>
             <arg value="update"/>
@@ -16,6 +15,7 @@
             <arg value="--ansi"/>
             <arg value="plaisio:assets"/>
         </exec>
+        <phing phingfile="build.xml" target="kernel" haltonfailure="true"/>
     </target>
 
     <target name="kernel">

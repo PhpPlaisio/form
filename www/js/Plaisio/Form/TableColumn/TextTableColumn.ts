@@ -1,5 +1,6 @@
-import {TextTableColumn as BaseTextTableColumn} from "../../Table/TableColumn/TextTableColumn";
-import {OverviewTable} from "../../Table/OverviewTable";
+import {Cast} from '../../Helper/Cast';
+import {OverviewTable} from '../../Table/OverviewTable';
+import {TextTableColumn as BaseTextTableColumn} from '../../Table/TableColumn/TextTableColumn';
 
 /**
  * Table column with cell with input:text form control.
@@ -12,7 +13,7 @@ export class TextTableColumn extends BaseTextTableColumn
    */
   public extractForFilter(tableCell: HTMLTableCellElement): string
   {
-    return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('input').val());
+    return OverviewTable.toLowerCaseNoDiacritics(Cast.toManString($(tableCell).find('input').val(), ''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ export class TextTableColumn extends BaseTextTableColumn
    */
   public getSortKey(tableCell: HTMLTableCellElement): string
   {
-    return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('input').val());
+    return OverviewTable.toLowerCaseNoDiacritics(Cast.toManString($(tableCell).find('input').val(), ''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

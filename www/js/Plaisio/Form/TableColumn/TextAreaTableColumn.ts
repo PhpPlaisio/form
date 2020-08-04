@@ -1,5 +1,6 @@
-import {TextTableColumn} from "../../Table/TableColumn/TextTableColumn";
-import {OverviewTable} from "../../Table/OverviewTable";
+import {Cast} from '../../Helper/Cast';
+import {OverviewTable} from '../../Table/OverviewTable';
+import {TextTableColumn} from '../../Table/TableColumn/TextTableColumn';
 
 /**
  * Table column with cells with a text area.
@@ -12,7 +13,7 @@ export class TextAreaTableColumn extends TextTableColumn
    */
   public extractForFilter(tableCell: HTMLTableCellElement): string
   {
-    return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('textarea').val());
+    return OverviewTable.toLowerCaseNoDiacritics(Cast.toManString($(tableCell).find('textarea').val(), ''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ export class TextAreaTableColumn extends TextTableColumn
    */
   public getSortKey(tableCell: HTMLTableCellElement): string
   {
-    return OverviewTable.toLowerCaseNoDiacritics(<string>$(tableCell).find('textarea').val());
+    return OverviewTable.toLowerCaseNoDiacritics(Cast.toManString($(tableCell).find('textarea').val(), ''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

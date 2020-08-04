@@ -11,4 +11,5 @@
 /vendor/
 /www/js/**/*.js
 /www/js/**/*.map
+/www/js/Plaisio/Helper
 /www/js/Plaisio/Table
