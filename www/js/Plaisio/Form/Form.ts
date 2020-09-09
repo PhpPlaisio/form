@@ -1,4 +1,5 @@
 import * as Cookies from 'js-cookie';
+import {Cast} from '../Helper/Cast';
 
 /**
  * Class for forms.
@@ -65,11 +66,13 @@ export class Form
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the CSRF cookie.
+   * Sets the CSRF value.
    */
   private static setCsrfValue(event: JQuery.TriggeredEvent): void
   {
-    $(event.target).find('input[type=hidden][name=ses_csrf_token]').val(Cookies.get('ses_csrf_token'));
+    const $input    = $(event.target).find('input[type=hidden][name=ses_csrf_token]');
+    const csrfToken = Cast.toManString(Cookies.get('ses_csrf_token'), '');
+    $input.val(csrfToken);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
