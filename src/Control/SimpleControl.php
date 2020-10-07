@@ -430,12 +430,12 @@ abstract class SimpleControl extends Control
   /**
    * Sets the inner HTML of the abel for this form control.
    *
-   * @param string|null $text The (inner) label text. Special characters are converted to HTML entities.
+   * @param bool|int|float|string|null $text The (inner) label text. Special characters are converted to HTML entities.
    *
    * @since 1.0.0
    * @api
    */
-  public function setLabelText(?string $text): void
+  public function setLabelText($text): void
   {
     $this->label = Html::txt2Html($text);
   }

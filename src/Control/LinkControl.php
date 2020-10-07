@@ -63,14 +63,14 @@ class LinkControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Set the inner HTML of this hyperlink element.
+   * Set the inner text of this hyperlink element.
    *
-   * @param string|null $text The inner text. Special characters will be converted to HTML entities.
+   * @param bool|int|float|string|null $text The inner text. Special characters will be converted to HTML entities.
    *
    * @since 1.0.0
    * @api
    */
-  public function setInnerText(?string $text): void
+  public function setInnerText($text): void
   {
     $this->innerHtml = Html::txt2Html($text);
   }

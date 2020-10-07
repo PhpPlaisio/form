@@ -51,12 +51,12 @@ class Legend extends HtmlElement
   /**
    * Sets the inner HTML of this legend.
    *
-   * @param string|null $text The text of legend. Special characters will be converted to HTML entities.
+   * @param bool|int|float|string|null $text The text of legend. Special characters will be converted to HTML entities.
    *
    * @since 1.0.0
    * @api
    */
-  public function setLegendText(?string $text): void
+  public function setLegendText($text): void
   {
     $this->legend = Html::txt2Html($text);
   }
