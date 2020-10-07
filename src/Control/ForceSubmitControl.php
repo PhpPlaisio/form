@@ -80,7 +80,7 @@ class ForceSubmitControl extends HiddenControl
   /**
    * Has no effect. The value of a hidden button is not set by this method.
    *
-   * @param array $values Not used.
+   * @param array|null $values Not used.
    */
   public function setValuesBase(?array $values): void
   {

@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\Html;
 use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Formatter\Formatter;
+use Plaisio\Helper\Html;
 use SetBased\Exception\LogicException;
 
 /**
@@ -396,8 +396,8 @@ abstract class SimpleControl extends Control
   /**
    * Sets the inner HTML of the label for this form control.
    *
-   * @param string $htmlSnippet The (inner) label HTML snippet. It is the developer's responsibility that it is
-   *                            valid HTML code.
+   * @param string|null $htmlSnippet The (inner) label HTML snippet. It is the developer's responsibility that it is
+   *                                 valid HTML code.
    *
    * @since 1.0.0
    * @api

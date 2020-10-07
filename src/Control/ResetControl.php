@@ -49,7 +49,7 @@ class ResetControl extends SimpleControl
   /**
    * Has no effect. The value of a button is not set by this method.
    *
-   * @param array $values Not used.
+   * @param array|null $values Not used.
    */
   public function setValuesBase(?array $values): void
   {
