@@ -18,42 +18,42 @@ class SelectControl extends SimpleControl
    *
    * @var string|null
    */
-  protected $emptyOption;
+  protected ?string $emptyOption = null;
 
   /**
    * The key in $options holding the keys for the options in this select box.
    *
    * @var string
    */
-  protected $keyKey;
+  protected string $keyKey;
 
   /**
    * The key in $options holding the labels for the options in this select box.
    *
    * @var string
    */
-  protected $labelKey;
+  protected string $labelKey;
 
   /**
    * The map from the keys in the options to attribute names of the option elements.
    *
    * @var array|null
    */
-  protected $optionAttributesMap;
+  protected ?array $optionAttributesMap = null;
 
   /**
    * The options of this select box.
    *
    * @var array[]|null
    */
-  protected $options;
+  protected ?array $options = null;
 
   /**
    * The obfuscator for the names of the options.
    *
    * @var Obfuscator|null
    */
-  protected $optionsObfuscator;
+  protected ?Obfuscator $optionsObfuscator = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

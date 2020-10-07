@@ -12,9 +12,9 @@ class RemoveWhitespaceCleaner implements Cleaner
   /**
    * The singleton instance of this class.
    *
-   * @var RemoveWhitespaceCleaner
+   * @var RemoveWhitespaceCleaner|null
    */
-  static private $singleton;
+  static private ?RemoveWhitespaceCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -33,9 +33,9 @@ class RemoveWhitespaceCleaner implements Cleaner
   /**
    * Returns a submitted value with all whitespace removed.
    *
-   * @param string|null $value The submitted value.
+   * @param mixed $value The submitted value.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api

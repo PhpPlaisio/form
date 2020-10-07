@@ -21,49 +21,49 @@ abstract class Control extends HtmlElement
    *
    * @var string[]|null
    */
-  protected $errorMessages;
+  protected ?array $errorMessages = null;
 
   /**
    * The name of this form control.
    *
    * @var string
    */
-  protected $name;
+  protected string $name;
 
   /**
    * The obfuscator to obfuscate the (submitted) name of this form control.
    *
-   * @var Obfuscator
+   * @var Obfuscator|null
    */
-  protected $obfuscator;
+  protected ?Obfuscator $obfuscator = null;
 
   /**
    * The HTML code that will be appended after the HTML code of this form control.
    *
    * @var string
    */
-  protected $postfix;
+  protected string $postfix = '';
 
   /**
    * The HTML code that will be inserted before the HTML code of this form control.
    *
    * @var string
    */
-  protected $prefix;
+  protected string $prefix = '';
 
   /**
    * The submit name or name in the generated HTML code of this form control.
    *
    * @var string
    */
-  protected $submitName;
+  protected string $submitName;
 
   /**
    * The validators that will be used to validate this form control.
    *
    * @var Validator[]
    */
-  protected $validators = [];
+  protected array $validators = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

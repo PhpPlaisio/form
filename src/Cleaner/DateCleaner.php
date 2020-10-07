@@ -14,28 +14,28 @@ class DateCleaner implements Cleaner
    *
    * @var string|null
    */
-  protected $alternativeSeparators;
+  protected ?string $alternativeSeparators;
 
   /**
    * The expected format of the date.
    *
    * @var string
    */
-  protected $format;
+  protected string $format;
 
   /**
    * The expected separator in the format of this validator.
    *
    * @var string|null
    */
-  protected $separator;
+  protected ?string $separator;
 
   /**
    * If set the date that will treated as an open date. An empty form control will be translated to the open date.
    *
    * @var string|null
    */
-  private $openDate;
+  private ?string $openDate = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -62,9 +62,9 @@ class DateCleaner implements Cleaner
    * Cleans a submitted date and returns the date in ISO 8601 machine format if the date is a valid date. Otherwise
    * returns the original submitted value.
    *
-   * @param string|null $value The submitted date.
+   * @param mixed $value The submitted date.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api
@@ -115,7 +115,7 @@ class DateCleaner implements Cleaner
   /**
    * Sets the open date. An empty submitted value will be replaced with the open date.
    *
-   * @param string $openDate The open date in YYYY-MM-DD format.
+   * @param string|null $openDate The open date in YYYY-MM-DD format.
    *
    * @since 1.0.0
    * @api

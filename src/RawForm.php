@@ -26,49 +26,49 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @var array
    */
-  protected $changedControls = [];
+  protected array $changedControls = [];
 
   /**
    * The cleaner to clean and/or translate (to machine format) the submitted values.
    *
    * @var CompoundCleaner|null
    */
-  protected $cleaner;
+  protected ?CompoundCleaner $cleaner = null;
 
   /**
    * The list of error messages associated with this form control.
    *
    * @var string[]|null
    */
-  protected $errorMessages;
+  protected ?array $errorMessages = null;
 
   /**
    * The field sets of this form.
    *
    * @var ComplexControl
    */
-  protected $fieldSets;
+  protected ComplexControl $fieldSets;
 
   /**
    * After a call to {@link validate} holds the form controls which have failed one or more validations.
    *
    * @var array
    */
-  protected $invalidControls = [];
+  protected array $invalidControls = [];
 
   /**
    * If true the form has been prepared (for executing of getting the HTML code).
    *
    * @var bool
    */
-  protected $prepared = false;
+  protected bool $prepared = false;
 
   /**
    * After a call to {@link loadSubmittedValues} holds the white-listed submitted values.
    *
    * @var array
    */
-  protected $values = [];
+  protected array $values = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -16,14 +16,14 @@ class IntegerValidator implements Validator
    *
    * @var int|null
    */
-  private $maxValue;
+  private ?int $maxValue;
 
   /**
    * The lower bound of the range of valid (integer) values.
    *
    * @var int
    */
-  private $minValue;
+  private int $minValue;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

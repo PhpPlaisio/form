@@ -19,15 +19,17 @@ class PushControl extends SimpleControl
    *  <li> reset
    *  <li> button
    *  </ul>
+   *
+   * @var string|null
    */
-  protected $buttonType;
+  protected ?string $buttonType = null;
 
   /**
    * The name of the method for handling the form when the form submit is triggered by this control.
    *
    * @var string|null
    */
-  protected $method;
+  protected ?string $method = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -79,7 +81,7 @@ class PushControl extends SimpleControl
   /**
    * Has no effect. The value of a button is not set by this method.
    *
-   * @param array $values Not used.
+   * @param array|null $values Not used.
    */
   public function setValuesBase(?array $values): void
   {

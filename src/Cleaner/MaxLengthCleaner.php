@@ -14,7 +14,7 @@ class MaxLengthCleaner implements Cleaner
    *
    * @var int
    */
-  private $maxLength;
+  private int $maxLength;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,9 +34,9 @@ class MaxLengthCleaner implements Cleaner
   /**
    * Returns a submitted value with leading and training whitespace removed.
    *
-   * @param string|null $value The submitted value.
+   * @param mixed $value The submitted value.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api

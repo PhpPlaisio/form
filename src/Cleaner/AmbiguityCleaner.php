@@ -22,9 +22,9 @@ class AmbiguityCleaner implements Cleaner
   /**
    * The singleton instance of this class.
    *
-   * @var AmbiguityCleaner
+   * @var AmbiguityCleaner|null
    */
-  static private $singleton;
+  static private ?AmbiguityCleaner $singleton = null;
 
   /**
    * Intended entered characters (unambiguities) and there possible mistakenly entered characters (ambiguities).
@@ -139,16 +139,16 @@ class AmbiguityCleaner implements Cleaner
    */
   public static function get(): AmbiguityCleaner
   {
-    if (!self::$singleton) self::$singleton = new self();
+    if (self::$singleton===null) self::$singleton = new self();
 
     return self::$singleton;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Replaces all ambiguous characters in a submitted values with the intended characters.
+   * Replaces all ambiguous characters in a submitted value with the intended characters.
    *
-   * @param string|null $value The submitted value.
+   * @param mixed $value The submitted value.
    *
    * @return string|null
    *
@@ -164,23 +164,23 @@ class AmbiguityCleaner implements Cleaner
     }
 
     // Replace all ambiguous characters.
-    $tmp = $value;
+    $clean = $value;
     foreach ($this->ambiguities as $unambiguity => $ambiguities)
     {
       foreach ($ambiguities as $ambiguity)
       {
         // Note: str_replace works fine with multi byte characters like UTF-8.
-        $tmp = str_replace($ambiguity, $unambiguity, $tmp);
+        $clean = str_replace($ambiguity, $unambiguity, $clean);
       }
     }
 
     // Restore EOL for DOS users.
-    if (PHP_EOL!="\n") $tmp = str_replace("\n", PHP_EOL, $tmp);
+    if (PHP_EOL!="\n") $clean = str_replace("\n", PHP_EOL, $clean);
 
     // Return null for empty strings.
-    if ($tmp==='') $tmp = null;
+    if ($clean==='') $clean = null;
 
-    return $tmp;
+    return $clean;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

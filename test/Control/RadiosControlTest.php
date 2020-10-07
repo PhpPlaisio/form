@@ -6,6 +6,7 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\RadiosControl;
 use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\TestControl;
 use Plaisio\Form\Test\TestForm;
 
 /**
@@ -78,10 +79,11 @@ class RadiosControlTest extends PlaisioTestCase
     $input = new RadiosControl('traffic-light');
     $input->setInputAttributesMap(['xxx' => 'id', 'extra' => 'class']);
     $input->setOptions($entities, 'key', 'label');
+    TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
 
-    self::assertStringContainsString('<input id="123" class="blink" type="radio" value="O"/>', $html);
+    self::assertStringContainsString('<input id="123" class="blink" type="radio" name="traffic-light" value="O"/>', $html);
     self::assertStringContainsString('<label for="123">Orange</label>', $html);
   }
 
@@ -110,10 +112,11 @@ class RadiosControlTest extends PlaisioTestCase
     $input->setInputAttributesMap(['xxx' => 'id']);
     $input->setLabelAttributesMap(['extra' => 'class']);
     $input->setOptions($entities, 'key', 'label');
+    TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
 
-    self::assertStringContainsString('<input id="123" type="radio" value="O"/>', $html);
+    self::assertStringContainsString('<input id="123" type="radio" name="traffic-light" value="O"/>', $html);
     self::assertStringContainsString('<label class="blink" for="123">Orange</label>', $html);
   }
 
@@ -129,6 +132,7 @@ class RadiosControlTest extends PlaisioTestCase
     $input = new RadiosControl('id');
     $input->setInputAttributesMap(['no' => 'id']);
     $input->setOptions($entities, 'key', 'name');
+    TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
 
@@ -149,6 +153,7 @@ class RadiosControlTest extends PlaisioTestCase
     $input->setInputAttributesMap(['no' => 'id']);
     $input->setOptions($entities, 'key', 'name');
     $input->setLabelIsHtml();
+    TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
 

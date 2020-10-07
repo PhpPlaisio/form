@@ -15,9 +15,9 @@ class TidyCleaner implements Cleaner
   /**
    * The singleton instance of this class.
    *
-   * @var TidyCleaner
+   * @var TidyCleaner|null
    */
-  static private $singleton;
+  static private ?TidyCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,7 +27,7 @@ class TidyCleaner implements Cleaner
    */
   public static function get(): TidyCleaner
   {
-    if (!self::$singleton) self::$singleton = new self();
+    if (self::$singleton===null) self::$singleton = new self();
 
     return self::$singleton;
   }
@@ -77,9 +77,9 @@ class TidyCleaner implements Cleaner
   /**
    * Returns a HTML snippet cleaned by [HTML Tidy](http://www.html-tidy.org/).
    *
-   * @param string|null $value The submitted HTML snippet.
+   * @param mixed $value The submitted HTML snippet.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api

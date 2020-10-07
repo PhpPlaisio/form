@@ -17,7 +17,7 @@ class DivControl extends Control
    *
    * @var string|null
    */
-  protected $innerHtml;
+  protected ?string $innerHtml = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

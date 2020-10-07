@@ -17,7 +17,7 @@ class PlaisioTestCase extends TestCase
    *
    * @var PlaisioKernel
    */
-  private $kernel;
+  private PlaisioKernel $kernel;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -26,7 +26,7 @@ class PlaisioTestCase extends TestCase
    * @param Object $object     The HTML child class.
    * @param array  $attributes The attribute names.
    */
-  protected function htmlAttributesTest($object, array $attributes): void
+  protected function htmlAttributesTest(Object $object, array $attributes): void
   {
     foreach ($attributes as $attribute => $method)
     {

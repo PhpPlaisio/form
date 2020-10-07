@@ -16,14 +16,14 @@ class ForceSubmitControl extends HiddenControl
    *
    * @var string|null
    */
-  protected $method;
+  protected ?string $method = null;
 
   /**
    * If the true this submit button has been submitted.
    *
    * @var bool
    */
-  private $force;
+  private bool $force;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

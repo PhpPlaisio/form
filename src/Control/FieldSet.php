@@ -15,9 +15,9 @@ class FieldSet extends ComplexControl
   /**
    * The legend of this fieldset.
    *
-   * @var Legend
+   * @var Legend|null
    */
-  protected $legend;
+  protected ?Legend $legend = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -88,7 +88,7 @@ class FieldSet extends ComplexControl
    */
   protected function getHtmlLegend(): string
   {
-    if ($this->legend)
+    if ($this->legend!==null)
     {
       $ret = $this->legend->getHtml();
     }

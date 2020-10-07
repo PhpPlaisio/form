@@ -17,7 +17,7 @@ class Legend extends HtmlElement
    *
    * @var string|null
    */
-  protected $legend;
+  protected ?string $legend = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

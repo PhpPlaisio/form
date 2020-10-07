@@ -14,14 +14,14 @@ class DateFormatter implements Formatter
    *
    * @var string
    */
-  private $format;
+  private string $format;
 
   /**
    * If set the date that will treated as an open date. An open date will be shown as an empty form control.
    *
    * @var string|null
    */
-  private $openDate;
+  private ?string $openDate = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -42,9 +42,9 @@ class DateFormatter implements Formatter
    * If the machine value is a valid date returns the date formatted according the format specifier. Otherwise,
    * returns the machine value unchanged.
    *
-   * @param string|null $value The machine value.
+   * @param mixed $value The machine value.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api
@@ -71,7 +71,7 @@ class DateFormatter implements Formatter
   /**
    * Sets the open date. An open date will be shown as an empty field.
    *
-   * @param string $openDate The open date in YYYY-MM-DD format.
+   * @param string|null $openDate The open date in YYYY-MM-DD format.
    *
    * @since 1.0.0
    * @api

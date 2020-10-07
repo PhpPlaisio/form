@@ -12,9 +12,9 @@ class TrimWhitespaceCleaner implements Cleaner
   /**
    * The singleton instance of this class.
    *
-   * @var TrimWhitespaceCleaner
+   * @var TrimWhitespaceCleaner|null
    */
-  static private $singleton;
+  static private ?TrimWhitespaceCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -24,7 +24,7 @@ class TrimWhitespaceCleaner implements Cleaner
    */
   public static function get(): TrimWhitespaceCleaner
   {
-    if (!self::$singleton) self::$singleton = new self();
+    if (self::$singleton===null) self::$singleton = new self();
 
     return self::$singleton;
   }
@@ -33,9 +33,9 @@ class TrimWhitespaceCleaner implements Cleaner
   /**
    * Returns a submitted value with leading and training whitespace removed.
    *
-   * @param string|null $value The submitted value.
+   * @param mixed $value The submitted value.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api

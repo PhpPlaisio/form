@@ -14,9 +14,9 @@ class UrlCleaner implements Cleaner
   /**
    * The singleton instance of this class.
    *
-   * @var UrlCleaner
+   * @var UrlCleaner|null
    */
-  static private $singleton;
+  static private ?UrlCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -26,7 +26,7 @@ class UrlCleaner implements Cleaner
    */
   public static function get(): UrlCleaner
   {
-    if (!self::$singleton) self::$singleton = new self();
+    if (self::$singleton===null) self::$singleton = new self();
 
     return self::$singleton;
   }
@@ -35,9 +35,9 @@ class UrlCleaner implements Cleaner
   /**
    * Returns a normalized URL if the submitted value is a URL. Otherwise returns the submitted value.
    *
-   * @param string|null $value The submitted URL.
+   * @param mixed $value The submitted URL.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api

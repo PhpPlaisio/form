@@ -17,14 +17,14 @@ class LengthValidator implements Validator
    *
    * @var int
    */
-  private $maxLength;
+  private int $maxLength;
 
   /**
    * The lower bound of the range of valid lengths.
    *
    * @var int
    */
-  private $minLength;
+  private int $minLength;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

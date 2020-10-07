@@ -12,9 +12,9 @@ use Plaisio\Form\Test\PlaisioTestCase;
 abstract class CleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected $emptyValues = ['', false, null, ' ', '  ', "\n", "\n \n", "\n \t"];
+  protected array $emptyValues = ['', false, null, ' ', '  ', "\n", "\n \n", "\n \t"];
 
-  protected $zeroValues = ['0', ' 0 ', "\t 0 \n"];
+  protected array $zeroValues = ['0', ' 0 ', "\t 0 \n"];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

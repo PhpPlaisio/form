@@ -24,14 +24,14 @@ class Form extends RawForm
    *
    * @var bool
    */
-  protected $csrfCheck;
+  protected bool $csrfCheck;
 
   /**
    * FieldSet for all form control elements of type "hidden".
    *
    * @var FieldSet
    */
-  protected $hiddenFieldSet;
+  protected FieldSet $hiddenFieldSet;
 
   /**
    * <ul>
@@ -42,7 +42,7 @@ class Form extends RawForm
    *
    * @var bool|null
    */
-  protected $valid;
+  protected ?bool $valid = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

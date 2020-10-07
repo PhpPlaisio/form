@@ -13,9 +13,9 @@ use Plaisio\Form\Cleaner\Cleaner;
 class AmbiguityCleanerTest extends CleanerTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected $emptyValues = ['', false, null];
+  protected array $emptyValues = ['', false, null];
 
-  protected $zeroValues = ['0'];
+  protected array $zeroValues = ['0'];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

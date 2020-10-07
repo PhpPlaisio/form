@@ -19,73 +19,72 @@ class RadiosControl extends Control
    *
    * @var array|null
    */
-  protected $inputAttributesMap;
+  protected ?array $inputAttributesMap = null;
 
   /**
    * The key in $options holding the keys for the radio buttons.
    *
    * @var string
    */
-  protected $keyKey;
+  protected string $keyKey;
 
   /**
    * The map from the keys in the options to attribute names of the label elements.
    *
    * @var array|null
    */
-  protected $labelAttributesMap;
+  protected ?array $labelAttributesMap = null;
 
   /**
    * If true and only if true labels are HTML code.
    *
    * @var bool
    */
-  protected $labelIsHtml = false;
+  protected bool $labelIsHtml = false;
 
   /**
    * The key in $options holding the labels for the radio buttons.
    *
    * @var string
    */
-  protected $labelKey;
+  protected string $labelKey;
 
   /**
    * The HTML snippet appended after each label for the radio buttons.
    *
    * @var string
    */
-  protected $labelPostfix = '';
+  protected string $labelPostfix = '';
 
   /**
    * The HTML snippet inserted before each label for the radio buttons.
    *
    * @var string
    */
-  protected $labelPrefix = '';
+  protected string $labelPrefix = '';
 
   /**
    * The data for the radio buttons.
    *
    * @var array[]|null
    */
-  protected $options;
+  protected ?array $options = null;
 
   /**
    * The obfuscator for the names of the radio buttons.
    *
-   * @var Obfuscator
+   * @var Obfuscator|null
    */
-  protected $optionsObfuscator;
+  protected ?Obfuscator $optionsObfuscator = null;
 
   /**
    * The value of the checked radio button.
    *
-   * @var string|null
+   * @var mixed
    */
-  protected $value;
+  protected $value = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritdoc
    */
@@ -238,7 +237,7 @@ class RadiosControl extends Control
    */
   public function setLabelPostfix(?string $htmlSnippet): void
   {
-    $this->labelPostfix = $htmlSnippet;
+    $this->labelPostfix = $htmlSnippet ?? '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -249,7 +248,7 @@ class RadiosControl extends Control
    */
   public function setLabelPrefix(?string $htmlSnippet): void
   {
-    $this->labelPrefix = $htmlSnippet;
+    $this->labelPrefix = $htmlSnippet ?? '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

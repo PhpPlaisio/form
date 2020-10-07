@@ -17,28 +17,28 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @var CompoundCleaner|null
    */
-  protected $cleaner;
+  protected ?CompoundCleaner $cleaner = null;
 
   /**
    * The child form controls of this form control.
    *
    * @var Control[]
    */
-  protected $controls = [];
+  protected array $controls = [];
 
   /**
    * The child form controls of this form control with invalid submitted values.
    *
    * @var Control[]
    */
-  protected $invalidControls = [];
+  protected array $invalidControls = [];
 
   /**
    * The value of this form control, i.e. a nested array of the values of the child form controls.
    *
    * @var array
    */
-  protected $values = [];
+  protected array $values = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

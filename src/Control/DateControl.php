@@ -14,21 +14,6 @@ class DateControl extends TextControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The cleaner to clean and/or translate (to machine format) the submitted value.
-   *
-   * @var DateCleaner
-   */
-  protected $cleaner;
-
-  /**
-   * The formatter to format the value (from machine format) to the displayed value.
-   *
-   * @var DateFormatter
-   */
-  protected $formatter;
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * @inheritdoc
    *
    * @since 1.0.0

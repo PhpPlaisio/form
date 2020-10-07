@@ -22,12 +22,12 @@ class ComplexControlTest extends PlaisioTestCase
   /**
    * @var ComplexControl
    */
-  private $originComplexControl;
+  private ComplexControl $originComplexControl;
 
   /**
    * @var SimpleControl
    */
-  private $originControl;
+  private SimpleControl $originControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -17,7 +17,7 @@ class SpanControl extends Control
    *
    * @var string|null
    */
-  protected $innerHtml;
+  protected ?String $innerHtml = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

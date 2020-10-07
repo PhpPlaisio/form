@@ -17,7 +17,7 @@ class HiddenSubmitControl extends HiddenControl
    *
    * @var string|null
    */
-  protected $method;
+  protected ?string $method = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

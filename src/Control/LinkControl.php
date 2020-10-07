@@ -17,7 +17,7 @@ class LinkControl extends Control
    *
    * @var string|null
    */
-  protected $innerHtml;
+  protected ?string $innerHtml = '';
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

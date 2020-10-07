@@ -16,7 +16,7 @@ class HtmlControl extends Control
    *
    * @var string|null
    */
-  protected $value;
+  protected ?string $value = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -18,28 +18,28 @@ class CheckboxesControl extends Control
    *
    * @var string
    */
-  protected $checkedKey;
+  protected string $checkedKey;
 
   /**
    * The map from the keys in the options to attribute names of the input elements.
    *
    * @var array|null
    */
-  protected $inputAttributesMap;
+  protected ?array $inputAttributesMap = null;
 
   /**
    * The key in $options holding the keys for the checkboxes.
    *
    * @var string
    */
-  protected $keyKey;
+  protected string $keyKey;
 
   /**
    * The map from the keys in the options to attribute names of the label elements.
    *
    * @var array|null
    */
-  protected $labelAttributesMap;
+  protected ?array $labelAttributesMap = null;
 
   /**
    * If true and only if true labels are HTML code. Otherwise special characters in the labels will be replaced with
@@ -47,49 +47,49 @@ class CheckboxesControl extends Control
    *
    * @var bool
    */
-  protected $labelIsHtml = false;
+  protected bool $labelIsHtml = false;
 
   /**
    * The key in $options holding the labels for the checkboxes.
    *
    * @var string
    */
-  protected $labelKey;
+  protected string $labelKey;
 
   /**
    * The HTML snippet appended after each label for the checkboxes.
    *
    * @var string
    */
-  protected $labelPostfix = '';
+  protected string $labelPostfix = '';
 
   /**
    * The HTML snippet inserted before each label for the checkboxes.
    *
    * @var string
    */
-  protected $labelPrefix = '';
+  protected string $labelPrefix = '';
 
   /**
    * The options of this select box.
    *
    * @var array[]|null
    */
-  protected $options;
+  protected ?array $options = null;
 
   /**
    * The obfuscator for the names of the checkboxes.
    *
-   * @var Obfuscator
+   * @var Obfuscator|null
    */
-  protected $optionsObfuscator;
+  protected ?Obfuscator $optionsObfuscator = null;
 
   /**
    * The values of the checkboxes.
    *
    * @var array
    */
-  protected $value;
+  protected array $value = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

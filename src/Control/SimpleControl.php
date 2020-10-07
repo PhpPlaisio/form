@@ -31,28 +31,28 @@ abstract class SimpleControl extends Control
    *
    * @var Cleaner|null
    */
-  protected $cleaner;
+  protected ?Cleaner $cleaner = null;
 
   /**
    * The formatter to format the value (from machine format) to the displayed value.
    *
    * @var Formatter|null
    */
-  protected $formatter;
+  protected ?Formatter $formatter = null;
 
   /**
    * The label of this form control.
    *
    * @var string|null
    */
-  protected $label;
+  protected ?string $label = null;
 
   /**
    * The attributes for the label of this form control.
    *
    * @var string[]
    */
-  protected $labelAttributes = [];
+  protected array $labelAttributes = [];
 
   /**
    * The position of the label of this form control.
@@ -63,7 +63,7 @@ abstract class SimpleControl extends Control
    *
    * @var string|null
    */
-  protected $labelPosition;
+  protected ?string $labelPosition = null;
 
   /**
    * The value of this form control.
