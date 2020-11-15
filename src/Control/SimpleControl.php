@@ -27,6 +27,16 @@ abstract class SimpleControl extends Control
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The label will be inserted before the HML code of this form control.
+   */
+  const C_LABEL_POSITION_PRE = 1;
+
+  /**
+   * The label will be inserted before the HML code of this form control.
+   */
+  const C_LABEL_POSITION_POST = 1;
+
+  /**
    * The cleaner to clean and/or translate (to machine format) the submitted value.
    *
    * @var Cleaner|null
@@ -55,15 +65,15 @@ abstract class SimpleControl extends Control
   protected array $labelAttributes = [];
 
   /**
-   * The position of the label of this form control.
+   * The position of the label of this form control. One of:
    * <ul>
-   * <li> 'pre'  The label will be inserted before the HML code of this form control.
-   * <li> 'post' The label will be appended after the HML code of this form control.
+   * <li> C_LABEL_POSITION_PRE  The label will be inserted before the HML code of this form control.
+   * <li> C_LABEL_POSITION_POST The label will be appended after the HML code of this form control.
    * </ul>
    *
-   * @var string|null
+   * @var int|null
    */
-  protected ?string $labelPosition = null;
+  protected ?int $labelPosition = null;
 
   /**
    * The value of this form control.
@@ -411,17 +421,17 @@ abstract class SimpleControl extends Control
   /**
    * Sets the position of the label of this form control.
    * <ul>
-   * <li> 'pre'  The label will be inserted before the HML code of this form control.
-   * <li> 'post' The label will be appended after the HML code of this form control.
-   * <li> null No label will be generated for this form control.
+   * <li> C_LABEL_POSITION_PRE  The label will be inserted before the HML code of this form control.
+   * <li> C_LABEL_POSITION_POST The label will be appended after the HML code of this form control.
+   * <li> null                  No label will be generated for this form control.
    * </ul>
    *
-   * @param string|null $position
+   * @param int|null $position
    *
    * @since 1.0.0
    * @api
    */
-  public function setLabelPosition(?string $position): void
+  public function setLabelPosition(?int $position): void
   {
     $this->labelPosition = $position;
   }
@@ -489,7 +499,7 @@ abstract class SimpleControl extends Control
   protected function getHtmlPostfixLabel(): string
   {
     // Generate a postfix label, if required.
-    if ($this->labelPosition=='post')
+    if ($this->labelPosition===self::C_LABEL_POSITION_POST)
     {
       $ret = $this->getHtmlLabel();
     }
@@ -513,7 +523,7 @@ abstract class SimpleControl extends Control
   protected function getHtmlPrefixLabel(): string
   {
     // If a label must be generated make sure the form control and the label have matching 'id' and 'for' attributes.
-    if (isset($this->labelPosition))
+    if ($this->labelPosition!==null)
     {
       if (!isset($this->attributes['id']))
       {
@@ -528,7 +538,7 @@ abstract class SimpleControl extends Control
     }
 
     // Generate a prefix label, if required.
-    if ($this->labelPosition=='pre')
+    if ($this->labelPosition===self::C_LABEL_POSITION_PRE)
     {
       $ret = $this->getHtmlLabel();
     }
