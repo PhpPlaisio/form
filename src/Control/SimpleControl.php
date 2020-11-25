@@ -29,12 +29,12 @@ abstract class SimpleControl extends Control
   /**
    * The label will be inserted before the HML code of this form control.
    */
-  const C_LABEL_POSITION_PRE = 1;
+  const LABEL_POSITION_PRE = 1;
 
   /**
    * The label will be inserted before the HML code of this form control.
    */
-  const C_LABEL_POSITION_POST = 1;
+  const LABEL_POSITION_POST = 2;
 
   /**
    * The cleaner to clean and/or translate (to machine format) the submitted value.
@@ -499,7 +499,7 @@ abstract class SimpleControl extends Control
   protected function getHtmlPostfixLabel(): string
   {
     // Generate a postfix label, if required.
-    if ($this->labelPosition===self::C_LABEL_POSITION_POST)
+    if ($this->labelPosition===self::LABEL_POSITION_POST)
     {
       $ret = $this->getHtmlLabel();
     }
@@ -538,7 +538,7 @@ abstract class SimpleControl extends Control
     }
 
     // Generate a prefix label, if required.
-    if ($this->labelPosition===self::C_LABEL_POSITION_PRE)
+    if ($this->labelPosition===self::LABEL_POSITION_PRE)
     {
       $ret = $this->getHtmlLabel();
     }
