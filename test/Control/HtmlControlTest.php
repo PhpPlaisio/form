@@ -122,6 +122,7 @@ class HtmlControlTest extends PlaisioTestCase
 
     $values = $form->getValues();
 
+    self::assertIsString($values['snippet']);
     self::assertSame(Cast::toManString(pi()), $values['snippet']);
   }
 
