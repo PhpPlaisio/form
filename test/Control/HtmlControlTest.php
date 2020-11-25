@@ -7,6 +7,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Test\TestForm;
+use SetBased\Helper\Cast;
 
 /**
  * Unit tests for class HtmlControl.
@@ -101,6 +102,27 @@ class HtmlControlTest extends PlaisioTestCase
     $values = $form->getValues();
 
     self::assertSame($html, $values['snippet']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * The value of a HtmlControl must be converted to a string.
+   */
+  public function testMergeValues3(): void
+  {
+    $html = '<h1>Hello World</h1>';
+
+    $form = $this->setupForm1($html);
+
+    // Merge with other values.
+    $values = ['snippet' => pi()];
+    $form->mergeValues($values);
+
+    $form->loadSubmittedValues();
+
+    $values = $form->getValues();
+
+    self::assertSame(Cast::toManString(pi()), $values['snippet']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

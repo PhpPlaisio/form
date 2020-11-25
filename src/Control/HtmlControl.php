@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\Html;
+use SetBased\Helper\Cast;
 
 /**
  * A class for pseudo form controls for generating arbitrary HTML code inside forms.
@@ -95,7 +96,7 @@ class HtmlControl extends Control
    */
   public function setValuesBase(?array $values): void
   {
-    $this->value = $values[$this->name] ?? null;
+    $this->value = Cast::toOptString($values[$this->name] ?? null);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
