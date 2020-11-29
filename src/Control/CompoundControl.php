@@ -94,10 +94,12 @@ interface CompoundControl
    *
    * @param CompoundCleaner|null $cleaner The cleaner.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setCleaner(?CompoundCleaner $cleaner): void;
+  public function setCleaner(?CompoundCleaner $cleaner);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -105,12 +107,12 @@ interface CompoundControl
    *
    * @param string $message The error message.
    *
-   * @return void
+   * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setErrorMessage(string $message): void;
+  public function setErrorMessage(string $message);
 
   //--------------------------------------------------------------------------------------------------------------------
 }

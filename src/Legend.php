@@ -39,12 +39,16 @@ class Legend extends HtmlElement
    *
    * @param string|null $html The HTML of legend. It is the developer's responsibility that it is valid HTML code.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLegendHtml(?string $html): void
+  public function setLegendHtml(?string $html): self
   {
     $this->legend = $html;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,12 +57,16 @@ class Legend extends HtmlElement
    *
    * @param bool|int|float|string|null $text The text of legend. Special characters will be converted to HTML entities.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLegendText($text): void
+  public function setLegendText($text): self
   {
     $this->legend = Html::txt2Html($text);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

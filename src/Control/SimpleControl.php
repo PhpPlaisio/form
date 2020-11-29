@@ -145,12 +145,16 @@ abstract class SimpleControl extends Control
    *
    * @param bool|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAutoComplete(?bool $value): void
+  public function setAttrAutoComplete(?bool $value): self
   {
     $this->attributes['autocomplete'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -159,12 +163,16 @@ abstract class SimpleControl extends Control
    *
    * @param bool|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAutoFocus(?bool $value): void
+  public function setAttrAutoFocus(?bool $value): self
   {
     $this->attributes['autofocus'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -173,12 +181,16 @@ abstract class SimpleControl extends Control
    *
    * @param bool|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrDisabled(?bool $value): void
+  public function setAttrDisabled(?bool $value): self
   {
     $this->attributes['disabled'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -187,12 +199,16 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrForm(?string $value): void
+  public function setAttrForm(?string $value): self
   {
     $this->attributes['form'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -201,12 +217,16 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrList(?string $value): void
+  public function setAttrList(?string $value): self
   {
     $this->attributes['list'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -215,12 +235,16 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrMax(?string $value): void
+  public function setAttrMax(?string $value): self
   {
     $this->attributes['max'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -229,12 +253,16 @@ abstract class SimpleControl extends Control
    *
    * @param int|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrMaxLength(?int $value): void
+  public function setAttrMaxLength(?int $value): self
   {
     $this->attributes['maxlength'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -243,12 +271,16 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrMin(?string $value): void
+  public function setAttrMin(?string $value): self
   {
     $this->attributes['min'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -257,12 +289,16 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrPattern(?string $value): void
+  public function setAttrPattern(?string $value): self
   {
     $this->attributes['pattern'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -271,12 +307,16 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrPlaceHolder(?string $value): void
+  public function setAttrPlaceHolder(?string $value): self
   {
     $this->attributes['placeholder'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -285,12 +325,16 @@ abstract class SimpleControl extends Control
    *
    * @param bool|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrReadOnly(?bool $value): void
+  public function setAttrReadOnly(?bool $value): self
   {
     $this->attributes['readonly'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -299,12 +343,16 @@ abstract class SimpleControl extends Control
    *
    * @param bool|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrRequired(?bool $value): void
+  public function setAttrRequired(?bool $value): self
   {
     $this->attributes['required'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -313,12 +361,16 @@ abstract class SimpleControl extends Control
    *
    * @param int|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrSize(?int $value): void
+  public function setAttrSize(?int $value): self
   {
     $this->attributes['size'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -327,12 +379,16 @@ abstract class SimpleControl extends Control
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrStep(?string $value): void
+  public function setAttrStep(?string $value): self
   {
     $this->attributes['step'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -341,12 +397,16 @@ abstract class SimpleControl extends Control
    *
    * @param Cleaner|null $cleaner The cleaner.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setCleaner(?Cleaner $cleaner)
+  public function setCleaner(?Cleaner $cleaner): self
   {
     $this->cleaner = $cleaner;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -355,12 +415,16 @@ abstract class SimpleControl extends Control
    *
    * @param Formatter|null $formatter The formatter.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setFormatter(?Formatter $formatter)
+  public function setFormatter(?Formatter $formatter): self
   {
     $this->formatter = $formatter;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -379,10 +443,12 @@ abstract class SimpleControl extends Control
    * @param string      $name  The name of the attribute.
    * @param string|null $value The value for the attribute.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelAttribute(string $name, ?string $value)
+  public function setLabelAttribute(string $name, ?string $value): self
   {
     if ($value==='' || $value===null)
     {
@@ -400,6 +466,8 @@ abstract class SimpleControl extends Control
         $this->labelAttributes[$name] = $value;
       }
     }
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -409,12 +477,16 @@ abstract class SimpleControl extends Control
    * @param string|null $htmlSnippet The (inner) label HTML snippet. It is the developer's responsibility that it is
    *                                 valid HTML code.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelHtml(?string $htmlSnippet): void
+  public function setLabelHtml(?string $htmlSnippet): self
   {
     $this->label = $htmlSnippet;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -428,12 +500,16 @@ abstract class SimpleControl extends Control
    *
    * @param int|null $position
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelPosition(?int $position): void
+  public function setLabelPosition(?int $position): self
   {
     $this->labelPosition = $position;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -442,12 +518,16 @@ abstract class SimpleControl extends Control
    *
    * @param bool|int|float|string|null $text The (inner) label text. Special characters are converted to HTML entities.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelText($text): void
+  public function setLabelText($text): self
   {
     $this->label = Html::txt2Html($text);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -456,12 +536,16 @@ abstract class SimpleControl extends Control
    *
    * @param mixed $value The new value for the form control.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setValue($value): void
+  public function setValue($value): self
   {
     $this->value = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

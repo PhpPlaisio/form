@@ -115,7 +115,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param FieldSet $fieldSet
    *
-   * @return self
+   * @return $this
    *
    * @api
    * @since 1.0.0
@@ -133,7 +133,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param CompoundValidator $validator
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api
@@ -354,7 +354,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param string|null $url The URL to send the form-data when this form is submitted.
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api
@@ -372,7 +372,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param bool|null $autoComplete The auto complete value.
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api
@@ -393,7 +393,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param string|null $encType The encoding type.
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api
@@ -413,7 +413,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param string|null $method The method.
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api
@@ -431,12 +431,16 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param CompoundCleaner|null $cleaner The cleaner.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setCleaner(?CompoundCleaner $cleaner): void
+  public function setCleaner(?CompoundCleaner $cleaner): self
   {
     $this->cleaner = $cleaner;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -444,10 +448,14 @@ class RawForm extends HtmlElement implements CompoundControl
    * Adds an error message to the list of error messages for this form control.
    *
    * @param string $message The error message.
+   *
+   * @return $this
    */
-  public function setErrorMessage(string $message): void
+  public function setErrorMessage(string $message): self
   {
     $this->errorMessages[] = $message;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -457,7 +465,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @param array|null $values The values as a nested array.
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api

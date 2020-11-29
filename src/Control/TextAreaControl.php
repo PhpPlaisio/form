@@ -56,12 +56,16 @@ class TextAreaControl extends SimpleControl
    *
    * @param int|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrCols(?int $value): void
+  public function setAttrCols(?int $value): self
   {
     $this->attributes['cols'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -70,12 +74,16 @@ class TextAreaControl extends SimpleControl
    *
    * @param int|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrRows(?int $value): void
+  public function setAttrRows(?int $value): self
   {
     $this->attributes['rows'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -86,12 +94,16 @@ class TextAreaControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrWrap(?string $value): void
+  public function setAttrWrap(?string $value): self
   {
     $this->attributes['wrap'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

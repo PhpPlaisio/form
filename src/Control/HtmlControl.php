@@ -68,12 +68,16 @@ class HtmlControl extends Control
    * @param string|null $htmlSnippet The inner HTML. It is the developer's responsibility to unsure it is valid HTML
    *                                 code.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setHtml(?string $htmlSnippet): void
+  public function setHtml(?string $htmlSnippet): self
   {
     $this->value = $htmlSnippet;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -82,12 +86,16 @@ class HtmlControl extends Control
    *
    * @param bool|int|float|string|null $text The text. Special characters will be converted to HTML entities.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setText($text): void
+  public function setText($text): self
   {
     $this->value = Html::txt2Html($text);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

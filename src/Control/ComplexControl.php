@@ -46,12 +46,16 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @param Control $control The from control added.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function addFormControl(Control $control): void
+  public function addFormControl(Control $control): self
   {
     $this->controls[] = $control;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -392,12 +396,16 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @param CompoundCleaner|null $cleaner The cleaner.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setCleaner(?CompoundCleaner $cleaner): void
+  public function setCleaner(?CompoundCleaner $cleaner): self
   {
     $this->cleaner = $cleaner;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -407,15 +415,19 @@ class ComplexControl extends Control implements CompoundControl
    *
    * @param array|null $values The values as a nested array.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setValue(?array $values): void
+  public function setValue(?array $values): self
   {
     foreach ($this->controls as $control)
     {
       $control->setValuesBase($values);
     }
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

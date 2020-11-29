@@ -133,12 +133,16 @@ class SelectControl extends SimpleControl
    *
    * @param string|null $emptyOption The value for the empty option. This value will not be obfuscated.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setEmptyOption(?string $emptyOption = ' '): void
+  public function setEmptyOption(?string $emptyOption = ' '): self
   {
     $this->emptyOption = $emptyOption;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -152,10 +156,14 @@ class SelectControl extends SimpleControl
    * </ul>
    *
    * @param array|null $map The map.
+   *
+   * @return $this
    */
-  public function setOptionAttributesMap(?array $map)
+  public function setOptionAttributesMap(?array $map): self
   {
     $this->optionAttributesMap = $map;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -166,14 +174,18 @@ class SelectControl extends SimpleControl
    * @param string       $keyKey   The key holding the keys of the options.
    * @param string       $labelKey The key holding the labels for the options.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setOptions(?array $options, string $keyKey, string $labelKey)
+  public function setOptions(?array $options, string $keyKey, string $labelKey): self
   {
     $this->options  = $options;
     $this->keyKey   = $keyKey;
     $this->labelKey = $labelKey;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -182,12 +194,16 @@ class SelectControl extends SimpleControl
    *
    * @param Obfuscator|null $obfuscator The obfuscator for the radio buttons.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setOptionsObfuscator(?Obfuscator $obfuscator): void
+  public function setOptionsObfuscator(?Obfuscator $obfuscator): self
   {
     $this->optionsObfuscator = $obfuscator;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

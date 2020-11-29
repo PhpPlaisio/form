@@ -51,12 +51,12 @@ trait Mutability
    *
    * @param bool|null $immutable Whether this form control is immutable.
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setImmutable(?bool $immutable)
+  public function setImmutable(?bool $immutable): self
   {
     $this->immutable = $immutable;
 
@@ -69,12 +69,12 @@ trait Mutability
    *
    * @param bool|null $mutable Whether this form control is mutable.
    *
-   * @return self
+   * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setMutable(?bool $mutable)
+  public function setMutable(?bool $mutable): self
   {
     $this->immutable = ($mutable===null) ? null : !$mutable;
 

@@ -77,10 +77,14 @@ class HiddenSubmitControl extends SimpleControl
    * Sets the name of the method for handling the form when the form submit is triggered by this control.
    *
    * @param null|string $method The name of the method.
+   *
+   * @return $this
    */
-  public function setMethod(?string $method): void
+  public function setMethod(?string $method): self
   {
     $this->method = $method;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

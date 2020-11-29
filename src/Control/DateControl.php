@@ -23,13 +23,12 @@ class DateControl extends TextControl
   {
     parent::__construct($name);
 
-    $this->setAttrSize(10);
-    $this->setAttrMaxLength(10);
-    $this->addClass('datepicker');
-    $this->setCleaner(new DateCleaner('d-m-Y', '-', '/. :\\'));
-    $this->setFormatter(new DateFormatter('d-m-Y'));
-
-    $this->addValidator(new DateValidator());
+    $this->setAttrSize(10)
+         ->setAttrMaxLength(10)
+         ->addClass('datepicker')
+         ->setCleaner(new DateCleaner('d-m-Y', '-', '/. :\\'))
+         ->setFormatter(new DateFormatter('d-m-Y'))
+         ->addValidator(new DateValidator());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -39,13 +38,17 @@ class DateControl extends TextControl
    *
    * @param string $openDate The open date in YYYY-MM-DD format.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setOpenDate(string $openDate): void
+  public function setOpenDate(string $openDate): self
   {
     $this->cleaner->setOpenDate($openDate);
     $this->formatter->setOpenDate($openDate);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

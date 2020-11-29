@@ -44,12 +44,16 @@ class FileControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAccept(?string $value): void
+  public function setAttrAccept(?string $value): self
   {
     $this->attributes['accept'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -58,12 +62,16 @@ class FileControl extends SimpleControl
    *
    * @param mixed $value Not used.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setValue($value): void
+  public function setValue($value): self
   {
     // Nothing to do.
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

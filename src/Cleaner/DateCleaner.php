@@ -117,12 +117,16 @@ class DateCleaner implements Cleaner
    *
    * @param string|null $openDate The open date in YYYY-MM-DD format.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setOpenDate(?string $openDate): void
+  public function setOpenDate(?string $openDate): self
   {
     $this->openDate = $openDate;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

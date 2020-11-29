@@ -36,12 +36,16 @@ class ImageControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrAlt(?string $value): void
+  public function setAttrAlt(?string $value): self
   {
     $this->attributes['alt'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -50,12 +54,16 @@ class ImageControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrFormAction(?string $value): void
+  public function setAttrFormAction(?string $value): self
   {
     $this->attributes['formaction'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -67,12 +75,16 @@ class ImageControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrFormEncType(?string $value): void
+  public function setAttrFormEncType(?string $value): self
   {
     $this->attributes['formenctype'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -83,12 +95,16 @@ class ImageControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrFormMethod(?string $value): void
+  public function setAttrFormMethod(?string $value): self
   {
     $this->attributes['formmethod'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -97,12 +113,16 @@ class ImageControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrFormTarget(?string $value): void
+  public function setAttrFormTarget(?string $value): self
   {
     $this->attributes['formtarget'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -111,12 +131,16 @@ class ImageControl extends SimpleControl
    *
    * @param int|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrHeight(?int $value): void
+  public function setAttrHeight(?int $value): self
   {
     $this->attributes['height'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -125,12 +149,16 @@ class ImageControl extends SimpleControl
    *
    * @param string|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrSrc(?string $value): void
+  public function setAttrSrc(?string $value): self
   {
     $this->attributes['src'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -139,12 +167,16 @@ class ImageControl extends SimpleControl
    *
    * @param int|null $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrWidth(?int $value): void
+  public function setAttrWidth(?int $value): self
   {
     $this->attributes['width'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -153,12 +185,16 @@ class ImageControl extends SimpleControl
    *
    * @param mixed $value Not used.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setValue($value): void
+  public function setValue($value): self
   {
     // Nothing to do.
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -108,17 +108,6 @@ class ForceSubmitControl extends PushControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the name of the method for handling the form when the form submit is triggered by this control.
-   *
-   * @param null|string $method The name of the method.
-   */
-  public function setMethod(?string $method): void
-  {
-    $this->method = $method;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Has no effect. The value of a hidden button is not set by this method.
    *
    * @param array|null $values Not used.

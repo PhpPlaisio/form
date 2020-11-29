@@ -85,12 +85,16 @@ abstract class Control extends HtmlElement
    *
    * @param Validator|CompoundValidator $validator
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function addValidator($validator): void
+  public function addValidator($validator): self
   {
     $this->validators[] = $validator;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -249,12 +253,16 @@ abstract class Control extends HtmlElement
    *
    * @param string $message The error message.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setErrorMessage(string $message): void
+  public function setErrorMessage(string $message)
   {
     $this->errorMessages[] = $message;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -263,12 +271,16 @@ abstract class Control extends HtmlElement
    *
    * @param Obfuscator $obfuscator The obfuscator.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setObfuscator(Obfuscator $obfuscator): void
+  public function setObfuscator(Obfuscator $obfuscator): self
   {
     $this->obfuscator = $obfuscator;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -277,12 +289,16 @@ abstract class Control extends HtmlElement
    *
    * @param string $htmlSnippet The HTML prefix.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setPostfix(string $htmlSnippet): void
+  public function setPostfix(string $htmlSnippet): self
   {
     $this->postfix = $htmlSnippet;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -291,12 +307,16 @@ abstract class Control extends HtmlElement
    *
    * @param string $htmlSnippet The HTML postfix.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setPrefix(string $htmlSnippet): void
+  public function setPrefix(string $htmlSnippet): self
   {
     $this->prefix = $htmlSnippet;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -307,8 +327,8 @@ abstract class Control extends HtmlElement
    * @param array|null $values The initial values as nested arrays.
    *
    * @return void
-   * @see mergeValuesBase
    *
+   * @see mergeValuesBase
    */
   abstract public function setValuesBase(?array $values): void;
 

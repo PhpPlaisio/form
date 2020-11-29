@@ -235,10 +235,14 @@ class CheckboxesControl extends Control
    * </ul>
    *
    * @param array|null $map The map.
+   *
+   * @return $this
    */
-  public function setInputAttributesMap(?array $map)
+  public function setInputAttributesMap(?array $map): self
   {
     $this->inputAttributesMap = $map;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -251,10 +255,14 @@ class CheckboxesControl extends Control
    * </ul>
    *
    * @param array|null $map The map.
+   *
+   * @return $this
    */
-  public function setLabelAttributesMap(?array $map)
+  public function setLabelAttributesMap(?array $map): self
   {
     $this->labelAttributesMap = $map;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -263,12 +271,16 @@ class CheckboxesControl extends Control
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelIsHtml(bool $labelIsHtml = true): void
+  public function setLabelIsHtml(bool $labelIsHtml = true): self
   {
     $this->labelIsHtml = $labelIsHtml;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -277,12 +289,16 @@ class CheckboxesControl extends Control
    *
    * @param string $htmlSnippet The label prefix.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelPostfix(string $htmlSnippet): void
+  public function setLabelPostfix(string $htmlSnippet): self
   {
     $this->labelPostfix = $htmlSnippet;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -291,12 +307,16 @@ class CheckboxesControl extends Control
    *
    * @param string $htmlSnippet The label postfix.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelPrefix(string $htmlSnippet): void
+  public function setLabelPrefix(string $htmlSnippet): self
   {
     $this->labelPrefix = $htmlSnippet;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -310,18 +330,22 @@ class CheckboxesControl extends Control
    *                                 [non-empty](http://php.net/manual/function.empty.php) value results that the
    *                                 checkbox is checked.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
   public function setOptions(?array $options,
                              string $keyKey,
                              string $labelKey,
-                             string $checkedKey = 'abc_map_checked'): void
+                             string $checkedKey = 'abc_map_checked'): self
   {
     $this->options    = $options;
     $this->keyKey     = $keyKey;
     $this->labelKey   = $labelKey;
     $this->checkedKey = $checkedKey;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -331,12 +355,16 @@ class CheckboxesControl extends Control
    *
    * @param Obfuscator $obfuscator The obfuscator for the checkbox names.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setOptionsObfuscator(Obfuscator $obfuscator): void
+  public function setOptionsObfuscator(Obfuscator $obfuscator): self
   {
     $this->optionsObfuscator = $obfuscator;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -74,7 +74,7 @@ class Form extends RawForm
    *
    * @param Control $control The hidden form control.
    *
-   * @return self
+   * @return $this
    */
   public function addHiddenFormControl(Control $control): self
   {

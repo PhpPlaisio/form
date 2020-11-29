@@ -17,30 +17,6 @@ class RadioControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Prepares this form control for HTML code generation or loading submitted values.
-   *
-   * @param string $parentSubmitName The submit name of the parent control.
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    // A radio button is checked if its value (not to be confused with attribute value) is not empty.
-    if (!empty($this->value))
-    {
-      $this->attributes['checked'] = true;
-    }
-    else
-    {
-      unset($this->attributes['checked']);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the HTML code for this form control.
    *
    * @return string
@@ -68,12 +44,16 @@ class RadioControl extends SimpleControl
    *
    * @param mixed $value The attribute value.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setAttrValue($value): void
+  public function setAttrValue($value): self
   {
     $this->attributes['value'] = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -124,6 +104,30 @@ class RadioControl extends SimpleControl
           $whiteListValues[$this->name] = null;
         }
       }
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Prepares this form control for HTML code generation or loading submitted values.
+   *
+   * @param string $parentSubmitName The submit name of the parent control.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    // A radio button is checked if its value (not to be confused with attribute value) is not empty.
+    if (!empty($this->value))
+    {
+      $this->attributes['checked'] = true;
+    }
+    else
+    {
+      unset($this->attributes['checked']);
     }
   }
 

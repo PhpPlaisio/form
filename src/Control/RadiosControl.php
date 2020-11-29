@@ -193,10 +193,14 @@ class RadiosControl extends Control
    * </ul>
    *
    * @param array|null $map The map.
+   *
+   * @return $this
    */
-  public function setInputAttributesMap(?array $map)
+  public function setInputAttributesMap(?array $map): self
   {
     $this->inputAttributesMap = $map;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -209,10 +213,14 @@ class RadiosControl extends Control
    * </ul>
    *
    * @param array|null $map The map.
+   *
+   * @return $this
    */
-  public function setLabelAttributesMap(?array $map)
+  public function setLabelAttributesMap(?array $map): self
   {
     $this->labelAttributesMap = $map;
+
+    return $this;
   }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -221,12 +229,16 @@ class RadiosControl extends Control
    *
    * @param bool $labelIsHtml If true and only if true labels are HTML code.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelIsHtml(bool $labelIsHtml = true): void
+  public function setLabelIsHtml(bool $labelIsHtml = true): self
   {
     $this->labelIsHtml = $labelIsHtml;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -235,12 +247,16 @@ class RadiosControl extends Control
    *
    * @param string|null $htmlSnippet The label postfix.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setLabelPostfix(?string $htmlSnippet): void
+  public function setLabelPostfix(?string $htmlSnippet): self
   {
     $this->labelPostfix = $htmlSnippet ?? '';
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -248,10 +264,14 @@ class RadiosControl extends Control
    * Sets the label prefix, e.g. the HTML code that is inserted before the HTML code of each label of the checkboxes.
    *
    * @param string|null $htmlSnippet The label prefix.
+   *
+   * @return $this
    */
-  public function setLabelPrefix(?string $htmlSnippet): void
+  public function setLabelPrefix(?string $htmlSnippet): self
   {
     $this->labelPrefix = $htmlSnippet ?? '';
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -262,14 +282,18 @@ class RadiosControl extends Control
    * @param string       $keyKey   The key holding the keys of the radio buttons.
    * @param string       $labelKey The key holding the labels for the radio buttons.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setOptions(?array $options, string $keyKey, string $labelKey): void
+  public function setOptions(?array $options, string $keyKey, string $labelKey): self
   {
     $this->options  = $options;
     $this->keyKey   = $keyKey;
     $this->labelKey = $labelKey;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -279,12 +303,16 @@ class RadiosControl extends Control
    *
    * @param Obfuscator|null $obfuscator The obfuscator for the radio buttons values.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setOptionsObfuscator(?Obfuscator $obfuscator): void
+  public function setOptionsObfuscator(?Obfuscator $obfuscator): self
   {
     $this->optionsObfuscator = $obfuscator;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -293,12 +321,16 @@ class RadiosControl extends Control
    *
    * @param mixed $value The new value for the form control.
    *
+   * @return $this
+   *
    * @since 1.0.0
    * @api
    */
-  public function setValue($value): void
+  public function setValue($value): self
   {
     $this->value = $value;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
