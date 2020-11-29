@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\Html;
+use Plaisio\Form\Control\Traits\InputElement;
 use SetBased\Helper\Cast;
 
 /**
@@ -11,6 +11,9 @@ use SetBased\Helper\Cast;
  */
 class SilentControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use InputElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the HTML code for this form control.
@@ -22,17 +25,7 @@ class SilentControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    $this->attributes['type'] = 'hidden';
-    $this->attributes['name'] = $this->submitName;
-
-    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
-    else                  $this->attributes['value'] = $this->value;
-
-    $ret = $this->prefix;
-    $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->postfix;
-
-    return $ret;
+    return $this->generateInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

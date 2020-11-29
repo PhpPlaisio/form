@@ -3,15 +3,18 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\Html;
 use Plaisio\Form\Cleaner\TrimWhitespaceCleaner;
-use SetBased\Helper\Cast;
+use Plaisio\Form\Control\Traits\LoadPlainText;
+use Plaisio\Helper\Html;
 
 /**
  * Class for form controls of type [textarea](http://www.w3schools.com/tags/tag_textarea.asp).
  */
 class TextAreaControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use LoadPlainText;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
@@ -89,32 +92,6 @@ class TextAreaControl extends SimpleControl
   public function setAttrWrap(?string $value): void
   {
     $this->attributes['wrap'] = $value;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
-  {
-    $submitKey = $this->submitKey();
-
-    // Get the submitted value.
-    $newValue = $submittedValues[$submitKey] ?? null;
-
-    // Clean the submitted value, if we have a cleaner.
-    if ($this->cleaner) $newValue = $this->cleaner->clean($newValue);
-
-    if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
-    {
-      $changedInputs[$this->name] = $this;
-      $this->value                = $newValue;
-    }
-
-    // The user can enter any text in a textarea. So, any value is white listed.
-    $whiteListValues[$this->name] = $newValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

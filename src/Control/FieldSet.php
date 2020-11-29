@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\Html;
 use Plaisio\Form\Legend;
+use Plaisio\Helper\Html;
 
 /**
  * Class for [fieldsets](http://www.w3schools.com/tags/tag_fieldset.asp).

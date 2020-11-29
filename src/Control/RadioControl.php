@@ -66,6 +66,7 @@ class RadioControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
+
     $submitKey = $this->submitKey();
     $newValue  = $submittedValues[$submitKey] ?? '';
 

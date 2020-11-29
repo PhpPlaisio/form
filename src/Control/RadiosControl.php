@@ -109,7 +109,6 @@ class RadiosControl extends Control
 
     if (is_array($this->options))
     {
-      // Normalize current value as a string.
       $valueAsString = Cast::toManString($this->value, '');
 
       foreach ($this->options as $option)
@@ -181,7 +180,7 @@ class RadiosControl extends Control
   /**
    * Sets the map from the keys in the options to attribute names of the input element.
    *
-   * Note the following attributes will ignored:
+   * When a key does not exists in an option the attribute will not be generated. The following attributes will ignored:
    * <ul>
    * <li> type
    * <li> name
@@ -200,7 +199,7 @@ class RadiosControl extends Control
   /**
    * Sets the map from the keys in the options to attribute names of the label element.
    *
-   * Note the following attribute will ignored:
+   * When a key does not exists in an option the attribute will not be generated. The following attribute will ignored:
    * <ul>
    * <li> for
    * </ul>

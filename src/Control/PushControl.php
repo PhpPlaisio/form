@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\Html;
+use Plaisio\Form\Control\Traits\InputElement;
 use SetBased\Exception\LogicException;
 use SetBased\Helper\Cast;
 
@@ -12,6 +12,9 @@ use SetBased\Helper\Cast;
  */
 class PushControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use InputElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /** The type of this button. Valid values are:
    *  <ul>
@@ -40,19 +43,7 @@ class PushControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    $this->attributes['type'] = $this->buttonType;
-    $this->attributes['name'] = $this->submitName;
-
-    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
-    else                  $this->attributes['value'] = $this->value;
-
-    $ret = $this->prefix;
-    $ret .= $this->getHtmlPrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->getHtmlPostfixLabel();
-    $ret .= $this->postfix;
-
-    return $ret;
+    return $this->generateInputElement($this->buttonType);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

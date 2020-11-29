@@ -82,7 +82,7 @@ abstract class SimpleControl extends Control
    *
    * @var mixed
    */
-  protected $value;
+  protected $value = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -498,7 +498,6 @@ abstract class SimpleControl extends Control
    */
   protected function getHtmlPostfixLabel(): string
   {
-    // Generate a postfix label, if required.
     if ($this->labelPosition===self::LABEL_POSITION_POST)
     {
       $ret = $this->getHtmlLabel();
@@ -537,7 +536,6 @@ abstract class SimpleControl extends Control
       }
     }
 
-    // Generate a prefix label, if required.
     if ($this->labelPosition===self::LABEL_POSITION_PRE)
     {
       $ret = $this->getHtmlLabel();

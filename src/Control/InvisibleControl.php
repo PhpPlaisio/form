@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\Html;
+use Plaisio\Form\Control\Traits\InputElement;
 
 /**
  * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp), however the submitted
@@ -11,6 +11,9 @@ use Plaisio\Helper\Html;
  */
 class InvisibleControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use InputElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the HTML code for this form control.
@@ -22,17 +25,7 @@ class InvisibleControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    $this->attributes['type'] = 'hidden';
-    $this->attributes['name'] = $this->submitName;
-
-    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
-    else                  $this->attributes['value'] = $this->value;
-
-    $ret = $this->prefix;
-    $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->postfix;
-
-    return $ret;
+    return $this->generateInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -56,6 +56,24 @@ class ForceSubmitControl extends HiddenControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * @inheritdoc
+   */
+  public function loadSubmittedValuesBase(array $submittedValues,
+                                          array &$whiteListValues,
+                                          array &$changedInputs): void
+  {
+    if ($this->force)
+    {
+      // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
+      // So, skip the following code.
+      // $changedInputs[$this->myName] = $this;
+
+      $whiteListValues[$this->name] = $this->value;
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Has no effect. The value of a hidden button is not set by this method.
    *
    * @param array $values Not used.
@@ -85,24 +103,6 @@ class ForceSubmitControl extends HiddenControl
   public function setValuesBase(?array $values): void
   {
     // Nothing to do.
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
-  {
-    if ($this->force)
-    {
-      // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
-      // So, skip the following code.
-      // $changedInputs[$this->myName] = $this;
-
-      $whiteListValues[$this->name] = $this->value;
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
