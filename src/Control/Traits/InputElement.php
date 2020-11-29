@@ -14,21 +14,13 @@ trait InputElement
   /**
    * Returns the HTML code for this form control.
    *
-   * @param string $type The value of the type attribute of the input element.
-   *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  protected function generateInputElement(string $type): string
+  protected function generateInputElement(): string
   {
-    $this->attributes['type'] = $type;
-    $this->attributes['name'] = $this->submitName;
-
-    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
-    else                  $this->attributes['value'] = $this->value;
-
     $ret = $this->prefix;
     $ret .= $this->getHtmlPrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
@@ -36,6 +28,21 @@ trait InputElement
     $ret .= $this->postfix;
 
     return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Prepares the input element part of this form control for HTML code generation or loading submitted values.
+   *
+   * @param string $type The value of the type attribute of the input element.
+   */
+  protected function prepareInputElement(string $type): void
+  {
+    $this->attributes['type'] = $type;
+    $this->attributes['name'] = $this->submitName;
+
+    if ($this->formatter) $this->attributes['value'] = $this->formatter->format($this->value);
+    else                  $this->attributes['value'] = $this->value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

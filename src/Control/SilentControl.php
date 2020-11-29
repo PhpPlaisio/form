@@ -25,7 +25,7 @@ class SilentControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement('hidden');
+    return $this->generateInputElement();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,6 +59,17 @@ class SilentControl extends SimpleControl
     }
 
     $this->value = $newValue;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    $this->prepareInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

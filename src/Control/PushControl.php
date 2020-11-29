@@ -25,9 +25,9 @@ class PushControl extends SimpleControl
    *  <li> button
    *  </ul>
    *
-   * @var string|null
+   * @var string
    */
-  protected ?string $buttonType = null;
+  protected string $buttonType = '';
 
   /**
    * The name of the method for handling the form when the form submit is triggered by this control.
@@ -45,7 +45,7 @@ class PushControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement($this->buttonType);
+    return $this->generateInputElement();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -107,6 +107,17 @@ class PushControl extends SimpleControl
         $whiteListValues[$this->name] = $this->value;
       }
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    $this->prepareInputElement($this->buttonType);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

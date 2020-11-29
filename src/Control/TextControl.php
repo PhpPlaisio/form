@@ -40,7 +40,18 @@ class TextControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement('text');
+    return $this->generateInputElement();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    $this->prepareInputElement('text');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

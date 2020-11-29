@@ -26,9 +26,6 @@ class RadioControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    $this->attributes['type'] = 'radio';
-    $this->attributes['name'] = $this->submitName;
-
     $ret = $this->prefix;
     $ret .= $this->getHtmlPrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
@@ -119,6 +116,9 @@ class RadioControl extends SimpleControl
   protected function prepare(string $parentSubmitName): void
   {
     parent::prepare($parentSubmitName);
+
+    $this->attributes['type'] = 'radio';
+    $this->attributes['name'] = $this->submitName;
 
     // A radio button is checked if its value (not to be confused with attribute value) is not empty.
     if (!empty($this->value))

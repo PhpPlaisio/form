@@ -34,7 +34,7 @@ class HiddenSubmitControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement('hidden');
+    return $this->generateInputElement();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -117,6 +117,17 @@ class HiddenSubmitControl extends SimpleControl
 
       $whiteListValues[$this->name] = $this->value;
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    $this->prepareInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

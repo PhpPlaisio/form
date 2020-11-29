@@ -50,7 +50,7 @@ class ForceSubmitControl extends PushControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement('hidden');
+    return $this->generateInputElement();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -115,6 +115,17 @@ class ForceSubmitControl extends PushControl
   public function setValuesBase(?array $values): void
   {
     // Nothing to do.
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    $this->prepareInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

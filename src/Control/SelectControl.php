@@ -68,8 +68,6 @@ class SelectControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    $this->attributes['name'] = $this->submitName;
-
     $html = $this->prefix;
     $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateTag('select', $this->attributes);
@@ -282,6 +280,17 @@ class SelectControl extends SimpleControl
         }
       }
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    $this->attributes['name'] = $this->submitName;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
