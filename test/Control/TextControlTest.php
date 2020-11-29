@@ -33,9 +33,9 @@ class TextControlTest extends SimpleControlTest
     $form->addFieldSet($fieldset);
 
     $input = new TextControl('birthday');
-    $input->setValue('1966-04-10');
-    $input->setCleaner(new DateCleaner('d-m-Y', '-', '/-. '));
-    $input->setFormatter(new DateFormatter('d-m-Y'));
+    $input->setValue('1966-04-10')
+          ->setCleaner(new DateCleaner('d-m-Y', '-', '/-. '))
+          ->setFormatter(new DateFormatter('d-m-Y'));
     $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();

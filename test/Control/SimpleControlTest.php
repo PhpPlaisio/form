@@ -72,9 +72,9 @@ abstract class SimpleControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('name');
-    $input->setValue('1');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
+    $input->setValue('1')
+          ->setPrefix('Hello')
+          ->setPostfix('World');
     $fieldset->addFormControl($input);
 
     $html = $form->getHtml();
@@ -166,8 +166,8 @@ abstract class SimpleControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new SubmitControl('submit');
-    $input->setValue('submit');
-    $input->setMethod('handler');
+    $input->setValue('submit')
+          ->setMethod('handler');
     $fieldset->addFormControl($input);
 
     $form->execute();

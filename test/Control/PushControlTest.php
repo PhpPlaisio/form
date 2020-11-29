@@ -189,8 +189,8 @@ abstract class PushControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('button');
-    $input->setValue('Do not push');
-    $input->setMethod('myMethod');
+    $input->setValue('Do not push')
+          ->setMethod('myMethod');
     $fieldset->addFormControl($input);
 
     $_POST['button'] = 'Do not push';
@@ -212,8 +212,8 @@ abstract class PushControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('123');
-    $input->setValue(456);
-    $input->setMethod('myMethod');
+    $input->setValue(456)
+          ->setMethod('myMethod');
     $fieldset->addFormControl($input);
 
     $_POST['123'] = '456';

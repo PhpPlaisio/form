@@ -30,9 +30,9 @@ class NumberControlTest extends SimpleControlTest
     $form->addFieldSet($fieldset);
 
     $input = new NumberControl('year');
-    $input->setAttrMin('2000');
-    $input->setAttrMax('2020');
-    $input->setValue(2018);
+    $input->setAttrMin('2000')
+          ->setAttrMax('2020')
+          ->setValue(2018);
     $fieldset->addFormControl($input);
 
     $form->prepare();
@@ -60,9 +60,9 @@ class NumberControlTest extends SimpleControlTest
     $form->addFieldSet($fieldset);
 
     $input = new NumberControl('year');
-    $input->setAttrMin('2000');
-    $input->setAttrMax('2020');
-    $input->setValue(2018);
+    $input->setAttrMin('2000')
+          ->setAttrMax('2020')
+          ->setValue(2018);
     $fieldset->addFormControl($input);
 
     $form->prepare();
@@ -91,9 +91,9 @@ class NumberControlTest extends SimpleControlTest
     $form->addFieldSet($fieldset);
 
     $input = new NumberControl('year');
-    $input->setAttrMin('2000');
-    $input->setAttrMax('2020');
-    $input->setValue(2018);
+    $input->setAttrMin('2000')
+          ->setAttrMax('2020')
+          ->setValue(2018);
     $fieldset->addFormControl($input);
 
     $form->prepare();

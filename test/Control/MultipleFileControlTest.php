@@ -35,8 +35,8 @@ class MultipleFileControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new MultipleFileControl('name');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
+    $input->setPrefix('Hello')
+          ->setPostfix('World');
     $fieldset->addFormControl($input);
 
     $html = $form->getHtml();

@@ -29,8 +29,8 @@ class TextAreaControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new TextAreaControl('name');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
+    $input->setPrefix('Hello')
+          ->setPostfix('World');
     $fieldset->addFormControl($input);
 
     $html = $form->getHtml();

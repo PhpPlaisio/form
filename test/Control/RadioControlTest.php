@@ -16,6 +16,44 @@ class RadioControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test clicking on a mutable radio button is possible.
+   */
+  public function testImmutable1(): void
+  {
+    $_POST['name'] = '2';
+
+    $form = $this->setForm2(1);
+    $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertArrayHasKey('name', $values);
+    self::assertSame(2, $values['name']);
+
+    self::assertArrayHasKey('name', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test values of immutable form control do not change.
+   */
+  public function testImmutable2(): void
+  {
+    $_POST['name'] = '2';
+
+    $form = $this->setForm2(2);
+    $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertArrayHasKey('name', $values);
+    self::assertSame(null, $values['name']);
+
+    self::assertArrayHasKey('name', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test control is hidden.
    */
   public function testIsHidden(): void
@@ -36,8 +74,8 @@ class RadioControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new RadioControl('name');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
+    $input->setPrefix('Hello')
+          ->setPostfix('World');
     $fieldset->addFormControl($input);
 
     $html = $form->getHtml();
@@ -147,44 +185,6 @@ class RadioControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test clicking on a mutable radio button is possible.
-   */
-  public function testImmutable1(): void
-  {
-    $_POST['name'] = '2';
-
-    $form = $this->setForm2(1);
-    $form->execute();
-    $values  = $form->getValues();
-    $changed = $form->getChangedControls();
-
-    self::assertArrayHasKey('name', $values);
-    self::assertSame(2, $values['name']);
-
-    self::assertArrayHasKey('name', $changed);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test values of immutable form control do not change.
-   */
-  public function testImmutable2(): void
-  {
-    $_POST['name'] = '2';
-
-    $form = $this->setForm2(2);
-    $form->execute();
-    $values  = $form->getValues();
-    $changed = $form->getChangedControls();
-
-    self::assertArrayHasKey('name', $values);
-    self::assertSame(null, $values['name']);
-
-    self::assertArrayHasKey('name', $changed);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Test form for radio.
    */
   private function setForm1(): TestForm
@@ -213,15 +213,15 @@ class RadioControlTest extends PlaisioTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function setForm2(int $immutable=null): TestForm
+  private function setForm2(int $immutable = null): TestForm
   {
     $form     = new TestForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadioControl('name');
-    $input->setAttrValue(1);
-    $input->setValue(1);
+    $input->setAttrValue(1)
+          ->setValue(1);
     if ($immutable===1) $input->setImmutable(true);
     $fieldset->addFormControl($input);
 

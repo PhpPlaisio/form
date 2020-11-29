@@ -26,7 +26,7 @@ class PlaisioTestCase extends TestCase
    * @param Object $object     The HTML child class.
    * @param array  $attributes The attribute names.
    */
-  protected function htmlAttributesTest(Object $object, array $attributes): void
+  protected function htmlAttributesTest(object $object, array $attributes): void
   {
     foreach ($attributes as $attribute => $method)
     {

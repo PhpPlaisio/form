@@ -360,9 +360,9 @@ class SelectControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new SelectControl('cnt_id');
-    $input->setEmptyOption();
-    $input->setValue('1');
-    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $input->setEmptyOption()
+          ->setValue('1')
+          ->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
     return $form;

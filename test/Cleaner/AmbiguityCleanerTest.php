@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
-use ReflectionClass;
 use Plaisio\Form\Cleaner\AmbiguityCleaner;
 use Plaisio\Form\Cleaner\Cleaner;
+use ReflectionClass;
 
 /**
  * Test cases for class AmbiguityCleaner.

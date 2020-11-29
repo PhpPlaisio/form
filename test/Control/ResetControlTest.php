@@ -81,9 +81,9 @@ class ResetControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new ResetControl('name');
-    $input->setValue('1');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
+    $input->setValue('1')
+          ->setPrefix('Hello')
+          ->setPostfix('World');
     $fieldset->addFormControl($input);
 
     $html = $form->getHtml();

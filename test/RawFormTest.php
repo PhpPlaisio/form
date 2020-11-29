@@ -291,8 +291,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler01(): void
   {
     $trigger = new SubmitControl('button1');
-    $trigger->setValue('knob');
-    $trigger->setMethod('handler');
+    $trigger->setValue('knob')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handler');
   }
@@ -304,8 +304,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler02(): void
   {
     $trigger = new ButtonControl('button1');
-    $trigger->setValue('knob');
-    $trigger->setMethod('handler');
+    $trigger->setValue('knob')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handler');
   }
@@ -317,8 +317,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler03()
   {
     $trigger = new HiddenSubmitControl('button1');
-    $trigger->setValue('knob');
-    $trigger->setMethod('handler');
+    $trigger->setValue('knob')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handler');
   }
@@ -330,8 +330,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler04(): void
   {
     $trigger = new ForceSubmitControl('button1', true);
-    $trigger->setValue('knob');
-    $trigger->setMethod('handler');
+    $trigger->setValue('knob')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handler');
   }
@@ -343,8 +343,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler11(): void
   {
     $trigger = new SubmitControl('button1');
-    $trigger->setValue('door');
-    $trigger->setMethod('handler');
+    $trigger->setValue('door')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
   }
@@ -356,8 +356,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler12(): void
   {
     $trigger = new ButtonControl('button1');
-    $trigger->setValue('door');
-    $trigger->setMethod('handler');
+    $trigger->setValue('door')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
   }
@@ -369,8 +369,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler13(): void
   {
     $trigger = new HiddenSubmitControl('button1');
-    $trigger->setValue('door');
-    $trigger->setMethod('handler');
+    $trigger->setValue('door')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
   }
@@ -382,8 +382,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler14a(): void
   {
     $trigger = new ForceSubmitControl('button1', false);
-    $trigger->setValue('door');
-    $trigger->setMethod('handler');
+    $trigger->setValue('door')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
   }
@@ -395,8 +395,8 @@ class RawFormTest extends PlaisioTestCase
   public function testSearchSubmitHandler14b(): void
   {
     $trigger = new ForceSubmitControl('button1', true);
-    $trigger->setValue('door');
-    $trigger->setMethod('handler');
+    $trigger->setValue('door')
+            ->setMethod('handler');
 
     $this->searchSubmitHandlerTest($trigger, 'handler');
   }
@@ -482,8 +482,8 @@ class RawFormTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new SubmitControl('submit');
-    $input->setValue('submit');
-    $input->setMethod('handler');
+    $input->setValue('submit')
+          ->setMethod('handler');
     $fieldset->addFormControl($input);
 
     return $form;

@@ -26,13 +26,13 @@ class CheckboxControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('immutable1');
-    $input->setImmutable(true);
-    $input->setValue(true);
+    $input->setImmutable(true)
+          ->setValue(true);
     $fieldset->addFormControl($input);
 
     $input = new CheckboxControl('immutable2');
-    $input->setImmutable(true);
-    $input->setValue(false);
+    $input->setImmutable(true)
+          ->setValue(false);
     $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
@@ -70,13 +70,13 @@ class CheckboxControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('immutable1');
-    $input->setMutable(true);
-    $input->setValue(true);
+    $input->setMutable(true)
+          ->setValue(true);
     $fieldset->addFormControl($input);
 
     $input = new CheckboxControl('immutable2');
-    $input->setMutable(true);
-    $input->setValue(false);
+    $input->setMutable(true)
+          ->setValue(false);
     $fieldset->addFormControl($input);
 
     $form->loadSubmittedValues();
@@ -101,8 +101,8 @@ class CheckboxControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('name');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
+    $input->setPrefix('Hello')
+          ->setPostfix('World');
     $fieldset->addFormControl($input);
 
     $html = $form->getHtml();

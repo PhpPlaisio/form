@@ -142,8 +142,8 @@ class CheckboxesControlTest extends PlaisioTestCase
     $entities[] = ['key' => 'G', 'label' => 'Green'];
 
     $input = new CheckboxesControl('traffic-light');
-    $input->setInputAttributesMap(['xxx' => 'id', 'extra' => 'class']);
-    $input->setOptions($entities, 'key', 'label');
+    $input->setInputAttributesMap(['xxx' => 'id', 'extra' => 'class'])
+          ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
@@ -174,9 +174,9 @@ class CheckboxesControlTest extends PlaisioTestCase
     $entities[] = ['key' => 'G', 'label' => 'Green'];
 
     $input = new CheckboxesControl('traffic-light');
-    $input->setInputAttributesMap(['xxx' => 'id']);
-    $input->setLabelAttributesMap(['extra' => 'class']);
-    $input->setOptions($entities, 'key', 'label');
+    $input->setInputAttributesMap(['xxx' => 'id'])
+          ->setLabelAttributesMap(['extra' => 'class'])
+          ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
@@ -195,8 +195,8 @@ class CheckboxesControlTest extends PlaisioTestCase
     $entities[] = ['no' => 1, 'key' => 'B', 'name' => '&nbsp;'];
 
     $input = new CheckboxesControl('id');
-    $input->setInputAttributesMap(['no' => 'id']);
-    $input->setOptions($entities, 'key', 'name');
+    $input->setInputAttributesMap(['no' => 'id'])
+          ->setOptions($entities, 'key', 'name');
     TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
@@ -215,9 +215,9 @@ class CheckboxesControlTest extends PlaisioTestCase
     $entities[] = ['no' => 1, 'key' => 'B', 'name' => '<span>1</span>'];
 
     $input = new CheckboxesControl('id');
-    $input->setInputAttributesMap(['no' => 'id']);
-    $input->setOptions($entities, 'key', 'name');
-    $input->setLabelIsHtml();
+    $input->setInputAttributesMap(['no' => 'id'])
+          ->setOptions($entities, 'key', 'name')
+          ->setLabelIsHtml();
     TestControl::fixSubmitName($input);
 
     $html = $input->getHtml();
