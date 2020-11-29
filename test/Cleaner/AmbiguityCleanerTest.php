@@ -5,7 +5,6 @@ namespace Plaisio\Form\Test\Cleaner;
 
 use Plaisio\Form\Cleaner\AmbiguityCleaner;
 use Plaisio\Form\Cleaner\Cleaner;
-use ReflectionClass;
 
 /**
  * Test cases for class AmbiguityCleaner.
@@ -82,7 +81,7 @@ class AmbiguityCleanerTest extends CleanerTest
   {
     $cleaner = new AmbiguityCleaner();
 
-    $reflection = new ReflectionClass($cleaner);
+    $reflection = new \ReflectionClass($cleaner);
     $property   = $reflection->getProperty('ambiguities');
     $property->setAccessible(true);
     $unambiguities = $property->getValue($cleaner);
@@ -111,11 +110,16 @@ class AmbiguityCleanerTest extends CleanerTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function checkEncoding($var): void
+  /**
+   * Asserts a string is valid UTF-8.
+   *
+   * @param string|null $string The string.
+   */
+  private function checkEncoding(?string $string): void
   {
-    if ($var!==null)
+    if ($string!==null)
     {
-      self::assertTrue(mb_check_encoding($var), sprintf("%s is not valid UTF-8", $var));
+      self::assertTrue(mb_check_encoding($string), sprintf("%s is not valid UTF-8", $string));
     }
   }
 
