@@ -143,22 +143,6 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the name of this form control
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   *
-   * @deprecated
-   */
-  public function getLocalName(): string
-  {
-    return $this->name;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the name of this form control.
    *
    * @return string
