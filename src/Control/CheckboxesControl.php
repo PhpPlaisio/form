@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -12,6 +13,9 @@ use SetBased\Helper\Cast;
  */
 class CheckboxesControl extends Control
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The key in $options holding the checked flag for the checkboxes.
@@ -130,7 +134,7 @@ class CheckboxesControl extends Control
         $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
         $inputAttributes['name']    = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
-        $inputAttributes['checked'] = ($this->checkedKey!==null && !empty($option[$this->checkedKey]));
+        $inputAttributes['checked'] = (!empty($option[$this->checkedKey]));
 
         $html .= Html::generateVoidElement('input', $inputAttributes);
 
@@ -371,59 +375,70 @@ class CheckboxesControl extends Control
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitKey = $this->submitKey();
-
-    foreach ($this->options as $i => $option)
+    if ($this->immutable===true)
     {
-      // Get the (database) ID of the option.
-      $key = $option[$this->keyKey];
-
-      // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-      $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
-
-      // Get the original value (i.e. the option is checked or not).
-      $value = $option[$this->checkedKey] ?? false;
-
-      if ($submitKey!=='')
+      foreach ($this->options as $i => $option)
       {
-        // Get the submitted value (i.e. the option is checked or not).
-        $newValue = $submittedValues[$submitKey][$code] ?? false;
+        $key                                = $option[$this->keyKey];
+        $whiteListValues[$this->name][$key] = $this->options[$i][$this->checkedKey];
+      }
+    }
+    else
+    {
+      $submitKey = $this->submitKey();
 
-        // If the original value differs from the submitted value then the form control has been changed.
-        if (empty($value)!==empty($newValue)) $changedInputs[$this->name][$key] = $this;
+      foreach ($this->options as $i => $option)
+      {
+        // Get the (database) ID of the option.
+        $key = $option[$this->keyKey];
 
-        if (!empty($newValue))
+        // If an obfuscator is installed compute the obfuscated code of the (database) ID.
+        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
+
+        // Get the original value (i.e. the option is checked or not).
+        $value = $option[$this->checkedKey] ?? false;
+
+        if ($submitKey!=='')
         {
-          $this->value[$key]                  = true;
-          $whiteListValues[$this->name][$key] = true;
+          // Get the submitted value (i.e. the option is checked or not).
+          $newValue = $submittedValues[$submitKey][$code] ?? false;
+
+          // If the original value differs from the submitted value then the form control has been changed.
+          if (empty($value)!==empty($newValue)) $changedInputs[$this->name][$key] = $this;
+
+          if (!empty($newValue))
+          {
+            $this->value[$key]                  = true;
+            $whiteListValues[$this->name][$key] = true;
+          }
+          else
+          {
+            $this->value[$key]                  = false;
+            $whiteListValues[$this->name][$key] = false;
+          }
         }
         else
         {
-          $this->value[$key]                  = false;
-          $whiteListValues[$this->name][$key] = false;
+          // Get the submitted value (i.e. the option is checked or not).
+          $newValue = $submittedValues[$code] ?? false;
+
+          // If the original value differs from the submitted value then the form control has been changed.
+          if (empty($value)!==empty($newValue)) $changedInputs[$key] = $this;
+
+          if (!empty($newValue))
+          {
+            $this->value[$key]     = true;
+            $whiteListValues[$key] = true;
+          }
+          else
+          {
+            $this->value[$key]     = false;
+            $whiteListValues[$key] = false;
+          }
         }
+
+        $this->options[$i][$this->checkedKey] = $this->value[$key];
       }
-      else
-      {
-        // Get the submitted value (i.e. the option is checked or not).
-        $newValue = $submittedValues[$code] ?? false;
-
-        // If the original value differs from the submitted value then the form control has been changed.
-        if (empty($value)!==empty($newValue)) $changedInputs[$key] = $this;
-
-        if (!empty($newValue))
-        {
-          $this->value[$key]     = true;
-          $whiteListValues[$key] = true;
-        }
-        else
-        {
-          $this->value[$key]     = false;
-          $whiteListValues[$key] = false;
-        }
-      }
-
-      $this->options[$i][$this->checkedKey] = $this->value[$key];
     }
   }
 

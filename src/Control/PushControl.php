@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
+use Plaisio\Form\Control\Traits\Mutability;
 use SetBased\Exception\LogicException;
 use SetBased\Helper\Cast;
 
@@ -14,6 +15,7 @@ class PushControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   use InputElement;
+  use Mutability;
 
   //--------------------------------------------------------------------------------------------------------------------
   /** The type of this button. Valid values are:
@@ -87,16 +89,19 @@ class PushControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitKey = $this->submitKey();
-
-    if (isset($submittedValues[$submitKey]) &&
-      Cast::toManString($submittedValues[$submitKey], '')===Cast::toManString($this->value, ''))
+    if ($this->immutable!==false)
     {
-      // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
-      // So, skip the following code.
-      // $changedInputs[$this->myName] = $this;
+      $submitKey = $this->submitKey();
 
-      $whiteListValues[$this->name] = $this->value;
+      if (isset($submittedValues[$submitKey]) &&
+        Cast::toManString($submittedValues[$submitKey], '')===Cast::toManString($this->value, ''))
+      {
+        // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
+        // So, skip the following code.
+        // $changedInputs[$this->myName] = $this;
+
+        $whiteListValues[$this->name] = $this->value;
+      }
     }
   }
 

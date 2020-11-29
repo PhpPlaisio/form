@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\RadiosControl;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Test\TestControl;
@@ -64,6 +65,27 @@ class RadiosControlTest extends PlaisioTestCase
                 'expected'  => 4];
 
     return $cases;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test values of immutable form control do not change.
+   */
+  public function testImmutable(): void
+  {
+    $_POST['cnt_id'] = '3';
+
+    $form = $this->setupForm2();
+    /** @var RadiosControl $input */
+    $input = $form->getFormControlByName('cnt_id');
+    $input->setImmutable(true);
+
+    $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertEquals('1', $values['cnt_id']);
+    self::assertArrayNotHasKey('cnt_id', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -163,6 +185,27 @@ class RadiosControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test values of mutable form control do change.
+   */
+  public function testMutable(): void
+  {
+    $_POST['cnt_id'] = '3';
+
+    $form = $this->setupForm2();
+    /** @var RadiosControl $input */
+    $input = $form->getFormControlByName('cnt_id');
+    $input->setMutable(true);
+
+    $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertEquals('3', $values['cnt_id']);
+    self::assertArrayHasKey('cnt_id', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Tests for setValue.
    *
    * @param mixed $value     The new value for the radios form control.
@@ -219,7 +262,8 @@ class RadiosControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id'] = '3';
 
-    $form   = $this->setupForm2();
+    $form = $this->setupForm2();
+    $form->execute();
     $values = $form->getValues();
 
     self::assertEquals('3', $values['cnt_id']);
@@ -251,7 +295,8 @@ class RadiosControlTest extends PlaisioTestCase
     // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
     $_POST['cnt_id'] = 99;
 
-    $form   = $this->setupForm2();
+    $form = $this->setupForm2();
+    $form->execute();
     $values = $form->getValues();
 
     self::assertArrayHasKey('cnt_id', $values);
@@ -300,7 +345,11 @@ class RadiosControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('execute');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }
@@ -325,7 +374,9 @@ class RadiosControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('execute');
+    $fieldset->addFormControl($input);
 
     return $form;
   }

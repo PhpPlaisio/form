@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Helper\Html;
 
 /**
@@ -10,6 +11,9 @@ use Plaisio\Helper\Html;
  */
 class CheckboxControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
@@ -42,20 +46,27 @@ class CheckboxControl extends SimpleControl
   {
     $submitKey = $this->submitKey();
 
-    if (empty($this->value)!==empty($submittedValues[$submitKey]))
+    if ($this->immutable===true)
     {
-      $changedInputs[$this->name] = $this;
-    }
-
-    if (!empty($submittedValues[$submitKey]))
-    {
-      $this->value                  = true;
-      $whiteListValues[$this->name] = true;
+      $whiteListValues[$this->name] = $this->value;
     }
     else
     {
-      $this->value                  = false;
-      $whiteListValues[$this->name] = false;
+      if (empty($this->value)!==empty($submittedValues[$submitKey]))
+      {
+        $changedInputs[$this->name] = $this;
+      }
+
+      if (!empty($submittedValues[$submitKey]))
+      {
+        $this->value                  = true;
+        $whiteListValues[$this->name] = true;
+      }
+      else
+      {
+        $this->value                  = false;
+        $whiteListValues[$this->name] = false;
+      }
     }
   }
 

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -13,6 +14,9 @@ use SetBased\Helper\Cast;
  */
 class RadiosControl extends Control
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The map from the keys in the options to attribute names of the input elements.
@@ -314,51 +318,58 @@ class RadiosControl extends Control
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitKey = $this->submitKey();
-
-    // Normalize current value as a string.
-    $valueAsString = Cast::toManString($this->value, '');
-
-    if (isset($submittedValues[$submitKey]))
+    if ($this->immutable===true)
     {
-      // Normalize the submitted value as a string.
-      $newValueAsString = Cast::toManString($submittedValues[$submitKey], '');
+      $whiteListValues[$this->name] = $this->value;
+    }
+    else
+    {
+      $submitKey = $this->submitKey();
 
-      foreach ($this->options as $option)
+      // Normalize current value as a string.
+      $valueAsString = Cast::toManString($this->value, '');
+
+      if (isset($submittedValues[$submitKey]))
       {
-        // Get the (database) ID of the option.
-        $key         = $option[$this->keyKey];
-        $keyAsString = Cast::toManString($key, '');
+        // Normalize the submitted value as a string.
+        $newValueAsString = Cast::toManString($submittedValues[$submitKey], '');
 
-        // If an obfuscator is installed compute the obfuscated code of the radio button name.
-        $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
-
-        if ($newValueAsString===$code)
+        foreach ($this->options as $option)
         {
-          // If the original value differs from the submitted value then the form control has been changed.
-          if ($valueAsString!==$keyAsString)
+          // Get the (database) ID of the option.
+          $key         = $option[$this->keyKey];
+          $keyAsString = Cast::toManString($key, '');
+
+          // If an obfuscator is installed compute the obfuscated code of the radio button name.
+          $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
+
+          if ($newValueAsString===$code)
           {
-            $changedInputs[$this->name] = $this;
+            // If the original value differs from the submitted value then the form control has been changed.
+            if ($valueAsString!==$keyAsString)
+            {
+              $changedInputs[$this->name] = $this;
+            }
+
+            // Set the white listed value.
+            $whiteListValues[$this->name] = $key;
+            $this->value                  = $key;
+
+            // Leave the loop after first match.
+            break;
           }
-
-          // Set the white listed value.
-          $whiteListValues[$this->name] = $key;
-          $this->value                  = $key;
-
-          // Leave the loop after first match.
-          break;
         }
       }
-    }
 
-    if (!isset($whiteListValues[$this->name]))
-    {
-      // No value has been submitted or a none white listed value has been submitted
-      $this->value                  = null;
-      $whiteListValues[$this->name] = null;
-      if ($valueAsString!=='')
+      if (!isset($whiteListValues[$this->name]))
       {
-        $changedInputs[$this->name] = $this;
+        // No value has been submitted or a none white listed value has been submitted
+        $this->value                  = null;
+        $whiteListValues[$this->name] = null;
+        if ($valueAsString!=='')
+        {
+          $changedInputs[$this->name] = $this;
+        }
       }
     }
   }

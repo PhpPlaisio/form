@@ -8,6 +8,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\Formatter\DateFormatter;
+use Plaisio\Form\Test\Control\Traits\Immutable;
 use Plaisio\Form\Test\TestForm;
 
 /**
@@ -15,6 +16,9 @@ use Plaisio\Form\Test\TestForm;
  */
 class TextControlTest extends SimpleControlTest
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Immutable;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test cleaning and formatting is done before testing value of the form control has changed.

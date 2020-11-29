@@ -5,6 +5,7 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\CheckboxesControl;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Test\TestControl;
 use Plaisio\Form\Test\TestForm;
@@ -106,6 +107,32 @@ class CheckboxesControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test values of immutable form control do not change.
+   */
+  public function testImmutable(): void
+  {
+    $_POST['cnt_id'] = ['3' => 'on', '0.1' => 'on'];
+
+    $form = $this->setupForm1();
+    /** @var CheckboxesControl $input */
+    $input = $form->getFormControlByName('cnt_id');
+    $input->setImmutable(true);
+    $form->setValues(['cnt_id' => ['0' => true, '1' => true]]);
+
+    $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertTrue($values['cnt_id']['0']);
+    self::assertTrue($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['2']);
+    self::assertFalse($values['cnt_id']['3']);
+    self::assertFalse($values['cnt_id']['0.1']);
+    self::assertArrayNotHasKey('cnt_id', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test special characters in the labels are replaced with HTML entities.
    */
   public function testInputAttributesMap(): void
@@ -197,6 +224,32 @@ class CheckboxesControlTest extends PlaisioTestCase
 
     self::assertStringContainsString('<label for="0"><span>0</span></label>', $html);
     self::assertStringContainsString('<label for="1"><span>1</span></label>', $html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test values of immutable form control do not change.
+   */
+  public function testMutable(): void
+  {
+    $_POST['cnt_id'] = ['3' => 'on', '0.1' => 'on'];
+
+    $form = $this->setupForm1();
+    /** @var CheckboxesControl $input */
+    $input = $form->getFormControlByName('cnt_id');
+    $input->setMutable(true);
+    $form->setValues(['cnt_id' => ['0' => true, '1' => true]]);
+
+    $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertFalse($values['cnt_id']['0']);
+    self::assertFalse($values['cnt_id']['1']);
+    self::assertFalse($values['cnt_id']['2']);
+    self::assertTrue($values['cnt_id']['3']);
+    self::assertTrue($values['cnt_id']['0.1']);
+    self::assertArrayHasKey('cnt_id', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -311,7 +364,8 @@ class CheckboxesControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id']['2'] = 'on';
 
-    $form   = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->execute();
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
@@ -329,7 +383,8 @@ class CheckboxesControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id']['0.1'] = 'on';
 
-    $form   = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->execute();
     $values = $form->getValues();
 
     // Test checkbox with index 0.1 has been checked.
@@ -347,7 +402,8 @@ class CheckboxesControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id']['2'] = 'on';
 
-    $form   = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->execute();
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
@@ -365,7 +421,8 @@ class CheckboxesControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id']['2'] = 'on';
 
-    $form   = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->execute();
     $values = $form->getValues();
 
     // Test checkbox with index 2 has been checked.
@@ -383,7 +440,8 @@ class CheckboxesControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id']['0.1'] = 'on';
 
-    $form   = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->execute();
     $values = $form->getValues();
 
     // Test checkbox with index 0.1 has been checked.
@@ -402,7 +460,8 @@ class CheckboxesControlTest extends PlaisioTestCase
     // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
     $_POST['cnt_id']['99'] = 'on';
 
-    $form    = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
@@ -453,7 +512,9 @@ class CheckboxesControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('execute');
+    $fieldset->addFormControl($input);
 
     return $form;
   }
@@ -475,7 +536,11 @@ class CheckboxesControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('execute');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }
@@ -497,7 +562,11 @@ class CheckboxesControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('execute');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

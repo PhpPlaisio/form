@@ -3,14 +3,18 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\InputElement;
 use SetBased\Exception\LogicException;
 use SetBased\Helper\Cast;
 
 /**
  * Class for mimicking a hidden submit button.
  */
-class HiddenSubmitControl extends HiddenControl
+class HiddenSubmitControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use InputElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The name of the method for handling the form when the form submit is triggered by this control.
@@ -18,6 +22,32 @@ class HiddenSubmitControl extends HiddenControl
    * @var string|null
    */
   protected ?string $method = null;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the HTML code for this form control.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getHtml(): string
+  {
+    return $this->generateInputElement('hidden');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns true.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function isHidden(): bool
+  {
+    return true;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -29,27 +59,6 @@ class HiddenSubmitControl extends HiddenControl
   public function isSubmitTrigger(): bool
   {
     return true;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function loadSubmittedValuesBase(array $submittedValues,
-                                          array &$whiteListValues,
-                                          array &$changedInputs): void
-  {
-    $submitKey = $this->submitKey();
-
-    if (isset($submittedValues[$submitKey]) &&
-      Cast::toManString($submittedValues[$submitKey], '')===Cast::toManString($this->value, ''))
-    {
-      // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
-      // So, skip the following code.
-      // $changedInputs[$this->myName] = $this;
-
-      $whiteListValues[$this->name] = $this->value;
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -83,6 +92,27 @@ class HiddenSubmitControl extends HiddenControl
   public function setValuesBase(?array $values): void
   {
     // Nothing to do.
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
+  {
+    $submitKey = $this->submitKey();
+
+    if (isset($submittedValues[$submitKey]) &&
+      Cast::toManString($submittedValues[$submitKey], '')===Cast::toManString($this->value, ''))
+    {
+      // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
+      // So, skip the following code.
+      // $changedInputs[$this->myName] = $this;
+
+      $whiteListValues[$this->name] = $this->value;
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

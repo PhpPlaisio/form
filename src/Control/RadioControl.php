@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Helper\Html;
 use SetBased\Helper\Cast;
 
@@ -11,6 +12,33 @@ use SetBased\Helper\Cast;
  */
 class RadioControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Prepares this form control for HTML code generation or loading submitted values.
+   *
+   * @param string $parentSubmitName The submit name of the parent control.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
+    // A radio button is checked if its value (not to be confused with attribute value) is not empty.
+    if (!empty($this->value))
+    {
+      $this->attributes['checked'] = true;
+    }
+    else
+    {
+      unset($this->attributes['checked']);
+    }
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the HTML code for this form control.
@@ -24,16 +52,6 @@ class RadioControl extends SimpleControl
   {
     $this->attributes['type'] = 'radio';
     $this->attributes['name'] = $this->submitName;
-
-    // A radio button is checked if its value (not to be confused with attribute value) is not empty.
-    if (!empty($this->value))
-    {
-      $this->attributes['checked'] = true;
-    }
-    else
-    {
-      unset($this->attributes['checked']);
-    }
 
     $ret = $this->prefix;
     $ret .= $this->getHtmlPrefixLabel();
@@ -66,36 +84,45 @@ class RadioControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-
-    $submitKey = $this->submitKey();
-    $newValue  = $submittedValues[$submitKey] ?? '';
-
-    if (isset($this->attributes['value']) &&
-      Cast::toManString($newValue, '')===Cast::toManString($this->attributes['value'], ''))
+    if ($this->immutable===true)
     {
-      if (empty($this->attributes['checked']))
+      if (!isset($whiteListValues[$this->name]) && !empty($this->attributes['checked']))
       {
-        $changedInputs[$this->name] = $this;
+        $whiteListValues[$this->name] = $this->attributes['value'];
       }
-      $this->attributes['checked']  = true;
-      $whiteListValues[$this->name] = $this->attributes['value'];
-      $this->value                  = $this->attributes['value'];
     }
     else
     {
-      if (!empty($this->attributes['checked']))
-      {
-        $changedInputs[$this->name] = $this;
-      }
-      $this->attributes['checked'] = false;
-      $this->value                 = null;
+      $submitKey = $this->submitKey();
+      $newValue  = $submittedValues[$submitKey] ?? '';
 
-      // If the white listed value is not set by a radio button with the same name as this radio button, set the white
-      // listed value of this radio button (and other radio buttons with the same name) to null. If another radio button
-      // with the same name is checked the white listed value will be overwritten.
-      if (!isset($whiteListValues[$this->name]))
+      if (isset($this->attributes['value']) &&
+        Cast::toManString($newValue, '')===Cast::toManString($this->attributes['value'], ''))
       {
-        $whiteListValues[$this->name] = null;
+        if (empty($this->attributes['checked']))
+        {
+          $changedInputs[$this->name] = $this;
+        }
+        $this->attributes['checked']  = true;
+        $whiteListValues[$this->name] = $this->attributes['value'];
+        $this->value                  = $this->attributes['value'];
+      }
+      else
+      {
+        if (!empty($this->attributes['checked']))
+        {
+          $changedInputs[$this->name] = $this;
+        }
+        $this->attributes['checked'] = false;
+        $this->value                 = null;
+
+        // If the white listed value is not set by a radio button with the same name as this radio button, set the white
+        // listed value of this radio button (and other radio buttons with the same name) to null. If another radio button
+        // with the same name is checked the white listed value will be overwritten.
+        if (!isset($whiteListValues[$this->name]))
+        {
+          $whiteListValues[$this->name] = null;
+        }
       }
     }
   }

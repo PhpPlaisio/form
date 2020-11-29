@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
+use Plaisio\Form\Control\Traits\Mutability;
 use SetBased\Exception\LogicException;
 
 /**
@@ -13,6 +14,7 @@ class ImageControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   use InputElement;
+  use Mutability;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -167,7 +169,14 @@ class ImageControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    throw new LogicException('Not implemented.');
+    if ($this->immutable===true)
+    {
+      $whiteListValues[$this->name] = $this->value;
+    }
+    else
+    {
+      throw new LogicException('Not implemented.');
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

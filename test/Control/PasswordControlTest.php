@@ -5,12 +5,16 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\PasswordControl;
 use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Test\Control\Traits\Immutable;
 
 /**
  * Unit tests for class PasswordControl.
  */
 class PasswordControlTest extends SimpleControlTest
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Immutable;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test control is hidden.
@@ -21,6 +25,7 @@ class PasswordControlTest extends SimpleControlTest
 
     self::assertSame(false, $control->isHidden());
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc

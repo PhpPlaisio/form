@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -12,6 +13,9 @@ use SetBased\Helper\Cast;
  */
 class SelectControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * If set the first option in the select box with be an option with an empty label with value $emptyOption.
@@ -194,65 +198,72 @@ class SelectControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitKey = $this->submitKey();
-
-    // Normalize current value as a string.
-    $valueAsString = Cast::toManString($this->value, '');
-
-    if (isset($submittedValues[$submitKey]))
+    if ($this->immutable===true)
     {
-      // Normalize the submitted value as a string.
-      $newValueAsString = Cast::toManString($submittedValues[$submitKey], '');
+      $whiteListValues[$this->name] = $this->value;
+    }
+    else
+    {
+      $submitKey = $this->submitKey();
 
-      if ($this->emptyOption!==null && $newValueAsString===$this->emptyOption)
+      // Normalize current value as a string.
+      $valueAsString = Cast::toManString($this->value, '');
+
+      if (isset($submittedValues[$submitKey]))
       {
-        $this->value                  = null;
-        $whiteListValues[$this->name] = null;
-        if ($valueAsString!=='' && $valueAsString!==$this->emptyOption)
+        // Normalize the submitted value as a string.
+        $newValueAsString = Cast::toManString($submittedValues[$submitKey], '');
+
+        if ($this->emptyOption!==null && $newValueAsString===$this->emptyOption)
         {
-          $changedInputs[$this->name] = $this;
-        }
-      }
-      else
-      {
-        if (is_array($this->options))
-        {
-          foreach ($this->options as $option)
+          $this->value                  = null;
+          $whiteListValues[$this->name] = null;
+          if ($valueAsString!=='' && $valueAsString!==$this->emptyOption)
           {
-            // Get the key of the option.
-            $key         = $option[$this->keyKey];
-            $keyAsString = Cast::toManString($key, '');
-
-            // If an obfuscator is installed compute the obfuscated code of the (database) ID.
-            $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
-
-            if ($newValueAsString===$code)
+            $changedInputs[$this->name] = $this;
+          }
+        }
+        else
+        {
+          if (is_array($this->options))
+          {
+            foreach ($this->options as $option)
             {
-              // If the original value differs from the submitted value then the form control has been changed.
-              if ($valueAsString!==$keyAsString)
+              // Get the key of the option.
+              $key         = $option[$this->keyKey];
+              $keyAsString = Cast::toManString($key, '');
+
+              // If an obfuscator is installed compute the obfuscated code of the (database) ID.
+              $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
+
+              if ($newValueAsString===$code)
               {
-                $changedInputs[$this->name] = $this;
+                // If the original value differs from the submitted value then the form control has been changed.
+                if ($valueAsString!==$keyAsString)
+                {
+                  $changedInputs[$this->name] = $this;
+                }
+
+                // Set the white listed value.
+                $this->value                  = $key;
+                $whiteListValues[$this->name] = $key;
+
+                break;
               }
-
-              // Set the white listed value.
-              $this->value                  = $key;
-              $whiteListValues[$this->name] = $key;
-
-              break;
             }
           }
         }
       }
-    }
 
-    if (!isset($whiteListValues[$this->name]))
-    {
-      // No value has been submitted or a none white listed value has been submitted
-      $this->value                  = null;
-      $whiteListValues[$this->name] = null;
-      if ($valueAsString!=='' && $valueAsString!==Cast::toManString($this->emptyOption, ''))
+      if (!isset($whiteListValues[$this->name]))
       {
-        $changedInputs[$this->name] = $this;
+        // No value has been submitted or a none white listed value has been submitted
+        $this->value                  = null;
+        $whiteListValues[$this->name] = null;
+        if ($valueAsString!=='' && $valueAsString!==Cast::toManString($this->emptyOption, ''))
+        {
+          $changedInputs[$this->name] = $this;
+        }
       }
     }
   }

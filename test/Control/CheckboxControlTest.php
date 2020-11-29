@@ -15,6 +15,39 @@ class CheckboxControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test values of immutable form control do not change.
+   */
+  public function testImmutable(): void
+  {
+    $_POST['immutable2'] = 'on';
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxControl('immutable1');
+    $input->setImmutable(true);
+    $input->setValue(true);
+    $fieldset->addFormControl($input);
+
+    $input = new CheckboxControl('immutable2');
+    $input->setImmutable(true);
+    $input->setValue(false);
+    $fieldset->addFormControl($input);
+
+    $form->loadSubmittedValues();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertTrue($values['immutable1']);
+    self::assertArrayNotHasKey('immutable1', $changed);
+
+    self::assertFalse($values['immutable2']);
+    self::assertArrayNotHasKey('immutable2', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test control is hidden.
    */
   public function testIsHidden(): void
@@ -22,6 +55,39 @@ class CheckboxControlTest extends PlaisioTestCase
     $control = new CheckboxControl('hidden');
 
     self::assertSame(false, $control->isHidden());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test values of mutable form control do change.
+   */
+  public function testMutable(): void
+  {
+    $_POST['immutable2'] = 'on';
+
+    $form     = new TestForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new CheckboxControl('immutable1');
+    $input->setMutable(true);
+    $input->setValue(true);
+    $fieldset->addFormControl($input);
+
+    $input = new CheckboxControl('immutable2');
+    $input->setMutable(true);
+    $input->setValue(false);
+    $fieldset->addFormControl($input);
+
+    $form->loadSubmittedValues();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertFalse($values['immutable1']);
+    self::assertArrayHasKey('immutable1', $changed);
+
+    self::assertTrue($values['immutable2']);
+    self::assertArrayHasKey('immutable2', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

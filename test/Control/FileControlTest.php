@@ -23,6 +23,7 @@ class FileControlTest extends PlaisioTestCase
 
     self::assertSame(false, $control->isHidden());
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Tests for methods setPrefix() and setPostfix().

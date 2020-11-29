@@ -11,6 +11,9 @@ use SetBased\Helper\Cast;
 trait LoadPlainText
 {
   //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
+  //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
@@ -18,21 +21,28 @@ trait LoadPlainText
                                           array &$whiteListValues,
                                           array &$changedInputs): void
   {
-    $submitKey = $this->submitKey();
-    $newValue  = $submittedValues[$submitKey] ?? null;
-
-    if ($this->cleaner)
+    if ($this->immutable===true)
     {
-      $newValue = $this->cleaner->clean($newValue);
+      $whiteListValues[$this->name] = $this->value;
     }
-
-    if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
+    else
     {
-      $changedInputs[$this->name] = $this;
-      $this->value                = $newValue;
-    }
+      $submitKey = $this->submitKey();
+      $newValue  = $submittedValues[$submitKey] ?? null;
 
-    $whiteListValues[$this->name] = $newValue;
+      if ($this->cleaner)
+      {
+        $newValue = $this->cleaner->clean($newValue);
+      }
+
+      if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
+      {
+        $changedInputs[$this->name] = $this;
+        $this->value                = $newValue;
+      }
+
+      $whiteListValues[$this->name] = $newValue;
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

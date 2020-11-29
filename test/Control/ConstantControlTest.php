@@ -28,6 +28,7 @@ class ConstantControlTest extends PlaisioTestCase
     // Assert "name" has not be recoded as a changed value.
     self::assertArrayNotHasKey('name', $changed);
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test control is hidden.

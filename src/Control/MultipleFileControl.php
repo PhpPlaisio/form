@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Helper\Html;
 
 /**
@@ -11,6 +12,9 @@ use Plaisio\Helper\Html;
  */
 class MultipleFileControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the HTML code for this form control.
@@ -71,35 +75,42 @@ class MultipleFileControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitKey = $this->submitKey();
-
-    if (isset($_FILES[$submitKey]['name']))
+    if ($this->immutable===true)
     {
-      $changedInputs[$this->name]   = $this;
-      $whiteListValues[$this->name] = [];
-      $this->value                  = [];
+      $whiteListValues[$this->name] = $this->value;
+    }
+    else
+    {
+      $submitKey = $this->submitKey();
 
-      foreach ($_FILES[$submitKey]['name'] as $i => $dummy)
+      if (isset($_FILES[$submitKey]['name']))
       {
-        if ($_FILES[$submitKey]['error'][$i]===UPLOAD_ERR_OK)
-        {
-          $tmp = ['name'     => $_FILES[$submitKey]['name'][$i],
-                  'type'     => $_FILES[$submitKey]['type'][$i],
-                  'tmp_name' => $_FILES[$submitKey]['tmp_name'][$i],
-                  'size'     => $_FILES[$submitKey]['size'][$i]];
+        $changedInputs[$this->name]   = $this;
+        $whiteListValues[$this->name] = [];
+        $this->value                  = [];
 
-          $whiteListValues[$this->name][] = $tmp;
-          $this->value[]                  = $tmp;
+        foreach ($_FILES[$submitKey]['name'] as $i => $dummy)
+        {
+          if ($_FILES[$submitKey]['error'][$i]===UPLOAD_ERR_OK)
+          {
+            $tmp = ['name'     => $_FILES[$submitKey]['name'][$i],
+                    'type'     => $_FILES[$submitKey]['type'][$i],
+                    'tmp_name' => $_FILES[$submitKey]['tmp_name'][$i],
+                    'size'     => $_FILES[$submitKey]['size'][$i]];
+
+            $whiteListValues[$this->name][] = $tmp;
+            $this->value[]                  = $tmp;
+          }
         }
       }
-    }
 
-    if (empty($this->value))
-    {
-      // Either no files have been uploaded or all uploaded files have errors.
-      unset($changedInputs[$this->name]);
-      $this->value                  = null;
-      $whiteListValues[$this->name] = null;
+      if (empty($this->value))
+      {
+        // Either no files have been uploaded or all uploaded files have errors.
+        unset($changedInputs[$this->name]);
+        $this->value                  = null;
+        $whiteListValues[$this->name] = null;
+      }
     }
   }
 

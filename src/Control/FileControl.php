@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Helper\Html;
 
 /**
@@ -11,6 +12,9 @@ use Plaisio\Helper\Html;
  */
 class FileControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Mutability;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the HTML code for this form control.
@@ -70,18 +74,25 @@ class FileControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitName = $this->submitKey();
-
-    if (isset($_FILES[$submitName]['error']) && $_FILES[$submitName]['error']===0)
+    if ($this->immutable===true)
     {
-      $changedInputs[$this->name]   = $this;
-      $whiteListValues[$this->name] = $_FILES[$submitName];
-      $this->value                  = $_FILES[$submitName];
+      $whiteListValues[$this->name] = $this->value;
     }
     else
     {
-      $this->value                  = null;
-      $whiteListValues[$this->name] = null;
+      $submitName = $this->submitKey();
+
+      if (isset($_FILES[$submitName]['error']) && $_FILES[$submitName]['error']===0)
+      {
+        $changedInputs[$this->name]   = $this;
+        $whiteListValues[$this->name] = $_FILES[$submitName];
+        $this->value                  = $_FILES[$submitName];
+      }
+      else
+      {
+        $this->value                  = null;
+        $whiteListValues[$this->name] = null;
+      }
     }
   }
 

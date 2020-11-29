@@ -7,6 +7,7 @@ use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Test\Control\Traits\Immutable;
 use Plaisio\Form\Test\TestForm;
 
 /**
@@ -14,6 +15,9 @@ use Plaisio\Form\Test\TestForm;
  */
 class HiddenControlTest extends SimpleControlTest
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Immutable;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test control is hidden.
@@ -24,6 +28,7 @@ class HiddenControlTest extends SimpleControlTest
 
     self::assertSame(true, $control->isHidden());
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test change value.

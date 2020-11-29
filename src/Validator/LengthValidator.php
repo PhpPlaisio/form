@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Validator;
 
-use Plaisio\Helper\Html;
 use Plaisio\Form\Control\Control;
+use Plaisio\Helper\Html;
 
 /**
  * Validator for validating the string length of the value of a form control.

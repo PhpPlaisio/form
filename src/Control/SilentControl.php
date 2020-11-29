@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
-use SetBased\Helper\Cast;
 
 /**
- * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp), however
+ * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp), however, the form
+ * control is never marked as a changed form control.
  */
 class SilentControl extends SimpleControl
 {
@@ -51,17 +51,14 @@ class SilentControl extends SimpleControl
                                              array &$changedInputs): void
   {
     $submitKey = $this->submitKey();
+    $newValue  = $submittedValues[$submitKey] ?? null;
 
-    // Get the submitted value.
-    $newValue = $submittedValues[$submitKey] ?? null;
-
-    // Clean the submitted value, if we have a cleaner.
-    if ($this->cleaner) $newValue = $this->cleaner->clean($newValue);
-
-    if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
+    if ($this->cleaner)
     {
-      $this->value = $newValue;
+      $newValue = $this->cleaner->clean($newValue);
     }
+
+    $this->value = $newValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

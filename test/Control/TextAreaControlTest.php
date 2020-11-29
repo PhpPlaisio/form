@@ -6,6 +6,7 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\TextAreaControl;
+use Plaisio\Form\Test\Control\Traits\Immutable;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Test\TestForm;
 
@@ -14,6 +15,9 @@ use Plaisio\Form\Test\TestForm;
  */
 class TextAreaControlTest extends PlaisioTestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Immutable;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Tests for methods setPrefix() and setPostfix().
@@ -113,6 +117,19 @@ class TextAreaControlTest extends PlaisioTestCase
     $html = $form->getHtml();
 
     self::assertNotEmpty($html);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a TextAreaControl form control.
+   *
+   * @param string $name The name of the form control.
+   *
+   * @return TextAreaControl
+   */
+  protected function getControl(string $name): TextAreaControl
+  {
+    return new TextAreaControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -3,23 +3,20 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Control\Traits\InputElement;
 use SetBased\Exception\LogicException;
 
 /**
  * Class for mimicking a submit button that has been submitted.
  */
-class ForceSubmitControl extends HiddenControl
+class ForceSubmitControl extends PushControl
 {
   //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * The name of the method for handling the form when the form submit is triggered by this control.
-   *
-   * @var string|null
-   */
-  protected ?string $method = null;
+  use InputElement;
 
+  //--------------------------------------------------------------------------------------------------------------------
   /**
-   * If the true this submit button has been submitted.
+   * Whether this submit button has been submitted.
    *
    * @var bool
    */
@@ -40,6 +37,32 @@ class ForceSubmitControl extends HiddenControl
     parent::__construct($name);
 
     $this->force = $force;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the HTML code for this form control.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getHtml(): string
+  {
+    return $this->generateInputElement('hidden');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns true.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function isHidden(): bool
+  {
+    return true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

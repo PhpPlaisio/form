@@ -73,7 +73,8 @@ class SelectControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id'] = ' ';
 
-    $form    = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->loadSubmittedValues();
     $changed = $form->getChangedControls();
 
     self::assertEmpty($changed);
@@ -87,7 +88,8 @@ class SelectControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id'] = '2';
 
-    $form    = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->loadSubmittedValues();
     $changed = $form->getChangedControls();
 
     self::assertNotEmpty($changed);
@@ -101,7 +103,8 @@ class SelectControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id'] = '123';
 
-    $form    = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->loadSubmittedValues();
     $changed = $form->getChangedControls();
 
     self::assertEmpty($changed);
@@ -116,10 +119,54 @@ class SelectControlTest extends PlaisioTestCase
     $_POST['cnt_id'] = '-';
 
     $form = $this->setupForm1('-');
-
+    $form->loadSubmittedValues();
     $changed = $form->getChangedControls();
 
     self::assertEmpty($changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test values of immutable form control do not change.
+   */
+  public function testImmutable(): void
+  {
+    $_POST['cnt_id'] = '3';
+
+    $form = $this->setupForm2();
+    /** @var SelectControl $input */
+    $input = $form->getFormControlByName('cnt_id');
+    $input->setImmutable(true);
+
+    $form->loadSubmittedValues();
+
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertEquals('1', $values['cnt_id']);
+    self::assertArrayNotHasKey('cnt_id', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test values of mutable form control do change.
+   */
+  public function testMutable(): void
+  {
+    $_POST['cnt_id'] = '3';
+
+    $form = $this->setupForm2();
+    /** @var SelectControl $input */
+    $input = $form->getFormControlByName('cnt_id');
+    $input->setMutable(true);
+
+    $form->loadSubmittedValues();
+
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertEquals('3', $values['cnt_id']);
+    self::assertArrayHasKey('cnt_id', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -190,7 +237,8 @@ class SelectControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id'] = '3';
 
-    $form   = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->loadSubmittedValues();
     $values = $form->getValues();
 
     self::assertEquals('3', $values['cnt_id']);
@@ -204,7 +252,8 @@ class SelectControlTest extends PlaisioTestCase
   {
     $_POST['cnt_id'] = '3';
 
-    $form   = $this->setupForm2();
+    $form = $this->setupForm2();
+    $form->loadSubmittedValues();
     $values = $form->getValues();
 
     self::assertEquals('3', $values['cnt_id']);
@@ -219,7 +268,8 @@ class SelectControlTest extends PlaisioTestCase
     // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
     $_POST['cnt_id'] = 99;
 
-    $form   = $this->setupForm1();
+    $form = $this->setupForm1();
+    $form->loadSubmittedValues();
     $values = $form->getValues();
 
     self::assertArrayHasKey('cnt_id', $values);
@@ -236,7 +286,8 @@ class SelectControlTest extends PlaisioTestCase
     // cnt_id is not a value that is in the white list of values (i.e. 1,2, and 3).
     $_POST['cnt_id'] = 99;
 
-    $form   = $this->setupForm2();
+    $form = $this->setupForm2();
+    $form->loadSubmittedValues();
     $values = $form->getValues();
 
     self::assertArrayHasKey('cnt_id', $values);
@@ -290,8 +341,6 @@ class SelectControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
-
     return $form;
   }
 
@@ -315,8 +364,6 @@ class SelectControlTest extends PlaisioTestCase
     $input->setValue('1');
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
-
-    $form->loadSubmittedValues();
 
     return $form;
   }

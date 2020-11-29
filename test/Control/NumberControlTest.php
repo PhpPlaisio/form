@@ -6,6 +6,7 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\NumberControl;
 use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Test\Control\Traits\Immutable;
 use Plaisio\Form\Test\TestForm;
 
 /**
@@ -13,6 +14,9 @@ use Plaisio\Form\Test\TestForm;
  */
 class NumberControlTest extends SimpleControlTest
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use Immutable;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with illegal submitted value.
