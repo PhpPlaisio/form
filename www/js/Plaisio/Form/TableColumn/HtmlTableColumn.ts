@@ -28,6 +28,4 @@ export class HtmlTableColumn extends TextTableColumn
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-OverviewTable.registerTableColumn('control-div', HtmlTableColumn);
-OverviewTable.registerTableColumn('control-span', HtmlTableColumn);
-OverviewTable.registerTableColumn('control-link', HtmlTableColumn);
+OverviewTable.registerTableColumn('control-html', HtmlTableColumn);
