@@ -117,18 +117,9 @@ class RadioControl extends SimpleControl
   {
     parent::prepare($parentSubmitName);
 
-    $this->attributes['type'] = 'radio';
-    $this->attributes['name'] = $this->submitName;
-
-    // A radio button is checked if its value (not to be confused with attribute value) is not empty.
-    if (!empty($this->value))
-    {
-      $this->attributes['checked'] = true;
-    }
-    else
-    {
-      unset($this->attributes['checked']);
-    }
+    $this->attributes['type']    = 'radio';
+    $this->attributes['name']    = $this->submitName;
+    $this->attributes['checked'] = !empty($this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

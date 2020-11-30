@@ -72,10 +72,8 @@ class SelectControl extends SimpleControl
     $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateTag('select', $this->attributes);
 
-    // Normalize current value as a string.
     $valueAsString = Cast::toManString($this->value, '');
 
-    // Add an empty option, if necessary.
     if ($this->emptyOption!==null)
     {
       $optionAttributes = ['value'    => $this->emptyOption,
@@ -90,11 +88,9 @@ class SelectControl extends SimpleControl
       {
         $optionAttributes = $this->optionAttributes($option);
 
-        // Get the (database) key of the option.
         $key         = $option[$this->keyKey];
         $keyAsString = Cast::toManString($key, '');
 
-        // If an obfuscator is installed compute the obfuscated code of the (database) ID.
         $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $keyAsString;
 
         $optionAttributes['value']    = $code;

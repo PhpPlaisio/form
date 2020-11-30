@@ -19,7 +19,7 @@ trait Mutability
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Return whether this form control is immutable.
+   * Returns whether this form control is immutable.
    *
    * @return bool
    *
@@ -33,7 +33,7 @@ trait Mutability
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Return whether this form control is mutable.
+   * Returns whether this form control is mutable.
    *
    * @return bool
    *
@@ -47,7 +47,7 @@ trait Mutability
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Set whether this form control is immutable.
+   * Sets whether this form control is immutable.
    *
    * @param bool|null $immutable Whether this form control is immutable.
    *
@@ -65,7 +65,7 @@ trait Mutability
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Set whether this form control is mutable.
+   * Sets whether this form control is mutable.
    *
    * @param bool|null $mutable Whether this form control is mutable.
    *
