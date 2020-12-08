@@ -5,13 +5,14 @@ namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\Control\PasswordControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\TextAreaControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\MandatoryValidator;
 
 /**
@@ -59,7 +60,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
         }
         $form = $this->setupForm1($control);
 
-        self::assertFalse($form->validate(),
+        self::assertFalse($form->isValid(),
                           sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
       }
     }
@@ -73,7 +74,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
     $_POST = [];
     $form  = $this->setupForm2();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -108,7 +109,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
         }
         $form = $this->setupForm1($control);
 
-        self::assertFalse($form->validate(),
+        self::assertFalse($form->isValid(),
                           sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
       }
     }
@@ -123,7 +124,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
     $_POST['box'] = 'on';
     $form         = $this->setupForm2();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -164,7 +165,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
       }
       $form = $this->setupForm1($control);
 
-      self::assertTrue($form->validate(), sprintf("type: '%s'.", $type));
+      self::assertTrue($form->isValid(), sprintf("type: '%s'.", $type));
     }
   }
 
@@ -174,11 +175,11 @@ class MandatoryValidatorTest extends PlaisioTestCase
    *
    * @param SimpleControl $control
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1($control): TestForm
+  private function setupForm1(SimpleControl $control): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -186,7 +187,11 @@ class MandatoryValidatorTest extends PlaisioTestCase
     $input->addValidator(new MandatoryValidator());
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }
@@ -195,11 +200,11 @@ class MandatoryValidatorTest extends PlaisioTestCase
   /**
    * Setups a form with a checkbox form control.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm2(): TestForm
+  private function setupForm2(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -207,7 +212,11 @@ class MandatoryValidatorTest extends PlaisioTestCase
     $input->addValidator(new MandatoryValidator());
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

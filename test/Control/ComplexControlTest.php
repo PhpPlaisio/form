@@ -7,10 +7,11 @@ use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\MandatoryValidator;
 
 /**
@@ -30,6 +31,7 @@ class ComplexControlTest extends PlaisioTestCase
   private SimpleControl $originControl;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test find FormControl by name.
    */
@@ -336,9 +338,7 @@ class ComplexControlTest extends PlaisioTestCase
     $_POST['complex_name']['field_2']                  = 'value';
     $_POST['complex_name']['complex_name2']['field_4'] = 'value';
 
-    $form = $this->setForm2();
-    $form->loadSubmittedValues();
-
+    $form    = $this->setForm2();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
@@ -389,7 +389,7 @@ class ComplexControlTest extends PlaisioTestCase
    */
   public function testValidate(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -407,12 +407,15 @@ class ComplexControlTest extends PlaisioTestCase
     $input->addValidator(new MandatoryValidator());
     $fieldset->addFormControl($input);
 
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
     // Simulate a post without any values.
-    $form->loadSubmittedValues();
-    $form->validate();
+    $method = $form->execute();
     $invalid = $form->getInvalidControls();
 
-    // We expect 2 invalid controls.
+    self::assertSame('handleEchoForm', $method);
     self::assertCount(2, $invalid);
   }
   //--------------------------------------------------------------------------------------------------------------------
@@ -424,9 +427,7 @@ class ComplexControlTest extends PlaisioTestCase
     $_POST['unknown_field']                    = 'value';
     $_POST['unknown_complex']['unknown_field'] = 'value';
 
-    $form = $this->setForm2();
-    $form->loadSubmittedValues();
-
+    $form    = $this->setForm2();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
@@ -440,11 +441,11 @@ class ComplexControlTest extends PlaisioTestCase
   /**
    * Setups a form with a select form control.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setForm1(): TestForm
+  private function setForm1(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -514,7 +515,11 @@ class ComplexControlTest extends PlaisioTestCase
     $input = new TextControl('city2');
     $complex->addFormControl($input);
 
-    $form->prepare();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }
@@ -523,9 +528,9 @@ class ComplexControlTest extends PlaisioTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setForm2(): TestForm
+  private function setForm2(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -553,7 +558,11 @@ class ComplexControlTest extends PlaisioTestCase
     $input = new TextControl('field_4');
     $complex3->addFormControl($input);
 
-    $form->prepare();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }
@@ -564,11 +573,11 @@ class ComplexControlTest extends PlaisioTestCase
    *
    * @param string $name The name of the form control.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setForm3(string $name): TestForm
+  private function setForm3(string $name): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -581,7 +590,7 @@ class ComplexControlTest extends PlaisioTestCase
     $this->originComplexControl = $complex;
     $this->originControl        = $input;
 
-    $form->prepare();
+    $form->execute();
 
     return $form;
   }

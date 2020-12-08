@@ -7,7 +7,6 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ResetControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class ResetControl.
@@ -39,8 +38,9 @@ class ResetControlTest extends PlaisioTestCase
    */
   public function testLoadSubmittedValues1(): void
   {
-    // Create form.
-    $form     = new TestForm();
+    $_POST['button'] = 'Do not push';
+
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -48,14 +48,13 @@ class ResetControlTest extends PlaisioTestCase
     $input->setValue('Do not push');
     $fieldset->addFormControl($input);
 
-    $_POST['button'] = 'Do not push';
-
-    $form->loadSubmittedValues();
-
-    $values = $form->getValues();
-    self::assertArrayNotHasKey('button', $values);
-
+    $method  = $form->execute();
+    $values  = $form->getValues();
     $changed = $form->getChangedControls();
+
+    self::assertNull($form->isValid());
+    self::assertSame('handleEchoForm', $method);
+    self::assertArrayNotHasKey('button', $values);
     self::assertArrayNotHasKey('button', $changed);
   }
 
@@ -66,7 +65,7 @@ class ResetControlTest extends PlaisioTestCase
   public function testMergeValues(): void
   {
     // Create form.
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -96,7 +95,7 @@ class ResetControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -122,7 +121,7 @@ class ResetControlTest extends PlaisioTestCase
   public function testSetValues(): void
   {
     // Create form.
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 

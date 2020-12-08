@@ -8,7 +8,6 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\RadioControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class PasswordControl.
@@ -43,13 +42,15 @@ class RadioControlTest extends PlaisioTestCase
     $_POST['name'] = '2';
 
     $form = $this->setForm2(1);
-    $form->execute();
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertArrayHasKey('name', $values);
     self::assertSame(2, $values['name']);
-
     self::assertArrayHasKey('name', $changed);
   }
 
@@ -62,13 +63,15 @@ class RadioControlTest extends PlaisioTestCase
     $_POST['name'] = '2';
 
     $form = $this->setForm2(2);
-    $form->execute();
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertArrayHasKey('name', $values);
     self::assertSame(null, $values['name']);
-
     self::assertArrayHasKey('name', $changed);
   }
 
@@ -89,7 +92,7 @@ class RadioControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -207,9 +210,9 @@ class RadioControlTest extends PlaisioTestCase
   /**
    * Test form for radio.
    */
-  private function setForm1(): TestForm
+  private function setForm1(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -226,16 +229,21 @@ class RadioControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     return $form;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function setForm2(int $immutable = null): TestForm
+  /**
+   * @param int|null $immutable
+   *
+   * @return RawForm
+   */
+  private function setForm2(int $immutable = null): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -256,16 +264,19 @@ class RadioControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     return $form;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function setForm3(): TestForm
+  /**
+   * @return RawForm
+   */
+  private function setForm3(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -274,8 +285,8 @@ class RadioControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new RadioControl('name');
-    $input->setAttrValue('0.0');
-    $input->setValue('0.0');
+    $input->setAttrValue('0.0')
+          ->setValue('0.0');
     $fieldset->addFormControl($input);
 
     $input = new RadioControl('name');
@@ -283,7 +294,7 @@ class RadioControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     return $form;

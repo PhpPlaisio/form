@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\NumberControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\Immutable;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class NumberControl.
@@ -45,7 +45,7 @@ class NumberControlTest extends SimpleControlTest
   {
     $_POST['year'] = 'Hello, world';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -55,14 +55,16 @@ class NumberControlTest extends SimpleControlTest
           ->setValue(2018);
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $form->loadSubmittedValues();
-    $form->validate();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
     self::assertFalse($form->isValid());
+    self::assertSame('handleEchoForm', $method);
     self::assertSame('Hello, world', $values['year']);
     self::assertArrayHasKey('year', $changed);
   }
@@ -75,7 +77,7 @@ class NumberControlTest extends SimpleControlTest
   {
     $_POST['year'] = 1900;
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -85,14 +87,16 @@ class NumberControlTest extends SimpleControlTest
           ->setValue(2018);
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $form->loadSubmittedValues();
-    $form->validate();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
     self::assertFalse($form->isValid());
+    self::assertSame('handleEchoForm', $method);
     self::assertSame('1900', $values['year']);
     self::assertArrayHasKey('year', $changed);
   }
@@ -106,7 +110,7 @@ class NumberControlTest extends SimpleControlTest
   {
     $_POST['year'] = '2018';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -116,14 +120,16 @@ class NumberControlTest extends SimpleControlTest
           ->setValue(2018);
     $fieldset->addFormControl($input);
 
-    $form->prepare();
-    $form->loadSubmittedValues();
-    $form->validate();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
     self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertSame('2018', $values['year']);
     self::assertArrayNotHasKey('year', $changed);
   }
@@ -135,6 +141,28 @@ class NumberControlTest extends SimpleControlTest
   protected function getControl(string $name): SimpleControl
   {
     return new NumberControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid submitted value (different form initial value).
+   *
+   * @return string
+   */
+  protected function getValidSubmittedValue(): string
+  {
+    return '456';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid initial value.
+   *
+   * @return mixed
+   */
+  protected function getValidInitialValue()
+  {
+    return 123;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

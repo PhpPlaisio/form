@@ -64,6 +64,17 @@ class RawForm extends HtmlElement implements CompoundControl
   protected bool $prepared = false;
 
   /**
+   * <ul>
+   * <li> true:  This form has been submitted and submitted values are valid.
+   * <li> false: This form has been submitted and submitted values are not valid.
+   * <li> null:  The form has not been submitted (or not yet executed).
+   * </ul>
+   *
+   * @var bool|null
+   */
+  protected ?bool $valid = null;
+
+  /**
    * After a call to {@link loadSubmittedValues} holds the white-listed submitted values.
    *
    * @var array
@@ -143,6 +154,42 @@ class RawForm extends HtmlElement implements CompoundControl
     $this->fieldSets->addValidator($validator);
 
     return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Executes this form. Executes means:
+   * <ul>
+   * <li> If the form is submitted the submitted values are validated:
+   *      <ul>
+   *      <li> If the submitted values are valid the appropriated handler is returned.
+   *      <li> Otherwise the form is shown.
+   *      </ul>
+   * <li> Otherwise the form is shown.
+   * </ul>
+   *
+   * @return string The appropriate handler method.
+   */
+  public function execute(): string
+  {
+    $this->prepare();
+
+    $handler = $this->searchSubmitHandler();
+    if ($handler!==null)
+    {
+      $this->loadSubmittedValues();
+      $this->valid = $this->validate();
+      if (!$this->valid)
+      {
+        $handler = 'handleEchoForm';
+      }
+    }
+    else
+    {
+      $handler = 'handleEchoForm';
+    }
+
+    return $handler;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -230,9 +277,7 @@ class RawForm extends HtmlElement implements CompoundControl
     $this->prepare();
 
     $html = $this->getHtmlStartTag();
-
     $html .= $this->getHtmlBody();
-
     $html .= $this->getHtmlEndTag();
 
     return $html;
@@ -330,6 +375,22 @@ class RawForm extends HtmlElement implements CompoundControl
   public function haveChangedInputs(): bool
   {
     return !empty($this->changedControls);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns:
+   * <ul>
+   * <li> true:  This form has been submitted and submitted values are valid.
+   * <li> false: This form has been submitted and submitted values are not valid.
+   * <li> null:  The form has not been submitted (or not yet been executed).
+   * </ul>
+   *
+   * @return bool|null
+   */
+  public function isValid(): ?bool
+  {
+    return $this->valid;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -559,7 +620,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   protected function prepare(): void
   {
-    if (!$this->prepared)
+    if (!$this->prepared || true)
     {
       $this->fieldSets->prepare('');
 

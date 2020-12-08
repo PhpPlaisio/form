@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\IntegerValidator;
 
 /**
@@ -23,7 +24,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = 'string';
     $form             = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '0.1';
     $form             = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '123abc'; // My favorite password ;-)
     $form             = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,7 +60,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '-9';
     $form             = $this->setupForm2();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -71,7 +72,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '-2';
     $form             = $this->setupForm2();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -83,7 +84,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '11';
     $form             = $this->setupForm2();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -95,7 +96,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '23';
     $form             = $this->setupForm2();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -107,7 +108,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = 0;
     $form             = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -119,7 +120,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '56';
     $form             = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -131,7 +132,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = 37;
     $form             = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -143,7 +144,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '-11';
     $form             = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -155,7 +156,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = -45;
     $form             = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -167,7 +168,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '-1';
     $form             = $this->setupForm2();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -179,7 +180,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '0';
     $form             = $this->setupForm2();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -190,7 +191,7 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '3';
     $form             = $this->setupForm2();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -202,16 +203,16 @@ class IntegerValidatorTest extends PlaisioTestCase
     $_POST['integer'] = '10';
     $form             = $this->setupForm2();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a text form control (which must be a valid inter) values.
    */
-  private function setupForm1(): TestForm
+  private function setupForm1(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -219,7 +220,11 @@ class IntegerValidatorTest extends PlaisioTestCase
     $input->addValidator(new IntegerValidator());
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }
@@ -228,11 +233,11 @@ class IntegerValidatorTest extends PlaisioTestCase
   /**
    * Setups a form with a text form control (which must be a valid inter) values.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm2(): TestForm
+  private function setupForm2(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -240,7 +245,11 @@ class IntegerValidatorTest extends PlaisioTestCase
     $input->addValidator(new IntegerValidator(-1, 10));
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

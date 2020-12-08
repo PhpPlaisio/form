@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\InvisibleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class InvisibleControl.
@@ -15,18 +15,32 @@ use Plaisio\Form\Test\TestForm;
 class InvisibleControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test submitted value is not loaded.
+   */
   public function testForm1(): void
   {
     $_POST['name'] = '2';
 
-    $form    = $this->setupForm1();
+    $form     = new RawForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new InvisibleControl('name');
+    $input->setValue('1');
+    $fieldset->addFormControl($input);
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Assert the value of "name" is still "1".
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertEquals('1', $values['name']);
-
-    // Assert "name" has not be recorded as a changed value.
     self::assertArrayNotHasKey('name', $changed);
   }
 
@@ -48,6 +62,7 @@ class InvisibleControlTest extends PlaisioTestCase
     $expected = '<form method="post" action="/"><fieldset><input type="hidden" name="myForm[myFieldSet][myInput]"/></fieldset></form>';
     self::assertSame($expected, $html);
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test control is hidden.
@@ -65,7 +80,7 @@ class InvisibleControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -81,22 +96,6 @@ class InvisibleControlTest extends PlaisioTestCase
 
     $pos = strpos($html, '/>World');
     self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  private function setupForm1(): TestForm
-  {
-    $form     = new TestForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new InvisibleControl('name');
-    $input->setValue('1');
-    $fieldset->addFormControl($input);
-
-    $form->loadSubmittedValues();
-
-    return $form;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

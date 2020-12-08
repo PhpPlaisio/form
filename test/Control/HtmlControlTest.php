@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use SetBased\Helper\Cast;
 
 /**
@@ -17,41 +17,24 @@ class HtmlControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Create a from with a HtmlControl.
-   *
-   * @param string|null $html The value of the HtmlControl.
-   *
-   * @return TestForm
-   */
-  public function setupForm1($html = null): TestForm
-  {
-    $form     = new TestForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new HtmlControl('snippet');
-    $input->setHtml($html);
-    $fieldset->addFormControl($input);
-
-    return $form;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * The value of a HtmlControl must be independent of the posted values.
    */
   public function testGetValues1(): void
   {
+    $_POST['snippet'] = 'bye bye';
+
     $html = '<h1>Hello World</h1>';
 
     $form = $this->setupForm1($html);
 
-    $_POST['snippet'] = 'bye bye';
-    $form->loadSubmittedValues();
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
 
-    $values = $form->getValues();
-
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertSame($html, $values['snippet']);
+    self::assertArrayNotHasKey('snippet', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -98,11 +81,14 @@ class HtmlControlTest extends PlaisioTestCase
     $values['snippet'] = $html;
     $form->mergeValues($values);
 
-    $form->loadSubmittedValues();
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
 
-    $values = $form->getValues();
-
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertSame($html, $values['snippet']);
+    self::assertArrayNotHasKey('snippet', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -119,11 +105,14 @@ class HtmlControlTest extends PlaisioTestCase
     $values = ['name' => 'paul'];
     $form->mergeValues($values);
 
-    $form->loadSubmittedValues();
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
 
-    $values = $form->getValues();
-
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertSame($html, $values['snippet']);
+    self::assertArrayNotHasKey('snippet', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -140,12 +129,15 @@ class HtmlControlTest extends PlaisioTestCase
     $values = ['snippet' => pi()];
     $form->mergeValues($values);
 
-    $form->loadSubmittedValues();
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
 
-    $values = $form->getValues();
-
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertIsString($values['snippet']);
     self::assertSame(Cast::toManString(pi()), $values['snippet']);
+    self::assertArrayNotHasKey('snippet', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -160,11 +152,14 @@ class HtmlControlTest extends PlaisioTestCase
     $control = $form->getFormControlByName('snippet');
     $control->setText('<&>');
 
-    $form->loadSubmittedValues();
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
 
-    $values = $form->getValues();
-
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertSame('&lt;&amp;&gt;', $values['snippet']);
+    self::assertArrayNotHasKey('snippet', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -180,11 +175,14 @@ class HtmlControlTest extends PlaisioTestCase
     $values = ['snippet' => $html];
     $form->setValues($values);
 
-    $form->loadSubmittedValues();
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
 
-    $values = $form->getValues();
-
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertSame($html, $values['snippet']);
+    self::assertArrayNotHasKey('snippet', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -196,6 +194,31 @@ class HtmlControlTest extends PlaisioTestCase
     parent::setUp();
 
     $_POST = [];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Create a from with a HtmlControl.
+   *
+   * @param string|null $html The value of the HtmlControl.
+   *
+   * @return RawForm
+   */
+  private function setupForm1($html = null): RawForm
+  {
+    $form     = new RawForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new HtmlControl('snippet');
+    $input->setHtml($html);
+    $fieldset->addFormControl($input);
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    return $form;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

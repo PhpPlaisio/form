@@ -6,9 +6,9 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Control\CheckboxesControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Test\TestControl;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class CheckboxesControl.
@@ -268,7 +268,7 @@ class CheckboxesControlTest extends PlaisioTestCase
     $countries[] = ['cnt_id' => 4, 'cnt_name' => 'GB'];
 
     // Create a form with checkboxes.
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -276,7 +276,12 @@ class CheckboxesControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     // Generate HTML code for the form.
     $html = $form->getHtml();
@@ -315,7 +320,7 @@ class CheckboxesControlTest extends PlaisioTestCase
     $countries[] = ['cnt_id' => 4, 'cnt_name' => 'GB'];
 
     // Create a form with checkboxes.
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -479,7 +484,7 @@ class CheckboxesControlTest extends PlaisioTestCase
     $days[] = ['day_id' => '2', 'days' => 2];
     $days[] = ['day_id' => '3', 'days' => 3];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -496,7 +501,7 @@ class CheckboxesControlTest extends PlaisioTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm1(): TestForm
+  private function setupForm1(): RawForm
   {
     $countries[] = ['cnt_id' => '0', 'cnt_name' => '-'];
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
@@ -504,7 +509,7 @@ class CheckboxesControlTest extends PlaisioTestCase
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
     $countries[] = ['cnt_id' => '0.1', 'cnt_name' => 'UA'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -513,7 +518,7 @@ class CheckboxesControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     return $form;
@@ -523,12 +528,12 @@ class CheckboxesControlTest extends PlaisioTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm3(): TestForm
+  private function setupForm3(): RawForm
   {
     $countries[] = ['cnt_id' => '0', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '0.0', 'cnt_name' => 'BE'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -537,7 +542,7 @@ class CheckboxesControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     $form->execute();
@@ -549,12 +554,12 @@ class CheckboxesControlTest extends PlaisioTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm4(): TestForm
+  private function setupForm4(): RawForm
   {
     $countries[] = ['cnt_id' => 0, 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'BE'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -563,7 +568,7 @@ class CheckboxesControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     $form->execute();

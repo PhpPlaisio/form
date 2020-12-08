@@ -5,11 +5,11 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextAreaControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\Immutable;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class TextAreaControl.
@@ -44,7 +44,7 @@ class TextAreaControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -70,7 +70,7 @@ class TextAreaControlTest extends PlaisioTestCase
   {
     $_POST['test'] = '  Hello    World!   ';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -81,15 +81,17 @@ class TextAreaControlTest extends PlaisioTestCase
     // Set cleaner for textarea field (default it off).
     $input->setCleaner(PruneWhitespaceCleaner::get());
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // After clean '  Hello    World!   ' must be equal 'Hello World!'.
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertEquals('Hello World!', $values['test']);
-
-    // Value not change.
     self::assertArrayNotHasKey('test', $changed);
   }
 
@@ -101,7 +103,7 @@ class TextAreaControlTest extends PlaisioTestCase
   {
     $_POST['test'] = 'Hello World!';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -109,14 +111,17 @@ class TextAreaControlTest extends PlaisioTestCase
     $input->setValue('Hi World!');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertEquals('Hello World!', $values['test']);
-
-    // Value is change.
     self::assertNotEmpty($changed['test']);
   }
 
@@ -126,7 +131,7 @@ class TextAreaControlTest extends PlaisioTestCase
    */
   public function testWithNumericValues(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -150,6 +155,28 @@ class TextAreaControlTest extends PlaisioTestCase
   protected function getControl(string $name): TextAreaControl
   {
     return new TextAreaControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid submitted value (different form initial value).
+   *
+   * @return string
+   */
+  protected function getValidSubmittedValue(): string
+  {
+    return 'Bye, bye!';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid initial value.
+   *
+   * @return mixed
+   */
+  protected function getValidInitialValue()
+  {
+    return 'Hello, World!';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

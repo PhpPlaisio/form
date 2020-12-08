@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\EmailValidator;
 
 /**
@@ -23,7 +24,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = '"much.more unusual"@setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = '"very.unusual.@.unusual.com"@setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = '!#$%&\'*+-/=?^_`{}|~@setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,7 +60,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'info@localhost';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -71,7 +72,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'info@info@setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -83,7 +84,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'info@setbased.nl@info';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -95,7 +96,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'info@xsetbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -109,7 +110,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = "$local@setbased.nl";
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -121,7 +122,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'info.setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -133,7 +134,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'info@setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -145,7 +146,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'p.r.water@setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -157,7 +158,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'disposable.style.email.with+symbol@setbased.nl';
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -169,7 +170,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = '';
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -181,7 +182,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = false;
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -193,7 +194,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = null;
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -206,7 +207,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = 'info@thelongestdomainnameintheworldandthensomeandthensomemoreandmore.com';
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -220,18 +221,18 @@ class EmailValidatorTest extends PlaisioTestCase
     $_POST['email'] = "$local@setbased.nl";
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a text form control (which must be a valid email address) values.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1(): TestForm
+  private function setupForm1(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -239,7 +240,11 @@ class EmailValidatorTest extends PlaisioTestCase
     $input->addValidator(new EmailValidator());
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

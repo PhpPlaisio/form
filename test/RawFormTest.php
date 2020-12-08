@@ -28,7 +28,7 @@ class RawFormTest extends PlaisioTestCase
    */
   public function searchSubmitHandlerTest(Control $trigger, ?string $expected): void
   {
-    $form      = new TestForm('form1');
+    $form      = new RawForm('form1');
     $fieldset1 = new FieldSet('fieldset1');
     $form->addFieldSet($fieldset1);
 
@@ -226,7 +226,7 @@ class RawFormTest extends PlaisioTestCase
     $options[] = ['id' => 2, 'label' => 'label2'];
     $options[] = ['id' => 3, 'label' => 'label3'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet('name');
     $form->addFieldSet($fieldset);
 
@@ -459,16 +459,16 @@ class RawFormTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1(): TestForm
+  private function setupForm1(): RawForm
   {
     $options   = [];
     $options[] = ['id' => 1, 'label' => 'label1'];
     $options[] = ['id' => 2, 'label' => 'label2'];
     $options[] = ['id' => 2, 'label' => 'label3'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
     $input = new TextControl('name1');
@@ -483,7 +483,7 @@ class RawFormTest extends PlaisioTestCase
 
     $input = new SubmitControl('submit');
     $input->setValue('submit')
-          ->setMethod('handler');
+          ->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     return $form;

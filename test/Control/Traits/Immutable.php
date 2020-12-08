@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control\Traits;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\Traits\Mutability;
-use Plaisio\Form\Test\TestForm;
+use Plaisio\Form\RawForm;
 
 /**
  * Test for immutable form controls.
@@ -18,23 +19,27 @@ trait Immutable
    */
   public function testImmutable(): void
   {
-    $_POST['immutable'] = 'Bye, bye!';
+    $_POST['immutable'] = $this->getValidSubmittedValue();
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('immutable');
-    $input->setValue('Hello, World!');
-    $input->setImmutable(true);
+    $input->setValue($this->getValidInitialValue())
+          ->setImmutable(true);
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertEquals('Hello, World!', $values['immutable']);
+    self::assertSame('handleSubmit', $method);
+    self::assertSame($this->getValidInitialValue(), $values['immutable']);
     self::assertArrayNotHasKey('immutable', $changed);
   }
 
@@ -86,24 +91,50 @@ trait Immutable
    */
   public function testMutable(): void
   {
-    $_POST['mutable'] = 'Bye, bye!';
+    $_POST['mutable'] = $this->getValidSubmittedValue();
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('mutable');
-    $input->setValue('Hello, World!');
-    $input->setMutable(true);
+    $input->setValue($this->getValidInitialValue())
+          ->setMutable(true);
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertEquals('Bye, bye!', $values['mutable']);
+    self::assertSame('handleSubmit', $method);
+    self::assertSame($this->getValidSubmittedValue(), $values['mutable']);
     self::assertArrayHasKey('mutable', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid initial value.
+   *
+   * @return mixed
+   */
+  protected function getValidInitialValue()
+  {
+    return 'Hello, World!';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid submitted value (different form initial value).
+   *
+   * @return string
+   */
+  protected function getValidSubmittedValue(): string
+  {
+    return 'Bye, bye!';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

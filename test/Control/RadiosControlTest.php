@@ -6,9 +6,9 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\RadiosControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Test\TestControl;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class RadiosControl.
@@ -21,7 +21,7 @@ class RadiosControlTest extends PlaisioTestCase
    *
    * @return array[]
    */
-  public function setValueCases()
+  public function setValueCases(): array
   {
     $cases = [];
 
@@ -80,10 +80,12 @@ class RadiosControlTest extends PlaisioTestCase
     $input = $form->getFormControlByName('cnt_id');
     $input->setImmutable(true);
 
-    $form->execute();
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertEquals('1', $values['cnt_id']);
     self::assertArrayNotHasKey('cnt_id', $changed);
   }
@@ -223,20 +225,26 @@ class RadiosControlTest extends PlaisioTestCase
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
     $countries[] = ['cnt_id' => 4, 'cnt_name' => 'DE'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new RadiosControl('cnt_id');
-    $input->setOptions($countries, 'cnt_id', 'cnt_name');
+    $input->setOptions($countries, 'cnt_id', 'cnt_name')
+          ->setValue($value);
     $fieldset->addFormControl($input);
 
-    $input->setValue($value);
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
     self::assertSame($value, $form->getSetValues()['cnt_id']);
 
-    $form->loadSubmittedValues();
-
+    $method = $form->execute();
     $values = $form->getValues();
+
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertSame($expected, $values['cnt_id']);
   }
 
@@ -314,7 +322,7 @@ class RadiosControlTest extends PlaisioTestCase
     $days[] = ['day_id' => '2', 'days' => 2];
     $days[] = ['day_id' => '3', 'days' => 3];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -331,13 +339,13 @@ class RadiosControlTest extends PlaisioTestCase
   /**
    * Setups a form with a select form control.
    */
-  private function setupForm1(): TestForm
+  private function setupForm1(): RawForm
   {
     $countries[] = ['cnt_id' => '1', 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => '2', 'cnt_name' => 'BE'];
     $countries[] = ['cnt_id' => '3', 'cnt_name' => 'LU'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -346,7 +354,7 @@ class RadiosControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     $form->execute();
@@ -359,13 +367,13 @@ class RadiosControlTest extends PlaisioTestCase
    * Setups a form with a select form control. Difference between this function
    * and SetupForm1 are the cnt_id are integers.
    */
-  private function setupForm2(): TestForm
+  private function setupForm2(): RawForm
   {
     $countries[] = ['cnt_id' => 1, 'cnt_name' => 'NL'];
     $countries[] = ['cnt_id' => 2, 'cnt_name' => 'BE'];
     $countries[] = ['cnt_id' => 3, 'cnt_name' => 'LU'];
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -375,7 +383,7 @@ class RadiosControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('execute');
+    $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
     return $form;

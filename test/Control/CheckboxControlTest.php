@@ -5,9 +5,9 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class CheckboxControl.
@@ -41,7 +41,7 @@ class CheckboxControlTest extends PlaisioTestCase
   {
     $_POST['immutable2'] = 'on';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -55,13 +55,18 @@ class CheckboxControlTest extends PlaisioTestCase
           ->setValue(false);
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method = $form->execute();
+
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
+    self::assertSame('handleSubmit', $method);
     self::assertTrue($values['immutable1']);
     self::assertArrayNotHasKey('immutable1', $changed);
-
     self::assertFalse($values['immutable2']);
     self::assertArrayNotHasKey('immutable2', $changed);
   }
@@ -85,7 +90,7 @@ class CheckboxControlTest extends PlaisioTestCase
   {
     $_POST['immutable2'] = 'on';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -99,9 +104,15 @@ class CheckboxControlTest extends PlaisioTestCase
           ->setValue(false);
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
+
+    self::assertSame('handleSubmit', $method);
 
     self::assertFalse($values['immutable1']);
     self::assertArrayHasKey('immutable1', $changed);
@@ -116,7 +127,7 @@ class CheckboxControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -142,20 +153,23 @@ class CheckboxControlTest extends PlaisioTestCase
    */
   public function testSubmittedValue1(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test1');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Value has not set.
+    self::assertSame('handleSubmit', $method);
     self::assertFalse($values['test1']);
-    // Value has not change.
     self::assertArrayNotHasKey('test1', $changed);
   }
 
@@ -169,21 +183,23 @@ class CheckboxControlTest extends PlaisioTestCase
   {
     $_POST['test2'] = 'on';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test2');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Value set from POST.
+    self::assertSame('handleSubmit', $method);
     self::assertTrue($values['test2']);
-
-    // Assert value has changed.
     self::assertNotEmpty($changed['test2']);
   }
 
@@ -195,7 +211,7 @@ class CheckboxControlTest extends PlaisioTestCase
    */
   public function testSubmittedValue3(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -203,14 +219,16 @@ class CheckboxControlTest extends PlaisioTestCase
     $input->setValue(true);
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Value set from POST checkbox unchecked.
+    self::assertSame('handleSubmit', $method);
     self::assertFalse($values['test3']);
-
-    // Value is change.
     self::assertNotEmpty($changed['test3']);
   }
 
@@ -224,7 +242,7 @@ class CheckboxControlTest extends PlaisioTestCase
   {
     $_POST['test4'] = 'on';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -232,14 +250,16 @@ class CheckboxControlTest extends PlaisioTestCase
     $input->setValue(true);
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Value set from POST.
+    self::assertSame('handleSubmit', $method);
     self::assertTrue($values['test4']);
-
-    // Value has not changed.
     self::assertArrayNotHasKey('test4', $changed);
   }
 
@@ -252,20 +272,23 @@ class CheckboxControlTest extends PlaisioTestCase
    */
   public function testSubmittedValue5(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test5');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Value has not set.
+    self::assertSame('handleSubmit', $method);
     self::assertSame(false, $values['test5']);
-    // Value has not change.
     self::assertArrayNotHasKey('test5', $changed);
   }
 
@@ -280,21 +303,23 @@ class CheckboxControlTest extends PlaisioTestCase
   {
     $_POST['test6'] = 'on';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new CheckboxControl('test6');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Value has not set.
-    self::assertSame(true, $values['test6']);
-
-    // Value has changed.
+    self::assertSame('handleSubmit', $method);
+    self::assertTrue($values['test6']);
     self::assertArrayHasKey('test6', $changed);
   }
 

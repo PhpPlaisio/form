@@ -6,8 +6,8 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  *  Abstract parent class for unit tests for child classes of SimpleControl.
@@ -67,7 +67,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -143,7 +143,11 @@ abstract class SimpleControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Returns the concrete SimpleControl
+   *
+   * @param string $name The name of the form control.
+   *
+   * @return SimpleControl
    */
   abstract protected function getControl(string $name): SimpleControl;
 
@@ -153,11 +157,11 @@ abstract class SimpleControlTest extends PlaisioTestCase
    *
    * @param string|null $value The value of the form control
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1(?string $value): TestForm
+  private function setupForm1(?string $value): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 

@@ -5,12 +5,12 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Cleaner\DateCleaner;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\Formatter\DateFormatter;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\Immutable;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class TextControl.
@@ -29,7 +29,7 @@ class TextControlTest extends SimpleControlTest
   {
     $_POST['birthday'] = '10.04.1966';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -39,10 +39,15 @@ class TextControlTest extends SimpleControlTest
           ->setFormatter(new DateFormatter('d-m-Y'));
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
+
+    self::assertSame('handleSubmit', $method);
 
     // After formatting and clean the date must be in ISO 8601 format.
     self::assertEquals('1966-04-10', $values['birthday']);
@@ -79,7 +84,7 @@ class TextControlTest extends SimpleControlTest
   {
     $_POST['test'] = '  Hello    World!   ';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -87,10 +92,15 @@ class TextControlTest extends SimpleControlTest
     $input->setValue('Hello World!');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
+
+    self::assertSame('handleSubmit', $method);
 
     // After clean '  Hello    World!   ' must be equal 'Hello World!'.
     self::assertEquals('Hello World!', $values['test']);

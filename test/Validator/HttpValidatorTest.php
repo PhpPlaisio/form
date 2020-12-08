@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\HttpValidator;
 
 /**
@@ -23,7 +24,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = 'hffd//:www.setbased/nl';
     $form         = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = 'http//golgelinva';
     $form         = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = 'ftp//:!#$%&\'*+-/=?^_`{}|~ed.com';
     $form         = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,7 +60,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = 'http://www.setbased.nl';
     $form         = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -71,7 +72,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = 'http://www.google.com';
     $form         = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -83,7 +84,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = 'http://www.php.net';
     $form         = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -95,7 +96,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = '';
     $form         = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -107,7 +108,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = false;
     $form         = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -119,18 +120,18 @@ class HttpValidatorTest extends PlaisioTestCase
     $_POST['url'] = null;
     $form         = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Setups a form with a text form control (which must be a valid url address).
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1(): TestForm
+  private function setupForm1(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -138,7 +139,11 @@ class HttpValidatorTest extends PlaisioTestCase
     $input->addValidator(new HttpValidator());
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

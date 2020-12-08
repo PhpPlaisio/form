@@ -9,7 +9,6 @@ use Plaisio\Form\Control\PushControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Abstract parent class for unit tests for child classes of PushControl.
@@ -63,23 +62,24 @@ abstract class PushControlTest extends PlaisioTestCase
    */
   public function testLoadSubmittedValues1(): void
   {
-    // Create form.
-    $form     = new TestForm();
+    $_POST['button'] = 'Do not push';
+
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('button');
-    $input->setValue('Do not push');
+    $input->setValue('Do not push')
+          ->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
-    $_POST['button'] = 'Do not push';
-
-    $form->loadSubmittedValues();
-
-    $values = $form->getValues();
-    self::assertEquals('Do not push', $values['button']);
-
+    $method  = $form->execute();
+    $values  = $form->getValues();
     $changed = $form->getChangedControls();
+
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
+    self::assertEquals('Do not push', $values['button']);
     self::assertArrayNotHasKey('button', $changed);
   }
 
@@ -89,31 +89,35 @@ abstract class PushControlTest extends PlaisioTestCase
    */
   public function testLoadSubmittedValues2(): void
   {
-    // Create form.
-    $form     = new TestForm();
+    $_POST['button'] = 'Do push me';
+
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('button');
-    $input->setValue('Do not push');
+    $input->setValue('Do not push')
+          ->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
-    $_POST['button'] = 'Do push me';
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
 
-    $form->loadSubmittedValues();
+    self::assertArrayNotHasKey('button', $changed);
 
-    $values = $form->getValues();
     if (get_class($input)!=ForceSubmitControl::class)
     {
+      self::assertNull($form->isValid());
+      self::assertSame('handleEchoForm', $method);
       self::assertArrayNotHasKey('button', $values);
     }
     else
     {
+      self::assertTrue($form->isValid());
+      self::assertSame('handleSubmit', $method);
       self::assertArrayHasKey('button', $values);
     }
-
-    $changed = $form->getChangedControls();
-    self::assertArrayNotHasKey('button', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -122,23 +126,24 @@ abstract class PushControlTest extends PlaisioTestCase
    */
   public function testLoadSubmittedValues3(): void
   {
-    // Create form.
-    $form     = new TestForm();
+    $_POST['button'] = '123';
+
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = $this->getControl('button');
-    $input->setValue(123);
+    $input->setValue(123)
+          ->setMethod('handleSubmit');
     $fieldset->addFormControl($input);
 
-    $_POST['button'] = '123';
-
-    $form->loadSubmittedValues();
-
-    $values = $form->getValues();
-    self::assertEquals(123, $values['button']);
-
+    $method  = $form->execute();
+    $values  = $form->getValues();
     $changed = $form->getChangedControls();
+
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
+    self::assertEquals(123, $values['button']);
     self::assertArrayNotHasKey('button', $changed);
   }
 
@@ -149,7 +154,7 @@ abstract class PushControlTest extends PlaisioTestCase
   public function testMergeValues(): void
   {
     // Create form.
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -179,7 +184,7 @@ abstract class PushControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -203,8 +208,9 @@ abstract class PushControlTest extends PlaisioTestCase
    */
   public function testSearchSubmitHandler1(): void
   {
-    // Create form.
-    $form     = new TestForm();
+    $_POST['button'] = 'Do not push';
+
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -212,8 +218,6 @@ abstract class PushControlTest extends PlaisioTestCase
     $input->setValue('Do not push')
           ->setMethod('myMethod');
     $fieldset->addFormControl($input);
-
-    $_POST['button'] = 'Do not push';
 
     $handler = $form->execute();
 
@@ -226,8 +230,9 @@ abstract class PushControlTest extends PlaisioTestCase
    */
   public function testSearchSubmitHandler2(): void
   {
-    // Create form.
-    $form     = new TestForm();
+    $_POST['123'] = '456';
+
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -235,8 +240,6 @@ abstract class PushControlTest extends PlaisioTestCase
     $input->setValue(456)
           ->setMethod('myMethod');
     $fieldset->addFormControl($input);
-
-    $_POST['123'] = '456';
 
     $handler = $form->execute();
 
@@ -250,7 +253,7 @@ abstract class PushControlTest extends PlaisioTestCase
   public function testSetValues(): void
   {
     // Create form.
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 

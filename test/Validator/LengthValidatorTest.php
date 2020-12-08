@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\LengthValidator;
 
 /**
@@ -23,7 +24,7 @@ class LengthValidatorTest extends PlaisioTestCase
     $_POST['value'] = 'Hyperbolicsyllabicsesquedalymistic';
     $form           = $this->setupForm1(10, 20);
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ class LengthValidatorTest extends PlaisioTestCase
     $_POST['value'] = 'Isaac';
     $form           = $this->setupForm1(10, 20);
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,7 @@ class LengthValidatorTest extends PlaisioTestCase
     $_POST['value'] = 'hot';
     $form           = $this->setupForm1(3, 8);
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,7 +60,7 @@ class LengthValidatorTest extends PlaisioTestCase
     $_POST['value'] = 'buttered';
     $form           = $this->setupForm1(3, 8);
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -71,7 +72,7 @@ class LengthValidatorTest extends PlaisioTestCase
     $_POST['value'] = 'soul';
     $form           = $this->setupForm1(3, 8);
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -81,11 +82,11 @@ class LengthValidatorTest extends PlaisioTestCase
    * @param int $min The minimum valid length.
    * @param int $max The maximum valid length.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1(int $min, int $max): TestForm
+  private function setupForm1(int $min, int $max): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -93,7 +94,11 @@ class LengthValidatorTest extends PlaisioTestCase
     $input->addValidator(new LengthValidator($min, $max));
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

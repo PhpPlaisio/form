@@ -5,11 +5,11 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\Immutable;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class HiddenControl.
@@ -57,7 +57,7 @@ class HiddenControlTest extends SimpleControlTest
   {
     $_POST['test'] = 'New value';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -65,12 +65,18 @@ class HiddenControlTest extends SimpleControlTest
     $input->setValue('Old value');
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
+    $method  = $form->execute();
+    $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Value is change.
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertNotEmpty($changed['test']);
+    self::assertSame('New value', $values['test']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -81,26 +87,26 @@ class HiddenControlTest extends SimpleControlTest
   {
     $_POST['test'] = '  Hello    World!   ';
 
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
     $input = new HiddenControl('test');
-    $input->setValue('Hello World!');
+    $input->setValue('Hello World!')
+          ->setCleaner(PruneWhitespaceCleaner::get());
     $fieldset->addFormControl($input);
 
-    // Set cleaner for hidden field (default it off).
-    $input->setCleaner(PruneWhitespaceCleaner::get());
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
-
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // After clean '  Hello    World!   ' must be equal 'Hello World!'.
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertEquals('Hello World!', $values['test']);
-
-    // Value not change.
     self::assertArrayNotHasKey('test', $changed);
   }
 

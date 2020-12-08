@@ -5,9 +5,9 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\ConstantControl;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class ConstantControl.
@@ -15,18 +15,32 @@ use Plaisio\Form\Test\TestForm;
 class ConstantControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test submitted value is not loaded.
+   */
   public function testForm1(): void
   {
     $_POST['name'] = '2';
 
-    $form    = $this->setupForm1();
+    $form     = new RawForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new ConstantControl('name');
+    $input->setValue('1');
+    $fieldset->addFormControl($input);
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    // Assert the value of "name" is still "1".
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
     self::assertEquals('1', $values['name']);
-
-    // Assert "name" has not be recoded as a changed value.
     self::assertArrayNotHasKey('name', $changed);
   }
 
@@ -58,22 +72,6 @@ class ConstantControlTest extends PlaisioTestCase
     $control = new ConstantControl('hidden');
 
     self::assertSame(true, $control->isHidden());
-  }
-
-  //-------------------------------------------------------------------------------------------------------------------
-  private function setupForm1(): TestForm
-  {
-    $form     = new TestForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new ConstantControl('name');
-    $input->setValue('1');
-    $fieldset->addFormControl($input);
-
-    $form->loadSubmittedValues();
-
-    return $form;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

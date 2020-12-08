@@ -5,8 +5,9 @@ namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\DateControl;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\DateValidator;
 
 /**
@@ -27,7 +28,7 @@ class DateValidatorTest extends PlaisioTestCase
       $_POST['date'] = $date;
       $form          = $this->setupForm1();
 
-      self::assertFalse($form->validate(), "Submitted: $date");
+      self::assertFalse($form->isValid(), "Submitted: $date");
     }
   }
 
@@ -44,7 +45,7 @@ class DateValidatorTest extends PlaisioTestCase
       $_POST['date'] = $date;
       $form          = $this->setupForm1();
 
-      self::assertTrue($form->validate(), "Submitted: $date");
+      self::assertTrue($form->isValid(), "Submitted: $date");
     }
   }
 
@@ -52,11 +53,11 @@ class DateValidatorTest extends PlaisioTestCase
   /**
    * Setups a form with a text form control (which must be a valid email address) values.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1(): TestForm
+  private function setupForm1(): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -64,7 +65,11 @@ class DateValidatorTest extends PlaisioTestCase
     $input->addValidator(new DateValidator());
     $fieldset->addFormControl($input);
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

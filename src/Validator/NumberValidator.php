@@ -26,8 +26,8 @@ class NumberValidator implements Validator
    */
   public function validate(Control $control): bool
   {
-    $options = ['options' => ['min_range' => $control->getAttribute('min'),
-                              'max_range' => $control->getAttribute('max')]];
+    $options = ['options' => ['min_range' => $control->getAttribute('min') ?? PHP_INT_MIN,
+                              'max_range' => $control->getAttribute('max') ?? PHP_INT_MAX]];
 
     $value = $control->getSubmittedValue();
 

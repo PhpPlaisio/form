@@ -5,9 +5,10 @@ namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\CompoundControl;
 use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 use Plaisio\Form\Validator\ProxyCompoundValidator;
 
 /**
@@ -24,7 +25,7 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
     $_POST['input'] = 'valid';
     $form           = $this->setupForm1('valid');
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
     $_POST['input'] = 'invalid';
     $form           = $this->setupForm1('valid');
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -48,7 +49,7 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
     $_POST['input'] = '';
     $form           = $this->setupForm1();
 
-    self::assertTrue($form->validate());
+    self::assertTrue($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -60,7 +61,7 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
     $_POST['input'] = 'invalid';
     $form           = $this->setupForm1();
 
-    self::assertFalse($form->validate());
+    self::assertFalse($form->isValid());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -85,11 +86,11 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
    *
    * @param mixed $data The additional data.
    *
-   * @return TestForm
+   * @return RawForm
    */
-  private function setupForm1($data = null): TestForm
+  private function setupForm1($data = null): RawForm
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
@@ -97,7 +98,11 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
     $form->addValidator(new ProxyCompoundValidator([$this, 'validate'], $data));
 
-    $form->loadSubmittedValues();
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
 
     return $form;
   }

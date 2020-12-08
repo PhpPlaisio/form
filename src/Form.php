@@ -9,7 +9,6 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\SilentControl;
 use Plaisio\Kernel\Nub;
 use SetBased\Exception\LogicException;
-use SetBased\Exception\RuntimeException;
 
 /**
  * Class for forms with protection against CSRF.
@@ -20,7 +19,7 @@ class Form extends RawForm
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * If set the generated form has protection against CSRF.
+   * Whether the generated form must be protected against CSRF.
    *
    * @var bool
    */
@@ -32,17 +31,6 @@ class Form extends RawForm
    * @var FieldSet
    */
   protected FieldSet $hiddenFieldSet;
-
-  /**
-   * <ul>
-   * <li> true:  This form has been submitted and submitted values are valid.
-   * <li> false: This form has been submitted and submitted values are not valid.
-   * <li> null:  The form has not been submitted (or not yet executed).
-   * </ul>
-   *
-   * @var bool|null
-   */
-  protected ?bool $valid = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -61,7 +49,7 @@ class Form extends RawForm
     $this->hiddenFieldSet = new FieldSet();
     $this->addFieldSet($this->hiddenFieldSet);
 
-    // Set attribute for name (used by JavaScript).
+    // Set attribute for name (used in JavaScript).
     if ($name!=='') $this->setAttrData('name', $name);
 
     // Add hidden field for protection against CSRF.
@@ -85,11 +73,12 @@ class Form extends RawForm
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Defends against CSRF attacks using State Full Double Submit Cookie.
+   * Defends against CSRF attacks using State Full Double Submit Cookie. Throws a BadRequestException in case of a
+   * possible CSRF attack.
    *
-   * @throws RuntimeException
+   * @throws BadRequestException
    */
-  public function csrfCheck()
+  public function csrfCheck(): void
   {
     // Return immediately if CSRF check is disabled.
     if (!$this->csrfCheck) return;
@@ -126,42 +115,6 @@ class Form extends RawForm
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Executes this form. Executes means:
-   * <ul>
-   * <li> If the form is submitted the submitted values are validated:
-   *      <ul>
-   *      <li> If the submitted values are valid the appropriated handler is returned.
-   *      <li> Otherwise the form is shown.
-   *      </ul>
-   * <li> Otherwise the form is shown.
-   * </ul>
-   *
-   * @return string The appropriate handler method.
-   */
-  public function execute(): string
-  {
-    $this->prepare();
-
-    $handler = $this->searchSubmitHandler();
-    if ($handler!==null)
-    {
-      $this->loadSubmittedValues();
-      $this->valid = $this->validate();
-      if (!$this->valid)
-      {
-        $handler = 'handleEchoForm';
-      }
-    }
-    else
-    {
-      $handler = 'handleEchoForm';
-    }
-
-    return $handler;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the hidden fieldset of this form.
    *
    * @return FieldSet
@@ -169,22 +122,6 @@ class Form extends RawForm
   public function getHiddenFieldSet(): FieldSet
   {
     return $this->hiddenFieldSet;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns:
-   * <ul>
-   * <li> true:  This form has been submitted and submitted values are valid.
-   * <li> false: This form has been submitted and submitted values are not valid.
-   * <li> null:  The form has not been submitted (or not yet been executed).
-   * </ul>
-   *
-   * @return bool|null
-   */
-  public function isValid(): ?bool
-  {
-    return $this->valid;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

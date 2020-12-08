@@ -7,7 +7,6 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ImageControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestForm;
 
 /**
  * Unit tests for class ImageControl.
@@ -50,7 +49,7 @@ class ImageControlTest extends PlaisioTestCase
    */
   public function testPrefixAndPostfix(): void
   {
-    $form     = new TestForm();
+    $form     = new RawForm();
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
