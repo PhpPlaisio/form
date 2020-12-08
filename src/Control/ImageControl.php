@@ -27,7 +27,7 @@ class ImageControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement();
+    return $this->generateInputElement('image');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -213,17 +213,6 @@ class ImageControl extends SimpleControl
     {
       throw new LogicException('Not implemented.');
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->prepareInputElement('image');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

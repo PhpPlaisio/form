@@ -26,6 +26,9 @@ class FileControl extends SimpleControl
    */
   public function getHtml(): string
   {
+    $this->attributes['type'] = 'file';
+    $this->attributes['name'] = $this->submitName;
+
     $ret = $this->prefix;
     $ret .= $this->getHtmlPrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
@@ -99,18 +102,6 @@ class FileControl extends SimpleControl
         $whiteListValues[$this->name] = null;
       }
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->attributes['type'] = 'file';
-    $this->attributes['name'] = $this->submitName;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -25,7 +25,7 @@ class SilentControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement();
+    return $this->generateInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -44,6 +44,18 @@ class SilentControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns true.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function isHidden(): bool
+  {
+    return true;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    */
   protected function loadSubmittedValuesBase(array $submittedValues,
@@ -58,18 +70,8 @@ class SilentControl extends SimpleControl
       $newValue = $this->cleaner->clean($newValue);
     }
 
-    $this->value = $newValue;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->prepareInputElement('hidden');
+    $whiteListValues[$this->name] = $newValue;
+    $this->value                  = $newValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

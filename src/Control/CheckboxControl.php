@@ -23,6 +23,10 @@ class CheckboxControl extends SimpleControl
    */
   public function getHtml(): string
   {
+    $this->attributes['type']    = 'checkbox';
+    $this->attributes['name']    = $this->submitName;
+    $this->attributes['checked'] = !empty($this->value);
+
     $html = $this->prefix;
     $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateVoidElement('input', $this->attributes);
@@ -64,19 +68,6 @@ class CheckboxControl extends SimpleControl
         $whiteListValues[$this->name] = false;
       }
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->attributes['type']    = 'checkbox';
-    $this->attributes['name']    = $this->submitName;
-    $this->attributes['checked'] = !empty($this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

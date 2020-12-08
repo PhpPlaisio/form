@@ -39,6 +39,8 @@ class TextAreaControl extends SimpleControl
    */
   public function getHtml(): string
   {
+    $this->attributes['name'] = $this->submitName;
+
     $html = $this->prefix;
     $html .= $this->getHtmlPrefixLabel();
     $html .= Html::generateElement('textarea', $this->attributes, $this->value);
@@ -102,17 +104,6 @@ class TextAreaControl extends SimpleControl
     $this->attributes['wrap'] = $value;
 
     return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->attributes['name'] = $this->submitName;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

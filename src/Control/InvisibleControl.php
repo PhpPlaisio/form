@@ -25,7 +25,7 @@ class InvisibleControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement();
+    return $this->generateInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -65,17 +65,6 @@ class InvisibleControl extends SimpleControl
   {
     // Note: by definition the value of a input:invisible form control will not be changed, whatever is submitted.
     $whiteListValues[$this->name] = $this->value;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->prepareInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

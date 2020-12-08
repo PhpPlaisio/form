@@ -26,6 +26,10 @@ class RadioControl extends SimpleControl
    */
   public function getHtml(): string
   {
+    $this->attributes['type']    = 'radio';
+    $this->attributes['name']    = $this->submitName;
+    $this->attributes['checked'] = !empty($this->value);
+
     $ret = $this->prefix;
     $ret .= $this->getHtmlPrefixLabel();
     $ret .= Html::generateVoidElement('input', $this->attributes);
@@ -63,7 +67,7 @@ class RadioControl extends SimpleControl
   {
     if ($this->immutable===true)
     {
-      if (!isset($whiteListValues[$this->name]) && !empty($this->attributes['checked']))
+      if (!isset($whiteListValues[$this->name]) && !empty($this->value))
       {
         $whiteListValues[$this->name] = $this->attributes['value'];
       }
@@ -76,7 +80,7 @@ class RadioControl extends SimpleControl
       if (isset($this->attributes['value']) &&
         Cast::toManString($newValue, '')===Cast::toManString($this->attributes['value'], ''))
       {
-        if (empty($this->attributes['checked']))
+        if (empty($this->value))
         {
           $changedInputs[$this->name] = $this;
         }
@@ -86,7 +90,7 @@ class RadioControl extends SimpleControl
       }
       else
       {
-        if (!empty($this->attributes['checked']))
+        if (!empty($this->value))
         {
           $changedInputs[$this->name] = $this;
         }
@@ -102,24 +106,6 @@ class RadioControl extends SimpleControl
         }
       }
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Prepares this form control for HTML code generation or loading submitted values.
-   *
-   * @param string $parentSubmitName The submit name of the parent control.
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->attributes['type']    = 'radio';
-    $this->attributes['name']    = $this->submitName;
-    $this->attributes['checked'] = !empty($this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -36,21 +36,8 @@ class ForceSubmitControl extends PushControl
   {
     parent::__construct($name);
 
-    $this->force = $force;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the HTML code for this form control.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getHtml(): string
-  {
-    return $this->generateInputElement();
+    $this->buttonType = 'hidden';
+    $this->force      = $force;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -115,17 +102,6 @@ class ForceSubmitControl extends PushControl
   public function setValuesBase(?array $values): void
   {
     // Nothing to do.
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->prepareInputElement('hidden');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

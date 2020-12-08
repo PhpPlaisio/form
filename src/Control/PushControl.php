@@ -45,7 +45,7 @@ class PushControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement();
+    return $this->generateInputElement($this->buttonType);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -107,17 +107,6 @@ class PushControl extends SimpleControl
         $whiteListValues[$this->name] = $this->value;
       }
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->prepareInputElement($this->buttonType);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

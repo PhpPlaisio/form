@@ -107,10 +107,9 @@ class RawFormTest extends PlaisioTestCase
    */
   public function testGetSetValues(): void
   {
-    $options   = [];
-    $options[] = ['id' => 1, 'label' => 'label1'];
-    $options[] = ['id' => 2, 'label' => 'label2'];
-    $options[] = ['id' => 3, 'label' => 'label3'];
+    $options = [['id' => 1, 'label' => 'label1'],
+                ['id' => 2, 'label' => 'label2'],
+                ['id' => 3, 'label' => 'label3']];
 
     $form     = new RawForm();
     $fieldset = new FieldSet();
@@ -126,13 +125,11 @@ class RawFormTest extends PlaisioTestCase
     $input->setOptions($options, 'id', 'label');
     $fieldset->addFormControl($input);
 
-    $values['name1']      = 'name1';
-    $values['name2']      = 'name2';
-    $values['options'][1] = true;
-    $values['options'][2] = false;
-    $values['options'][3] = true;
-
-    // Set the form control values.
+    $values = ['name1'   => 'name1',
+               'name2'   => 'name2',
+               'options' => [1 => true,
+                             2 => false,
+                             3 => true]];
     $form->setValues($values);
 
     $current = $form->getSetValues();

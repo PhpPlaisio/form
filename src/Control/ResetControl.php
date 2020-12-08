@@ -22,7 +22,7 @@ class ResetControl extends SimpleControl
    */
   public function getHtml(): string
   {
-    return $this->generateInputElement();
+    return $this->generateInputElement('reset');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -56,17 +56,6 @@ class ResetControl extends SimpleControl
                                              array &$changedInputs): void
   {
     // Nothing to do.
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  protected function prepare(string $parentSubmitName): void
-  {
-    parent::prepare($parentSubmitName);
-
-    $this->prepareInputElement('reset');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
