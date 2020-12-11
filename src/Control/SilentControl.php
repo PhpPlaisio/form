@@ -7,7 +7,7 @@ use Plaisio\Form\Control\Traits\InputElement;
 
 /**
  * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp), however, the form
- * control is never marked as a changed form control.
+ * control is never marked as a changed form control and its value is never returned in the whitelist values.
  */
 class SilentControl extends SimpleControl
 {
@@ -70,8 +70,7 @@ class SilentControl extends SimpleControl
       $newValue = $this->cleaner->clean($newValue);
     }
 
-    $whiteListValues[$this->name] = $newValue;
-    $this->value                  = $newValue;
+    $this->value = $newValue;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

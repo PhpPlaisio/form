@@ -29,8 +29,8 @@ class SilentControlTest extends PlaisioTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertEquals($name, $values['name']);
-    self::assertEmpty($changed);
+    self::assertArrayNotHasKey('name', $values);
+    self::assertArrayNotHasKey('name', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -47,8 +47,8 @@ class SilentControlTest extends PlaisioTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertEquals($name, $values['name']);
-    self::assertEmpty($changed);
+    self::assertArrayNotHasKey('name', $values);
+    self::assertArrayNotHasKey('name', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -147,8 +147,8 @@ class SilentControlTest extends PlaisioTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertEquals($name, $values['name']);
-    self::assertEmpty($changed);
+    self::assertArrayNotHasKey('name', $values);
+    self::assertArrayNotHasKey('name', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -165,8 +165,8 @@ class SilentControlTest extends PlaisioTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertEmpty($values['name']);
-    self::assertEmpty($changed);
+    self::assertArrayNotHasKey('name', $values);
+    self::assertArrayNotHasKey('name', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -183,8 +183,8 @@ class SilentControlTest extends PlaisioTestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertEmpty($values['name']);
-    self::assertEmpty($changed);
+    self::assertArrayNotHasKey($name, $values);
+    self::assertArrayNotHasKey($name, $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -213,8 +213,8 @@ class SilentControlTest extends PlaisioTestCase
 
     self::assertTrue($form->isValid());
     self::assertSame('handleSubmit', $method);
-    self::assertEmpty($changed);
-    self::assertSame('New value', $values['test']);
+    self::assertArrayNotHasKey('test', $values);
+    self::assertArrayNotHasKey('test', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
