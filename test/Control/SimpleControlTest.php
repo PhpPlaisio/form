@@ -20,7 +20,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
    */
   public function test1Empty1(): void
   {
-    $name            = 0;
+    $name            = '0';
     $_POST['name']   = $name;
     $_POST['submit'] = 'submit';
 

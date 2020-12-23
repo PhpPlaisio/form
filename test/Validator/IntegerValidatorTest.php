@@ -105,7 +105,7 @@ class IntegerValidatorTest extends PlaisioTestCase
    */
   public function testValidInteger1(): void
   {
-    $_POST['integer'] = 0;
+    $_POST['integer'] = '0';
     $form             = $this->setupForm1();
 
     self::assertTrue($form->isValid());
@@ -125,35 +125,11 @@ class IntegerValidatorTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * An integer (posted as integer) must be valid.
-   */
-  public function testValidInteger3(): void
-  {
-    $_POST['integer'] = 37;
-    $form             = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * An negative integer (posted as string) must be valid.
    */
   public function testValidInteger4(): void
   {
     $_POST['integer'] = '-11';
-    $form             = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An negative integer (posted as integer) must be valid.
-   */
-  public function testValidInteger5(): void
-  {
-    $_POST['integer'] = -45;
     $form             = $this->setupForm1();
 
     self::assertTrue($form->isValid());
@@ -184,7 +160,8 @@ class IntegerValidatorTest extends PlaisioTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  /** An integer is within a predetermined range must be valid.
+  /**
+   * An integer is within a predetermined range must be valid.
    */
   public function testValidInteger8(): void
   {

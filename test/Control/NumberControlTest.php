@@ -75,7 +75,7 @@ class NumberControlTest extends SimpleControlTest
    */
   public function testInvalidSubmittedValue02(): void
   {
-    $_POST['year'] = 1900;
+    $_POST['year'] = '1900';
 
     $form     = new RawForm();
     $fieldset = new FieldSet();
