@@ -44,17 +44,16 @@ class PruneWhitespaceCleaner implements Cleaner
    */
   public function clean($value)
   {
-    if ($value==='' || $value===null || $value===false)
+    $clean = AmbiguityCleaner::get()->clean($value);
+
+    if ($clean==='' || $clean===null || $clean===false)
     {
       return null;
     }
 
-    $clean = AmbiguityCleaner::get()->clean($value);
-
     $clean = trim(mb_ereg_replace('[\ \t\n]+', ' ', $clean, 'p'));
-    if ($clean==='') $clean = null;
 
-    return $clean;
+    return ($clean==='') ? null : $clean;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

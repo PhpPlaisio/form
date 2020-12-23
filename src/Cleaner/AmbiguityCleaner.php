@@ -150,7 +150,7 @@ class AmbiguityCleaner implements Cleaner
    *
    * @param mixed $value The submitted value.
    *
-   * @return string|null
+   * @return mixed
    *
    * @since 1.0.0
    * @api

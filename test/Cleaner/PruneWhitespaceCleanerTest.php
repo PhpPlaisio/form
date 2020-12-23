@@ -21,6 +21,9 @@ class PruneWhitespaceCleanerTest extends CleanerTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with multiple with space.
+   */
   public function testClean(): void
   {
     $raw     = "  Hello  \n\n\x0a\x00  World!   \x0b";
@@ -28,6 +31,32 @@ class PruneWhitespaceCleanerTest extends CleanerTest
     $value   = $cleaner->clean($raw);
 
     self::assertEquals('Hello World!', $value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with ambiguous whitespace only.
+   */
+  public function testAmbiguity(): void
+  {
+    $raw     = "\xc2\xa0\x0b";
+    $cleaner = PruneWhitespaceCleaner::get();
+    $value   = $cleaner->clean($raw);
+
+    self::assertNull($value);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with ambiguous whitespace only.
+   */
+  public function testEmpty(): void
+  {
+    $raw     = "\x00";
+    $cleaner = PruneWhitespaceCleaner::get();
+    $value   = $cleaner->clean($raw);
+
+    self::assertNull($value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
