@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
+use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
@@ -79,7 +80,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * A mandatory text, password, or textarea form control with whitespace is invalid.
+   * A mandatory text, password, or textarea form control with whitespaceOnly is invalid.
    */
   public function testInvalidWhitespace(): void
   {
@@ -107,6 +108,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
             $control = new TextAreaControl('input');
             break;
         }
+        $control->addCleaner(PruneWhitespaceCleaner::get());
         $form = $this->setupForm1($control);
 
         self::assertFalse($form->isValid(),

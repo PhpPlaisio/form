@@ -62,15 +62,8 @@ class SilentControl extends SimpleControl
                                              array &$whiteListValues,
                                              array &$changedInputs): void
   {
-    $submitKey = $this->submitKey();
-    $newValue  = $submittedValues[$submitKey] ?? null;
-
-    if ($this->cleaner)
-    {
-      $newValue = $this->cleaner->clean($newValue);
-    }
-
-    $this->value = $newValue;
+    $submitKey   = $this->submitKey();
+    $this->value = $this->clean($submittedValues[$submitKey] ?? null);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

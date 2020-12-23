@@ -28,12 +28,7 @@ trait LoadPlainText
     else
     {
       $submitKey = $this->submitKey();
-      $newValue  = $submittedValues[$submitKey] ?? null;
-
-      if ($this->cleaner)
-      {
-        $newValue = $this->cleaner->clean($newValue);
-      }
+      $newValue  = $this->clean($submittedValues[$submitKey] ?? null);
 
       if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
       {

@@ -8,7 +8,8 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextAreaControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\Immutable;
+use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTest;
+use Plaisio\Form\Test\Control\Traits\ImmutableTest;
 use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
@@ -17,7 +18,43 @@ use Plaisio\Form\Test\PlaisioTestCase;
 class TextAreaControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use Immutable;
+  use ImmutableTest;
+  use CommonSimpleControlTest
+  {
+    CommonSimpleControlTest::stringAttributes as parentStringAttributes;
+    CommonSimpleControlTest::integerAttributes as parentIntegerAttributes;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns all integer valued attributes.
+   *
+   * @return string[][]
+   */
+  public function integerAttributes(): array
+  {
+    $ret = $this->parentIntegerAttributes();
+
+    $ret[] = ['setAttrCols', 'cols'];
+    $ret[] = ['setAttrRows', 'rows'];
+
+    return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns all string valued attributes.
+   *
+   * @return string[][]
+   */
+  public function stringAttributes(): array
+  {
+    $ret = $this->parentStringAttributes();
+
+    $ret[] = ['setAttrWrap', 'wrap'];
+
+    return $ret;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -79,7 +116,7 @@ class TextAreaControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     // Set cleaner for textarea field (default it off).
-    $input->setCleaner(PruneWhitespaceCleaner::get());
+    $input->addCleaner(PruneWhitespaceCleaner::get());
 
     $input = new ForceSubmitControl('submit', true);
     $input->setMethod('handleSubmit');
@@ -146,6 +183,19 @@ class TextAreaControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns a concrete instance of TextAreaControl.
+   *
+   * @param string|null $name The of the control.
+   *
+   * @return TextAreaControl
+   */
+  protected function createControl(?string $name): TextAreaControl
+  {
+    return new TextAreaControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns a TextAreaControl form control.
    *
    * @param string $name The name of the form control.
@@ -155,6 +205,17 @@ class TextAreaControlTest extends PlaisioTestCase
   protected function getControl(string $name): TextAreaControl
   {
     return new TextAreaControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid initial value.
+   *
+   * @return mixed
+   */
+  protected function getValidInitialValue()
+  {
+    return 'Hello, World!';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -170,11 +231,11 @@ class TextAreaControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a valid initial value.
+   * Returns a valid value for a TexControl.
    *
-   * @return mixed
+   * @return string
    */
-  protected function getValidInitialValue()
+  protected function getValidValue(): string
   {
     return 'Hello, World!';
   }

@@ -31,7 +31,6 @@ class ComplexControlTest extends PlaisioTestCase
   private SimpleControl $originControl;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Test find FormControl by name.
    */
@@ -412,7 +411,7 @@ class ComplexControlTest extends PlaisioTestCase
     $fieldset->addFormControl($input);
 
     // Simulate a post without any values.
-    $method = $form->execute();
+    $method  = $form->execute();
     $invalid = $form->getInvalidControls();
 
     self::assertSame('handleEchoForm', $method);

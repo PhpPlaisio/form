@@ -3,19 +3,25 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
-use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Cleaner\UrlCleaner;
+use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
+use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Test cases for class UrlCleaner.
  */
-class UrlCleanerTest extends CleanerTest
+class UrlCleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
+  use StringCleaner;
+
+  //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Returns an instance of UrlCleaner.
+   *
+   * @return UrlCleaner
    */
-  public function makeCleaner(): Cleaner
+  public function createCleaner(): UrlCleaner
   {
     return UrlCleaner::get();
   }
@@ -29,7 +35,7 @@ class UrlCleanerTest extends CleanerTest
     $value = $cleaner->clean($raw);
     self::assertEquals('ftp://ftp.setbased.nl/', $value);
 
-    $raw   = '  ftp://user:password@ftp.setbased.nl';
+    $raw   = 'ftp://user:password@ftp.setbased.nl';
     $value = $cleaner->clean($raw);
     self::assertEquals('ftp://user:password@ftp.setbased.nl/', $value);
   }
@@ -40,10 +46,6 @@ class UrlCleanerTest extends CleanerTest
     $cleaner = UrlCleaner::get();
 
     $raw   = 'www.setbased.nl';
-    $value = $cleaner->clean($raw);
-    self::assertEquals('http://www.setbased.nl/', $value);
-
-    $raw   = '  www.setbased.nl  ';
     $value = $cleaner->clean($raw);
     self::assertEquals('http://www.setbased.nl/', $value);
 
@@ -93,29 +95,26 @@ class UrlCleanerTest extends CleanerTest
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test with invalid URL that can not be parsed.
+   */
+  public function testInvalid(): void
+  {
+    $cleaner = UrlCleaner::get();
+
+    $value = 'http://:80';
+    $clean = $cleaner->clean($value);
+    self::assertSame($value, $clean);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   public function testMailTo(): void
   {
     $cleaner = UrlCleaner::get();
 
-    $raw   = 'mailto:info@setbased.nl ';
+    $raw   = 'mailto:info@setbased.nl';
     $value = $cleaner->clean($raw);
     self::assertEquals('mailto:info@setbased.nl', $value);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * UrlCleaner must return 'http://0/' (instead of '0').
-   */
-  public function testZeroValues(): void
-  {
-    $cleaner = $this->makeCleaner();
-
-    foreach ($this->zeroValues as $value)
-    {
-      $cleaned = $cleaner->clean($value);
-
-      self::assertEquals('http://0/', $cleaned, sprintf("Cleaning '%s' must return 'http://0'.", addslashes($value)));
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

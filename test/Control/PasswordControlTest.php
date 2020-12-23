@@ -7,7 +7,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\PasswordControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\Immutable;
+use Plaisio\Form\Test\Control\Traits\ImmutableTest;
 
 /**
  * Unit tests for class PasswordControl.
@@ -15,7 +15,7 @@ use Plaisio\Form\Test\Control\Traits\Immutable;
 class PasswordControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use Immutable;
+  use ImmutableTest;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -51,7 +51,7 @@ class PasswordControlTest extends SimpleControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name): SimpleControl
+  protected function createControl(string $name): SimpleControl
   {
     return new PasswordControl($name);
   }

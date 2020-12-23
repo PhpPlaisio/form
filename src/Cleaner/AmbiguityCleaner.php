@@ -158,9 +158,15 @@ class AmbiguityCleaner implements Cleaner
   public function clean($value)
   {
     // Return null for empty strings.
-    if ($value==='' || $value===null || $value===false)
+    if ($value==='' || $value===null)
     {
       return null;
+    }
+
+    // Return original value for non-strings.
+    if (!is_string($value))
+    {
+      return $value;
     }
 
     // Replace all ambiguous characters.
@@ -175,12 +181,12 @@ class AmbiguityCleaner implements Cleaner
     }
 
     // Restore EOL for DOS users.
-    if (PHP_EOL!="\n") $clean = str_replace("\n", PHP_EOL, $clean);
+    if (PHP_EOL!="\n")
+    {
+      $clean = str_replace("\n", PHP_EOL, $clean);
+    }
 
-    // Return null for empty strings.
-    if ($clean==='') $clean = null;
-
-    return $clean;
+    return ($clean==='') ? null : $clean;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

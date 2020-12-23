@@ -3,15 +3,18 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Form\Cleaner\DateCleaner;
-use Plaisio\Form\Formatter\DateFormatter;
-use Plaisio\Form\Validator\DateValidator;
+use Plaisio\Form\Control\Traits\InputElement;
+use Plaisio\Form\Control\Traits\LoadPlainText;
 
 /**
- * Class for form controls with jQuery UI datepicker.
+ * Class for form controls of type [input:date](http://www.w3schools.com/tags/tag_input.asp).
  */
-class DateControl extends TextControl
+class DateControl extends SimpleControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use InputElement;
+  use LoadPlainText;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
@@ -19,16 +22,9 @@ class DateControl extends TextControl
    * @since 1.0.0
    * @api
    */
-  public function __construct(?string $name)
+  public function getHtml(): string
   {
-    parent::__construct($name);
-
-    $this->setAttrSize(10)
-         ->setAttrMaxLength(10)
-         ->addClass('datepicker')
-         ->setCleaner(new DateCleaner('d-m-Y', '-', '/. :\\'))
-         ->setFormatter(new DateFormatter('d-m-Y'))
-         ->addValidator(new DateValidator());
+    return $this->generateInputElement('date');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -45,8 +41,17 @@ class DateControl extends TextControl
    */
   public function setOpenDate(string $openDate): self
   {
-    $this->cleaner->setOpenDate($openDate);
-    $this->formatter->setOpenDate($openDate);
+    foreach ($this->cleaners as $cleaner)
+    {
+      if (method_exists($cleaner, 'setOpenDate'))
+      {
+        $cleaner->setOpenDate($openDate);
+      }
+    }
+    if (method_exists($this->formatter, 'setOpenDate'))
+    {
+      $this->formatter->setOpenDate($openDate);
+    }
 
     return $this;
   }

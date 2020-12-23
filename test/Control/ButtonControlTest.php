@@ -26,7 +26,7 @@ class ButtonControlTest extends PushControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name): SimpleControl
+  protected function createControl(?string $name): SimpleControl
   {
     return new ButtonControl($name);
   }

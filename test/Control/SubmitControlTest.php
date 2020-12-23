@@ -19,7 +19,7 @@ class SubmitControlTest extends PushControlTest
                    'formmethod'  => 'setAttrFormMethod',
                    'formtarget'  => 'setAttrFormTarget'];
 
-    $input = $this->getControl('button');
+    $input = $this->createControl('button');
 
     $this->htmlAttributesTest($input, $attributes);
   }
@@ -28,7 +28,7 @@ class SubmitControlTest extends PushControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name): SimpleControl
+  protected function createControl(?string $name): SimpleControl
   {
     return new SubmitControl($name);
   }

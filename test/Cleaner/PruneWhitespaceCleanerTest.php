@@ -3,19 +3,25 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
-use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
+use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
+use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Test cases for class PruneWhitespaceCleaner.
  */
-class PruneWhitespaceCleanerTest extends CleanerTest
+class PruneWhitespaceCleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
+  use StringCleaner;
+
+  //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Returns an instance of PruneWhitespaceCleaner.
+   *
+   * @return PruneWhitespaceCleaner
    */
-  public function makeCleaner(): Cleaner
+  public function createCleaner(): PruneWhitespaceCleaner
   {
     return PruneWhitespaceCleaner::get();
   }
@@ -35,20 +41,7 @@ class PruneWhitespaceCleanerTest extends CleanerTest
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test with ambiguous whitespace only.
-   */
-  public function testAmbiguity(): void
-  {
-    $raw     = "\xc2\xa0\x0b";
-    $cleaner = PruneWhitespaceCleaner::get();
-    $value   = $cleaner->clean($raw);
-
-    self::assertNull($value);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with ambiguous whitespace only.
+   * Test with ambiguous whitespaceOnly only.
    */
   public function testEmpty(): void
   {
@@ -57,6 +50,34 @@ class PruneWhitespaceCleanerTest extends CleanerTest
     $value   = $cleaner->clean($raw);
 
     self::assertNull($value);
+  }
+
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Tests whitespaces only.
+   *
+   * @dataProvider whitespaceOnly
+   *
+   * @param string|null $string $string String with only whitespace.
+   */
+  public function testWhitSpaceOnly(?string $string): void
+  {
+    $cleaner = PruneWhitespaceCleaner::get();
+    $clean   = $cleaner->clean($string);
+
+    self::assertNull($clean);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns cases with with spaces only.
+   *
+   * @return array
+   */
+  public function whitespaceOnly(): array
+  {
+    return [[''], [null], [' '], ['  '], ["\n"], ["\n \n"], ["\n \t"], [" \t\n\r\0\x0B \t\n\r\0\x0B"]];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

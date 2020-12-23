@@ -9,7 +9,7 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\Immutable;
+use Plaisio\Form\Test\Control\Traits\ImmutableTest;
 
 /**
  * Unit tests for class HiddenControl.
@@ -17,7 +17,7 @@ use Plaisio\Form\Test\Control\Traits\Immutable;
 class HiddenControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use Immutable;
+  use ImmutableTest;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -93,7 +93,7 @@ class HiddenControlTest extends SimpleControlTest
 
     $input = new HiddenControl('test');
     $input->setValue('Hello World!')
-          ->setCleaner(PruneWhitespaceCleaner::get());
+          ->addCleaner(PruneWhitespaceCleaner::get());
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
@@ -114,7 +114,7 @@ class HiddenControlTest extends SimpleControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name): SimpleControl
+  protected function createControl(string $name): SimpleControl
   {
     return new HiddenControl($name);
   }

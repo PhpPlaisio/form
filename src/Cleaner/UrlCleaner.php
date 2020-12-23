@@ -44,14 +44,16 @@ class UrlCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // First prune whitespace.
-    $cleaner = PruneWhitespaceCleaner::get();
-    $value   = $cleaner->clean($value);
-
-    // If the value is empty return immediately,
-    if ($value==='' || $value===null || $value===false)
+    // Return null for empty strings.
+    if ($value==='' || $value===null)
     {
       return null;
+    }
+
+    // Return original value for non-strings.
+    if (!is_string($value))
+    {
+      return $value;
     }
 
     // Split the URL in parts.

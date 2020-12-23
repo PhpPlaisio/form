@@ -161,10 +161,8 @@ abstract class Control extends HtmlElement
    *
    * @param array $values
    */
-  public function getSetValuesBase(array &$values): void
-  {
-    // Nothing to do.
-  }
+  abstract public function getSetValuesBase(array &$values): void;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the submit name of this form control
@@ -226,10 +224,7 @@ abstract class Control extends HtmlElement
    * @since 1.0.0
    * @api
    */
-  public function mergeValuesBase(array $values): void
-  {
-    // Nothing to do.
-  }
+  abstract public function mergeValuesBase(array $values): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -242,7 +237,7 @@ abstract class Control extends HtmlElement
    * @since 1.0.0
    * @api
    */
-  public function setErrorMessage(string $message)
+  public function setErrorMessage(string $message): self
   {
     $this->errorMessages[] = $message;
 

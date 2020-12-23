@@ -42,17 +42,21 @@ class TrimWhitespaceCleaner implements Cleaner
    */
   public function clean($value)
   {
-    if ($value==='' || $value===null || $value===false)
+    // Return null for empty strings.
+    if ($value==='' || $value===null)
     {
       return null;
     }
 
-    $tmp = AmbiguityCleaner::get()->clean($value);
+    // Return original value for non-strings.
+    if (!is_string($value))
+    {
+      return $value;
+    }
 
-    $tmp = trim($tmp, " \t\n");
-    if ($tmp==='') $tmp = null;
+    $clean = trim($value);
 
-    return $tmp;
+    return ($clean==='') ? null : $clean;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

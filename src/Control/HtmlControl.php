@@ -37,6 +37,15 @@ class HtmlControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * @inheritdoc
+   */
+  public function getSetValuesBase(array &$values): void
+  {
+    $values[$this->name] = $this->value;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the value of this form control.
    *
    * @return string|null

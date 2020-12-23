@@ -10,7 +10,7 @@ use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
- *  Abstract parent class for unit tests for child classes of SimpleControl.
+ *  Abstract parent class for unit tests for child classes of CommonSimpleControlTest.
  */
 abstract class SimpleControlTest extends PlaisioTestCase
 {
@@ -56,7 +56,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
    */
   public function testIsSubmitTrigger(): void
   {
-    $input = $this->getControl('trigger');
+    $input = $this->createControl('trigger');
 
     self::assertFalse($input->isSubmitTrigger());
   }
@@ -71,7 +71,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
-    $input = $this->getControl('name');
+    $input = $this->createControl('name');
     $input->setValue('1')
           ->setPrefix('Hello')
           ->setPostfix('World');
@@ -158,13 +158,13 @@ abstract class SimpleControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the concrete SimpleControl
+   * Returns the concrete CommonSimpleControlTest
    *
    * @param string $name The name of the form control.
    *
    * @return SimpleControl
    */
-  abstract protected function getControl(string $name): SimpleControl;
+  abstract protected function createControl(string $name): SimpleControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -202,7 +202,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
-    $input = $this->getControl('name');
+    $input = $this->createControl('name');
     $input->setValue($value);
     $fieldset->addFormControl($input);
 

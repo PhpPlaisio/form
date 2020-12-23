@@ -11,7 +11,7 @@ use Plaisio\Form\RawForm;
 /**
  * Test for immutable form controls.
  */
-trait Immutable
+trait ImmutableTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -25,7 +25,7 @@ trait Immutable
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
-    $input = $this->getControl('immutable');
+    $input = $this->createControl('immutable');
     $input->setValue($this->getValidInitialValue())
           ->setImmutable(true);
     $fieldset->addFormControl($input);
@@ -50,36 +50,36 @@ trait Immutable
   public function testIsMutable(): void
   {
     /** @var Mutability $input */
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     self::assertFalse($input->isImmutable());
     self::assertTrue($input->isMutable());
 
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     $input->setImmutable(true);
     self::assertTrue($input->isImmutable());
     self::assertFalse($input->isMutable());
 
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     $input->setImmutable(false);
     self::assertFalse($input->isImmutable());
     self::assertTrue($input->isMutable());
 
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     $input->setImmutable(null);
     self::assertFalse($input->isImmutable());
     self::assertTrue($input->isMutable());
 
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     $input->setMutable(true);
     self::assertFalse($input->isImmutable());
     self::assertTrue($input->isMutable());
 
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     $input->setMutable(false);
     self::assertTrue($input->isImmutable());
     self::assertFalse($input->isMutable());
 
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     $input->setMutable(null);
     self::assertFalse($input->isImmutable());
     self::assertTrue($input->isMutable());
@@ -97,7 +97,7 @@ trait Immutable
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
-    $input = $this->getControl('mutable');
+    $input = $this->createControl('mutable');
     $input->setValue($this->getValidInitialValue())
           ->setMutable(true);
     $fieldset->addFormControl($input);

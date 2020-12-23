@@ -47,7 +47,7 @@ class ForceSubmitControlTest extends PushControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name): SimpleControl
+  protected function createControl(?string $name): SimpleControl
   {
     return new ForceSubmitControl($name, true);
   }

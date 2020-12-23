@@ -43,18 +43,19 @@ class MaxLengthCleaner implements Cleaner
    */
   public function clean($value)
   {
-    if ($value==='' || $value===null || $value===false)
+    // Return null for empty strings.
+    if ($value==='' || $value===null)
     {
       return null;
     }
 
-    $tmp = PruneWhitespaceCleaner::get()->clean($value);
-    if ($tmp==='' || $tmp===null)
+    // Return original value for non-strings.
+    if (!is_string($value))
     {
-      return null;
+      return $value;
     }
 
-    return mb_substr($tmp, 0, $this->maxLength);
+    return mb_substr($value, 0, $this->maxLength);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

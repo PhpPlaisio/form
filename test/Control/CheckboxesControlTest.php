@@ -276,7 +276,6 @@ class CheckboxesControlTest extends PlaisioTestCase
     $input->setOptions($countries, 'cnt_id', 'cnt_name');
     $fieldset->addFormControl($input);
 
-
     $input = new ForceSubmitControl('submit', true);
     $input->setMethod('handleSubmit');
     $fieldset->addFormControl($input);

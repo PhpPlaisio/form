@@ -219,6 +219,19 @@ class SilentControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Return an instance of SilentControl.
+   *
+   * @param string $name the name of the form control.
+   *
+   * @return SilentControl
+   */
+  protected function createControl(string $name): SilentControl
+  {
+    return new SilentControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns a valid initial value.
    *
    * @return mixed
@@ -237,6 +250,17 @@ class SilentControlTest extends PlaisioTestCase
   protected function getValidSubmittedValue(): string
   {
     return 'Bye, bye!';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid value for a TexControl.
+   *
+   * @return string
+   */
+  protected function getValidValue(): string
+  {
+    return 'Hello, World!';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -39,9 +39,9 @@ abstract class SimpleControl extends Control
   /**
    * The cleaner to clean and/or translate (to machine format) the submitted value.
    *
-   * @var Cleaner|null
+   * @var Cleaner[]
    */
-  protected ?Cleaner $cleaner = null;
+  protected array $cleaners = [];
 
   /**
    * The formatter to format the value (from machine format) to the displayed value.
@@ -102,6 +102,24 @@ abstract class SimpleControl extends Control
     {
       throw new LogicException('Name is empty');
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a cleaner to this form control.
+   *
+   * @param Cleaner $cleaner The cleaner.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function addCleaner(Cleaner $cleaner): self
+  {
+    $this->cleaners[] = $cleaner;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -233,14 +251,14 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [max](http://www.w3schools.com/tags/att_input_max.asp).
    *
-   * @param string|null $value The attribute value.
+   * @param string|int|null $value The attribute value.
    *
    * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setAttrMax(?string $value): self
+  public function setAttrMax($value): self
   {
     $this->attributes['max'] = $value;
 
@@ -269,14 +287,14 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [min](http://www.w3schools.com/tags/att_input_min.asp).
    *
-   * @param string|null $value The attribute value.
+   * @param string|int|null $value The attribute value.
    *
    * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setAttrMin(?string $value): self
+  public function setAttrMin($value): self
   {
     $this->attributes['min'] = $value;
 
@@ -377,34 +395,16 @@ abstract class SimpleControl extends Control
   /**
    * Sets the attribute [step](http://www.w3schools.com/tags/att_input_step.asp).
    *
-   * @param string|null $value The attribute value.
+   * @param string|int|null $value The attribute value.
    *
    * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setAttrStep(?string $value): self
+  public function setAttrStep($value): self
   {
     $this->attributes['step'] = $value;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the cleaner for this form control.
-   *
-   * @param Cleaner|null $cleaner The cleaner.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function setCleaner(?Cleaner $cleaner): self
-  {
-    $this->cleaner = $cleaner;
 
     return $this;
   }
@@ -555,6 +555,24 @@ abstract class SimpleControl extends Control
   public function setValuesBase(?array $values): void
   {
     $this->setValue($values[$this->name] ?? null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Applies the cleaners on the submitted value.
+   *
+   * @param mixed $value The submitted value.
+   *
+   * @return mixed
+   */
+  protected function clean($value)
+  {
+    foreach ($this->cleaners as $cleaner)
+    {
+      $value = $cleaner->clean($value);
+    }
+
+    return $value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

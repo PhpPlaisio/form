@@ -3,19 +3,25 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
-use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Cleaner\DateCleaner;
+use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
+use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Test cases for class DateCleaner.
  */
-class DateCleanerTest extends CleanerTest
+class DateCleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
+  use StringCleaner;
+
+  //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Returns an instance of DateCleaner.
+   *
+   * @return DateCleaner
    */
-  public function makeCleaner(): Cleaner
+  public function createCleaner(): DateCleaner
   {
     return new DateCleaner('d-m-Y');
   }
@@ -160,14 +166,14 @@ class DateCleanerTest extends CleanerTest
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test against Dutch format 'd-m-Y' with illegal date, alternative separators and whitespace.
+   * Test against Dutch format 'd-m-Y' with illegal date, alternative separators and whitespaceOnly.
    */
   public function testClean5(): void
   {
     $cleaner = new DateCleaner('m/d/Y', '-', '/-. ');
 
     // Test against format.
-    $raw   = '31/11.1966 ';
+    $raw   = '31/11.1966';
     $value = $cleaner->clean($raw);
     self::assertEquals('31-11-1966', $value);
   }

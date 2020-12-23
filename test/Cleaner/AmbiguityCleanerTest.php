@@ -4,25 +4,26 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Cleaner;
 
 use Plaisio\Form\Cleaner\AmbiguityCleaner;
-use Plaisio\Form\Cleaner\Cleaner;
+use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
+use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Test cases for class AmbiguityCleaner.
  */
-class AmbiguityCleanerTest extends CleanerTest
+class AmbiguityCleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  protected array $emptyValues = ['', false, null];
-
-  protected array $zeroValues = ['0'];
+  use StringCleaner;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Returns an instance of AmbiguityCleaner.
+   *
+   * @return AmbiguityCleaner
    */
-  public function makeCleaner(): Cleaner
+  public function createCleaner(): AmbiguityCleaner
   {
-    return new AmbiguityCleaner();
+    return AmbiguityCleaner::get();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

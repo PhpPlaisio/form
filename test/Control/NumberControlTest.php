@@ -8,7 +8,8 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\NumberControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\Immutable;
+use Plaisio\Form\Test\Control\Traits\ImmutableTest;
+use Plaisio\Form\Validator\NumberValidator;
 
 /**
  * Unit tests for class NumberControl.
@@ -16,7 +17,7 @@ use Plaisio\Form\Test\Control\Traits\Immutable;
 class NumberControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use Immutable;
+  use ImmutableTest;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -25,6 +26,7 @@ class NumberControlTest extends SimpleControlTest
   public function testHtml(): void
   {
     $input = new NumberControl('myInput');
+    $input->addValidator(new NumberValidator());
 
     $fieldSet = new FieldSet('myFieldSet');
     $fieldSet->addFormControl($input);
@@ -52,7 +54,8 @@ class NumberControlTest extends SimpleControlTest
     $input = new NumberControl('year');
     $input->setAttrMin('2000')
           ->setAttrMax('2020')
-          ->setValue(2018);
+          ->setValue(2018)
+          ->addValidator(new NumberValidator());
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
@@ -84,7 +87,8 @@ class NumberControlTest extends SimpleControlTest
     $input = new NumberControl('year');
     $input->setAttrMin('2000')
           ->setAttrMax('2020')
-          ->setValue(2018);
+          ->setValue(2018)
+          ->addValidator(new NumberValidator());
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
@@ -104,7 +108,7 @@ class NumberControlTest extends SimpleControlTest
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test cleaning and formatting is done before testing value of the form control has changed.
-   * For text field whitespace cleaner set default.
+   * For text field whitespaceOnly cleaner set default.
    */
   public function testValidSubmittedValue(): void
   {
@@ -138,20 +142,9 @@ class NumberControlTest extends SimpleControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name): SimpleControl
+  protected function createControl(string $name): SimpleControl
   {
     return new NumberControl($name);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns a valid submitted value (different form initial value).
-   *
-   * @return string
-   */
-  protected function getValidSubmittedValue(): string
-  {
-    return '456';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -163,6 +156,17 @@ class NumberControlTest extends SimpleControlTest
   protected function getValidInitialValue()
   {
     return 123;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid submitted value (different form initial value).
+   *
+   * @return string
+   */
+  protected function getValidSubmittedValue(): string
+  {
+    return '456';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

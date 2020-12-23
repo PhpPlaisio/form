@@ -71,13 +71,16 @@ class DateCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // First prune whitespace.
-    $value = PruneWhitespaceCleaner::get()->clean($value);
-
-    // If the value is empty return immediately.
-    if ($value==='' || $value===null || $value===false)
+    // Return open data for empty strings.
+    if ($value==='' || $value===null)
     {
       return $this->openDate;
+    }
+
+    // Return original value for non-strings.
+    if (!is_string($value))
+    {
+      return $value;
     }
 
     // First validate against ISO 8601.
@@ -105,7 +108,7 @@ class DateCleaner implements Cleaner
       // Note: String '2000-02-30' will transformed to date '2000-03-01' with a warning. We consider this as an
       // invalid date.
       $tmp = $date::getLastErrors();
-      if ($tmp['warning_count']==0) return $date->format('Y-m-d');
+      if ($tmp['warning_count']===0) return $date->format('Y-m-d');
     }
 
     return $value;

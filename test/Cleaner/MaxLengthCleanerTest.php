@@ -3,21 +3,27 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
-use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Cleaner\MaxLengthCleaner;
+use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
+use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Test cases for class MaxLengthCleaner.
  */
-class MaxLengthCleanerTest extends CleanerTest
+class MaxLengthCleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
+  use StringCleaner;
+
+  //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
+   * Returns an instance of MaxLengthCleaner.
+   *
+   * @return MaxLengthCleaner
    */
-  public function makeCleaner(): Cleaner
+  public function createCleaner(): MaxLengthCleaner
   {
-    return new MaxLengthCleaner(10);
+    return new MaxLengthCleaner(8);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

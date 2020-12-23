@@ -86,13 +86,16 @@ class TidyCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // First prune whitespace.
-    $cleaner = PruneWhitespaceCleaner::get();
-    $value   = $cleaner->clean($value);
-
-    if ($value==='' || $value===null || $value===false)
+    // Return null for empty strings.
+    if ($value==='' || $value===null)
     {
       return null;
+    }
+
+    // Return original value for non-strings.
+    if (!is_string($value))
+    {
+      return $value;
     }
 
     $tidyConfig = ['clean'          => false,
@@ -104,15 +107,15 @@ class TidyCleaner implements Cleaner
 
     $tidy->parseString($value, $tidyConfig, self::getTidyEncoding());
     $tidy->cleanRepair();
-    $value = trim(tidy_get_output($tidy));
+    $clean = trim(tidy_get_output($tidy));
 
     // In some cases Tidy returns an empty paragraph only.
-    if (preg_match('/^(([ \r\n\t])|(<p>)|(<\/p>)|(&nbsp;))*$/', $value)==1)
+    if (preg_match('/^(([ \r\n\t])|(<p>)|(<\/p>)|(&nbsp;))*$/', $clean)===1)
     {
-      $value = null;
+      $clean = null;
     }
 
-    return $value;
+    return ($clean==='') ? null : $clean;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

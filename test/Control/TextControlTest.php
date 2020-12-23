@@ -4,13 +4,14 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Cleaner\DateCleaner;
+use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\Formatter\DateFormatter;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\Immutable;
+use Plaisio\Form\Test\Control\Traits\ImmutableTest;
 
 /**
  * Unit tests for class TextControl.
@@ -18,12 +19,12 @@ use Plaisio\Form\Test\Control\Traits\Immutable;
 class TextControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use Immutable;
+  use ImmutableTest;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test cleaning and formatting is done before testing value of the form control has changed.
-   * For text field whitespace cleaner set default.
+   * For text field whitespaceOnly cleaner set default.
    */
   public function testDateFormattingAndCleaning(): void
   {
@@ -35,7 +36,7 @@ class TextControlTest extends SimpleControlTest
 
     $input = new TextControl('birthday');
     $input->setValue('1966-04-10')
-          ->setCleaner(new DateCleaner('d-m-Y', '-', '/-. '))
+          ->addCleaner(new DateCleaner('d-m-Y', '-', '/-. '))
           ->setFormatter(new DateFormatter('d-m-Y'));
     $fieldset->addFormControl($input);
 
@@ -78,7 +79,7 @@ class TextControlTest extends SimpleControlTest
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test cleaning is done before testing value of the form control has changed.
-   * For text field whitespace cleaner set default.
+   * For text field whitespaceOnly cleaner set default.
    */
   public function testPruneWhitespaceNoChanged(): void
   {
@@ -89,7 +90,8 @@ class TextControlTest extends SimpleControlTest
     $form->addFieldSet($fieldset);
 
     $input = new TextControl('test');
-    $input->setValue('Hello World!');
+    $input->setValue('Hello World!')
+          ->addCleaner(PruneWhitespaceCleaner::get());
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
@@ -113,9 +115,12 @@ class TextControlTest extends SimpleControlTest
   /**
    * @inheritdoc
    */
-  protected function getControl(string $name): SimpleControl
+  protected function createControl(string $name): SimpleControl
   {
-    return new TextControl($name);
+    $input = new TextControl($name);
+    $input->addCleaner(PruneWhitespaceCleaner::get());
+
+    return $input;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
