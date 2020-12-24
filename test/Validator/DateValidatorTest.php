@@ -3,10 +3,6 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
-use Plaisio\Form\Control\DateControl;
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\ForceSubmitControl;
-use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Validator\DateValidator;
 
@@ -17,61 +13,63 @@ class DateValidatorTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test against invalid dates.
+   * Returns invalid dates.
+   *
+   * @return array
    */
-  public function testInvalidDates(): void
+  public function getInvalidValues(): array
   {
-    $dates = ['15- 7 -20', '10-april-1966', 'Hello world.', '15- 7 -20', '2015-02-29'];
+    return [['15- 7 -20'],
+            ['10-april-1966'],
+            ['Hello world.'],
+            ['15- 7 -20'],
+            ['2015-02-29'],
+            ['2020-11-31'],
+            [$this],
+            ['foo' => 'bar']];
+  }
 
-    foreach ($dates as $date)
-    {
-      $_POST['date'] = $date;
-      $form          = $this->setupForm1();
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns valid dates.
+   *
+   * @return array
+   */
+  public function getValidValues(): array
+  {
+    return [['1966-04-10'], ['1970-01-01'], ['1900-01-01'], ['9999-12-31'], ['2020-02-29'], [''], [null]];
+  }
 
-      self::assertFalse($form->isValid(), "Submitted: $date");
-    }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against invalid dates.
+   *
+   * @param mixed $value The invalid value.
+   *
+   * @dataProvider getInvalidValues
+   */
+  public function testInvalidDates($value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new DateValidator();
+    $valid     = $validator->validate($control);
+    self::assertFalse($valid);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test against valid dates.
-   */
-  public function testValidDates(): void
-  {
-    $dates = ['1966-04-10', '1970-01-01', '1900-01-01', '9999-12-31', '2020-02-29'];
-
-    foreach ($dates as $date)
-    {
-      $_POST['date'] = $date;
-      $form          = $this->setupForm1();
-
-      self::assertTrue($form->isValid(), "Submitted: $date");
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Setups a form with a text form control (which must be a valid email address) values.
    *
-   * @return RawForm
+   * @param mixed $value The valid value.
+   *
+   * @dataProvider getValidValues
    */
-  private function setupForm1(): RawForm
+  public function testValidDates($value): void
   {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new DateControl('date');
-    $input->addValidator(new DateValidator());
-    $fieldset->addFormControl($input);
-
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
-
-    $form->execute();
-
-    return $form;
+    $control   = new TestControl('test', $value);
+    $validator = new DateValidator();
+    $valid     = $validator->validate($control);
+    self::assertTrue($valid);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
