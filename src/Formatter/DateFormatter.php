@@ -32,7 +32,7 @@ class DateFormatter implements Formatter
    * @since 1.0.0
    * @api
    */
-  public function __construct(string $format)
+  public function __construct(string $format = 'Y-m-d')
   {
     $this->format = $format;
   }

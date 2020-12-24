@@ -26,9 +26,9 @@ class DateCleaner implements Cleaner
   /**
    * The expected separator in the format of this validator.
    *
-   * @var string|null
+   * @var string
    */
-  protected ?string $separator;
+  protected string $separator;
 
   /**
    * If set the date that will treated as an open date. An empty form control will be translated to the open date.
@@ -44,13 +44,13 @@ class DateCleaner implements Cleaner
    * @param string      $format                The expected date format. See
    *                                           DateTime::createFromFormat](http://php.net/manual/datetime.createfromformat.php)
    *                                           for the formatting options.
-   * @param string|null $separator             The separator (a single character) in the expected format.
+   * @param string      $separator             The separator (a single character) in the expected format.
    * @param string|null $alternativeSeparators Alternative separators (each character is an alternative separator).
    *
    * @since 1.0.0
    * @api
    */
-  public function __construct(string $format, ?string $separator = null, ?string $alternativeSeparators = null)
+  public function __construct(string $format = 'Y-m-d', string $separator = '-', ?string $alternativeSeparators = null)
   {
     $this->format                = $format;
     $this->separator             = $separator;
@@ -94,7 +94,7 @@ class DateCleaner implements Cleaner
     }
 
     // Replace alternative separators with the expected separator.
-    if ($this->separator!==null && $this->alternativeSeparators!==null)
+    if ($this->alternativeSeparators!==null)
     {
       $value = strtr($value,
                      $this->alternativeSeparators,

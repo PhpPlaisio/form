@@ -17,6 +17,14 @@ class DateControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The open date of this form control.
+   *
+   * @var string|null
+   */
+  private ?string $openDate = null;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    *
    * @since 1.0.0
@@ -32,28 +40,44 @@ class DateControl extends SimpleControl
    * Sets the open date. An empty submitted value will be replaced with the open date and an open date will be shown as
    * an empty field.
    *
-   * @param string $openDate The open date in YYYY-MM-DD format.
+   * @param string|null $openDate The open date in YYYY-MM-DD format.
    *
    * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setOpenDate(string $openDate): self
+  public function setOpenDate(?string $openDate): self
   {
+    $this->openDate = $openDate;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Prepares this form control for HTML code generation or loading submitted values.
+   *
+   * @param string $parentSubmitName The submit name of the parent control.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  protected function prepare(string $parentSubmitName): void
+  {
+    parent::prepare($parentSubmitName);
+
     foreach ($this->cleaners as $cleaner)
     {
       if (method_exists($cleaner, 'setOpenDate'))
       {
-        $cleaner->setOpenDate($openDate);
+        $cleaner->setOpenDate($this->openDate);
       }
     }
     if (method_exists($this->formatter, 'setOpenDate'))
     {
-      $this->formatter->setOpenDate($openDate);
+      $this->formatter->setOpenDate($this->openDate);
     }
-
-    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
