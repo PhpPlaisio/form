@@ -3,236 +3,120 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\ForceSubmitControl;
-use Plaisio\Form\Control\TextControl;
-use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\PlaisioTestCase;
+use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Validator\IntegerValidator;
 
 /**
  * Test cases for class IntegerValidator.
  */
-class IntegerValidatorTest extends PlaisioTestCase
+class IntegerValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * A string must be invalid.
-   */
-  public function testInvalidInteger1(): void
-  {
-    $_POST['integer'] = 'string';
-    $form             = $this->setupForm1();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A float must be invalid.
-   */
-  public function testInvalidInteger2(): void
-  {
-    $_POST['integer'] = '0.1';
-    $form             = $this->setupForm1();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A mix of numeric and alpha numeric must be invalid.
-   */
-  public function testInvalidInteger3(): void
-  {
-    $_POST['integer'] = '123abc'; // My favorite password ;-)
-    $form             = $this->setupForm1();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An integer misses the specified range must be invalid.
-   */
-  public function testInvalidInteger4(): void
-  {
-    $_POST['integer'] = '-9';
-    $form             = $this->setupForm2();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An integer misses the specified range must be invalid.
-   */
-  public function testInvalidInteger5(): void
-  {
-    $_POST['integer'] = '-2';
-    $form             = $this->setupForm2();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An integer misses the specified range must be invalid.
-   */
-  public function testInvalidInteger6(): void
-  {
-    $_POST['integer'] = '11';
-    $form             = $this->setupForm2();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An integer misses the specified range must be invalid.
-   */
-  public function testInvalidInteger7(): void
-  {
-    $_POST['integer'] = '23';
-    $form             = $this->setupForm2();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A zero must be valid.
-   */
-  public function testValidInteger1(): void
-  {
-    $_POST['integer'] = '0';
-    $form             = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An integer (posted as string) must be valid.
-   */
-  public function testValidInteger2(): void
-  {
-    $_POST['integer'] = '56';
-    $form             = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An negative integer (posted as string) must be valid.
-   */
-  public function testValidInteger4(): void
-  {
-    $_POST['integer'] = '-11';
-    $form             = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An minimal integer is within a predetermined range must be valid.
-   */
-  public function testValidInteger6(): void
-  {
-    $_POST['integer'] = '-1';
-    $form             = $this->setupForm2();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * If zero is within a predetermined range must be valid.
-   */
-  public function testValidInteger7(): void
-  {
-    $_POST['integer'] = '0';
-    $form             = $this->setupForm2();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An integer is within a predetermined range must be valid.
-   */
-  public function testValidInteger8(): void
-  {
-    $_POST['integer'] = '3';
-    $form             = $this->setupForm2();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An maximum integer is within a predetermined range must be valid.
-   */
-  public function testValidInteger9(): void
-  {
-    $_POST['integer'] = '10';
-    $form             = $this->setupForm2();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Setups a form with a text form control (which must be a valid inter) values.
-   */
-  private function setupForm1(): RawForm
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new TextControl('integer');
-    $input->addValidator(new IntegerValidator());
-    $fieldset->addFormControl($input);
-
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
-
-    $form->execute();
-
-    return $form;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Setups a form with a text form control (which must be a valid inter) values.
+   * Returns invalid integers.
    *
-   * @return RawForm
+   * @return array
    */
-  private function setupForm2(): RawForm
+  public function getInvalidValues(): array
   {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
+    $ret = [];
 
-    $input = new TextControl('integer');
-    $input->addValidator(new IntegerValidator(-1, 10));
-    $fieldset->addFormControl($input);
+    // Not integers.
+    $ret[] = [null, null, 'string'];
+    $ret[] = [null, null, '123abc'];
+    $ret[] = [null, null, '0.1'];
+    $ret[] = [null, null, 1.2];
+    $ret[] = [null, null, pi()];
 
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
+    // Out of range.
+    $ret[] = [-1, 10, -9];
+    $ret[] = [-1, 10, -2];
+    $ret[] = [-1, 10, -23];
 
-    $form->execute();
+    // Only strings or integers are valid.
+    $ret[] = [null, null, $this];
+    $ret[] = [null, null, ['foo' => 'bar']];
 
-    return $form;
+    return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns valid integers.
+   *
+   * @return array
+   */
+  public function getValidValues(): array
+  {
+    $ret = [];
+
+    // Integer in range.
+    $ret[] = [-1, 10, -1];
+    $ret[] = [-1, 10, 10];
+    $ret[] = [-1, 10, 5];
+    $ret[] = [-1, 10, 0];
+
+    // String in range.
+    $ret[] = [-1, 10, '-1'];
+    $ret[] = [-1, 10, '10'];
+    $ret[] = [-1, 10, '5'];
+    $ret[] = [-1, 10, '0'];
+
+    // No range.
+    $ret[] = [null, null, '0'];
+    $ret[] = [null, null, 0];
+    $ret[] = [null, null, PHP_INT_MIN];
+    $ret[] = [null, null, PHP_INT_MAX];
+
+    // An empty string is valid.
+    $ret[] = [null, null, ''];
+    $ret[] = [null, null, null];
+
+    return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against invalid strings.
+   *
+   * @param int|null $minValue The minimum value.
+   * @param int|null $maxValue The maximum value.
+   * @param mixed    $value    The invalid value.
+   *
+   * @dataProvider getInvalidValues
+   */
+  public function testInvalidValues(?int $minValue, ?int $maxValue, $value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new IntegerValidator($minValue, $maxValue);
+    $valid     = $validator->validate($control);
+    $errors    = $control->getErrorMessages();
+    self::assertFalse($valid);
+    self::assertIsArray($errors);
+    self::assertCount(1, $errors);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against valid strings.
+   *
+   * @param int|null $minValue The minimum value.
+   * @param int|null $maxValue The maximum value.
+   * @param mixed    $value    The valid value.
+   *
+   * @dataProvider getValidValues
+   */
+  public function testValidValues(?int $minValue, ?int $maxValue, $value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new IntegerValidator($minValue, $maxValue);
+    $valid     = $validator->validate($control);
+    $errors    = $control->getErrorMessages();
+    self::assertTrue($valid);
+    self::assertNull($errors);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-
