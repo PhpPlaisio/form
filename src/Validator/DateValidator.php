@@ -12,7 +12,7 @@ class DateValidator implements Validator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether the submitted value of a control is a valid date.
+   * Returns whether the submitted value of a form control is a valid date.
    *
    * Note:
    * * Empty values are considered valid.
