@@ -62,6 +62,36 @@ class IntegerValidator implements Validator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the maximum value.
+   *
+   * @param int|null $maxValue The maximum value.
+   *
+   * @return IntegerValidator
+   */
+  public function setMaxValue(?int $maxValue): IntegerValidator
+  {
+    $this->maxValue = $maxValue ?? PHP_INT_MAX;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the minimum value.
+   *
+   * @param int|null $minValue The minimum value.
+   *
+   * @return IntegerValidator
+   */
+  public function setMinValue(?int $minValue): IntegerValidator
+  {
+    $this->minValue = $minValue ?? PHP_INT_MIN;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns true if the value of the form control is an integer and with the specified range. Otherwise returns false.
    *
    * Note:

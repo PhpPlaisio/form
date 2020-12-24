@@ -4,12 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\NumberControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\ImmutableTest;
-use Plaisio\Form\Validator\NumberValidator;
 
 /**
  * Unit tests for class NumberControl.
@@ -26,7 +24,6 @@ class NumberControlTest extends SimpleControlTest
   public function testHtml(): void
   {
     $input = new NumberControl('myInput');
-    $input->addValidator(new NumberValidator());
 
     $fieldSet = new FieldSet('myFieldSet');
     $fieldSet->addFormControl($input);
@@ -37,105 +34,6 @@ class NumberControlTest extends SimpleControlTest
     $html     = $form->getHtml();
     $expected = '<form method="post" action="/"><fieldset><input type="number" name="myForm[myFieldSet][myInput]"/></fieldset></form>';
     self::assertSame($expected, $html);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with illegal submitted value.
-   */
-  public function testInvalidSubmittedValue01(): void
-  {
-    $_POST['year'] = 'Hello, world';
-
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new NumberControl('year');
-    $input->setAttrMin('2000')
-          ->setAttrMax('2020')
-          ->setValue(2018)
-          ->addValidator(new NumberValidator());
-    $fieldset->addFormControl($input);
-
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
-
-    $method  = $form->execute();
-    $values  = $form->getValues();
-    $changed = $form->getChangedControls();
-
-    self::assertFalse($form->isValid());
-    self::assertSame('handleEchoForm', $method);
-    self::assertSame('Hello, world', $values['year']);
-    self::assertArrayHasKey('year', $changed);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with illegal submitted value.
-   */
-  public function testInvalidSubmittedValue02(): void
-  {
-    $_POST['year'] = '1900';
-
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new NumberControl('year');
-    $input->setAttrMin('2000')
-          ->setAttrMax('2020')
-          ->setValue(2018)
-          ->addValidator(new NumberValidator());
-    $fieldset->addFormControl($input);
-
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
-
-    $method  = $form->execute();
-    $values  = $form->getValues();
-    $changed = $form->getChangedControls();
-
-    self::assertFalse($form->isValid());
-    self::assertSame('handleEchoForm', $method);
-    self::assertSame('1900', $values['year']);
-    self::assertArrayHasKey('year', $changed);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test cleaning and formatting is done before testing value of the form control has changed.
-   * For text field whitespaceOnly cleaner set default.
-   */
-  public function testValidSubmittedValue(): void
-  {
-    $_POST['year'] = '2018';
-
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new NumberControl('year');
-    $input->setAttrMin('2000')
-          ->setAttrMax('2020')
-          ->setValue(2018);
-    $fieldset->addFormControl($input);
-
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
-
-    $method  = $form->execute();
-    $values  = $form->getValues();
-    $changed = $form->getChangedControls();
-
-    self::assertTrue($form->isValid());
-    self::assertSame('handleSubmit', $method);
-    self::assertSame('2018', $values['year']);
-    self::assertArrayNotHasKey('year', $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
