@@ -12,7 +12,7 @@ class EmailValidator implements Validator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if the value of the form control is a valid email address. Otherwise returns false.
+   * Returns whether the submitted value of a form control is a valid email address.
    *
    * Note:
    * * Empty values are considered valid.
@@ -30,13 +30,13 @@ class EmailValidator implements Validator
     $value = $control->getSubmittedValue();
 
     // An empty value is valid.
-    if ($value==='' || $value===null || $value===false)
+    if ($value==='' || $value===null)
     {
       return true;
     }
 
-    // Objects and arrays are not valid email addresses.
-    if (!is_scalar($value))
+    // Only string can hold an email address.
+    if (!is_string($value))
     {
       return false;
     }
@@ -50,14 +50,8 @@ class EmailValidator implements Validator
       return false;
     }
 
-    // Test if the domain does exists.
-    $domain = substr(strstr($value, '@'), 1);
-    if ($domain===false || $domain==='')
-    {
-      return false;
-    }
-
     // The domain must have a MX or A record.
+    $domain = substr(strstr($value, '@'), 1);
     if (!(checkdnsrr($domain.'.', 'MX') || checkdnsrr($domain.'.', 'A')))
     {
       return false;
