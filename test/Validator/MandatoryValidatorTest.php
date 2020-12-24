@@ -3,16 +3,6 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
-use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
-use Plaisio\Form\Control\CheckboxControl;
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\ForceSubmitControl;
-use Plaisio\Form\Control\HiddenControl;
-use Plaisio\Form\Control\PasswordControl;
-use Plaisio\Form\Control\SimpleControl;
-use Plaisio\Form\Control\TextAreaControl;
-use Plaisio\Form\Control\TextControl;
-use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Validator\MandatoryValidator;
 
@@ -23,213 +13,84 @@ class MandatoryValidatorTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * A mandatory text, password, hidden or textarea form control with value @c null, @c false, or @c '', is invalid.
-   */
-  public function testInvalidEmpty(): void
-  {
-    $types  = ['text', 'password', 'hidden', 'textarea', 'checkbox'];
-    $values = [null, false, ''];
-
-    foreach ($types as $type)
-    {
-      foreach ($values as $value)
-      {
-
-        $_POST['input'] = $value;
-        $control        = null;
-        switch ($type)
-        {
-          case 'text':
-            $control = new TextControl('input');
-            break;
-
-          case 'password':
-            $control = new PasswordControl('input');
-            break;
-
-          case 'hidden':
-            $control = new HiddenControl('input');
-            break;
-
-          case 'textarea':
-            $control = new TextAreaControl('input');
-            break;
-
-          case 'checkbox':
-            $control = new CheckboxControl('input');
-            break;
-        }
-        $form = $this->setupForm1($control);
-
-        self::assertFalse($form->isValid(),
-                          sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
-      }
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /** A mandatory unchecked checked box is invalid.
-   */
-  public function testInvalidUncheckedCheckbox(): void
-  {
-    $_POST = [];
-    $form  = $this->setupForm2();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A mandatory text, password, or textarea form control with whitespaceOnly is invalid.
-   */
-  public function testInvalidWhitespace(): void
-  {
-    $types  = ['text', 'password', 'textarea'];
-    $values = [' ', '  ', " \n  "];
-
-    foreach ($types as $type)
-    {
-      foreach ($values as $value)
-      {
-
-        $_POST['input'] = $value;
-        $control        = null;
-        switch ($type)
-        {
-          case 'text':
-            $control = new TextControl('input');
-            break;
-
-          case 'password':
-            $control = new PasswordControl('input');
-            break;
-
-          case 'textarea':
-            $control = new TextAreaControl('input');
-            break;
-        }
-        $control->addCleaner(PruneWhitespaceCleaner::get());
-        $form = $this->setupForm1($control);
-
-        self::assertFalse($form->isValid(),
-                          sprintf("type: '%s', value: '%s'.", $type, var_export($value, true)));
-      }
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A mandatory checked checked box is valid.
-   */
-  public function testValidCheckedCheckbox(): void
-  {
-    $_POST['box'] = 'on';
-    $form         = $this->setupForm2();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  // @todo test with select
-  // @todo test with radio
-  // @todo test with radios
-  // @todo test with checkboxes
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A mandatory non-empty text, password, hidden, or textarea form control is valid.
-   */
-  public function testValidNoneEmptyText(): void
-  {
-    $types = ['text', 'password', 'hidden', 'textarea'];
-
-    foreach ($types as $type)
-    {
-      $_POST['input'] = 'Set Based IT Consultancy';
-      $control        = null;
-      switch ($type)
-      {
-        case 'text':
-          $control = new TextControl('input');
-          break;
-
-        case 'password':
-          $control = new PasswordControl('input');
-          break;
-
-        case 'hidden':
-          $control = new HiddenControl('input');
-          break;
-
-        case 'textarea':
-          $control = new TextAreaControl('input');
-          break;
-      }
-      $form = $this->setupForm1($control);
-
-      self::assertTrue($form->isValid(), sprintf("type: '%s'.", $type));
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Setups a form with a single form control of certain type.
+   * Returns invalid mandatory values.
    *
-   * @param SimpleControl $control
-   *
-   * @return RawForm
+   * @return array
    */
-  private function setupForm1(SimpleControl $control): RawForm
+  public function getInvalidValues(): array
   {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
+    $ret = [];
 
-    $input = $control;
-    $input->addValidator(new MandatoryValidator());
-    $fieldset->addFormControl($input);
+    $ret[] = [''];
+    $ret[] = [null];
+    $ret[] = [false];
+    $ret[] = [[]];
+    $ret[] = [['foo' => ['bar' => []]]];
 
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
-
-    $form->execute();
-
-    return $form;
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Setups a form with a checkbox form control.
+   * Returns valid mandatory values.
    *
-   * @return RawForm
+   * @return array
    */
-  private function setupForm2(): RawForm
+  public function getValidValues(): array
   {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
+    $ret = [];
 
-    $input = new CheckboxControl('box');
-    $input->addValidator(new MandatoryValidator());
-    $fieldset->addFormControl($input);
+    $ret[] = ['Hello, World!'];
+    $ret[] = [true];
+    $ret[] = [0];
+    $ret[] = ['0'];
+    $ret[] = [$this];
+    $ret[] = [['options' => ['a' => false, 'b' => true, 'c' => false]]];
+    $ret[] = [['options' => ['a' => '', 'b' => '0', 'c' => null]]];
+    $ret[] = [['options' => ['a' => '', 'b' => 0, 'c' => null]]];
+    $ret[] = [['options' => ['a' => '', 'b' => 'Hello, World!', 'c' => null]]];
 
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
-
-    $form->execute();
-
-    return $form;
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // @todo test with select
-  // @todo test with radio
-  // @todo test with radios
-  // @todo test with checkboxes
+  /**
+   * Test against invalid dates.
+   *
+   * @param mixed $value The invalid value.
+   *
+   * @dataProvider getInvalidValues
+   */
+  public function testInvalidAddresses($value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new MandatoryValidator();
+    $valid     = $validator->validate($control);
+    $errors    = $control->getErrorMessages();
+    self::assertFalse($valid);
+    self::assertIsArray($errors);
+    self::assertCount(1, $errors);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against valid dates.
+   *
+   * @param mixed $value The valid value.
+   *
+   * @dataProvider getValidValues
+   */
+  public function testValidAddresses($value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new MandatoryValidator();
+    $valid     = $validator->validate($control);
+    $errors    = $control->getErrorMessages();
+    self::assertTrue($valid);
+    self::assertNull($errors);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-

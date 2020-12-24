@@ -31,15 +31,23 @@ class MandatoryValidator implements Validator
 
     if ($value==='' || $value===null || $value===false)
     {
-      return false;
+      $valid = false;
     }
-
-    if (is_array($value))
+    elseif (is_array($value))
     {
-      return $this->validateArray($value);
+      $valid = $this->validateArray($value);
+    }
+    else
+    {
+      $valid = true;
     }
 
-    return true;
+    if (!$valid)
+    {
+      $control->setErrorMessage('Required field.');
+    }
+
+    return $valid;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
