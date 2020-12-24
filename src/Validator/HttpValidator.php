@@ -12,7 +12,7 @@ class HttpValidator implements Validator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if the value of the form control is a valid http URL.
+   * Returns whether the value of a form control is valid HTTP address.
    *
    * Note:
    * * Empty values are considered valid.
@@ -35,8 +35,8 @@ class HttpValidator implements Validator
       return true;
     }
 
-    // Objects and arrays are not a valid http URL.
-    if (!is_scalar($value))
+    // Only strings can be valid URLs.
+    if (!is_string($value))
     {
       return false;
     }
@@ -50,8 +50,8 @@ class HttpValidator implements Validator
       return false;
     }
 
-    // filter_var allows not to specify the HTTP protocol. Test the URL starts with http (or https).
-    if (substr($url, 0, 4)!=='http')
+    // filter_var allows not to specify the HTTP protocol. Test the URL starts with http or https.
+    if (!str_starts_with($value, 'http:') && !str_starts_with($value, 'https:'))
     {
       return false;
     }
@@ -60,17 +60,19 @@ class HttpValidator implements Validator
     try
     {
       $headers = get_headers($url);
-      $ok      = (is_array($headers) && preg_match('/^HTTP\\/\\d+\\.\\d+\\s+[23]\\d\\d\\s*.*$/', $headers[0]));
+      $valid   = (is_array($headers) && preg_match('/^HTTP\\/\\d+\\.\\d+\\s+[23]\\d\\d\\s*.*$/', $headers[0]));
     }
     catch (\Exception $e)
     {
       // Something went wrong. Possibly:
-      // * Unable to open stream
-      // * Peer certificate did not match expected
-      $ok = false;
+      // * Unable to open stream.
+      // * Domain does not exists.
+      // * Domain does have a website.
+      // * Peer certificate did not match expected.
+      $valid = false;
     }
 
-    return $ok;
+    return $valid;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

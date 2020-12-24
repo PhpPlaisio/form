@@ -3,10 +3,6 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\ForceSubmitControl;
-use Plaisio\Form\Control\TextControl;
-use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Validator\HttpValidator;
 
@@ -17,139 +13,89 @@ class HttpValidatorTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * An usual url address must be invalid.
-   */
-  public function testInvalidHttp1(): void
-  {
-    $_POST['url'] = 'hffd//:www.setbased/nl';
-    $form         = $this->setupForm1();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An usual url address must be invalid.
-   */
-  public function testInvalidHttp2(): void
-  {
-    $_POST['url'] = 'http//golgelinva';
-    $form         = $this->setupForm1();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A strange but valid url address must be valid.
-   */
-  public function testInvalidHttp3(): void
-  {
-    $_POST['url'] = 'ftp//:!#$%&\'*+-/=?^_`{}|~ed.com';
-    $form         = $this->setupForm1();
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A valid url address must be valid.
-   */
-  public function testValidHttp(): void
-  {
-    $_POST['url'] = 'http://www.setbased.nl';
-    $form         = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A valid url address must be valid.
-   */
-  public function testValidHttp2(): void
-  {
-    $_POST['url'] = 'http://www.google.com';
-    $form         = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * A valid url address must be valid.
-   */
-  public function testValidHttp3(): void
-  {
-    $_POST['url'] = 'http://www.php.net';
-    $form         = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An empty url address is a valid url address.
-   */
-  public function testValidHttpEmpty(): void
-  {
-    $_POST['url'] = '';
-    $form         = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An empty url address is a valid url address.
-   */
-  public function testValidHttpFalse(): void
-  {
-    $_POST['url'] = false;
-    $form         = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * An empty url address is a valid url address.
-   */
-  public function testValidHttpNull(): void
-  {
-    $_POST['url'] = null;
-    $form         = $this->setupForm1();
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Setups a form with a text form control (which must be a valid url address).
+   * Returns invalid email addresses.
    *
-   * @return RawForm
+   * @return array
    */
-  private function setupForm1(): RawForm
+  public function getInvalidValues(): array
   {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
+    $ret = [];
 
-    $input = new TextControl('url');
-    $input->addValidator(new HttpValidator());
-    $fieldset->addFormControl($input);
+    // An usual url address must be invalid.
+    $ret[] = ['hffd//:www.setbased/nl'];
+    $ret[] = ['http//golgelinva'];
+    $ret[] = ['ftp//:!#$%&\'*+-/=?^_`{}|~ed.com'];
 
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
+    // Only HTTP protocol is valid.
+    $ret[] = ['ftp://setbased.nl'];
 
-    $form->execute();
+    // Website must exists.
+    $ret[] = ['http://www.xsetbased.nl'];
 
-    return $form;
+    // Only strings are valid
+    $ret[] = [$this];
+    $ret[] = [['foo' => 'bar']];
+
+    return $ret;
   }
 
-  //-------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns valid email addresses.
+   *
+   * @return array
+   */
+  public function getValidValues(): array
+  {
+    $ret = [];
+
+    // Valid URL must be valid.
+    $ret[] = ['http://www.setbased.nl'];
+    $ret[] = ['http://www.google.com'];
+    $ret[] = ['http://www.php.net'];
+    $ret[] = ['https://www.google.com'];
+    $ret[] = ['https://www.php.net'];
+
+    // An empty URL is valid.
+    $ret[] = [''];
+    $ret[] = [null];
+
+    return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against invalid URLs.
+   *
+   * @param mixed $value The invalid value.
+   *
+   * @dataProvider getInvalidValues
+   */
+  public function testInvalidUrl($value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new HttpValidator();
+    $valid     = $validator->validate($control);
+    self::assertFalse($valid);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against valid URLs.
+   *
+   * @param mixed $value The valid value.
+   *
+   * @dataProvider getValidValues
+   */
+  public function testValidUrl($value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new HttpValidator();
+    $valid     = $validator->validate($control);
+    self::assertTrue($valid);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-
