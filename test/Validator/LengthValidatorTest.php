@@ -3,108 +3,100 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\ForceSubmitControl;
-use Plaisio\Form\Control\TextControl;
-use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\PlaisioTestCase;
+use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Validator\LengthValidator;
 
 /**
  * Test cases for class LengthValidator.
  */
-class LengthValidatorTest extends PlaisioTestCase
+class LengthValidatorTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests a too long string.
-   */
-  public function testInvalidString1(): void
-  {
-    $_POST['value'] = 'Hyperbolicsyllabicsesquedalymistic';
-    $form           = $this->setupForm1(10, 20);
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Tests a too short string.
-   */
-  public function testInvalidString2(): void
-  {
-    $_POST['value'] = 'Isaac';
-    $form           = $this->setupForm1(10, 20);
-
-    self::assertFalse($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Tests valid string with minimum length.
-   */
-  public function testValidString1(): void
-  {
-    $_POST['value'] = 'hot';
-    $form           = $this->setupForm1(3, 8);
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Tests valid string with maximum length.
-   */
-  public function testValidString2(): void
-  {
-    $_POST['value'] = 'buttered';
-    $form           = $this->setupForm1(3, 8);
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Tests a valid string.
-   */
-  public function testValidString3(): void
-  {
-    $_POST['value'] = 'soul';
-    $form           = $this->setupForm1(3, 8);
-
-    self::assertTrue($form->isValid());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Setups a form with a text form control which must be a valid length.
+   * Returns invalid string.
    *
-   * @param int $min The minimum valid length.
-   * @param int $max The maximum valid length.
-   *
-   * @return RawForm
+   * @return array
    */
-  private function setupForm1(int $min, int $max): RawForm
+  public function getInvalidValues(): array
   {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
+    $ret = [];
 
-    $input = new TextControl('value');
-    $input->addValidator(new LengthValidator($min, $max));
-    $fieldset->addFormControl($input);
+    // A too long string.
+    $ret[] = [10, 20, 'Hyperbolicsyllabicsesquedalymistic'];
 
-    $input = new ForceSubmitControl('submit', true);
-    $input->setMethod('handleSubmit');
-    $fieldset->addFormControl($input);
+    // a too short string.
+    $ret[] = [10, 20, 'Isaac'];
 
-    $form->execute();
+    // Only strings are valid
+    $ret[] = [0, 100, $this];
+    $ret[] = [0, 100, ['foo' => 'bar']];
 
-    return $form;
+    return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns valid strings.
+   *
+   * @return array
+   */
+  public function getValidValues(): array
+  {
+    $ret = [];
+
+    // A string with minimum length.
+    $ret[] = [3, 8, 'hot'];
+
+    // A string with maximum length.
+    $ret[] = [3, 8, 'buttered'];
+
+    // A string between minn and max length.
+    $ret[] = [3, 8, 'soul'];
+
+    // An empty string is valid.
+    $ret[] = [0, 100, ''];
+    $ret[] = [0, 100, null];
+
+    return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against invalid strings.
+   *
+   * @param int   $minLength The minimum length.
+   * @param int   $maxLength The maximum length.
+   * @param mixed $value     The invalid value.
+   *
+   * @dataProvider getInvalidValues
+   */
+  public function testInvalidStrings(int $minLength, int $maxLength, $value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new LengthValidator($minLength, $maxLength);
+    $valid     = $validator->validate($control);
+    self::assertFalse($valid);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against valid strings.
+   *
+   * @param int   $minLength The minimum length.
+   * @param int   $maxLength The maximum length.
+   * @param mixed $value     The valid value.
+   *
+   * @dataProvider getValidValues
+   */
+  public function testValidStrings(int $minLength, int $maxLength, $value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new LengthValidator($minLength, $maxLength);
+    $valid     = $validator->validate($control);
+    self::assertTrue($valid);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-
