@@ -30,11 +30,11 @@ class RawForm extends HtmlElement implements CompoundControl
   protected array $changedControls = [];
 
   /**
-   * The cleaner to clean and/or translate (to machine format) the submitted values.
+   * The cleaners to clean and/or translate (to machine format) the submitted values.
    *
-   * @var CompoundCleaner|null
+   * @var CompoundCleaner[]
    */
-  protected ?CompoundCleaner $cleaner = null;
+  protected array $cleaners = [];
 
   /**
    * The list of error messages associated with this form control.
@@ -491,16 +491,16 @@ class RawForm extends HtmlElement implements CompoundControl
   /**
    * Sets the cleaner for this form control.
    *
-   * @param CompoundCleaner|null $cleaner The cleaner.
+   * @param CompoundCleaner $cleaner The cleaner.
    *
    * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function addCleaner(?CompoundCleaner $cleaner): self
+  public function addCleaner(CompoundCleaner $cleaner): self
   {
-    $this->cleaner = $cleaner;
+    $this->cleaners[] = $cleaner;
 
     return $this;
   }
@@ -604,9 +604,9 @@ class RawForm extends HtmlElement implements CompoundControl
         throw new FallenException('method', $this->attributes['method']);
     }
 
-    if ($this->cleaner!==null)
+    foreach ($this->cleaners as $cleaner)
     {
-      $values = $this->cleaner->clean($values);
+      $values = $cleaner->clean($values);
     }
 
     $walker = new LoadWalker($values, $this->values, $this->changedControls, $this->getName());
