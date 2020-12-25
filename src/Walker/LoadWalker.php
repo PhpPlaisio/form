@@ -123,7 +123,7 @@ class LoadWalker
     {
       $this->whiteListValues[$name] = [];
     }
-    if (!isset($this->changedInputs[$name]))
+    if (!isset($this->changedControls[$name]))
     {
       $this->changedControls[$name] = [];
     }
