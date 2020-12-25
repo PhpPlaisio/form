@@ -366,14 +366,14 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if and only if the value of one or more submitted form controls have changed. Otherwise returns false.
+   * Returns whether the value of one or more form controls have changed.
    *
-   * @note  This method should only be invoked after method {@link loadSubmittedValues} has been invoked.
+   * @note This method should only be invoked after the submitted values have been loaded.
    *
    * @since 1.0.0
    * @api
    */
-  public function haveChangedInputs(): bool
+  public function haveChangedControls(): bool
   {
     return !empty($this->changedControls);
   }
