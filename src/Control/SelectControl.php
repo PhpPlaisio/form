@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -206,13 +207,11 @@ class SelectControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     if ($this->immutable===true)
     {
-      $whiteListValues[$this->name] = $this->value;
+      $walker->setWithListValue($this->name, $this->value);
     }
     else
     {
@@ -221,18 +220,18 @@ class SelectControl extends SimpleControl
       // Normalize current value as a string.
       $valueAsString = Cast::toManString($this->value, '');
 
-      if (isset($submittedValues[$submitKey]))
+      if ($walker->getSubmittedValue($submitKey))
       {
         // Normalize the submitted value as a string.
-        $newValueAsString = Cast::toManString($submittedValues[$submitKey], '');
+        $newValueAsString = Cast::toManString($walker->getSubmittedValue($submitKey), '');
 
         if ($this->emptyOption!==null && $newValueAsString===$this->emptyOption)
         {
-          $this->value                  = null;
-          $whiteListValues[$this->name] = null;
+          $this->value = null;
+          $walker->setWithListValue($this->name, null);
           if ($valueAsString!=='' && $valueAsString!==$this->emptyOption)
           {
-            $changedInputs[$this->name] = $this;
+            $walker->setChanged($this->name);
           }
         }
         else
@@ -253,12 +252,12 @@ class SelectControl extends SimpleControl
                 // If the original value differs from the submitted value then the form control has been changed.
                 if ($valueAsString!==$keyAsString)
                 {
-                  $changedInputs[$this->name] = $this;
+                  $walker->setChanged($this->name);
                 }
 
                 // Set the white listed value.
-                $this->value                  = $key;
-                $whiteListValues[$this->name] = $key;
+                $this->value = $key;
+                $walker->setWithListValue($this->name, $key);
 
                 break;
               }
@@ -267,14 +266,14 @@ class SelectControl extends SimpleControl
         }
       }
 
-      if (!isset($whiteListValues[$this->name]))
+      if ($walker->getWithListValue($this->name)===null)
       {
         // No value has been submitted or a none white listed value has been submitted
-        $this->value                  = null;
-        $whiteListValues[$this->name] = null;
+        $this->value = null;
+        $walker->setWithListValue($this->name, null);
         if ($valueAsString!=='' && $valueAsString!==Cast::toManString($this->emptyOption, ''))
         {
-          $changedInputs[$this->name] = $this;
+          $walker->setChanged($this->name);
         }
       }
     }

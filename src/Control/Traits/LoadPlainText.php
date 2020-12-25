@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control\Traits;
 
+use Plaisio\Form\Walker\LoadWalker;
 use SetBased\Helper\Cast;
 
 /**
@@ -17,27 +18,21 @@ trait LoadPlainText
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase(array $submittedValues,
-                                          array &$whiteListValues,
-                                          array &$changedInputs): void
+  public function loadSubmittedValuesBase(LoadWalker $walker): void
   {
-    if ($this->immutable===true)
-    {
-      $whiteListValues[$this->name] = $this->value;
-    }
-    else
+    if ($this->immutable!==true)
     {
       $submitKey = $this->submitKey();
-      $newValue  = $this->clean($submittedValues[$submitKey] ?? null);
+      $newValue  = $this->clean($walker->getSubmittedValue($submitKey));
 
       if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
       {
-        $changedInputs[$this->name] = $this;
-        $this->value                = $newValue;
+        $walker->setChanged($this->name);
+        $this->value = $newValue;
       }
-
-      $whiteListValues[$this->name] = $newValue;
     }
+
+    $walker->setWithListValue($this->name, $this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
+use Plaisio\Form\Walker\LoadWalker;
 use SetBased\Exception\LogicException;
 
 /**
@@ -68,17 +69,15 @@ class ForceSubmitControl extends PushControl
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase(array $submittedValues,
-                                          array &$whiteListValues,
-                                          array &$changedInputs): void
+  public function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     if ($this->force)
     {
       // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
       // So, skip the following code.
-      // $changedInputs[$this->myName] = $this;
+      // $walker->setChanged($this->name);
 
-      $whiteListValues[$this->name] = $this->value;
+      $walker->setWithListValue($this->name, $this->value);
     }
   }
 

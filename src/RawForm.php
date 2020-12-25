@@ -9,6 +9,7 @@ use Plaisio\Form\Control\CompoundControl;
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Validator\CompoundValidator;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
 use Plaisio\Kernel\Nub;
@@ -110,7 +111,7 @@ class RawForm extends HtmlElement implements CompoundControl
     $ret = false;
     foreach ($array as $tmp)
     {
-      if (is_object($tmp))
+      if ($tmp)
       {
         $ret = true;
         break;
@@ -608,7 +609,8 @@ class RawForm extends HtmlElement implements CompoundControl
       $values = $this->cleaner->clean($values);
     }
 
-    $this->fieldSets->loadSubmittedValuesBase($values, $this->values, $this->changedControls);
+    $walker = new LoadWalker($values, $this->values, $this->changedControls, $this->getName());
+    $this->fieldSets->loadSubmittedValuesBase($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

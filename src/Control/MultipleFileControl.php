@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -79,23 +80,14 @@ class MultipleFileControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
-    if ($this->immutable===true)
-    {
-      $whiteListValues[$this->name] = $this->value;
-    }
-    else
+    if ($this->immutable!==true)
     {
       $submitKey = $this->submitKey();
-
       if (isset($_FILES[$submitKey]['name']))
       {
-        $changedInputs[$this->name]   = $this;
-        $whiteListValues[$this->name] = [];
-        $this->value                  = [];
+        $this->value = [];
 
         foreach ($_FILES[$submitKey]['name'] as $i => $dummy)
         {
@@ -106,8 +98,7 @@ class MultipleFileControl extends SimpleControl
                     'tmp_name' => $_FILES[$submitKey]['tmp_name'][$i],
                     'size'     => $_FILES[$submitKey]['size'][$i]];
 
-            $whiteListValues[$this->name][] = $tmp;
-            $this->value[]                  = $tmp;
+            $this->value[] = $tmp;
           }
         }
       }
@@ -115,11 +106,15 @@ class MultipleFileControl extends SimpleControl
       if (empty($this->value))
       {
         // Either no files have been uploaded or all uploaded files have errors.
-        unset($changedInputs[$this->name]);
-        $this->value                  = null;
-        $whiteListValues[$this->name] = null;
+        $this->value = null;
+      }
+      else
+      {
+        $walker->setChanged($this->name);
       }
     }
+
+    $walker->setWithListValue($this->name, $this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

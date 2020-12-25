@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
+use Plaisio\Form\Walker\LoadWalker;
 
 /**
  * Class for form controls of type [input:reset](http://www.w3schools.com/tags/tag_input.asp).
@@ -51,9 +52,7 @@ class ResetControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     // Nothing to do.
   }

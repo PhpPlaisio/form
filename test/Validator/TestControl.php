@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
+use Plaisio\Form\Walker\LoadWalker;
+
 /**
  * Form control for testing validators.
  */
@@ -79,7 +81,7 @@ class TestControl extends \Plaisio\Form\Control\Control
   /**
    * @inheritDoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues, array &$whiteListValues, array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     throw new \LogicException('Not implemented');
   }

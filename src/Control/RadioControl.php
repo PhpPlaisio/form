@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 use SetBased\Helper\Cast;
 
@@ -61,38 +62,36 @@ class RadioControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     if ($this->immutable===true)
     {
-      if (!isset($whiteListValues[$this->name]) && !empty($this->value))
+      if ($walker->getWithListValue($this->name)===null && !empty($this->value))
       {
-        $whiteListValues[$this->name] = $this->attributes['value'];
+        $walker->setWithListValue($this->name, $this->attributes['value']);
       }
     }
     else
     {
       $submitKey = $this->submitKey();
-      $newValue  = $submittedValues[$submitKey] ?? '';
+      $newValue  = $walker->getSubmittedValue($submitKey) ?? '';
 
       if (isset($this->attributes['value']) &&
         Cast::toManString($newValue, '')===Cast::toManString($this->attributes['value'], ''))
       {
         if (empty($this->value))
         {
-          $changedInputs[$this->name] = $this;
+          $walker->setChanged($this->name);
         }
-        $this->attributes['checked']  = true;
-        $whiteListValues[$this->name] = $this->attributes['value'];
-        $this->value                  = $this->attributes['value'];
+        $this->attributes['checked'] = true;
+        $this->value                 = $this->attributes['value'];
+        $walker->setWithListValue($this->name, $this->attributes['value']);
       }
       else
       {
         if (!empty($this->value))
         {
-          $changedInputs[$this->name] = $this;
+          $walker->setChanged($this->name);
         }
         $this->attributes['checked'] = false;
         $this->value                 = null;
@@ -100,9 +99,9 @@ class RadioControl extends SimpleControl
         // If the white listed value is not set by a radio button with the same name as this radio button, set the white
         // listed value of this radio button (and other radio buttons with the same name) to null. If another radio button
         // with the same name is checked the white listed value will be overwritten.
-        if (!isset($whiteListValues[$this->name]))
+        if ($walker->getWithListValue($this->name)===null)
         {
-          $whiteListValues[$this->name] = null;
+          $walker->setWithListValue($this->name, null);
         }
       }
     }

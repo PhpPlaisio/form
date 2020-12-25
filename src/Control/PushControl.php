@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use SetBased\Exception\LogicException;
 use SetBased\Helper\Cast;
 
@@ -89,22 +90,16 @@ class PushControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     if ($this->immutable!==false)
     {
       $submitKey = $this->submitKey();
-
-      if (isset($submittedValues[$submitKey]) &&
-        Cast::toManString($submittedValues[$submitKey], '')===Cast::toManString($this->value, ''))
+      $newValue  = $walker->getSubmittedValue($submitKey);
+      if ($newValue!==null && Cast::toManString($newValue, '')===Cast::toManString($this->value, ''))
       {
         // We don't register buttons as a changed input, otherwise every submitted form will always have changed inputs.
-        // So, skip the following code.
-        // $changedInputs[$this->myName] = $this;
-
-        $whiteListValues[$this->name] = $this->value;
+        $walker->setWithListValue($this->name, $this->value);
       }
     }
   }

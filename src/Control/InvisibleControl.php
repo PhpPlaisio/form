@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
+use Plaisio\Form\Walker\LoadWalker;
 
 /**
  * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp), however the submitted
@@ -57,14 +58,12 @@ class InvisibleControl extends SimpleControl
    *
    * Note:
    * Always sets the white listed value to the value of this constant form control.
-   * Never uses $submittedValues and never sets the $changedInputs.
+   * Never uses whitelisted values and never sets the changed controls.
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     // Note: by definition the value of a input:invisible form control will not be changed, whatever is submitted.
-    $whiteListValues[$this->name] = $this->value;
+    $walker->setWithListValue($this->name, $this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

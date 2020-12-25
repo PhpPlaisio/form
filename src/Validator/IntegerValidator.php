@@ -44,7 +44,6 @@ class IntegerValidator implements Validator
   private int $minValue;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

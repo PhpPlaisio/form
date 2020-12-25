@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
+use Plaisio\Form\Walker\LoadWalker;
 
 /**
  * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp), however, the form
@@ -58,12 +59,10 @@ class SilentControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     $submitKey   = $this->submitKey();
-    $this->value = $this->clean($submittedValues[$submitKey] ?? null);
+    $this->value = $this->clean($walker->getSubmittedValue($submitKey));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

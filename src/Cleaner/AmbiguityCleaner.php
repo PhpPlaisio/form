@@ -33,7 +33,7 @@ class AmbiguityCleaner implements Cleaner
    *
    * @var array<string,string[]>
    */
-  protected $ambiguities =
+  protected array $ambiguities =
     // Spaces.
     [' '  => ["\xc2\xa0",      // NO-BRAKE SPACE*
               "\xe1\x9a\x80",  // OGHAM SPACE MARK*

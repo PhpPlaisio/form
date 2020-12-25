@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Validator\Validator;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
 use Plaisio\Obfuscator\Obfuscator;
@@ -315,15 +316,11 @@ abstract class Control extends HtmlElement
   /**
    * Loads the submitted values.
    *
-   * @param array $submittedValues The submitted values.
-   * @param array $whiteListValues The white listed values.
-   * @param array $changedInputs   The form controls which values are changed by the form submit.
+   * @param LoadWalker $walker The object for walking the control tree.
    *
    * @return void
    */
-  abstract protected function loadSubmittedValuesBase(array $submittedValues,
-                                                      array &$whiteListValues,
-                                                      array &$changedInputs): void;
+  abstract protected function loadSubmittedValuesBase(LoadWalker $walker): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

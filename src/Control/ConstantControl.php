@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Walker\LoadWalker;
+
 /**
  * Class for pseudo form controls for form controls of which the value is constant.
  */
@@ -54,13 +56,11 @@ class ConstantControl extends SimpleControl
    *
    * Note:
    * Always sets the white listed value to the value of this constant form control.
-   * Never uses $whiteListValue and never sets the $changedInputs.
+   * Never uses whitelisted values and never sets the changed controls.
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
-    $whiteListValues[$this->name] = $this->value;
+    $walker->setWithListValue($this->name, $this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

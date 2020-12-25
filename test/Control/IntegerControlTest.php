@@ -120,7 +120,7 @@ class IntegerControlTest extends TestCase
     $input = new IntegerControl('year');
     $input->setAttrMin('2000')
           ->setAttrMax('2020')
-          ->setValue(2018);
+          ->setValue('2018');
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);

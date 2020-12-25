@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -40,34 +41,21 @@ class CheckboxControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
-    $submitKey = $this->submitKey();
-
-    if ($this->immutable===true)
+    if ($this->immutable!==true)
     {
-      $whiteListValues[$this->name] = $this->value;
-    }
-    else
-    {
-      if (empty($this->value)!==empty($submittedValues[$submitKey]))
+      $submitKey = $this->submitKey();
+      $newValue  = !empty($walker->getSubmittedValue($submitKey));
+      if (empty($this->value)===$newValue)
       {
-        $changedInputs[$this->name] = $this;
+        $walker->setChanged($this->name);
       }
 
-      if (!empty($submittedValues[$submitKey]))
-      {
-        $this->value                  = true;
-        $whiteListValues[$this->name] = true;
-      }
-      else
-      {
-        $this->value                  = false;
-        $whiteListValues[$this->name] = false;
-      }
+      $this->value = $newValue;
     }
+
+    $walker->setWithListValue($this->name, $this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

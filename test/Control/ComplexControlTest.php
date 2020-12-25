@@ -417,6 +417,7 @@ class ComplexControlTest extends PlaisioTestCase
     self::assertSame('handleEchoForm', $method);
     self::assertCount(2, $invalid);
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Only white listed values must be loaded.

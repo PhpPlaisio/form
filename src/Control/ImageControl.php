@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use SetBased\Exception\LogicException;
 
 /**
@@ -201,13 +202,11 @@ class ImageControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     if ($this->immutable===true)
     {
-      $whiteListValues[$this->name] = $this->value;
+      $walker->setWithListValue($this->name, $this->value);
     }
     else
     {

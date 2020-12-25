@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -399,75 +400,39 @@ class CheckboxesControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
+    $submitKey = $this->submitKey();
+    $subWalker = $walker->descend($this->name, $submitKey);
+
     if ($this->immutable===true)
     {
       foreach ($this->options as $i => $option)
       {
-        $key                                = $option[$this->keyKey];
-        $whiteListValues[$this->name][$key] = $this->options[$i][$this->checkedKey];
+        $subWalker->setWithListValue($option[$this->keyKey], $this->options[$i][$this->checkedKey]);
       }
     }
     else
     {
-      $submitKey = $this->submitKey();
-
       foreach ($this->options as $i => $option)
       {
-        // Get the (database) ID of the option.
-        $key = $option[$this->keyKey];
-
-        // If an obfuscator is installed compute the obfuscated code of the (database) ID.
+        $key  = $option[$this->keyKey];
         $code = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
 
-        // Get the original value (i.e. the option is checked or not).
-        $value = $option[$this->checkedKey] ?? false;
-
-        if ($submitKey!=='')
+        $value    = $option[$this->checkedKey] ?? false;
+        $newValue = $subWalker->getSubmittedValue($code) ?? false;
+        if (empty($value)!==empty($newValue))
         {
-          // Get the submitted value (i.e. the option is checked or not).
-          $newValue = $submittedValues[$submitKey][$code] ?? false;
-
-          // If the original value differs from the submitted value then the form control has been changed.
-          if (empty($value)!==empty($newValue)) $changedInputs[$this->name][$key] = $this;
-
-          if (!empty($newValue))
-          {
-            $this->value[$key]                  = true;
-            $whiteListValues[$this->name][$key] = true;
-          }
-          else
-          {
-            $this->value[$key]                  = false;
-            $whiteListValues[$this->name][$key] = false;
-          }
+          $subWalker->setChanged($key);
         }
-        else
-        {
-          // Get the submitted value (i.e. the option is checked or not).
-          $newValue = $submittedValues[$code] ?? false;
-
-          // If the original value differs from the submitted value then the form control has been changed.
-          if (empty($value)!==empty($newValue)) $changedInputs[$key] = $this;
-
-          if (!empty($newValue))
-          {
-            $this->value[$key]     = true;
-            $whiteListValues[$key] = true;
-          }
-          else
-          {
-            $this->value[$key]     = false;
-            $whiteListValues[$key] = false;
-          }
-        }
+        $this->value[$key] = !empty($newValue);
+        $subWalker->setWithListValue($key, $this->value[$key]);
 
         $this->options[$i][$this->checkedKey] = $this->value[$key];
       }
     }
+
+    $walker->ascend($this->name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

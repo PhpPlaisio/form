@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -78,30 +79,24 @@ class FileControl extends SimpleControl
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
-    if ($this->immutable===true)
-    {
-      $whiteListValues[$this->name] = $this->value;
-    }
-    else
+    if ($this->immutable!==true)
     {
       $submitName = $this->submitKey();
 
       if (isset($_FILES[$submitName]['error']) && $_FILES[$submitName]['error']===0)
       {
-        $changedInputs[$this->name]   = $this;
-        $whiteListValues[$this->name] = $_FILES[$submitName];
-        $this->value                  = $_FILES[$submitName];
+        $walker->setChanged($this->name);
+        $this->value = $_FILES[$submitName];
       }
       else
       {
-        $this->value                  = null;
-        $whiteListValues[$this->name] = null;
+        $this->value = null;
       }
     }
+
+    $walker->setWithListValue($this->name, $this->value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

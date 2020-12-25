@@ -5,6 +5,7 @@ namespace Plaisio\Form\Test;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Walker\LoadWalker;
 
 /**
  * Control for setting the submit name of another control.
@@ -35,7 +36,7 @@ class TestControl extends SimpleControl
   /**
    * @inheritDoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues, array &$whiteListValues, array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     // Nothing to do.
   }

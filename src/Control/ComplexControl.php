@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Cleaner\CompoundCleaner;
+use Plaisio\Form\Walker\LoadWalker;
 use SetBased\Exception\LogicException;
 
 /**
@@ -95,8 +96,8 @@ class ComplexControl extends Control implements CompoundControl
       return null;
     }
 
-    // $path must start with a leading slash.
-    if (substr($path, 0, 1)!='/')
+    // Path must start with a leading slash.
+    if (!str_starts_with($path, '/'))
     {
       return null;
     }
@@ -108,9 +109,9 @@ class ComplexControl extends Control implements CompoundControl
     {
       $parts = preg_split('/\/+/', $relativePath);
 
-      if ($control->name==$parts[0])
+      if ($control->name===$parts[0])
       {
-        if (sizeof($parts)==1)
+        if (count($parts)===1)
         {
           return $control;
         }
@@ -120,14 +121,20 @@ class ComplexControl extends Control implements CompoundControl
           {
             array_shift($parts);
             $tmp = $control->findFormControlByPath('/'.implode('/', $parts));
-            if ($tmp) return $tmp;
+            if ($tmp!==null)
+            {
+              return $tmp;
+            }
           }
         }
       }
       elseif ($control->name==='' && ($control instanceof ComplexControl))
       {
         $tmp = $control->findFormControlByPath($path);
-        if ($tmp) return $tmp;
+        if ($tmp!==null)
+        {
+          return $tmp;
+        }
       }
     }
 
@@ -166,9 +173,7 @@ class ComplexControl extends Control implements CompoundControl
       $ret = array_merge($ret, $this->errorMessages);
     }
 
-    if (empty($ret)) $ret = null;
-
-    return $ret;
+    return (empty($ret)) ? null : $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -278,45 +283,22 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase(array $submittedValues,
-                                          array &$whiteListValues,
-                                          array &$changedInputs): void
+  public function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     $submitKey = $this->submitKey();
+    $subWalker = $walker->descend($this->name, $submitKey);
 
-    if ($this->name==='')
+    if ($this->cleaner)
     {
-      $tmp1 = $submittedValues;
-      $tmp2 = &$whiteListValues;
-      $tmp3 = &$changedInputs;
-    }
-    else
-    {
-      if (!isset($submittedValues[$submitKey])) $submittedValues[$submitKey] = [];
-      if (!isset($whiteListValues[$this->name])) $whiteListValues[$this->name] = [];
-      if (!isset($changedInputs[$this->name])) $changedInputs[$this->name] = [];
-
-      $tmp1 = $submittedValues[$submitKey];
-      $tmp2 = &$whiteListValues[$this->name];
-      $tmp3 = &$changedInputs[$this->name];
+      $subWalker->clean($this->cleaner);
     }
 
     foreach ($this->controls as $control)
     {
-      if ($this->cleaner)
-      {
-        $tmp1 = $this->cleaner->clean($tmp1);
-      }
-      $control->loadSubmittedValuesBase($tmp1, $tmp2, $tmp3);
+      $control->loadSubmittedValuesBase($subWalker);
     }
 
-    if ($this->name!=='')
-    {
-      if (empty($whiteListValues[$this->name])) unset($whiteListValues[$this->name]);
-      if (empty($changedInputs[$this->name])) unset($changedInputs[$this->name]);
-    }
-
-    $this->values = $tmp2;
+    $this->values = $walker->ascend($this->name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
