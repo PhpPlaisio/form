@@ -30,6 +30,8 @@ class LengthValidatorTest extends TestCase
     // Only strings are valid
     $ret[] = [0, 100, $this];
     $ret[] = [0, 100, ['foo' => 'bar']];
+    $ret[] = [0, 100, false];
+    $ret[] = [0, 100, true];
 
     return $ret;
   }

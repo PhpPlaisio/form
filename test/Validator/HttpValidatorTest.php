@@ -35,6 +35,8 @@ class HttpValidatorTest extends PlaisioTestCase
     // Only strings are valid
     $ret[] = [$this];
     $ret[] = [['foo' => 'bar']];
+    $ret[] = [false];
+    $ret[] = [true];
 
     return $ret;
   }

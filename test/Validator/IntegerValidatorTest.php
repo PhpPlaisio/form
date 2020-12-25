@@ -27,6 +27,8 @@ class IntegerValidatorTest extends TestCase
     $ret[] = [null, null, '0.1'];
     $ret[] = [null, null, 1.2];
     $ret[] = [null, null, pi()];
+    $ret[] = [null, null, false];
+    $ret[] = [null, null, true];
 
     // Out of range.
     $ret[] = [-1, 10, -9];

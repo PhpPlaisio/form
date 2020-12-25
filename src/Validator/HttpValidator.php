@@ -30,7 +30,7 @@ class HttpValidator implements Validator
     $value = $control->getSubmittedValue();
 
     // An empty value is valid.
-    if ($value==='' || $value===null || $value===false)
+    if ($value==='' || $value===null)
     {
       return true;
     }
