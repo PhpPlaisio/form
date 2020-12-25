@@ -28,8 +28,8 @@ trait LoadPlainText
       if (Cast::toManString($this->value, '')!==Cast::toManString($newValue, ''))
       {
         $walker->setChanged($this->name);
-        $this->value = $newValue;
       }
+      $this->value = $newValue;
     }
 
     $walker->setWithListValue($this->name, $this->value);

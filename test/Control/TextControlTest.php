@@ -113,6 +113,60 @@ class TextControlTest extends SimpleControlTest
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test values are always converted to strings.
+   */
+  public function testTypeConversion(): void
+  {
+    $_POST = ['string1' => '1',
+              'string2' => '1',
+              'bool1'   => '1',
+              'bool2'   => '1',
+              'bool3'   => '1'];
+
+    $form     = new RawForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new TextControl('string1');
+    $input->setValue(1);
+    $fieldset->addFormControl($input);
+
+    $input = new TextControl('string2');
+    $input->setValue(0);
+    $fieldset->addFormControl($input);
+
+    $input = new TextControl('bool1');
+    $input->setValue(false);
+    $fieldset->addFormControl($input);
+
+    $input = new TextControl('bool2');
+    $input->setValue(true);
+    $fieldset->addFormControl($input);
+
+    $input = new TextControl('bool3');
+    $fieldset->addFormControl($input);
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
+    self::assertSame('1', $values['string1']);
+    self::assertSame('1', $values['string2']);
+    self::assertSame('1', $values['bool1']);
+    self::assertSame('1', $values['bool1']);
+    self::assertSame('1', $values['bool2']);
+    self::assertSame('1', $values['bool3']);
+    self::assertSame(['string2' => true, 'bool1' => true, 'bool3' => true], $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    */
   protected function createControl(string $name): SimpleControl

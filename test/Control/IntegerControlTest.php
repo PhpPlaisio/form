@@ -4,13 +4,11 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use PHPUnit\Framework\TestCase;
-use Plaisio\Form\Cleaner\IntegerCleaner;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\IntegerControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Validator\IntegerValidator;
 
 /**
  * Unit tests for class IntegerControl.
@@ -51,9 +49,7 @@ class IntegerControlTest extends TestCase
     $input = new IntegerControl('year');
     $input->setAttrMin('2000')
           ->setAttrMax('2020')
-          ->setValue(2018)
-          ->addValidator(new IntegerValidator())
-          ->addCleaner(IntegerCleaner::get());
+          ->setValue(2018);
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
@@ -85,9 +81,7 @@ class IntegerControlTest extends TestCase
     $input = new IntegerControl('year');
     $input->setAttrMin('2000')
           ->setAttrMax('2020')
-          ->setValue(2018)
-          ->addValidator(new IntegerValidator())
-          ->addCleaner(IntegerCleaner::get());
+          ->setValue(2018);
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);
@@ -102,6 +96,59 @@ class IntegerControlTest extends TestCase
     self::assertSame('handleEchoForm', $method);
     self::assertSame(1900, $values['year']);
     self::assertArrayHasKey('year', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test values are always converted to integers.
+   */
+  public function testTypeConversion(): void
+  {
+    $_POST = ['string1' => '1',
+              'string2' => '1',
+              'bool1'   => '1',
+              'bool2'   => '1',
+              'bool3'   => '1'];
+
+    $form     = new RawForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new IntegerControl('string1');
+    $input->setValue('1');
+    $fieldset->addFormControl($input);
+
+    $input = new IntegerControl('string2');
+    $fieldset->addFormControl($input);
+
+    $input = new IntegerControl('bool1');
+    $input->setValue(false);
+    $fieldset->addFormControl($input);
+
+    $input = new IntegerControl('bool2');
+    $input->setValue(true);
+    $fieldset->addFormControl($input);
+
+    $input = new IntegerControl('bool3');
+    $fieldset->addFormControl($input);
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $method  = $form->execute();
+    $values  = $form->getValues();
+    $changed = $form->getChangedControls();
+
+    self::assertTrue($form->isValid());
+    self::assertSame('handleSubmit', $method);
+    self::assertSame(1, $values['string1']);
+    self::assertSame(1, $values['string2']);
+    self::assertSame(1, $values['bool1']);
+    self::assertSame(1, $values['bool1']);
+    self::assertSame(1, $values['bool2']);
+    self::assertSame(1, $values['bool3']);
+    self::assertSame(['string2' => true, 'bool1' => true, 'bool3' => true], $changed);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -133,7 +180,7 @@ class IntegerControlTest extends TestCase
 
     self::assertTrue($form->isValid());
     self::assertSame('handleSubmit', $method);
-    self::assertSame('2018', $values['year']);
+    self::assertSame(2018, $values['year']);
     self::assertArrayNotHasKey('year', $changed);
   }
 
@@ -144,8 +191,6 @@ class IntegerControlTest extends TestCase
   protected function createControl(string $name): SimpleControl
   {
     $input = new IntegerControl($name);
-    $input->addValidator(new IntegerValidator())
-          ->addCleaner(IntegerCleaner::get());
 
     return $input;
   }
