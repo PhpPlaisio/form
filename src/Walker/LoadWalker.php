@@ -185,6 +185,11 @@ class LoadWalker
    */
   public function getSubmittedValue($submitKey)
   {
+    if ($submitKey==='')
+    {
+      return $this->submittedValues;
+    }
+
     return $this->submittedValues[$submitKey] ?? null;
   }
 
