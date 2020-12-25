@@ -622,7 +622,7 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   protected function prepare(): void
   {
-    if (!$this->prepared || true)
+    if (!$this->prepared)
     {
       $this->fieldSets->prepare('');
 
