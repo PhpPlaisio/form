@@ -65,7 +65,7 @@ class MandatoryValidator implements Validator
       if (is_array($element))
       {
         $tmp = $this->validateArray($element);
-        if ($tmp===true)
+        if ($tmp)
         {
           return true;
         }
