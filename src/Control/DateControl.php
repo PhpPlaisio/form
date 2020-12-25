@@ -74,7 +74,7 @@ class DateControl extends SimpleControl
         $cleaner->setOpenDate($this->openDate);
       }
     }
-    if (method_exists($this->formatter, 'setOpenDate'))
+    if ($this->formatter!==null && method_exists($this->formatter, 'setOpenDate'))
     {
       $this->formatter->setOpenDate($this->openDate);
     }
