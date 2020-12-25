@@ -14,11 +14,11 @@ class ComplexControl extends Control implements CompoundControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The cleaner to clean and/or translate (to machine format) the submitted values.
+   * The cleaners to clean and/or translate (to machine format) the submitted values.
    *
-   * @var CompoundCleaner|null
+   * @var CompoundCleaner[]
    */
-  protected ?CompoundCleaner $cleaner = null;
+  protected array $cleaners = [];
 
   /**
    * The child form controls of this form control.
@@ -288,9 +288,9 @@ class ComplexControl extends Control implements CompoundControl
     $submitKey = $this->submitKey();
     $subWalker = $walker->descend($this->name, $submitKey);
 
-    if ($this->cleaner)
+    foreach ($this->cleaners as $cleaner)
     {
-      $subWalker->clean($this->cleaner);
+      $subWalker->clean($cleaner);
     }
 
     foreach ($this->controls as $control)
@@ -374,18 +374,18 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the cleaner for this form control.
+   * Adds a cleaner to this form control.
    *
-   * @param CompoundCleaner|null $cleaner The cleaner.
+   * @param CompoundCleaner $cleaner The cleaner.
    *
    * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function setCleaner(?CompoundCleaner $cleaner): self
+  public function addCleaner(CompoundCleaner $cleaner): self
   {
-    $this->cleaner = $cleaner;
+    $this->cleaners[] = $cleaner;
 
     return $this;
   }

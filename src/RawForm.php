@@ -498,7 +498,7 @@ class RawForm extends HtmlElement implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function setCleaner(?CompoundCleaner $cleaner): self
+  public function addCleaner(?CompoundCleaner $cleaner): self
   {
     $this->cleaner = $cleaner;
 

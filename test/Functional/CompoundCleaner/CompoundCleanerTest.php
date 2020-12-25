@@ -63,7 +63,7 @@ class CompoundCleanerTest extends TestCase
     $form = new RawForm();
 
     $fieldSet = new FieldSet();
-    $fieldSet->setCleaner(new TestCompoundCleaner());
+    $fieldSet->addCleaner(new TestCompoundCleaner());
 
     $input = new HiddenControl('A');
     $fieldSet->addFormControl($input);
