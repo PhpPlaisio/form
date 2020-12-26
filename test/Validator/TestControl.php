@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
+use Plaisio\Form\Control\Control;
 use Plaisio\Form\Walker\LoadWalker;
 
 /**
  * Form control for testing validators.
  */
-class TestControl extends \Plaisio\Form\Control\Control
+class TestControl extends Control
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
