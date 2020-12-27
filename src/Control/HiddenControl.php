@@ -31,17 +31,6 @@ class HiddenControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * A hidden control must never be shown in a table.
-   *
-   * @return string An empty string.
-   */
-  public function getHtmlTableCell(): string
-  {
-    return '';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns true.
    *
    * @since 1.0.0

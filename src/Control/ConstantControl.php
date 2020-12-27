@@ -26,20 +26,6 @@ class ConstantControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * A constant control must never be shown in a table.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getHtmlTableCell(): string
-  {
-    return '';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns true.
    *
    * @since 1.0.0

@@ -136,22 +136,6 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code for this form control in a table cell.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getHtmlTableCell(): string
-  {
-    $html = $this->getHtml();
-
-    return Html::generateElement('td', ['class' => ['control', $this->getAttribute('type')]], $html, true);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the name of this form control.
    *
    * @return string
