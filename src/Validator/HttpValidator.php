@@ -70,6 +70,8 @@ class HttpValidator implements Validator
       // * Domain does have a website.
       // * Peer certificate did not match expected.
       $valid = false;
+
+      $control->setErrorMessage('Voer een geldige website in.');
     }
 
     return $valid;
