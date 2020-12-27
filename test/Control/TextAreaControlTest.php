@@ -71,7 +71,7 @@ class TextAreaControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldSet);
 
     $html     = $form->getHtml();
-    $expected = '<form method="post" action="/"><fieldset><textarea name="myForm[myFieldSet][myInput]"></textarea></fieldset></form>';
+    $expected = '<form method="post" action="/"><fieldset class="frm"><textarea class="frm frm-input" name="myForm[myFieldSet][myInput]"></textarea></fieldset></form>';
     self::assertSame($expected, $html);
   }
 

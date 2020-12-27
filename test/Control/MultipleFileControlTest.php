@@ -28,8 +28,8 @@ class MultipleFileControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldSet);
 
     $html     = $form->getHtml();
-    $expected = '<form method="post" action="/"><fieldset><input type="file" name="myForm[myFieldSet][myInput][]" multiple="multiple"/></fieldset></form>';
-    self::assertSame($expected, $html);
+    $expected = '<input class="frm frm-input" type="file" name="myForm[myFieldSet][myInput][]" multiple="multiple"/>';
+    self::assertStringContainsString($expected, $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

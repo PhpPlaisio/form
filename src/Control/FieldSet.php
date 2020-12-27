@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Legend;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -18,6 +19,17 @@ class FieldSet extends ComplexControl
    * @var Legend|null
    */
   protected ?Legend $legend = null;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function prepare(PrepareWalker $walker): void
+  {
+    parent::prepare($walker);
+
+    $this->addClass($walker->getModuleClass());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

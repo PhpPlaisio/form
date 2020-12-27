@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Cleaner\CompoundCleaner;
+use Plaisio\Form\RawForm;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 use SetBased\Exception\LogicException;
 
 /**
@@ -40,6 +42,24 @@ class ComplexControl extends Control implements CompoundControl
    * @var array
    */
   protected array $values = [];
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a cleaner to this form control.
+   *
+   * @param CompoundCleaner $cleaner The cleaner.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function addCleaner(CompoundCleaner $cleaner): self
+  {
+    $this->cleaners[] = $cleaner;
+
+    return $this;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -328,18 +348,19 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Prepares this form complex control for HTML code generation or loading submitted values.
    *
-   * @param string $parentSubmitName The submit name of the parent control.
+   * @param PrepareWalker $walker The object for walking the control tree.
    *
    * @since 1.0.0
    * @api
    */
-  public function prepare(string $parentSubmitName): void
+  public function prepare(PrepareWalker $walker): void
   {
-    parent::prepare($parentSubmitName);
+    parent::prepare($walker);
 
+    $subWalker = $walker->descend($this->submitName);
     foreach ($this->controls as $control)
     {
-      $control->prepare($this->submitName);
+      $control->prepare($subWalker);
     }
   }
 
@@ -370,24 +391,6 @@ class ComplexControl extends Control implements CompoundControl
     }
 
     return null;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a cleaner to this form control.
-   *
-   * @param CompoundCleaner $cleaner The cleaner.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function addCleaner(CompoundCleaner $cleaner): self
-  {
-    $this->cleaners[] = $cleaner;
-
-    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -447,8 +450,8 @@ class ComplexControl extends Control implements CompoundControl
     {
       if (!$control->validateBase($invalidFormControls))
       {
-        $this->invalidControls[] = $control;
         $valid                   = false;
+        $this->invalidControls[] = $control;
       }
     }
 

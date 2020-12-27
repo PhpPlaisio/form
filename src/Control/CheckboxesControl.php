@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -95,6 +96,13 @@ class CheckboxesControl extends Control
    * @var array
    */
   protected array $value = [];
+
+  /**
+   * The CSS module class of form elements.
+   *
+   * @var string
+   */
+  private string $moduleClass;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -439,6 +447,19 @@ class CheckboxesControl extends Control
   /**
    * @inheritdoc
    */
+  protected function prepare(PrepareWalker $walker): void
+  {
+    parent::prepare($walker);
+
+    $this->moduleClass = $walker->getModuleClass();
+    $this->addClass($this->moduleClass);
+    $this->addClass($this->moduleClass.'-checkboxes');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
   protected function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
@@ -451,6 +472,11 @@ class CheckboxesControl extends Control
         $invalidFormControls[$this->name] = $this;
         break;
       }
+    }
+
+    if (!$valid)
+    {
+      $this->addClass(self::$isErrorClass);
     }
 
     return $valid;
@@ -478,7 +504,21 @@ class CheckboxesControl extends Control
 
     $attributes['type'] = 'checkbox';
 
-    if (!isset($attributes['id'])) $attributes['id'] = Html::getAutoId();
+    $class = sprintf('%s %s-checkbox', $this->moduleClass, $this->moduleClass);
+    if (!isset($attributes['class']))
+    {
+      $attributes['class'] = $class;
+    }
+    else
+    {
+      $attributes['class'] .= ' ';
+      $attributes['class'] .= $class;
+    }
+
+    if (!isset($attributes['id']))
+    {
+      $attributes['id'] = Html::getAutoId();
+    }
 
     return $attributes;
   }
@@ -501,6 +541,17 @@ class CheckboxesControl extends Control
       {
         if (isset($option[$key])) $attributes[$name] = $option[$key];
       }
+    }
+
+    $class = sprintf('%s %s-checkbox', $this->moduleClass, $this->moduleClass);
+    if (!isset($attributes['class']))
+    {
+      $attributes['class'] = $class;
+    }
+    else
+    {
+      $attributes['class'] .= ' ';
+      $attributes['class'] .= $class;
     }
 
     return $attributes;

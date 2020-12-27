@@ -6,6 +6,7 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Validator\Validator;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
 use Plaisio\Obfuscator\Obfuscator;
@@ -17,6 +18,13 @@ use SetBased\Helper\Cast;
 abstract class Control extends HtmlElement
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Class to be added to form controls with invalid values.
+   *
+   * @var string
+   */
+  public static string $isErrorClass = 'is-error';
+
   /**
    * The list of error messages associated with this form control.
    *
@@ -326,14 +334,14 @@ abstract class Control extends HtmlElement
   /**
    * Prepares this form control for HTML code generation or loading submitted values.
    *
-   * @param string $parentSubmitName The submit name of the parent control.
+   * @param PrepareWalker $walker The object for walking the control tree.
    *
    * @since 1.0.0
    * @api
    */
-  protected function prepare(string $parentSubmitName): void
+  protected function prepare(PrepareWalker $walker): void
   {
-    $this->setSubmitName($parentSubmitName);
+    $this->setSubmitName($walker->getParentSubmitName());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

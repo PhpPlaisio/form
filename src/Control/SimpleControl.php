@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Formatter\Formatter;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use SetBased\Exception\LogicException;
 
@@ -82,9 +83,7 @@ abstract class SimpleControl extends Control
    *
    * @var mixed
    */
-  protected $value = null;
-
-  //--------------------------------------------------------------------------------------------------------------------
+  protected $value = null;  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
@@ -104,7 +103,8 @@ abstract class SimpleControl extends Control
     }
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a cleaner to this form control.
    *
@@ -654,6 +654,18 @@ abstract class SimpleControl extends Control
   /**
    * @inheritdoc
    */
+  protected function prepare(PrepareWalker $walker): void
+  {
+    parent::prepare($walker);
+
+    $this->addClass($walker->getModuleClass());
+    $this->addClass($walker->getModuleClass().'-input');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
   protected function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
@@ -666,6 +678,11 @@ abstract class SimpleControl extends Control
         $invalidFormControls[] = $this;
         break;
       }
+    }
+
+    if (!$valid)
+    {
+      $this->addClass(self::$isErrorClass);
     }
 
     return $valid;

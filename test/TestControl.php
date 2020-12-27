@@ -6,6 +6,7 @@ namespace Plaisio\Form\Test;
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 
 /**
  * Control for setting the submit name of another control.
@@ -20,7 +21,9 @@ class TestControl extends SimpleControl
    */
   public static function fixSubmitName(Control $control): void
   {
-    $control->setSubmitName('');
+    $walker = new PrepareWalker('', 'frm');
+
+    $control->prepare($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

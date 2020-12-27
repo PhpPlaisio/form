@@ -12,6 +12,11 @@ use SetBased\Exception\LogicException;
 class LoadWalker
 {
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * The name of the branch where this walker starts walking.
+   *
+   * @var string
+   */
   private string $branch;
 
   /**

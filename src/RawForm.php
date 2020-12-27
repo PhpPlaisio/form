@@ -10,6 +10,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
 use Plaisio\Kernel\Nub;
@@ -82,6 +83,13 @@ class RawForm extends HtmlElement implements CompoundControl
    */
   protected array $values = [];
 
+  /**
+   * The CSS module class of form elements.
+   *
+   * @var string
+   */
+  protected string $moduleClass = 'frm';
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
@@ -119,6 +127,24 @@ class RawForm extends HtmlElement implements CompoundControl
     }
 
     return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the cleaner for this form control.
+   *
+   * @param CompoundCleaner $cleaner The cleaner.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function addCleaner(CompoundCleaner $cleaner): self
+  {
+    $this->cleaners[] = $cleaner;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -368,7 +394,7 @@ class RawForm extends HtmlElement implements CompoundControl
   /**
    * Returns whether the value of one or more form controls have changed.
    *
-   * @note This method should only be invoked after the submitted values have been loaded.
+   * @note  This method should only be invoked after the submitted values have been loaded.
    *
    * @since 1.0.0
    * @api
@@ -489,24 +515,6 @@ class RawForm extends HtmlElement implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the cleaner for this form control.
-   *
-   * @param CompoundCleaner $cleaner The cleaner.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function addCleaner(CompoundCleaner $cleaner): self
-  {
-    $this->cleaners[] = $cleaner;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Adds an error message to the list of error messages for this form control.
    *
    * @param string $message The error message.
@@ -516,6 +524,21 @@ class RawForm extends HtmlElement implements CompoundControl
   public function setErrorMessage(string $message): self
   {
     $this->errorMessages[] = $message;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets CSS module class of form elements.
+   *
+   * @param string $moduleClass The CSS module class of form elements.
+   *
+   * @return $this
+   */
+  public function setModuleClass(string $moduleClass): self
+  {
+    $this->moduleClass = $moduleClass;
 
     return $this;
   }
@@ -624,7 +647,8 @@ class RawForm extends HtmlElement implements CompoundControl
   {
     if (!$this->prepared)
     {
-      $this->fieldSets->prepare('');
+      $walker = new PrepareWalker('', $this->moduleClass);
+      $this->fieldSets->prepare($walker);
 
       $this->prepared = true;
     }

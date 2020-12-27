@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
+use Plaisio\Form\Walker\PrepareWalker;
 
 /**
  * Class for form controls of type [input:date](http://www.w3schools.com/tags/tag_input.asp).
@@ -58,14 +59,14 @@ class DateControl extends SimpleControl
   /**
    * Prepares this form control for HTML code generation or loading submitted values.
    *
-   * @param string $parentSubmitName The submit name of the parent control.
+   * @param PrepareWalker $walker The object for walking the control tree.
    *
    * @since 1.0.0
    * @api
    */
-  protected function prepare(string $parentSubmitName): void
+  protected function prepare(PrepareWalker $walker): void
   {
-    parent::prepare($parentSubmitName);
+    parent::prepare($walker);
 
     foreach ($this->cleaners as $cleaner)
     {

@@ -35,7 +35,7 @@ class SubmitControlTest extends PushControlTest
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Return submit type for form control.
+   * Returns the type of form control.
    *
    * @return string
    */

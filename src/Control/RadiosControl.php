@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -89,6 +90,13 @@ class RadiosControl extends Control
    */
   protected $value = null;
 
+  /**
+   * The CSS module class of form elements.
+   *
+   * @var string
+   */
+  private string $moduleClass = '';
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
@@ -96,8 +104,6 @@ class RadiosControl extends Control
   public function __construct(?string $name)
   {
     parent::__construct($name);
-
-    $this->attributes['class'] = 'radios';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -224,7 +230,7 @@ class RadiosControl extends Control
     return $this;
   }
 
-//--------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets whether labels are HTML code.
    *
@@ -242,7 +248,7 @@ class RadiosControl extends Control
     return $this;
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the label postfix., e.g. the HTML code that is appended after the HTML code of each label of the checkboxes.
    *
@@ -409,6 +415,19 @@ class RadiosControl extends Control
   /**
    * @inheritdoc
    */
+  protected function prepare(PrepareWalker $walker): void
+  {
+    parent::prepare($walker);
+
+    $this->moduleClass = $walker->getModuleClass();
+    $this->addClass($this->moduleClass);
+    $this->addClass($this->moduleClass.'-radios');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
   protected function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
@@ -421,6 +440,11 @@ class RadiosControl extends Control
         $invalidFormControls[] = $this;
         break;
       }
+    }
+
+    if (!$valid)
+    {
+      $this->addClass(self::$isErrorClass);
     }
 
     return $valid;
@@ -446,10 +470,24 @@ class RadiosControl extends Control
       }
     }
 
-    $attributes['type'] = 'radio';
-    $attributes['name'] = $this->submitName;
+    $attributes['type']  = 'radio';
+    $attributes['name']  = $this->submitName;
 
-    if (!isset($attributes['id'])) $attributes['id'] = Html::getAutoId();
+    $class = sprintf('%s %s-radio', $this->moduleClass, $this->moduleClass);
+    if (!isset($attributes['class']))
+    {
+      $attributes['class'] = $class;
+    }
+    else
+    {
+      $attributes['class'] .= ' ';
+      $attributes['class'] .= $class;
+    }
+
+    if (!isset($attributes['id']))
+    {
+      $attributes['id'] = Html::getAutoId();
+    }
 
     return $attributes;
   }
@@ -472,6 +510,17 @@ class RadiosControl extends Control
       {
         if (isset($option[$key])) $attributes[$name] = $option[$key];
       }
+    }
+
+    $class = sprintf('%s %s-radio', $this->moduleClass, $this->moduleClass);
+    if (!isset($attributes['class']))
+    {
+      $attributes['class'] = $class;
+    }
+    else
+    {
+      $attributes['class'] .= ' ';
+      $attributes['class'] .= $class;
     }
 
     return $attributes;

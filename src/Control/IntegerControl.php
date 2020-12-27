@@ -7,6 +7,7 @@ use Plaisio\Form\Cleaner\IntegerCleaner;
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
 use Plaisio\Form\Validator\IntegerValidator;
+use Plaisio\Form\Walker\PrepareWalker;
 use SetBased\Helper\Cast;
 
 /**
@@ -86,14 +87,14 @@ class IntegerControl extends SimpleControl
   /**
    * Prepares this form control for HTML code generation or loading submitted values.
    *
-   * @param string $parentSubmitName The submit name of the parent control.
+   * @param PrepareWalker $walker The object for walking the control tree.
    *
    * @since 1.0.0
    * @api
    */
-  protected function prepare(string $parentSubmitName): void
+  protected function prepare(PrepareWalker $walker): void
   {
-    parent::prepare($parentSubmitName);
+    parent::prepare($walker);
 
     foreach ($this->validators as $validator)
     {

@@ -8,6 +8,7 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\PushControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
+use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTest;
 use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
@@ -16,7 +17,7 @@ use Plaisio\Form\Test\PlaisioTestCase;
 abstract class PushControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use Traits\CommonSimpleControlTest;
+  use CommonSimpleControlTest;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -33,8 +34,9 @@ abstract class PushControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldSet);
 
     $html     = $form->getHtml();
-    $expected = sprintf('<form method="post" action="/"><fieldset><input type="%s" name="myForm[myFieldSet][myInput]"/></fieldset></form>', $this->getControlType());
-    self::assertSame($expected, $html);
+    $expected = sprintf('<input class="frm frm-input" type="%s" name="myForm[myFieldSet][myInput]"/>',
+                        $this->getControlType());
+    self::assertStringContainsString($expected, $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
