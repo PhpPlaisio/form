@@ -5,7 +5,7 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\HiddenSubmitControl;
 use Plaisio\Form\Control\SimpleControl;
-use Plaisio\Form\Test\Control\Traits\TestInputElement;
+use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 
 /**
  * Unit tests for class HiddenSubmitControl.
@@ -13,7 +13,7 @@ use Plaisio\Form\Test\Control\Traits\TestInputElement;
 class HiddenSubmitControlTest extends PushControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use TestInputElement;
+  use InputElementTest1;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

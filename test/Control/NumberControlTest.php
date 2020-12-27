@@ -6,7 +6,8 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Control\NumberControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Test\Control\Traits\ImmutableTest;
-use Plaisio\Form\Test\Control\Traits\TestInputElement;
+use Plaisio\Form\Test\Control\Traits\InputElementTest1;
+use Plaisio\Form\Test\Control\Traits\InputElementTest2;
 
 /**
  * Unit tests for class NumberControl.
@@ -15,7 +16,8 @@ class NumberControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   use ImmutableTest;
-  use TestInputElement;
+  use InputElementTest1;
+  use InputElementTest2;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

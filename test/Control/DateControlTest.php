@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Cleaner\DateCleaner;
-use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\DateControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
@@ -12,7 +11,8 @@ use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Formatter\DateFormatter;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\ImmutableTest;
-use Plaisio\Form\Test\Control\Traits\TestInputElement;
+use Plaisio\Form\Test\Control\Traits\InputElementTest1;
+use Plaisio\Form\Test\Control\Traits\InputElementTest2;
 
 /**
  * Unit tests for class DateControl.
@@ -21,7 +21,8 @@ class DateControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   use ImmutableTest;
-  use TestInputElement;
+  use InputElementTest1;
+  use InputElementTest2;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -58,7 +59,6 @@ class DateControlTest extends SimpleControlTest
     self::assertArrayNotHasKey('birthday', $changed);
   }
 
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test open date. Empty value yields open date and no changed form controls.
@@ -93,17 +93,14 @@ class DateControlTest extends SimpleControlTest
     $this->openDateTest($openDateStart, $openDateEnd);
   }
 
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
   protected function createControl(string $name): SimpleControl
   {
-    $input = new DateControl($name);
-    $input->addCleaner(PruneWhitespaceCleaner::get());
-    $input->addCleaner(new DateCleaner('d-m-Y', '-'));
-
-    return $input;
+    return new DateControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -115,6 +112,28 @@ class DateControlTest extends SimpleControlTest
   protected function getControlType(): string
   {
     return 'date';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid initial value.
+   *
+   * @return mixed
+   */
+  protected function getValidInitialValue()
+  {
+    return '2000-01-01';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a valid submitted value (different form initial value).
+   *
+   * @return string
+   */
+  protected function getValidSubmittedValue(): string
+  {
+    return '1999-12-31';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

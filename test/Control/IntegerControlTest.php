@@ -9,7 +9,8 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\IntegerControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\TestInputElement;
+use Plaisio\Form\Test\Control\Traits\InputElementTest1;
+use Plaisio\Form\Test\Control\Traits\InputElementTest2;
 
 /**
  * Unit tests for class IntegerControl.
@@ -17,7 +18,8 @@ use Plaisio\Form\Test\Control\Traits\TestInputElement;
 class IntegerControlTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use TestInputElement;
+  use InputElementTest1;
+  use InputElementTest2;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

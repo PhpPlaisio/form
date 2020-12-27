@@ -7,7 +7,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ResetControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\TestInputElement;
+use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
@@ -16,7 +16,7 @@ use Plaisio\Form\Test\PlaisioTestCase;
 class ResetControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use TestInputElement;
+  use InputElementTest1;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

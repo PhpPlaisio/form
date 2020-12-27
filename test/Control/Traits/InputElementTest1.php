@@ -7,9 +7,9 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\RawForm;
 
 /**
- *
+ * Tests for input elements.
  */
-trait TestInputElement
+trait InputElementTest1
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -10,7 +10,7 @@ use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\ImmutableTest;
-use Plaisio\Form\Test\Control\Traits\TestInputElement;
+use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 
 /**
  * Unit tests for class HiddenControl.
@@ -19,7 +19,7 @@ class HiddenControlTest extends SimpleControlTest
 {
   //--------------------------------------------------------------------------------------------------------------------
   use ImmutableTest;
-  use TestInputElement;
+  use InputElementTest1;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
