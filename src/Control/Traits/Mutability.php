@@ -10,7 +10,7 @@ trait Mutability
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Whether this form control is immutable. The value of an immutable form control will not change when receiving
+   * Whether this form control is immutable. The value of an immutable form control will not change on receiving
    * submitted values.
    *
    * @var bool|null
