@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -18,6 +19,7 @@ class SelectControl extends SimpleControl
   use Mutability;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * If set the first option in the select box with be an option with an empty label with value $emptyOption.
    *
@@ -277,6 +279,18 @@ class SelectControl extends SimpleControl
         }
       }
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  protected function prepare(PrepareWalker $walker): void
+  {
+    Control::prepare($walker);
+
+    $this->addClass($walker->getModuleClass());
+    $this->addClass($walker->getModuleClass().'-select');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
