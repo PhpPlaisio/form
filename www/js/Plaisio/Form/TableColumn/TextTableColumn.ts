@@ -29,6 +29,11 @@ export class TextTableColumn extends BaseTextTableColumn
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-OverviewTable.registerTableColumn('control-text', TextTableColumn);
 OverviewTable.registerTableColumn('control-button', TextTableColumn);
+OverviewTable.registerTableColumn('control-date', TextTableColumn);
+OverviewTable.registerTableColumn('control-integer', TextTableColumn);
+OverviewTable.registerTableColumn('control-number', TextTableColumn);
 OverviewTable.registerTableColumn('control-submit', TextTableColumn);
+OverviewTable.registerTableColumn('control-tel', TextTableColumn);
+OverviewTable.registerTableColumn('control-text', TextTableColumn);
+OverviewTable.registerTableColumn('control-url', TextTableColumn);
