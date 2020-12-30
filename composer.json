@@ -18,7 +18,6 @@
     "plaisio/obfuscator": "^2.0",
     "plaisio/request": "^0.13.0",
     "plaisio/session": "^4.0",
-    "plaisio/table-overview": "^3.0",
     "setbased/exception": "^2.1",
     "setbased/helper-cast": "^2.1"
   },
