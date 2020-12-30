@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Cleaner\CompoundCleaner;
-use Plaisio\Form\RawForm;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
 use SetBased\Exception\LogicException;

@@ -498,22 +498,21 @@ class CheckboxesControl extends Control
     {
       foreach ($this->inputAttributesMap as $key => $name)
       {
-        if (isset($option[$key])) $attributes[$name] = $option[$key];
+        if (isset($option[$key]))
+        {
+          $attributes[$name] = $option[$key];
+        }
       }
     }
 
-    $attributes['type'] = 'checkbox';
+    if (isset($attributes['class']) && !is_array($attributes['class']))
+    {
+      $attributes['class'] = [$attributes['class']];
+    }
 
-    $class = sprintf('%s %s-checkbox', $this->moduleClass, $this->moduleClass);
-    if (!isset($attributes['class']))
-    {
-      $attributes['class'] = $class;
-    }
-    else
-    {
-      $attributes['class'] .= ' ';
-      $attributes['class'] .= $class;
-    }
+    $attributes['type']    = 'checkbox';
+    $attributes['class'][] = $this->moduleClass;
+    $attributes['class'][] = $this->moduleClass.'-checkbox';
 
     if (!isset($attributes['id']))
     {
@@ -539,20 +538,20 @@ class CheckboxesControl extends Control
     {
       foreach ($this->labelAttributesMap as $key => $name)
       {
-        if (isset($option[$key])) $attributes[$name] = $option[$key];
+        if (isset($option[$key]))
+        {
+          $attributes[$name] = $option[$key];
+        }
       }
     }
 
-    $class = sprintf('%s %s-checkbox', $this->moduleClass, $this->moduleClass);
-    if (!isset($attributes['class']))
+    if (isset($attributes['class']) && !is_array($attributes['class']))
     {
-      $attributes['class'] = $class;
+      $attributes['class'] = [$attributes['class']];
     }
-    else
-    {
-      $attributes['class'] .= ' ';
-      $attributes['class'] .= $class;
-    }
+
+    $attributes['class'][] = $this->moduleClass;
+    $attributes['class'][] = $this->moduleClass.'-checkbox';
 
     return $attributes;
   }

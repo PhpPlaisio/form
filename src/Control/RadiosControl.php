@@ -470,19 +470,15 @@ class RadiosControl extends Control
       }
     }
 
-    $attributes['type']  = 'radio';
-    $attributes['name']  = $this->submitName;
+    if (isset($attributes['class']) && !is_array($attributes['class']))
+    {
+      $attributes['class'] = [$attributes['class']];
+    }
 
-    $class = sprintf('%s %s-radio', $this->moduleClass, $this->moduleClass);
-    if (!isset($attributes['class']))
-    {
-      $attributes['class'] = $class;
-    }
-    else
-    {
-      $attributes['class'] .= ' ';
-      $attributes['class'] .= $class;
-    }
+    $attributes['type']    = 'radio';
+    $attributes['name']    = $this->submitName;
+    $attributes['class'][] = $this->moduleClass;
+    $attributes['class'][] = $this->moduleClass.'-radio';
 
     if (!isset($attributes['id']))
     {
@@ -512,16 +508,13 @@ class RadiosControl extends Control
       }
     }
 
-    $class = sprintf('%s %s-radio', $this->moduleClass, $this->moduleClass);
-    if (!isset($attributes['class']))
+    if (isset($attributes['class']) && !is_array($attributes['class']))
     {
-      $attributes['class'] = $class;
+      $attributes['class'] = [$attributes['class']];
     }
-    else
-    {
-      $attributes['class'] .= ' ';
-      $attributes['class'] .= $class;
-    }
+
+    $attributes['class'][] = $this->moduleClass;
+    $attributes['class'][] = $this->moduleClass.'-radio';
 
     return $attributes;
   }

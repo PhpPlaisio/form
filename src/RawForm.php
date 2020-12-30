@@ -84,11 +84,11 @@ class RawForm extends HtmlElement implements CompoundControl
   protected array $values = [];
 
   /**
-   * The CSS module class of form elements.
+   * The CSS module class.
    *
    * @var string
    */
-  protected string $moduleClass = 'frm';
+  private string $moduleClass = 'frm';
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

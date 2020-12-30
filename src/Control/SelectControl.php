@@ -19,7 +19,6 @@ class SelectControl extends SimpleControl
   use Mutability;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * If set the first option in the select box with be an option with an empty label with value $emptyOption.
    *
@@ -309,7 +308,10 @@ class SelectControl extends SimpleControl
     {
       foreach ($this->optionAttributesMap as $key => $name)
       {
-        if (isset($option[$key])) $attributes[$name] = $option[$key];
+        if (isset($option[$key]))
+        {
+          $attributes[$name] = $option[$key];
+        }
       }
     }
 
