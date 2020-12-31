@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Cleaner;
 
+use SetBased\Exception\LogicException;
+
 /**
  * Cleaner for replacing ambiguous characters.
  *
@@ -31,7 +33,7 @@ class AmbiguityCleaner implements Cleaner
    *
    * Characters marked with * we have actually encountered in other databases.
    *
-   * @var array<string,string[]>
+   * @var array[]
    */
   protected array $ambiguities =
     // Spaces.
@@ -163,10 +165,9 @@ class AmbiguityCleaner implements Cleaner
       return null;
     }
 
-    // Return original value for non-strings.
     if (!is_string($value))
     {
-      return $value;
+      throw new LogicException('Expecting a string, got a %s.', gettype($value));
     }
 
     // Replace all ambiguous characters.

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Cleaner;
 
+use SetBased\Exception\LogicException;
+
 /**
  * Cleaner for removing leading and training whitespace.
  */
@@ -42,16 +44,14 @@ class TrimWhitespaceCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // Return null for empty strings.
     if ($value==='' || $value===null)
     {
       return null;
     }
 
-    // Return original value for non-strings.
     if (!is_string($value))
     {
-      return $value;
+      throw new LogicException('Expecting a string, got a %s.', gettype($value));
     }
 
     $clean = trim($value);

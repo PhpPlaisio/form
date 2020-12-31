@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control\Traits;
 
+use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Helper\Html;
 
 /**
@@ -23,6 +24,10 @@ trait InputElement
    */
   protected function generateInputElement(string $type): string
   {
+    if ($this->error)
+    {
+      $this->addClass(ComplexControl::$isErrorClass);
+    }
     $this->attributes['type'] = $type;
     $this->attributes['name'] = $this->submitName;
 

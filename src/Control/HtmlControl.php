@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use SetBased\Helper\Cast;
 
@@ -27,7 +28,7 @@ class HtmlControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
     $html = $this->prefix;
     $html .= $this->value;

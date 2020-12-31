@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Cleaner;
 
+use SetBased\Exception\LogicException;
 use SetBased\Helper\Cast;
 
 /**
@@ -44,10 +45,14 @@ class IntegerCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // Return null for empty values.
     if ($value==='' || $value===null)
     {
       return null;
+    }
+
+    if (!is_string($value) && !is_int($value) && !is_float($value) && !is_bool($value))
+    {
+      throw new LogicException('Expecting a string, got a %s.', gettype($value));
     }
 
     // Return original value for non-integers.

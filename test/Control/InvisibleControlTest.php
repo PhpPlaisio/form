@@ -21,6 +21,17 @@ class InvisibleControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns invisible.
+   *
+   * @return string
+   */
+  public function getControlClass(): string
+  {
+    return 'invisible';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test submitted value is not loaded.
    */
   public function testForm1(): void

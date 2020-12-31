@@ -7,6 +7,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 
 /**
  * Control for setting the submit name of another control.
@@ -21,7 +22,7 @@ class TestControl extends SimpleControl
    */
   public static function fixSubmitName(Control $control): void
   {
-    $walker = new PrepareWalker('', 'frm');
+    $walker = new PrepareWalker('');
 
     $control->prepare($walker);
   }
@@ -30,7 +31,7 @@ class TestControl extends SimpleControl
   /**
    * @inheritDoc
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
     return '';
   }

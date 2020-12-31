@@ -7,6 +7,7 @@ use Plaisio\Form\Cleaner\AmbiguityCleaner;
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
+use Plaisio\Form\Walker\RenderWalker;
 
 /**
  * Class for form controls of type [input:text](http://www.w3schools.com/tags/tag_input.asp).
@@ -39,8 +40,10 @@ class TextControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'text');
+
     return $this->generateInputElement('text');
   }
 

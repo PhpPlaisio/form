@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Cleaner;
 
+use SetBased\Exception\LogicException;
+
 /**
  * Cleaner for cleaning and transforming dates to ISO 8601 machine format.
  */
@@ -77,10 +79,9 @@ class DateCleaner implements Cleaner
       return $this->openDate;
     }
 
-    // Return original value for non-strings.
     if (!is_string($value))
     {
-      return $value;
+      throw new LogicException('Expecting a string, got a %s.', gettype($value));
     }
 
     // First validate against ISO 8601.

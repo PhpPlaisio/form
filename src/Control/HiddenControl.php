@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
+use Plaisio\Form\Walker\RenderWalker;
 
 /**
  * Class for form controls of type [input:hidden](http://www.w3schools.com/tags/tag_input.asp).
@@ -17,15 +18,15 @@ class HiddenControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code for this form control.
-   *
-   * @return string
+   * @inheritdoc
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'hidden');
+
     return $this->generateInputElement('hidden');
   }
 

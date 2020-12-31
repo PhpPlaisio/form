@@ -28,21 +28,6 @@ class DatabaseLabelValidatorTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Non-strings values are invalid.
-   */
-  public function testNonStringInvalidValid(): void
-  {
-    $validator = new DatabaseLabelValidator('CMP_ID');
-
-    $control = new TestControl('test', $this);
-    self::assertFalse($validator->validate($control));
-
-    $control = new TestControl('test', []);
-    self::assertFalse($validator->validate($control));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Only [0-9A-Z_]+ are allowed.
    */
   public function testNonValid(): void

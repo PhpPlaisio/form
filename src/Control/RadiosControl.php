@@ -5,7 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
-use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -14,7 +14,7 @@ use SetBased\Helper\Cast;
  * Class for an array of form controls of type [input:radio](http://www.w3schools.com/tags/tag_input.asp) with the same
  * name.
  */
-class RadiosControl extends Control
+class RadiosControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   use Mutability;
@@ -90,22 +90,6 @@ class RadiosControl extends Control
    */
   protected $value = null;
 
-  /**
-   * The CSS module class of form elements.
-   *
-   * @var string
-   */
-  private string $moduleClass = '';
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function __construct(?string $name)
-  {
-    parent::__construct($name);
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
@@ -113,8 +97,10 @@ class RadiosControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'radios');
+
     $html = $this->prefix;
     $html .= Html::generateTag('span', $this->attributes);
 
@@ -124,8 +110,8 @@ class RadiosControl extends Control
 
       foreach ($this->options as $option)
       {
-        $inputAttributes = $this->inputAttributes($option);
-        $labelAttributes = $this->labelAttributes($option);
+        $inputAttributes = $this->inputAttributes($option, $walker);
+        $labelAttributes = $this->labelAttributes($option, $walker);
 
         $labelAttributes['for'] = $inputAttributes['id'];
 
@@ -148,43 +134,6 @@ class RadiosControl extends Control
     $html .= $this->postfix;
 
     return $html;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds the value of a check radio button the values with the name of this form control as key.
-   *
-   * @param array $values The values.
-   */
-  public function getSetValuesBase(array &$values): void
-  {
-    $values[$this->name] = $this->value;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the value of the check radio button.
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getSubmittedValue()
-  {
-    return $this->value;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the value of the checked radio button.
-   *
-   * @param array $values
-   */
-  public function mergeValuesBase(array $values): void
-  {
-    if (array_key_exists($this->name, $values))
-    {
-      $this->setValuesBase($values);
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -324,33 +273,6 @@ class RadiosControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the value of this form control.
-   *
-   * @param mixed $value The new value for the form control.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function setValue($value): self
-  {
-    $this->value = $value;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function setValuesBase(?array $values): void
-  {
-    $this->value = $values[$this->name] ?? null;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * @inheritdoc
    */
   protected function loadSubmittedValuesBase(LoadWalker $walker): void
@@ -413,52 +335,14 @@ class RadiosControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
-   */
-  protected function prepare(PrepareWalker $walker): void
-  {
-    parent::prepare($walker);
-
-    $this->moduleClass = $walker->getModuleClass();
-    $this->addClass($this->moduleClass);
-    $this->addClass($this->moduleClass.'-radios');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  protected function validateBase(array &$invalidFormControls): bool
-  {
-    $valid = true;
-
-    foreach ($this->validators as $validator)
-    {
-      $valid = $validator->validate($this);
-      if (!$valid)
-      {
-        $invalidFormControls[] = $this;
-        break;
-      }
-    }
-
-    if (!$valid)
-    {
-      $this->addClass(self::$isErrorClass);
-    }
-
-    return $valid;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the attributes for the input element.
    *
-   * @param array $option The option.
+   * @param array        $option The option.
+   * @param RenderWalker $walker The object for walking the form control tree.
    *
    * @return array
    */
-  private function inputAttributes(array $option): array
+  private function inputAttributes(array $option, RenderWalker $walker): array
   {
     $attributes = [];
 
@@ -475,10 +359,12 @@ class RadiosControl extends Control
       $attributes['class'] = [$attributes['class']];
     }
 
-    $attributes['type']    = 'radio';
-    $attributes['name']    = $this->submitName;
-    $attributes['class'][] = $this->moduleClass;
-    $attributes['class'][] = $this->moduleClass.'-radio';
+    $attributes['type'] = 'radio';
+    $attributes['name'] = $this->submitName;
+    foreach ($walker->getClasses('radio') as $class)
+    {
+      $attributes['class'][] = $class;
+    }
 
     if (!isset($attributes['id']))
     {
@@ -492,11 +378,12 @@ class RadiosControl extends Control
   /**
    * Returns the attributes for the label element.
    *
-   * @param array $option The option.
+   * @param array        $option The option.
+   * @param RenderWalker $walker The object for walking the form control tree.
    *
    * @return array
    */
-  private function labelAttributes(array $option): array
+  private function labelAttributes(array $option, RenderWalker $walker): array
   {
     $attributes = [];
 
@@ -513,8 +400,10 @@ class RadiosControl extends Control
       $attributes['class'] = [$attributes['class']];
     }
 
-    $attributes['class'][] = $this->moduleClass;
-    $attributes['class'][] = $this->moduleClass.'-radio';
+    foreach ($walker->getClasses('radio') as $class)
+    {
+      $attributes['class'][] = $class;
+    }
 
     return $attributes;
   }

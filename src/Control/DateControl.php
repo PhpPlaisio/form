@@ -9,6 +9,7 @@ use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
 use Plaisio\Form\Validator\DateValidator;
 use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 
 /**
  * Class for form controls of type [input:date](http://www.w3schools.com/tags/tag_input.asp).
@@ -50,8 +51,10 @@ class DateControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'date');
+
     return $this->generateInputElement('date');
   }
 
@@ -78,7 +81,7 @@ class DateControl extends SimpleControl
   /**
    * Prepares this form control for HTML code generation or loading submitted values.
    *
-   * @param PrepareWalker $walker The object for walking the control tree.
+   * @param PrepareWalker $walker The object for walking the form control tree.
    *
    * @since 1.0.0
    * @api

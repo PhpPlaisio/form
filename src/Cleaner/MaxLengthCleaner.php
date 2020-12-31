@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Cleaner;
 
+use SetBased\Exception\LogicException;
+
 /**
  * Cleaner for trimming down the length of string to a maximum.
  */
@@ -43,16 +45,14 @@ class MaxLengthCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // Return null for empty strings.
     if ($value==='' || $value===null)
     {
       return null;
     }
 
-    // Return original value for non-strings.
     if (!is_string($value))
     {
-      return $value;
+      throw new LogicException('Expecting a string, got a %s.', gettype($value));
     }
 
     return mb_substr($value, 0, $this->maxLength);

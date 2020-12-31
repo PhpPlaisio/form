@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\RenderWalker;
 
 /**
  * Class for form controls of type [input:reset](http://www.w3schools.com/tags/tag_input.asp).
@@ -21,8 +22,10 @@ class ResetControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addClasses($walker->getClasses('reset'));
+
     return $this->generateInputElement('reset');
   }
 

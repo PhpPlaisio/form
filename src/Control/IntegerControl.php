@@ -8,6 +8,7 @@ use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
 use Plaisio\Form\Validator\IntegerValidator;
 use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use SetBased\Helper\Cast;
 
 /**
@@ -42,8 +43,10 @@ class IntegerControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'integer');
+
     return $this->generateInputElement('number');
   }
 
@@ -87,7 +90,7 @@ class IntegerControl extends SimpleControl
   /**
    * Prepares this form control for HTML code generation or loading submitted values.
    *
-   * @param PrepareWalker $walker The object for walking the control tree.
+   * @param PrepareWalker $walker The object for walking the form control tree.
    *
    * @since 1.0.0
    * @api

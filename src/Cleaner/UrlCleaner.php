@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Cleaner;
 
 use Plaisio\Helper\Url;
+use SetBased\Exception\LogicException;
 
 /**
  * Cleaner for normalizing URLs.
@@ -44,19 +45,16 @@ class UrlCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // Return null for empty strings.
     if ($value==='' || $value===null)
     {
       return null;
     }
 
-    // Return original value for non-strings.
     if (!is_string($value))
     {
-      return $value;
+      throw new LogicException('Expecting a string, got a %s.', gettype($value));
     }
 
-    // Split the URL in parts.
     $parts = parse_url($value);
     if (!is_array($parts))
     {

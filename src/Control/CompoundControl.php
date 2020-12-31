@@ -12,6 +12,19 @@ interface CompoundControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Adds a cleaner to this form control.
+   *
+   * @param CompoundCleaner $cleaner The cleaner.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function addCleaner(CompoundCleaner $cleaner);
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Searches for a form control with by name. If more than one form control with the same name exists the first
    * found form control is returned. If no form control is found null is returned.
    *
@@ -87,19 +100,6 @@ interface CompoundControl
    * @api
    */
   public function getSubmittedValue(): array;
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a cleaner to this form control.
-   *
-   * @param CompoundCleaner $cleaner The cleaner.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function addCleaner(CompoundCleaner $cleaner);
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

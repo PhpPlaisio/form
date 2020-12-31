@@ -6,6 +6,7 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use SetBased\Exception\LogicException;
 
 /**
@@ -19,15 +20,15 @@ class ImageControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code for this form control.
-   *
-   * @return string
+   * @inheritdoc
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'image');
+
     return $this->generateInputElement('image');
   }
 

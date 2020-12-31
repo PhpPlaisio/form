@@ -25,10 +25,21 @@ class IntegerCleanerTest extends TestCase
             [123, 123],
             [1.0, 1],
             [1.1, 1.1],
-            [[], []],
-            [$this, $this],
             [false, 0],
             [true, 1]];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns non-strings.
+   *
+   * @return array
+   */
+  public function getNonStrings(): array
+  {
+    return [[[]],
+            [$this],
+            [fopen('php://stdin', 'r')]];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -46,6 +57,22 @@ class IntegerCleanerTest extends TestCase
 
     $clean = $cleaner->clean($value);
     self::assertSame($expected, $clean);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test a cleaning a non-string yields the item.
+   *
+   * @param mixed $value The non-string.
+   *
+   * @dataProvider getNonStrings
+   */
+  public function testNonString($value): void
+  {
+    $this->expectException(\LogicException::class);
+
+    $cleaner = new IntegerCleaner();
+    $cleaner->clean($value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

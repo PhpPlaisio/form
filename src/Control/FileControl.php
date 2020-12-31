@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -20,13 +21,17 @@ class FileControl extends SimpleControl
   /**
    * Returns the HTML code for this form control.
    *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'file');
+
     $this->attributes['type'] = 'file';
     $this->attributes['name'] = $this->submitName;
 

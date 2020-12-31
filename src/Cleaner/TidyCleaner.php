@@ -5,6 +5,7 @@ namespace Plaisio\Form\Cleaner;
 
 use Plaisio\Helper\Html;
 use SetBased\Exception\FallenException;
+use SetBased\Exception\LogicException;
 
 /**
  * Cleaner for cleaning HTML code using [HTML Tidy](http://www.html-tidy.org/).
@@ -86,16 +87,14 @@ class TidyCleaner implements Cleaner
    */
   public function clean($value)
   {
-    // Return null for empty strings.
     if ($value==='' || $value===null)
     {
       return null;
     }
 
-    // Return original value for non-strings.
     if (!is_string($value))
     {
-      return $value;
+      throw new LogicException('Expecting a string, got a %s.', gettype($value));
     }
 
     $tidyConfig = ['clean'          => false,

@@ -25,6 +25,17 @@ class HttpControlTest extends PlaisioTestCase
   use InputElementTest2;
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns hidden.
+   *
+   * @return string
+   */
+  public function getControlClass(): string
+  {
+    return 'http';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
   public function testNonHttp(): void
   {
     $_POST['test'] = 'ftp://ftp.setbased.nl';

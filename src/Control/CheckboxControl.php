@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -22,8 +23,10 @@ class CheckboxControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'checkbox');
+
     $this->attributes['type']    = 'checkbox';
     $this->attributes['name']    = $this->submitName;
     $this->attributes['checked'] = !empty($this->value);

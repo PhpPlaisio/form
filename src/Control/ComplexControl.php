@@ -6,6 +6,7 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Cleaner\CompoundCleaner;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use SetBased\Exception\LogicException;
 
 /**
@@ -238,12 +239,12 @@ class ComplexControl extends Control implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
     $ret = $this->prefix;
     foreach ($this->controls as $control)
     {
-      $ret .= $control->getHtml();
+      $ret .= $control->getHtml($walker);
     }
     $ret .= $this->postfix;
 
@@ -347,7 +348,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Prepares this form complex control for HTML code generation or loading submitted values.
    *
-   * @param PrepareWalker $walker The object for walking the control tree.
+   * @param PrepareWalker $walker The object for walking the form control tree.
    *
    * @since 1.0.0
    * @api
@@ -451,6 +452,7 @@ class ComplexControl extends Control implements CompoundControl
       {
         $valid                   = false;
         $this->invalidControls[] = $control;
+        $control->setError(true);
       }
     }
 
@@ -460,7 +462,7 @@ class ComplexControl extends Control implements CompoundControl
       foreach ($this->validators as $validator)
       {
         $valid = $validator->validate($this);
-        if ($valid!==true)
+        if (!$valid)
         {
           $invalidFormControls[] = $this;
           break;

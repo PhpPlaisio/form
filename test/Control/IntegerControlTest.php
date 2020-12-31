@@ -23,6 +23,17 @@ class IntegerControlTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns integer.
+   *
+   * @return string
+   */
+  public function getControlClass(): string
+  {
+    return 'integer';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test with illegal submitted value.
    */
   public function testInvalidSubmittedValue01(): void

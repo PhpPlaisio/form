@@ -7,7 +7,7 @@ use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Validator\Validator;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Helper\Html;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\HtmlElement;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -19,11 +19,25 @@ abstract class Control extends HtmlElement
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Class to be added to form controls with invalid values.
+   * CSS class for invalid form control.
    *
    * @var string
    */
   public static string $isErrorClass = 'is-error';
+
+  /**
+   * CSS class for mandatory form control.
+   *
+   * @var string
+   */
+  public static string $isMandatoryClass = 'is-mandatory';
+
+  /**
+   * Whether this control is erroneous.
+   *
+   * @var bool
+   */
+  protected bool $error = false;
 
   /**
    * The list of error messages associated with this form control.
@@ -78,7 +92,7 @@ abstract class Control extends HtmlElement
   /**
    * Object constructor.
    *
-   * @param string|null $name The (local) name of this form control.
+   * @param string|null $name The name of this form control.
    *
    * @since 1.0.0
    * @api
@@ -127,12 +141,14 @@ abstract class Control extends HtmlElement
   /**
    * Returns the HTML code for this form control.
    *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  abstract public function getHtml(): string;
+  abstract public function getHtml(RenderWalker $walker): string;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -180,6 +196,17 @@ abstract class Control extends HtmlElement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns whether this control is erroneous.
+   *
+   * @return bool
+   */
+  public function isError(): bool
+  {
+    return $this->error;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns true if and only if this control is a hidden control (e.g. hidden, invisible, and constant control).
    * Otherwise, returns false.
    *
@@ -218,6 +245,21 @@ abstract class Control extends HtmlElement
    * @api
    */
   abstract public function mergeValuesBase(array $values): void;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets whether this control is erroneous.
+   *
+   * @param bool $error Whether this control is erroneous.
+   *
+   * @return Control
+   */
+  public function setError(bool $error): Control
+  {
+    $this->error = $error;
+
+    return $this;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -308,7 +350,7 @@ abstract class Control extends HtmlElement
   /**
    * Loads the submitted values.
    *
-   * @param LoadWalker $walker The object for walking the control tree.
+   * @param LoadWalker $walker The object for walking the form control tree.
    *
    * @return void
    */
@@ -318,7 +360,7 @@ abstract class Control extends HtmlElement
   /**
    * Prepares this form control for HTML code generation or loading submitted values.
    *
-   * @param PrepareWalker $walker The object for walking the control tree.
+   * @param PrepareWalker $walker The object for walking the form control tree.
    *
    * @since 1.0.0
    * @api

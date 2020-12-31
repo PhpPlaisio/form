@@ -8,6 +8,7 @@ use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Cleaner\UrlCleaner;
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
+use Plaisio\Form\Walker\RenderWalker;
 
 /**
  * Class for form controls of type [input:url](https://www.w3schools.com/tags/att_input_type_url.asp).
@@ -41,8 +42,10 @@ class UrlControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'url');
+
     return $this->generateInputElement('url');
   }
 

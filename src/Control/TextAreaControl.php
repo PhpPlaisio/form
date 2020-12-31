@@ -6,6 +6,7 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Cleaner\AmbiguityCleaner;
 use Plaisio\Form\Cleaner\TrimWhitespaceCleaner;
 use Plaisio\Form\Control\Traits\LoadPlainText;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -38,8 +39,10 @@ class TextAreaControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'textarea');
+
     $this->attributes['name'] = $this->submitName;
 
     $html = $this->prefix;

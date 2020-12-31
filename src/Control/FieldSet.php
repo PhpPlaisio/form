@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Legend;
-use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 
 /**
@@ -19,17 +19,6 @@ class FieldSet extends ComplexControl
    * @var Legend|null
    */
   protected ?Legend $legend = null;
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function prepare(PrepareWalker $walker): void
-  {
-    parent::prepare($walker);
-
-    $this->addClass($walker->getModuleClass());
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -63,13 +52,19 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
     if (empty($this->controls)) return '';
 
+    $this->addClass($walker->getModuleClass());
+    if ($this->error)
+    {
+      $this->addClass(ComplexControl::$isErrorClass);
+    }
+
     $ret = $this->getHtmlStartTag();
     $ret .= $this->getHtmlLegend();
-    $ret .= parent::getHtml();
+    $ret .= parent::getHtml($walker);
     $ret .= $this->getHtmlEndTag();
 
     return $ret;

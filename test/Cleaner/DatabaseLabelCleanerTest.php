@@ -5,12 +5,28 @@ namespace Plaisio\Form\Test\Cleaner;
 
 use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Cleaner\DatabaseLabelCleaner;
+use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
 
 /**
  * Testcases for class DatabaseLabelCleaner.
  */
 class DatabaseLabelCleanerTest extends TestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use StringCleaner;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns an instance of DatabaseLabelCleaner.
+   *
+   * @return DatabaseLabelCleaner
+   */
+  public function createCleaner(): DatabaseLabelCleaner
+  {
+    return new DatabaseLabelCleaner('CMP_ID');
+  }
+
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test on empty values returns null.
@@ -21,18 +37,6 @@ class DatabaseLabelCleanerTest extends TestCase
 
     self::assertNull($cleaner->clean(null));
     self::assertNull($cleaner->clean(''));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test non-string are returned as is.
-   */
-  public function testNonString(): void
-  {
-    $cleaner = new DatabaseLabelCleaner('CMP_ID');
-
-    self::assertSame($this, $cleaner->clean($this));
-    self::assertSame([], $cleaner->clean([]));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

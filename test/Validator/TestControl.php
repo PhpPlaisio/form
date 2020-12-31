@@ -5,6 +5,7 @@ namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\RenderWalker;
 
 /**
  * Form control for testing validators.
@@ -37,7 +38,7 @@ class TestControl extends Control
   /**
    * @inheritDoc
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
     throw new \LogicException('Not implemented');
   }

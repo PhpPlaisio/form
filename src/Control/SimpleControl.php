@@ -5,7 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Formatter\Formatter;
-use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use SetBased\Exception\LogicException;
 
@@ -83,7 +83,10 @@ abstract class SimpleControl extends Control
    *
    * @var mixed
    */
-  protected $value = null;  //--------------------------------------------------------------------------------------------------------------------
+  protected $value = null;
+
+  //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -559,6 +562,23 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Adds all control classes to this form control.
+   *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   * @param string       $type   The type of this from control (not to be confused with type attribute of input
+   *                             element).
+   */
+  protected function addControlClasses(RenderWalker $walker, string $type): void
+  {
+    $this->addClasses($walker->getClasses($type));
+    if ($this->error)
+    {
+      $this->addClass(ComplexControl::$isErrorClass);
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Applies the cleaners on the submitted value.
    *
    * @param mixed $value The submitted value.
@@ -654,18 +674,6 @@ abstract class SimpleControl extends Control
   /**
    * @inheritdoc
    */
-  protected function prepare(PrepareWalker $walker): void
-  {
-    parent::prepare($walker);
-
-    $this->addClass($walker->getModuleClass());
-    $this->addClass($walker->getModuleClass().'-input');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
   protected function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
@@ -678,11 +686,6 @@ abstract class SimpleControl extends Control
         $invalidFormControls[] = $this;
         break;
       }
-    }
-
-    if (!$valid)
-    {
-      $this->addClass(self::$isErrorClass);
     }
 
     return $valid;

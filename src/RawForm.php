@@ -11,6 +11,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
 use Plaisio\Kernel\Nub;
@@ -59,6 +60,13 @@ class RawForm extends HtmlElement implements CompoundControl
   protected array $invalidControls = [];
 
   /**
+   * The CSS module class.
+   *
+   * @var string
+   */
+  protected string $moduleClass = 'frm';
+
+  /**
    * If true the form has been prepared (for executing of getting the HTML code).
    *
    * @var bool
@@ -82,13 +90,6 @@ class RawForm extends HtmlElement implements CompoundControl
    * @var array
    */
   protected array $values = [];
-
-  /**
-   * The CSS module class.
-   *
-   * @var string
-   */
-  private string $moduleClass = 'frm';
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -303,8 +304,11 @@ class RawForm extends HtmlElement implements CompoundControl
 
     $this->prepare();
 
+    $walker = new RenderWalker($this->moduleClass, null);
+    $this->addClasses($walker->getClasses());
+
     $html = $this->getHtmlStartTag();
-    $html .= $this->getHtmlBody();
+    $html .= $this->getHtmlBody($walker);
     $html .= $this->getHtmlEndTag();
 
     return $html;
@@ -566,14 +570,16 @@ class RawForm extends HtmlElement implements CompoundControl
   /**
    * Returns the inner HTML code of this form.
    *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  protected function getHtmlBody(): string
+  protected function getHtmlBody(RenderWalker $walker): string
   {
-    return $this->fieldSets->getHtml();
+    return $this->fieldSets->getHtml($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -647,7 +653,7 @@ class RawForm extends HtmlElement implements CompoundControl
   {
     if (!$this->prepared)
     {
-      $walker = new PrepareWalker('', $this->moduleClass);
+      $walker = new PrepareWalker('');
       $this->fieldSets->prepare($walker);
 
       $this->prepared = true;

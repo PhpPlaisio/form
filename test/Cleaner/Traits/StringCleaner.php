@@ -31,9 +31,10 @@ trait StringCleaner
    */
   public function testNonString($value): void
   {
+    $this->expectException(\LogicException::class);
+
     $cleaner = $this->createCleaner();
-    $clean   = $cleaner->clean($value);
-    self::assertSame($value, $clean);
+    $cleaner->clean($value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

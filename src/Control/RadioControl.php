@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use SetBased\Helper\Cast;
 
@@ -18,15 +19,15 @@ class RadioControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code for this form control.
-   *
-   * @return string
+   * @inheritdoc
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'radio');
+
     $this->attributes['type']    = 'radio';
     $this->attributes['name']    = $this->submitName;
     $this->attributes['checked'] = !empty($this->value);

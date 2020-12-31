@@ -21,6 +21,17 @@ class SilentControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns hidden.
+   *
+   * @return string
+   */
+  public function getControlClass(): string
+  {
+    return 'silent';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test a submitted value '0'.
    */
   public function test1Empty1(): void

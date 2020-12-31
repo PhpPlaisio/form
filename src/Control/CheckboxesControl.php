@@ -5,7 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
-use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
@@ -13,7 +13,7 @@ use SetBased\Helper\Cast;
 /**
  * Class for form controls of with multiple checkboxes.
  */
-class CheckboxesControl extends Control
+class CheckboxesControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   use Mutability;
@@ -90,20 +90,6 @@ class CheckboxesControl extends Control
    */
   protected ?Obfuscator $optionsObfuscator = null;
 
-  /**
-   * The values of the checkboxes.
-   *
-   * @var array
-   */
-  protected array $value = [];
-
-  /**
-   * The CSS module class of form elements.
-   *
-   * @var string
-   */
-  private string $moduleClass;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
@@ -113,6 +99,7 @@ class CheckboxesControl extends Control
     parent::__construct($name);
 
     $this->attributes['class'] = 'checkboxes';
+    $this->value               = [];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -122,8 +109,10 @@ class CheckboxesControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addControlClasses($walker, 'checkboxes');
+
     $html = $this->prefix;
     $html .= Html::generateTag('span', $this->attributes);
 
@@ -131,8 +120,8 @@ class CheckboxesControl extends Control
     {
       foreach ($this->options as $option)
       {
-        $inputAttributes = $this->inputAttributes($option);
-        $labelAttributes = $this->labelAttributes($option);
+        $inputAttributes = $this->inputAttributes($option, $walker);
+        $labelAttributes = $this->labelAttributes($option, $walker);
 
         $labelAttributes['for'] = $inputAttributes['id'];
 
@@ -189,29 +178,13 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getSubmittedValue()
-  {
-    return $this->value;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Set the values (i.e. checked or not checked) of the checkboxes of this form control.
    *
    * @param array $values the values.
    */
   public function mergeValuesBase(array $values): void
   {
-    if ($this->name==='')
-    {
-      // Nothing to do.
-    }
-    elseif (isset($values[$this->name]))
+    if (isset($values[$this->name]))
     {
       $values = &$values[$this->name];
     }
@@ -445,52 +418,14 @@ class CheckboxesControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
-   */
-  protected function prepare(PrepareWalker $walker): void
-  {
-    parent::prepare($walker);
-
-    $this->moduleClass = $walker->getModuleClass();
-    $this->addClass($this->moduleClass);
-    $this->addClass($this->moduleClass.'-checkboxes');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  protected function validateBase(array &$invalidFormControls): bool
-  {
-    $valid = true;
-
-    foreach ($this->validators as $validator)
-    {
-      $valid = $validator->validate($this);
-      if (!$valid)
-      {
-        $invalidFormControls[$this->name] = $this;
-        break;
-      }
-    }
-
-    if (!$valid)
-    {
-      $this->addClass(self::$isErrorClass);
-    }
-
-    return $valid;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the attributes for the input element.
    *
-   * @param array $option The option.
+   * @param array        $option The option.
+   * @param RenderWalker $walker The object for walking the form control tree.
    *
    * @return array
    */
-  private function inputAttributes(array $option): array
+  private function inputAttributes(array $option, RenderWalker $walker): array
   {
     $attributes = [];
 
@@ -510,9 +445,11 @@ class CheckboxesControl extends Control
       $attributes['class'] = [$attributes['class']];
     }
 
-    $attributes['type']    = 'checkbox';
-    $attributes['class'][] = $this->moduleClass;
-    $attributes['class'][] = $this->moduleClass.'-checkbox';
+    $attributes['type'] = 'checkbox';
+    foreach ($walker->getClasses('checkbox') as $class)
+    {
+      $attributes['class'][] = $class;
+    }
 
     if (!isset($attributes['id']))
     {
@@ -526,11 +463,12 @@ class CheckboxesControl extends Control
   /**
    * Returns the attributes for the label element.
    *
-   * @param array $option The option.
+   * @param array        $option The option.
+   * @param RenderWalker $walker The object for walking the form control tree.
    *
    * @return array
    */
-  private function labelAttributes(array $option): array
+  private function labelAttributes(array $option, RenderWalker $walker): array
   {
     $attributes = [];
 
@@ -550,8 +488,10 @@ class CheckboxesControl extends Control
       $attributes['class'] = [$attributes['class']];
     }
 
-    $attributes['class'][] = $this->moduleClass;
-    $attributes['class'][] = $this->moduleClass.'-checkbox';
+    foreach ($walker->getClasses('checkbox') as $class)
+    {
+      $attributes['class'][] = $class;
+    }
 
     return $attributes;
   }

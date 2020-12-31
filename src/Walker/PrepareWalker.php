@@ -10,13 +10,6 @@ class PrepareWalker
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The CSS module class of form elements.
-   *
-   * @var string
-   */
-  private string $moduleClass;
-
-  /**
    * The submit name of the control.
    *
    * @var string
@@ -27,13 +20,11 @@ class PrepareWalker
   /**
    * Object constructor.
    *
-   * @param string $submitName  The submit name of the control.
-   * @param string $moduleClass The CSS module class of form elements.
+   * @param string $submitName The submit name of the control.
    */
-  public function __construct(string $submitName, string $moduleClass)
+  public function __construct(string $submitName)
   {
-    $this->submitName  = $submitName;
-    $this->moduleClass = $moduleClass;
+    $this->submitName = $submitName;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -46,18 +37,7 @@ class PrepareWalker
    */
   public function descend(string $submitName): PrepareWalker
   {
-    return new PrepareWalker($submitName, $this->moduleClass);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the CSS module class of form elements.
-   *
-   * @return string
-   */
-  public function getModuleClass(): string
-  {
-    return $this->moduleClass;
+    return new PrepareWalker($submitName);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -69,17 +49,6 @@ class PrepareWalker
   public function getParentSubmitName(): string
   {
     return $this->submitName;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the CSS module class of form elements.
-   *
-   * @param string $moduleClass The CSS module class of form elements.
-   */
-  public function setModuleClass(string $moduleClass): void
-  {
-    $this->moduleClass = $moduleClass;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
