@@ -434,12 +434,14 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Executes a validators on the child form controls of this form complex control. If  and only if all child form
-   * controls are valid the validators of this complex control are executed.
+   * Returns whether this complex form control is valid.
+   *
+   * First all validators of the child form controls of this complex form control are executed. Only if all child form
+   * controls are valid the validators of this complex form control are executed.
    *
    * @param array $invalidFormControls A nested array of invalid form controls.
    *
-   * @return bool True if and only if all form controls are valid.
+   * @return bool
    */
   public function validateBase(array &$invalidFormControls): bool
   {

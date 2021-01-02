@@ -427,7 +427,7 @@ abstract class Control extends HtmlElement
    *
    * @param array $invalidFormControls The form controls with invalid submitted values.
    *
-   * @return bool True if and only if the submitted values are valid.
+   * @return bool
    */
   abstract protected function validateBase(array &$invalidFormControls): bool;
 
