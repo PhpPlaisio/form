@@ -46,7 +46,7 @@ class RenderWalker
    */
   public function getClasses(?string $subClass = null): array
   {
-    $classes = [];
+    $classes = [$this->moduleClass];
     if ($this->subModuleClass!==null)
     {
       $classes[] = $this->subModuleClass;

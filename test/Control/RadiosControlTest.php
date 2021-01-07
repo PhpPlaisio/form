@@ -108,8 +108,8 @@ class RadiosControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<input id="123" class="blink frm-radio" type="radio" name="traffic-light" value="O"/>', $html);
-    self::assertStringContainsString('<label class="frm-radio" for="123">Orange</label>', $html);
+    self::assertStringContainsString('<input id="123" class="blink frm frm-radio" type="radio" name="traffic-light" value="O"/>', $html);
+    self::assertStringContainsString('<label class="frm frm-radio" for="123">Orange</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -141,8 +141,8 @@ class RadiosControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<input id="123" type="radio" name="traffic-light" class="frm-radio" value="O"/>', $html);
-    self::assertStringContainsString('<label class="blink frm-radio" for="123">Orange</label>', $html);
+    self::assertStringContainsString('<input id="123" type="radio" name="traffic-light" class="frm frm-radio" value="O"/>', $html);
+    self::assertStringContainsString('<label class="blink frm frm-radio" for="123">Orange</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -161,8 +161,8 @@ class RadiosControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm-radio" for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
-    self::assertStringContainsString('<label class="frm-radio" for="1">&amp;nbsp;</label>', $html);
+    self::assertStringContainsString('<label class="frm frm-radio" for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
+    self::assertStringContainsString('<label class="frm frm-radio" for="1">&amp;nbsp;</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -182,8 +182,8 @@ class RadiosControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm-radio" for="0"><span>0</span></label>', $html);
-    self::assertStringContainsString('<label class="frm-radio" for="1"><span>1</span></label>', $html);
+    self::assertStringContainsString('<label class="frm frm-radio" for="0"><span>0</span></label>', $html);
+    self::assertStringContainsString('<label class="frm frm-radio" for="1"><span>1</span></label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

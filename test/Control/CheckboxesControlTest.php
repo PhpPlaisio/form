@@ -149,8 +149,8 @@ class CheckboxesControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<input id="123" class="blink frm-checkbox" type="checkbox" name="traffic-light[O]"/>', $html);
-    self::assertStringContainsString('<label class="frm-checkbox" for="123">Orange</label>', $html);
+    self::assertStringContainsString('<input id="123" class="blink frm frm-checkbox" type="checkbox" name="traffic-light[O]"/>', $html);
+    self::assertStringContainsString('<label class="frm frm-checkbox" for="123">Orange</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -182,8 +182,8 @@ class CheckboxesControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<input id="123" type="checkbox" class="frm-checkbox" name="traffic-light[O]"/>', $html);
-    self::assertStringContainsString('<label class="blink frm-checkbox" for="123">Orange</label>', $html);
+    self::assertStringContainsString('<input id="123" type="checkbox" class="frm frm-checkbox" name="traffic-light[O]"/>', $html);
+    self::assertStringContainsString('<label class="blink frm frm-checkbox" for="123">Orange</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -202,8 +202,8 @@ class CheckboxesControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm-checkbox" for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
-    self::assertStringContainsString('<label class="frm-checkbox" for="1">&amp;nbsp;</label>', $html);
+    self::assertStringContainsString('<label class="frm frm-checkbox" for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
+    self::assertStringContainsString('<label class="frm frm-checkbox" for="1">&amp;nbsp;</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -223,8 +223,8 @@ class CheckboxesControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm-checkbox" for="0"><span>0</span></label>', $html);
-    self::assertStringContainsString('<label class="frm-checkbox" for="1"><span>1</span></label>', $html);
+    self::assertStringContainsString('<label class="frm frm-checkbox" for="0"><span>0</span></label>', $html);
+    self::assertStringContainsString('<label class="frm frm-checkbox" for="1"><span>1</span></label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
