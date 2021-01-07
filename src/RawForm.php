@@ -24,6 +24,13 @@ class RawForm extends HtmlElement implements CompoundControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The default CSS module class for form elements.
+   *
+   * @var string
+   */
+  public static string $defaultModuleClass = 'frm';
+
+  /**
    * After a call to {@link loadSubmittedValues} holds the names of the form controls of which the value has
    * changed.
    *
@@ -64,7 +71,7 @@ class RawForm extends HtmlElement implements CompoundControl
    *
    * @var string
    */
-  protected string $moduleClass = 'frm';
+  protected string $moduleClass;
 
   /**
    * If true the form has been prepared (for executing of getting the HTML code).
@@ -103,8 +110,8 @@ class RawForm extends HtmlElement implements CompoundControl
   public function __construct(?string $name = '')
   {
     $this->attributes['method'] = 'post';
-
-    $this->fieldSets = new ComplexControl($name);
+    $this->moduleClass          = self::$defaultModuleClass;
+    $this->fieldSets            = new ComplexControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
