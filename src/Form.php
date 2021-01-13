@@ -50,7 +50,10 @@ class Form extends RawForm
     $this->addFieldSet($this->hiddenFieldSet);
 
     // Set attribute for name (used in JavaScript).
-    if ($name!=='') $this->setAttrData('name', $name);
+    if ($name!=='')
+    {
+      $this->setAttrData('name', $name);
+    }
 
     // Add hidden field for protection against CSRF.
     if ($this->csrfCheck) $this->hiddenFieldSet->addFormControl(new SilentControl('ses_csrf_token'));

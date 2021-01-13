@@ -9,8 +9,11 @@ use Plaisio\Helper\HtmlElement;
 /**
  * Class for generating [legend](http://www.w3schools.com/tags/tag_legend.asp) elements.
  */
-class Legend extends HtmlElement
+class Legend
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use HtmlElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The inner HTML snippet of this legend.

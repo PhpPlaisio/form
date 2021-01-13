@@ -7,6 +7,7 @@ use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Formatter\Formatter;
 use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\HtmlElement;
 use SetBased\Exception\LogicException;
 
 /**
@@ -26,6 +27,9 @@ use SetBased\Exception\LogicException;
  */
 abstract class SimpleControl extends Control
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use HtmlElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The label will be inserted before the HML code of this form control.
@@ -86,7 +90,6 @@ abstract class SimpleControl extends Control
   protected $value = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

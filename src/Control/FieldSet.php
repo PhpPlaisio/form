@@ -6,12 +6,16 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Legend;
 use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\HtmlElement;
 
 /**
  * Class for [fieldsets](http://www.w3schools.com/tags/tag_fieldset.asp).
  */
 class FieldSet extends ComplexControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use HtmlElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * The legend of this fieldset.

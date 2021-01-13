@@ -8,14 +8,13 @@ use Plaisio\Form\Validator\Validator;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Form\Walker\RenderWalker;
-use Plaisio\Helper\HtmlElement;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
 
 /**
  * Abstract parent class for form controls.
  */
-abstract class Control extends HtmlElement
+abstract class Control
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

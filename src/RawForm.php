@@ -20,9 +20,13 @@ use SetBased\Exception\FallenException;
 /**
  * Class for generating [form](http://www.w3schools.com/tags/tag_form.asp) elements and processing submitted data.
  */
-class RawForm extends HtmlElement implements CompoundControl
+class RawForm implements CompoundControl
 {
   //--------------------------------------------------------------------------------------------------------------------
+  use HtmlElement;
+
+  //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * The default CSS module class for form elements.
    *
