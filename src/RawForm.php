@@ -531,21 +531,6 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets CSS module class of form elements.
-   *
-   * @param string $moduleClass The CSS module class of form elements.
-   *
-   * @return $this
-   */
-  public function setModuleClass(string $moduleClass): self
-  {
-    $this->moduleClass = $moduleClass;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Sets the values of the form controls of this form. The values of form controls for which no explicit value is set
    * are set to null.
    *

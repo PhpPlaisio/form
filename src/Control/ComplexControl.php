@@ -188,7 +188,7 @@ class ComplexControl extends Control implements CompoundControl
       }
     }
 
-    if (isset($this->errorMessages))
+    if (is_array($this->errorMessages))
     {
       $ret = array_merge($ret, $this->errorMessages);
     }
