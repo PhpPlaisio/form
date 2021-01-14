@@ -5,8 +5,8 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
-use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Class for form controls of type [input:file](http://www.w3schools.com/tags/tag_input.asp) that allows a single file

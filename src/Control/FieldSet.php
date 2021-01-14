@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Legend;
-use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Class for [fieldsets](http://www.w3schools.com/tags/tag_fieldset.asp).

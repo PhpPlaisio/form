@@ -5,7 +5,7 @@ namespace Plaisio\Form\Test\Validator;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Walker\LoadWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Form control for testing validators.

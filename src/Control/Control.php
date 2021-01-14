@@ -7,7 +7,7 @@ use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Validator\Validator;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Obfuscator\Obfuscator;
 use SetBased\Helper\Cast;
 

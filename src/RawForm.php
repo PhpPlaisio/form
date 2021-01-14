@@ -11,14 +11,16 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Validator\CompoundValidator;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Kernel\Nub;
 use SetBased\Exception\FallenException;
 
 /**
  * Class for generating [form](http://www.w3schools.com/tags/tag_form.asp) elements and processing submitted data.
+ *
+ * @property-read RenderWalker $renderWalker The render walker.
  */
 class RawForm implements CompoundControl
 {
@@ -26,14 +28,6 @@ class RawForm implements CompoundControl
   use HtmlElement;
 
   //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * The default CSS module class for form elements.
-   *
-   * @var string
-   */
-  public static string $defaultModuleClass = 'frm';
-
   /**
    * After a call to {@link loadSubmittedValues} holds the names of the form controls of which the value has
    * changed.
@@ -69,13 +63,6 @@ class RawForm implements CompoundControl
    * @var array
    */
   protected array $invalidControls = [];
-
-  /**
-   * The CSS module class.
-   *
-   * @var string
-   */
-  protected string $moduleClass;
 
   /**
    * If true the form has been prepared (for executing of getting the HTML code).
@@ -114,8 +101,8 @@ class RawForm implements CompoundControl
   public function __construct(?string $name = '')
   {
     $this->attributes['method'] = 'post';
-    $this->moduleClass          = self::$defaultModuleClass;
     $this->fieldSets            = new ComplexControl($name);
+    $this->renderWalker         = new RenderWalker('frm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -315,11 +302,10 @@ class RawForm implements CompoundControl
 
     $this->prepare();
 
-    $walker = new RenderWalker($this->moduleClass, null);
-    $this->addClasses($walker->getClasses());
+    $this->addClasses($this->renderWalker->getClasses());
 
     $html = $this->getHtmlStartTag();
-    $html .= $this->getHtmlBody($walker);
+    $html .= $this->getHtmlBody();
     $html .= $this->getHtmlEndTag();
 
     return $html;
@@ -581,16 +567,14 @@ class RawForm implements CompoundControl
   /**
    * Returns the inner HTML code of this form.
    *
-   * @param RenderWalker $walker The object for walking the form control tree.
-   *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  protected function getHtmlBody(RenderWalker $walker): string
+  protected function getHtmlBody(): string
   {
-    return $this->fieldSets->getHtml($walker);
+    return $this->fieldSets->getHtml($this->renderWalker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

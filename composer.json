@@ -18,7 +18,7 @@
     "plaisio/obfuscator": "^2.0.0",
     "plaisio/request": "^0.13.0",
     "plaisio/session": "^4.0.0",
-    "setbased/exception": "^2.1.2",
+    "setbased/exception": "^2.2.0",
     "setbased/helper-cast": "^2.1.1"
   },
   "require-dev": {

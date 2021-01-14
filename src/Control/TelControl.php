@@ -7,7 +7,7 @@ use Plaisio\Form\Cleaner\AmbiguityCleaner;
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Class for form controls of type [input:tel](https://www.w3schools.com/tags/att_input_type_tel.asp).

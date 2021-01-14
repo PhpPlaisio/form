@@ -5,9 +5,9 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Cleaner\Cleaner;
 use Plaisio\Form\Formatter\Formatter;
-use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
+use Plaisio\Helper\RenderWalker;
 use SetBased\Exception\LogicException;
 
 /**

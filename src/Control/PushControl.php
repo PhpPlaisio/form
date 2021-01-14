@@ -6,7 +6,7 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\Mutability;
 use Plaisio\Form\Walker\LoadWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 use SetBased\Exception\LogicException;
 use SetBased\Helper\Cast;
 

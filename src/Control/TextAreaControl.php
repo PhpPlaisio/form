@@ -6,8 +6,8 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Cleaner\AmbiguityCleaner;
 use Plaisio\Form\Cleaner\TrimWhitespaceCleaner;
 use Plaisio\Form\Control\Traits\LoadPlainText;
-use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Class for form controls of type [textarea](http://www.w3schools.com/tags/tag_textarea.asp).

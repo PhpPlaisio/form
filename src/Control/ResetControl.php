@@ -5,7 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Walker\LoadWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Class for form controls of type [input:reset](http://www.w3schools.com/tags/tag_input.asp).

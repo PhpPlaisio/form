@@ -9,7 +9,7 @@ use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
 use Plaisio\Form\Validator\DateValidator;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Class for form controls of type [input:date](http://www.w3schools.com/tags/tag_input.asp).

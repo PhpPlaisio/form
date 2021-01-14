@@ -6,7 +6,7 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Cleaner\CompoundCleaner;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 use SetBased\Exception\LogicException;
 
 /**

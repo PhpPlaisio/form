@@ -9,7 +9,7 @@ use Plaisio\Form\Control\RadiosControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Test\TestControl;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Unit tests for class RadiosControl.

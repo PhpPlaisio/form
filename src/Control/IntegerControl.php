@@ -8,7 +8,7 @@ use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
 use Plaisio\Form\Validator\IntegerValidator;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 use SetBased\Helper\Cast;
 
 /**

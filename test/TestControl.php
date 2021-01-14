@@ -7,7 +7,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Control for setting the submit name of another control.
