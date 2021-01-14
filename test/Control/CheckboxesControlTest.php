@@ -147,10 +147,19 @@ class CheckboxesControlTest extends PlaisioTestCase
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->getHtml(new RenderWalker('frm'));
+    $expected = <<< EOL
+<span class="frm frm-checkboxes">
+<label class="frm frm-checkbox">
+<input type="checkbox" class="frm frm-checkbox" name="traffic-light[R]"/>Red</label>
+<label class="frm frm-checkbox">
+<input id="123" class="blink frm frm-checkbox" type="checkbox" name="traffic-light[O]"/>Orange</label>
+<label class="frm frm-checkbox">
+<input type="checkbox" class="frm frm-checkbox" name="traffic-light[G]"/>Green</label>
+</span>
+EOL;
 
-    self::assertStringContainsString('<input id="123" class="blink frm frm-checkbox" type="checkbox" name="traffic-light[O]"/>', $html);
-    self::assertStringContainsString('<label class="frm frm-checkbox" for="123">Orange</label>', $html);
+    self::assertSame(str_replace(PHP_EOL, '', $expected), $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -180,10 +189,19 @@ class CheckboxesControlTest extends PlaisioTestCase
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->getHtml(new RenderWalker('frm'));
+    $expected = <<< EOL
+<span class="frm frm-checkboxes">
+<label class="frm frm-checkbox">
+<input type="checkbox" class="frm frm-checkbox" name="traffic-light[R]"/>Red</label>
+<label class="blink frm frm-checkbox">
+<input id="123" type="checkbox" class="frm frm-checkbox" name="traffic-light[O]"/>Orange</label>
+<label class="frm frm-checkbox">
+<input type="checkbox" class="frm frm-checkbox" name="traffic-light[G]"/>Green</label>
+</span>
+EOL;
 
-    self::assertStringContainsString('<input id="123" type="checkbox" class="frm frm-checkbox" name="traffic-light[O]"/>', $html);
-    self::assertStringContainsString('<label class="blink frm frm-checkbox" for="123">Orange</label>', $html);
+    self::assertSame(str_replace(PHP_EOL, '', $expected), $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -202,8 +220,8 @@ class CheckboxesControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm frm-checkbox" for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
-    self::assertStringContainsString('<label class="frm frm-checkbox" for="1">&amp;nbsp;</label>', $html);
+    self::assertStringContainsString('&lt;&amp;&#039;;&quot;&gt;', $html);
+    self::assertStringContainsString('&amp;nbsp;', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -223,8 +241,8 @@ class CheckboxesControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm frm-checkbox" for="0"><span>0</span></label>', $html);
-    self::assertStringContainsString('<label class="frm frm-checkbox" for="1"><span>1</span></label>', $html);
+    self::assertStringContainsString('<span>0</span>', $html);
+    self::assertStringContainsString('<span>1</span>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -291,19 +309,19 @@ class CheckboxesControlTest extends PlaisioTestCase
     $xpath = new \DOMXpath($doc);
 
     // Asset that the checkboxes are set or unset according to the $values.
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[1]' and @type='checkbox' and not(@checked)]");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[1]' and @type='checkbox' and not(@checked)]");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[2]' and @type='checkbox' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[2]' and @type='checkbox' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[3]' and @type='checkbox' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[3]' and @type='checkbox' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[4]' and @type='checkbox' and not(@checked)]");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[4]' and @type='checkbox' and not(@checked)]");
     self::assertEquals(1, $list->length);
   }
 
@@ -345,19 +363,19 @@ class CheckboxesControlTest extends PlaisioTestCase
     $xpath = new \DOMXpath($doc);
 
     // Asset that the checkboxes are set or unset according to the $values.
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[0]' and @type='checkbox' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[1]' and @type='checkbox' and not(@checked)]");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[1]' and @type='checkbox' and not(@checked)]");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[2]' and @type='checkbox' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[2]' and @type='checkbox' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[3]' and @type='checkbox' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[3]' and @type='checkbox' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
-    $list = $xpath->query("/form/fieldset/span/input[@name='cnt_id[4]' and @type='checkbox' and not(@checked)]");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='cnt_id[4]' and @type='checkbox' and not(@checked)]");
     self::assertEquals(1, $list->length);
   }
 

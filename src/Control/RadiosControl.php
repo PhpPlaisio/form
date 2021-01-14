@@ -56,20 +56,6 @@ class RadiosControl extends SimpleControl
   protected string $labelKey;
 
   /**
-   * The HTML snippet appended after each label for the radio buttons.
-   *
-   * @var string
-   */
-  protected string $labelPostfix = '';
-
-  /**
-   * The HTML snippet inserted before each label for the radio buttons.
-   *
-   * @var string
-   */
-  protected string $labelPrefix = '';
-
-  /**
    * The data for the radio buttons.
    *
    * @var array[]|null
@@ -113,8 +99,6 @@ class RadiosControl extends SimpleControl
         $inputAttributes = $this->inputAttributes($option, $walker);
         $labelAttributes = $this->labelAttributes($option, $walker);
 
-        $labelAttributes['for'] = $inputAttributes['id'];
-
         $key         = $option[$this->keyKey];
         $keyAsString = Cast::toManString($key, '');
         $value       = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
@@ -122,11 +106,9 @@ class RadiosControl extends SimpleControl
         $inputAttributes['value']   = $value;
         $inputAttributes['checked'] = ($valueAsString===$keyAsString);
 
-        $html .= Html::generateVoidElement('input', $inputAttributes);
-
-        $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label', $labelAttributes, $option[$this->labelKey], $this->labelIsHtml);
-        $html .= $this->labelPostfix;
+        $inner = Html::generateVoidElement('input', $inputAttributes);
+        $inner .= ($this->labelIsHtml) ? $option[$this->labelKey] : Html::txt2Html($option[$this->labelKey]);
+        $html  .= Html::generateElement('label', $labelAttributes, $inner, true);
       }
     }
 
@@ -193,39 +175,6 @@ class RadiosControl extends SimpleControl
   public function setLabelIsHtml(bool $labelIsHtml = true): self
   {
     $this->labelIsHtml = $labelIsHtml;
-
-    return $this;
-  }
-
-//--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the label postfix., e.g. the HTML code that is appended after the HTML code of each label of the checkboxes.
-   *
-   * @param string|null $htmlSnippet The label postfix.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function setLabelPostfix(?string $htmlSnippet): self
-  {
-    $this->labelPostfix = $htmlSnippet ?? '';
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the label prefix, e.g. the HTML code that is inserted before the HTML code of each label of the checkboxes.
-   *
-   * @param string|null $htmlSnippet The label prefix.
-   *
-   * @return $this
-   */
-  public function setLabelPrefix(?string $htmlSnippet): self
-  {
-    $this->labelPrefix = $htmlSnippet ?? '';
 
     return $this;
   }
@@ -364,11 +313,6 @@ class RadiosControl extends SimpleControl
     foreach ($walker->getClasses('radio') as $class)
     {
       $attributes['class'][] = $class;
-    }
-
-    if (!isset($attributes['id']))
-    {
-      $attributes['id'] = Html::getAutoId();
     }
 
     return $attributes;

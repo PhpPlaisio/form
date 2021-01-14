@@ -19,6 +19,7 @@ class CheckboxesControl extends SimpleControl
   use Mutability;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * The key in $options holding the checked flag for the checkboxes.
    *
@@ -63,20 +64,6 @@ class CheckboxesControl extends SimpleControl
   protected string $labelKey;
 
   /**
-   * The HTML snippet appended after each label for the checkboxes.
-   *
-   * @var string
-   */
-  protected string $labelPostfix = '';
-
-  /**
-   * The HTML snippet inserted before each label for the checkboxes.
-   *
-   * @var string
-   */
-  protected string $labelPrefix = '';
-
-  /**
    * The options of this select box.
    *
    * @var array[]|null
@@ -98,8 +85,7 @@ class CheckboxesControl extends SimpleControl
   {
     parent::__construct($name);
 
-    $this->attributes['class'] = 'checkboxes';
-    $this->value               = [];
+    $this->value = [];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -123,8 +109,6 @@ class CheckboxesControl extends SimpleControl
         $inputAttributes = $this->inputAttributes($option, $walker);
         $labelAttributes = $this->labelAttributes($option, $walker);
 
-        $labelAttributes['for'] = $inputAttributes['id'];
-
         // Get the (database) key of the option.
         $key = $option[$this->keyKey];
 
@@ -134,11 +118,9 @@ class CheckboxesControl extends SimpleControl
         $inputAttributes['name']    = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
         $inputAttributes['checked'] = (!empty($option[$this->checkedKey]));
 
-        $html .= Html::generateVoidElement('input', $inputAttributes);
-
-        $html .= $this->labelPrefix;
-        $html .= Html::generateElement('label', $labelAttributes, $option[$this->labelKey], $this->labelIsHtml);
-        $html .= $this->labelPostfix;
+        $inner = Html::generateVoidElement('input', $inputAttributes);
+        $inner .= ($this->labelIsHtml) ? $option[$this->labelKey] : Html::txt2Html($option[$this->labelKey]);
+        $html  .= Html::generateElement('label', $labelAttributes, $inner, true);
       }
     }
 
@@ -261,42 +243,6 @@ class CheckboxesControl extends SimpleControl
   public function setLabelIsHtml(bool $labelIsHtml = true): self
   {
     $this->labelIsHtml = $labelIsHtml;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the label prefix, e.g. the HTML code that is inserted before the HTML code of each label of the checkboxes.
-   *
-   * @param string $htmlSnippet The label prefix.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function setLabelPostfix(string $htmlSnippet): self
-  {
-    $this->labelPostfix = $htmlSnippet;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the label postfix., e.g. the HTML code that is appended after the HTML code of each label of the checkboxes.
-   *
-   * @param string $htmlSnippet The label postfix.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function setLabelPrefix(string $htmlSnippet): self
-  {
-    $this->labelPrefix = $htmlSnippet;
 
     return $this;
   }
@@ -449,11 +395,6 @@ class CheckboxesControl extends SimpleControl
     foreach ($walker->getClasses('checkbox') as $class)
     {
       $attributes['class'][] = $class;
-    }
-
-    if (!isset($attributes['id']))
-    {
-      $attributes['id'] = Html::getAutoId();
     }
 
     return $attributes;

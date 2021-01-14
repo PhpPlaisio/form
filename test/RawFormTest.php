@@ -269,15 +269,15 @@ class RawFormTest extends PlaisioTestCase
     self::assertEquals(1, $list->length);
 
     // name[options][1] must be unchanged.
-    $list = $xpath->query("/form/fieldset/span/input[@name='name[options][1]' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='name[options][1]' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
     // name[options][2] must be changed.
-    $list = $xpath->query("/form/fieldset/span/input[@name='name[options][2]' and @checked='checked']");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='name[options][2]' and @checked='checked']");
     self::assertEquals(1, $list->length);
 
     // name[options][3] must be changed.
-    $list = $xpath->query("/form/fieldset/span/input[@name='name[options][3]' and not(@checked)]");
+    $list = $xpath->query("/form/fieldset/span/label/input[@name='name[options][3]' and not(@checked)]");
     self::assertEquals(1, $list->length);
   }
 

@@ -107,9 +107,18 @@ class RadiosControlTest extends PlaisioTestCase
     TestControl::fixSubmitName($input);
 
     $html = $input->getHtml(new RenderWalker('frm'));
+    $expected = <<< EOL
+<span class="frm frm-radios">
+<label class="frm frm-radio">
+<input type="radio" name="traffic-light" class="frm frm-radio" value="R"/>Red</label>
+<label class="frm frm-radio">
+<input id="123" class="blink frm frm-radio" type="radio" name="traffic-light" value="O"/>Orange</label>
+<label class="frm frm-radio">
+<input type="radio" name="traffic-light" class="frm frm-radio" value="G"/>Green</label>
+</span>
+EOL;
 
-    self::assertStringContainsString('<input id="123" class="blink frm frm-radio" type="radio" name="traffic-light" value="O"/>', $html);
-    self::assertStringContainsString('<label class="frm frm-radio" for="123">Orange</label>', $html);
+    self::assertSame(str_replace(PHP_EOL, '', $expected), $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -140,9 +149,18 @@ class RadiosControlTest extends PlaisioTestCase
     TestControl::fixSubmitName($input);
 
     $html = $input->getHtml(new RenderWalker('frm'));
+    $expected = <<< EOL
+<span class="frm frm-radios">
+<label class="frm frm-radio">
+<input type="radio" name="traffic-light" class="frm frm-radio" value="R"/>Red</label>
+<label class="blink frm frm-radio">
+<input id="123" type="radio" name="traffic-light" class="frm frm-radio" value="O"/>Orange</label>
+<label class="frm frm-radio">
+<input type="radio" name="traffic-light" class="frm frm-radio" value="G"/>Green</label>
+</span>
+EOL;
 
-    self::assertStringContainsString('<input id="123" type="radio" name="traffic-light" class="frm frm-radio" value="O"/>', $html);
-    self::assertStringContainsString('<label class="blink frm frm-radio" for="123">Orange</label>', $html);
+    self::assertSame(str_replace(PHP_EOL, '', $expected), $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -161,8 +179,8 @@ class RadiosControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm frm-radio" for="0">&lt;&amp;&#039;;&quot;&gt;</label>', $html);
-    self::assertStringContainsString('<label class="frm frm-radio" for="1">&amp;nbsp;</label>', $html);
+    self::assertStringContainsString('>&lt;&amp;&#039;;&quot;&gt;</label>', $html);
+    self::assertStringContainsString('>&amp;nbsp;</label>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -182,8 +200,8 @@ class RadiosControlTest extends PlaisioTestCase
 
     $html = $input->getHtml(new RenderWalker('frm'));
 
-    self::assertStringContainsString('<label class="frm frm-radio" for="0"><span>0</span></label>', $html);
-    self::assertStringContainsString('<label class="frm frm-radio" for="1"><span>1</span></label>', $html);
+    self::assertStringContainsString('<span>0</span>', $html);
+    self::assertStringContainsString('<span>1</span>', $html);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -265,7 +283,7 @@ class RadiosControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * A white listed value must be valid (even whens string and integers are mixed).
+   * A white listed value must be valid (even when string and integers are mixed).
    */
   public function testValid2(): void
   {
