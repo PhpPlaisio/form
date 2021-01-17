@@ -121,6 +121,25 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the HTML of the form control for autonomous use, i.e outside a from.
+   *
+   * @param string      $moduleClass    The CSS module class.
+   * @param string|null $subModuleClass The CSS sub-module class.
+   * @param string      $submitName     The submit name of the parent control.
+   *
+   * @return string
+   */
+  public function getAutonomousHtml(string $moduleClass = '',
+                                    ?string $subModuleClass = null,
+                                    string $submitName = ''): string
+  {
+    $this->prepare(new PrepareWalker($submitName));
+
+    return $this->getHtml(new RenderWalker($moduleClass, $subModuleClass));
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the the error messages of this form control.
    *
    * @param bool $recursive
