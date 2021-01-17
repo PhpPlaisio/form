@@ -109,12 +109,12 @@ class RadiosControlTest extends PlaisioTestCase
     $html = $input->getHtml(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm frm-radios">
-<label class="frm frm-radio">
-<input type="radio" name="traffic-light" class="frm frm-radio" value="R"/>Red</label>
-<label class="frm frm-radio">
+<label class="frm frm-radio" for="plaisio-id-18">
+<input type="radio" name="traffic-light" class="frm frm-radio" id="plaisio-id-18" value="R"/>Red</label>
+<label class="frm frm-radio" for="123">
 <input id="123" class="blink frm frm-radio" type="radio" name="traffic-light" value="O"/>Orange</label>
-<label class="frm frm-radio">
-<input type="radio" name="traffic-light" class="frm frm-radio" value="G"/>Green</label>
+<label class="frm frm-radio" for="plaisio-id-19">
+<input type="radio" name="traffic-light" class="frm frm-radio" id="plaisio-id-19" value="G"/>Green</label>
 </span>
 EOL;
 
@@ -151,12 +151,12 @@ EOL;
     $html = $input->getHtml(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm frm-radios">
-<label class="frm frm-radio">
-<input type="radio" name="traffic-light" class="frm frm-radio" value="R"/>Red</label>
-<label class="blink frm frm-radio">
+<label class="frm frm-radio" for="plaisio-id-20">
+<input type="radio" name="traffic-light" class="frm frm-radio" id="plaisio-id-20" value="R"/>Red</label>
+<label class="blink frm frm-radio" for="123">
 <input id="123" type="radio" name="traffic-light" class="frm frm-radio" value="O"/>Orange</label>
-<label class="frm frm-radio">
-<input type="radio" name="traffic-light" class="frm frm-radio" value="G"/>Green</label>
+<label class="frm frm-radio" for="plaisio-id-21">
+<input type="radio" name="traffic-light" class="frm frm-radio" id="plaisio-id-21" value="G"/>Green</label>
 </span>
 EOL;
 

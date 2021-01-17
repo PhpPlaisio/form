@@ -99,6 +99,8 @@ class RadiosControl extends SimpleControl
         $inputAttributes = $this->inputAttributes($option, $walker);
         $labelAttributes = $this->labelAttributes($option, $walker);
 
+        $labelAttributes['for'] = $inputAttributes['id'];
+
         $key         = $option[$this->keyKey];
         $keyAsString = Cast::toManString($key, '');
         $value       = ($this->optionsObfuscator) ? $this->optionsObfuscator->encode(Cast::toOptInt($key)) : $key;
@@ -313,6 +315,11 @@ class RadiosControl extends SimpleControl
     foreach ($walker->getClasses('radio') as $class)
     {
       $attributes['class'][] = $class;
+    }
+
+    if (!isset($attributes['id']))
+    {
+      $attributes['id'] = Html::getAutoId();
     }
 
     return $attributes;

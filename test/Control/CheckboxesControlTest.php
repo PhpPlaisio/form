@@ -150,12 +150,12 @@ class CheckboxesControlTest extends PlaisioTestCase
     $html     = $input->getHtml(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm frm-checkboxes">
-<label class="frm frm-checkbox">
-<input type="checkbox" class="frm frm-checkbox" name="traffic-light[R]"/>Red</label>
-<label class="frm frm-checkbox">
+<label class="frm frm-checkbox" for="plaisio-id-1">
+<input type="checkbox" class="frm frm-checkbox" id="plaisio-id-1" name="traffic-light[R]"/>Red</label>
+<label class="frm frm-checkbox" for="123">
 <input id="123" class="blink frm frm-checkbox" type="checkbox" name="traffic-light[O]"/>Orange</label>
-<label class="frm frm-checkbox">
-<input type="checkbox" class="frm frm-checkbox" name="traffic-light[G]"/>Green</label>
+<label class="frm frm-checkbox" for="plaisio-id-2">
+<input type="checkbox" class="frm frm-checkbox" id="plaisio-id-2" name="traffic-light[G]"/>Green</label>
 </span>
 EOL;
 
@@ -192,12 +192,12 @@ EOL;
     $html     = $input->getHtml(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm frm-checkboxes">
-<label class="frm frm-checkbox">
-<input type="checkbox" class="frm frm-checkbox" name="traffic-light[R]"/>Red</label>
-<label class="blink frm frm-checkbox">
+<label class="frm frm-checkbox" for="plaisio-id-3">
+<input type="checkbox" class="frm frm-checkbox" id="plaisio-id-3" name="traffic-light[R]"/>Red</label>
+<label class="blink frm frm-checkbox" for="123">
 <input id="123" type="checkbox" class="frm frm-checkbox" name="traffic-light[O]"/>Orange</label>
-<label class="frm frm-checkbox">
-<input type="checkbox" class="frm frm-checkbox" name="traffic-light[G]"/>Green</label>
+<label class="frm frm-checkbox" for="plaisio-id-4">
+<input type="checkbox" class="frm frm-checkbox" id="plaisio-id-4" name="traffic-light[G]"/>Green</label>
 </span>
 EOL;
 

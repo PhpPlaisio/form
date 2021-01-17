@@ -109,6 +109,8 @@ class CheckboxesControl extends SimpleControl
         $inputAttributes = $this->inputAttributes($option, $walker);
         $labelAttributes = $this->labelAttributes($option, $walker);
 
+        $labelAttributes['for'] = $inputAttributes['id'];
+
         // Get the (database) key of the option.
         $key = $option[$this->keyKey];
 
@@ -395,6 +397,11 @@ class CheckboxesControl extends SimpleControl
     foreach ($walker->getClasses('checkbox') as $class)
     {
       $attributes['class'][] = $class;
+    }
+
+    if (!isset($attributes['id']))
+    {
+      $attributes['id'] = Html::getAutoId();
     }
 
     return $attributes;
