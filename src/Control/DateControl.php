@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Cleaner\AmbiguityCleaner;
+use Plaisio\Form\Cleaner\DateCleaner;
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Control\Traits\InputElement;
 use Plaisio\Form\Control\Traits\LoadPlainText;
+use Plaisio\Form\Formatter\DateFormatter;
 use Plaisio\Form\Validator\DateValidator;
 use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\RenderWalker;
@@ -41,6 +43,8 @@ class DateControl extends SimpleControl
 
     $this->addCleaner(AmbiguityCleaner::get());
     $this->addCleaner(PruneWhitespaceCleaner::get());
+    $this->addCleaner(new DateCleaner());
+    $this->setFormatter(new DateFormatter());
     $this->addValidator(new DateValidator());
   }
 
