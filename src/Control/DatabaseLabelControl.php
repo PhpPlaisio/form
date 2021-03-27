@@ -31,11 +31,11 @@ class DatabaseLabelControl extends TextControl
       throw new LogicException('Prefix %s does not match pattern %s.', $prefix, $pattern);
     }
 
-    $this->setAttrMaxLength($maxLength);
-    $this->setAttrPlaceHolder($prefix);
-    $this->addCleaner(new DatabaseLabelCleaner($prefix));
-    $this->addValidator(new LengthValidator(0, $maxLength));
-    $this->addValidator(new DatabaseLabelValidator($prefix));
+    $this->setAttrMaxLength($maxLength)
+         ->setAttrPlaceHolder($prefix)
+         ->addCleaner(new DatabaseLabelCleaner($prefix))
+         ->addValidator(new LengthValidator(0, $maxLength))
+         ->addValidator(new DatabaseLabelValidator($prefix));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

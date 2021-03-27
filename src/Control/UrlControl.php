@@ -30,9 +30,9 @@ class UrlControl extends SimpleControl
   {
     parent::__construct($name);
 
-    $this->addCleaner(AmbiguityCleaner::get());
-    $this->addCleaner(PruneWhitespaceCleaner::get());
-    $this->addCleaner(UrlCleaner::get());
+    $this->addCleaner(AmbiguityCleaner::get())
+         ->addCleaner(PruneWhitespaceCleaner::get())
+         ->addCleaner(UrlCleaner::get());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -29,8 +29,8 @@ class PasswordControl extends SimpleControl
   {
     parent::__construct($name);
 
-    $this->addCleaner(AmbiguityCleaner::get());
-    $this->addCleaner(PruneWhitespaceCleaner::get());
+    $this->addCleaner(AmbiguityCleaner::get())
+         ->addCleaner(PruneWhitespaceCleaner::get());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -41,11 +41,11 @@ class DateControl extends SimpleControl
   {
     parent::__construct($name);
 
-    $this->addCleaner(AmbiguityCleaner::get());
-    $this->addCleaner(PruneWhitespaceCleaner::get());
-    $this->addCleaner(new DateCleaner());
-    $this->setFormatter(new DateFormatter());
-    $this->addValidator(new DateValidator());
+    $this->addCleaner(AmbiguityCleaner::get())
+         ->addCleaner(PruneWhitespaceCleaner::get())
+         ->addCleaner(new DateCleaner())
+         ->setFormatter(new DateFormatter())
+         ->addValidator(new DateValidator());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

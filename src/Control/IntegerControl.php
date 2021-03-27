@@ -32,8 +32,8 @@ class IntegerControl extends SimpleControl
   {
     parent::__construct($name);
 
-    $this->addCleaner(IntegerCleaner::get());
-    $this->addValidator(new IntegerValidator());
+    $this->addCleaner(IntegerCleaner::get())
+         ->addValidator(new IntegerValidator());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -103,8 +103,8 @@ class IntegerControl extends SimpleControl
     {
       if (is_a($validator, IntegerValidator::class))
       {
-        $validator->setMinValue($this->getAttribute('min'));
-        $validator->setMaxValue($this->getAttribute('max'));
+        $validator->setMinValue($this->getAttribute('min'))
+                  ->setMaxValue($this->getAttribute('max'));
       }
     }
   }

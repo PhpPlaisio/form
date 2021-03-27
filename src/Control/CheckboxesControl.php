@@ -19,7 +19,6 @@ class CheckboxesControl extends SimpleControl
   use Mutability;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * The key in $options holding the checked flag for the checkboxes.
    *

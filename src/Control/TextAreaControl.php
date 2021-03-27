@@ -28,8 +28,8 @@ class TextAreaControl extends SimpleControl
   {
     parent::__construct($name);
 
-    $this->addCleaner(AmbiguityCleaner::get());
-    $this->addCleaner(TrimWhitespaceCleaner::get());
+    $this->addCleaner(AmbiguityCleaner::get())
+         ->addCleaner(TrimWhitespaceCleaner::get());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -32,10 +32,10 @@ class HttpControl extends SimpleControl
   {
     parent::__construct($name);
 
-    $this->addCleaner(AmbiguityCleaner::get());
-    $this->addCleaner(PruneWhitespaceCleaner::get());
-    $this->addCleaner(UrlCleaner::get());
-    $this->addValidator(new HttpValidator());
+    $this->addCleaner(AmbiguityCleaner::get())
+         ->addCleaner(PruneWhitespaceCleaner::get())
+         ->addCleaner(UrlCleaner::get())
+         ->addValidator(new HttpValidator());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
