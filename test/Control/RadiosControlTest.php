@@ -18,6 +18,23 @@ class RadiosControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns empty values
+   *
+   * @return array
+   */
+  public function getEmptyValues(): array
+  {
+    $cases = [];
+
+    $cases[] = ['value' => 0];
+    $cases[] = ['value' => '0'];
+    $cases[] = ['value' => ' '];
+
+    return $cases;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test cases for setValue.
    *
    * @return array[]
@@ -106,7 +123,7 @@ class RadiosControlTest extends PlaisioTestCase
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->getHtml(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm frm-radios">
 <label class="frm frm-radio" for="plaisio-id-18">
@@ -148,7 +165,7 @@ EOL;
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->getHtml(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm frm-radios">
 <label class="frm frm-radio" for="plaisio-id-20">
@@ -334,6 +351,42 @@ EOL;
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test labels are casted to strings.
+   *
+   * @param mixed $empty The empty value.
+   *
+   * @dataProvider getEmptyValues
+   */
+  public function testWithEmptyValue($empty): void
+  {
+    $_POST['day_id'] = $empty;
+
+    $days[] = ['day_id' => $empty, 'days' => '-'];
+    $days[] = ['day_id' => '1', 'days' => '1'];
+    $days[] = ['day_id' => '2', 'days' => '2'];
+
+    $form     = new RawForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new RadiosControl('day_id');
+    $input->setOptions($days, 'day_id', 'days');
+    $fieldset->addFormControl($input);
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
+    $values = $form->getValues();
+
+    self::assertArrayHasKey('day_id', $values);
+    self::assertSame($empty, $values['day_id']);
+    self::assertArrayHasKey('day_id', $form->getChangedControls());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test labels are casted to strings.
    */
   public function testWithNumericValues(): void
   {
@@ -356,7 +409,7 @@ EOL;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Setups a form with a select form control.
+   * Setups a form with a radios form control.
    */
   private function setupForm1(): RawForm
   {
@@ -383,7 +436,7 @@ EOL;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Setups a form with a select form control. Difference between this function
+   * Setups a form with a radios form control. Difference between this function
    * and SetupForm1 are the cnt_id are integers.
    */
   private function setupForm2(): RawForm
@@ -407,6 +460,7 @@ EOL;
 
     return $form;
   }
-
   //--------------------------------------------------------------------------------------------------------------------
 }
+
+//----------------------------------------------------------------------------------------------------------------------

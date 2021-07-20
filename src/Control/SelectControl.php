@@ -218,15 +218,15 @@ class SelectControl extends SimpleControl
     }
     else
     {
-      $submitKey = $this->submitKey();
-
       // Normalize current value as a string.
       $valueAsString = Cast::toManString($this->value, '');
 
-      if ($walker->getSubmittedValue($submitKey))
+      $submitKey      = $this->submitKey();
+      $submittedValue = $walker->getSubmittedValue($submitKey);
+      if ($submittedValue!==null)
       {
         // Normalize the submitted value as a string.
-        $newValueAsString = Cast::toManString($walker->getSubmittedValue($submitKey), '');
+        $newValueAsString = Cast::toManString($submittedValue, '');
 
         if ($this->emptyOption!==null && $newValueAsString===$this->emptyOption)
         {

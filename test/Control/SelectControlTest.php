@@ -16,6 +16,23 @@ class SelectControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns empty values
+   *
+   * @return array
+   */
+  public function getEmptyValues(): array
+  {
+    $cases = [];
+
+    $cases[] = ['value' => 0];
+    $cases[] = ['value' => '0'];
+    $cases[] = ['value' => ' '];
+
+    return $cases;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test cases for setValue.
    *
    * @return array[]
@@ -346,6 +363,42 @@ class SelectControlTest extends PlaisioTestCase
     self::assertArrayHasKey('cnt_id', $values);
     self::assertNull($values['cnt_id']);
     self::assertArrayHasKey('cnt_id', $changed);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test labels are casted to strings.
+   *
+   * @param mixed $empty The empty value.
+   *
+   * @dataProvider getEmptyValues
+   */
+  public function testWithEmptyValue($empty): void
+  {
+    $_POST['day_id'] = $empty;
+
+    $days[] = ['day_id' => $empty, 'days' => '-'];
+    $days[] = ['day_id' => '1', 'days' => '1'];
+    $days[] = ['day_id' => '2', 'days' => '2'];
+
+    $form     = new RawForm();
+    $fieldset = new FieldSet();
+    $form->addFieldSet($fieldset);
+
+    $input = new SelectControl('day_id');
+    $input->setOptions($days, 'day_id', 'days');
+    $fieldset->addFormControl($input);
+
+    $input = new ForceSubmitControl('submit', true);
+    $input->setMethod('handleSubmit');
+    $fieldset->addFormControl($input);
+
+    $form->execute();
+    $values = $form->getValues();
+
+    self::assertArrayHasKey('day_id', $values);
+    self::assertSame($empty, $values['day_id']);
+    self::assertArrayHasKey('day_id', $form->getChangedControls());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
