@@ -65,7 +65,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Adds a form control to this complex form control.
    *
-   * @param Control $control The from control added.
+   * @param Control $control The form control added.
    *
    * @return $this
    *
@@ -323,8 +323,8 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
-   * value is set are not affected.
+   * Sets the values of the form controls of this complex control. The values of the form controls for which no explicit
+   * value are set are not affected.
    *
    * @param array|null $values The values as a nested array.
    */
@@ -395,8 +395,8 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the form controls of this complex control. The values of form controls for which no explicit
-   * value is set are set to null.
+   * Sets the values of the form controls of this complex control. The values of the form controls for which no explicit
+   * value are set will be set to null.
    *
    * @param array|null $values The values as a nested array.
    *
