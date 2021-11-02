@@ -81,11 +81,11 @@ class UrlControlTest extends PlaisioTestCase
   /**
    * Returns a valid initial value.
    *
-   * @return mixed
+   * @return string
    */
-  protected function getValidInitialValue()
+  protected function getValidInitialValue(): string
   {
-    return 'http://www.google.com/';
+    return 'https://www.google.com/';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

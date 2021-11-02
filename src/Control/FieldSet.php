@@ -18,38 +18,28 @@ class FieldSet extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The additional CSS classes of this fieldset.
+   *
+   * @var string|array|null
+   */
+  private $additionalClasses = null;
+
+  /**
    * The legend of this fieldset.
    *
    * @var Legend|null
    */
-  protected ?Legend $legend = null;
+  private ?Legend $legend = null;
 
-  //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates a legend for this fieldset.
+   * The CSS subclasses of this fieldset.
    *
-   * @param string $type The class name of the legend.
-   *
-   * @return Legend
+   * @var string|array|null
    */
-  public function createLegend($type = 'legend')
-  {
-    switch ($type)
-    {
-      case 'legend':
-        $tmp = new Legend();
-        break;
-
-      default:
-        $tmp = new $type();
-    }
-
-    $this->legend = $tmp;
-
-    return $tmp;
-  }
+  private $subClasses = 'fieldset';
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    *
@@ -60,18 +50,72 @@ class FieldSet extends ComplexControl
   {
     if (empty($this->controls)) return '';
 
-    $this->addClass($walker->getModuleClass());
+    $this->addClasses($walker->getClasses($this->subClasses, $this->additionalClasses));
     if ($this->error)
     {
       $this->addClass(ComplexControl::$isErrorClass);
     }
 
     $ret = $this->getHtmlStartTag();
-    $ret .= $this->getHtmlLegend();
+    $ret .= $this->getHtmlLegend($walker);
     $ret .= parent::getHtml($walker);
     $ret .= $this->getHtmlEndTag();
 
     return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the additional CSS classes.
+   *
+   * @param array|string|null $additionalClasses The additional CSS classes.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setAdditionalClasses($additionalClasses): FieldSet
+  {
+    $this->additionalClasses = $additionalClasses;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the legend of this fieldset.
+   *
+   * @param Legend|null $legend The legend.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setLegend(?Legend $legend): FieldSet
+  {
+    $this->legend = $legend;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the CSS subclasses.
+   *
+   * @param array|string|null $subClasses The CSS subclasses.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setSubClasses($subClasses): FieldSet
+  {
+    $this->subClasses = $subClasses;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -97,18 +141,9 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  protected function getHtmlLegend(): string
+  protected function getHtmlLegend(RenderWalker $walker): string
   {
-    if ($this->legend!==null)
-    {
-      $ret = $this->legend->getHtml();
-    }
-    else
-    {
-      $ret = '';
-    }
-
-    return $ret;
+    return ($this->legend!==null) ? $this->legend->getHtml($walker) : '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

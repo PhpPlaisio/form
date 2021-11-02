@@ -302,7 +302,7 @@ class RawForm implements CompoundControl
 
     $this->prepare();
 
-    $this->addClasses($this->renderWalker->getClasses());
+    $this->addClasses($this->renderWalker->getClasses('form'));
 
     $html = $this->getHtmlStartTag();
     $html .= $this->getHtmlBody();

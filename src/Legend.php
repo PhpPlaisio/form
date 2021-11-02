@@ -5,6 +5,7 @@ namespace Plaisio\Form;
 
 use Plaisio\Helper\Html;
 use Plaisio\Helper\HtmlElement;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Class for generating [legend](http://www.w3schools.com/tags/tag_legend.asp) elements.
@@ -26,13 +27,17 @@ class Legend
   /**
    * Returns the HTML code for this legend.
    *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
+    $this->addClasses($walker->getClasses('legend'));
+
     return Html::generateElement('legend', $this->attributes, $this->legend, true);
   }
 

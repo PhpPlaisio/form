@@ -34,7 +34,7 @@ abstract class PushControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldSet);
 
     $html     = $form->getHtml();
-    $expected = sprintf('<input class="frm frm-%s" type="%s" name="myForm[myFieldSet][myInput]"/>',
+    $expected = sprintf('<input class="frm-%s" type="%s" name="myForm[myFieldSet][myInput]"/>',
                         $this->getControlType(),
                         $this->getControlType());
     self::assertStringContainsString($expected, $html);

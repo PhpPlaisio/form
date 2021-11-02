@@ -170,7 +170,7 @@ class SelectControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldSet);
 
     $html     = $form->getHtml();
-    $expected = '<select class="frm frm-select" name="myForm[myFieldSet][myInput]"></select>';
+    $expected = '<select class="frm-select" name="myForm[myFieldSet][myInput]"></select>';
     self::assertStringContainsString($expected, $html);
   }
 

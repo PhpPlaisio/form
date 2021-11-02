@@ -47,6 +47,7 @@ class Form extends RawForm
 
     // Create a fieldset for hidden form controls.
     $this->hiddenFieldSet = new FieldSet();
+    $this->hiddenFieldSet->setSubClasses('fieldset-hidden');
     $this->addFieldSet($this->hiddenFieldSet);
 
     // Set attribute for name (used in JavaScript).
@@ -99,7 +100,7 @@ class Form extends RawForm
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The default form handler. It only handles method 'handleEchoForm'. Otherwise an exception is thrown.
+   * The default form handler. It only handles method 'handleEchoForm'. Otherwise, an exception is thrown.
    *
    * @param string $method The name of the method for handling the form state.
    */

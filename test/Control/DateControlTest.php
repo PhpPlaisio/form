@@ -178,8 +178,8 @@ class DateControlTest extends SimpleControlTest
     self::assertArrayNotHasKey('date_start', $changed);
     self::assertArrayNotHasKey('date_end', $changed);
     // Open dates are empty values in form controls.
-    self::assertStringContainsString('<input class="frm frm-date" type="date" name="date_start"/', $html);
-    self::assertStringContainsString('<input class="frm frm-date" type="date" name="date_end"/', $html);
+    self::assertStringContainsString('<input class="frm-date" type="date" name="date_start"/', $html);
+    self::assertStringContainsString('<input class="frm-date" type="date" name="date_end"/', $html);
   }
 }
 

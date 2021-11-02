@@ -59,7 +59,7 @@ class ConstantControlTest extends PlaisioTestCase
     $form->addFieldSet($fieldSet);
 
     $html     = $form->getHtml();
-    $expected = '<form method="post" action="/" class="frm"><fieldset class="frm"></fieldset></form>';
+    $expected = '<form method="post" action="/" class="frm-form"><fieldset class="frm-fieldset"></fieldset></form>';
     self::assertSame($expected, $html);
   }
 
