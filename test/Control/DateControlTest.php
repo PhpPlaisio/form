@@ -170,7 +170,7 @@ class DateControlTest extends SimpleControlTest
     $method  = $form->execute();
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
-    $html    = $form->getHtml();
+    $html    = $form->htmlForm();
 
     self::assertSame('handleSubmit', $method);
     self::assertEquals($openDateStart, $values['date_start']);

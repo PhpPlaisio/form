@@ -66,7 +66,7 @@ class HttpValidator implements Validator
     {
       // Something went wrong. Possibly:
       // * Unable to open stream.
-      // * Domain does not exists.
+      // * Domain does not exist.
       // * Domain does have a website.
       // * Peer certificate did not match expected.
       $valid = false;

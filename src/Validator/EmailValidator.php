@@ -50,7 +50,7 @@ class EmailValidator implements Validator
       return false;
     }
 
-    // The domain must have a MX or A record.
+    // The domain must have an MX or A record.
     $domain = substr(strstr($value, '@'), 1);
     if (!(checkdnsrr($domain.'.', 'MX') || checkdnsrr($domain.'.', 'A')))
     {

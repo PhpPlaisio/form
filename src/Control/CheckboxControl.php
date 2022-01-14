@@ -23,7 +23,7 @@ class CheckboxControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addControlClasses($walker, 'checkbox');
 
@@ -32,9 +32,9 @@ class CheckboxControl extends SimpleControl
     $this->attributes['checked'] = !empty($this->value);
 
     $html = $this->prefix;
-    $html .= $this->getHtmlPrefixLabel();
-    $html .= Html::generateVoidElement('input', $this->attributes);
-    $html .= $this->getHtmlPostfixLabel();
+    $html .= $this->htmlPrefixLabel();
+    $html .= Html::htmlNested(['tag' => 'input', 'attr' => $this->attributes]);
+    $html .= $this->htmlPostfixLabel();
     $html .= $this->postfix;
 
     return $html;

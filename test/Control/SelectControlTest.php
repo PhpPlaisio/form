@@ -169,7 +169,7 @@ class SelectControlTest extends PlaisioTestCase
     $form = new RawForm('myForm');
     $form->addFieldSet($fieldSet);
 
-    $html     = $form->getHtml();
+    $html     = $form->htmlForm();
     $expected = '<select class="frm-select" name="myForm[myFieldSet][myInput]"></select>';
     self::assertStringContainsString($expected, $html);
   }
@@ -235,7 +235,7 @@ class SelectControlTest extends PlaisioTestCase
     $input->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $pos = strpos($html, 'Hello<select');
     self::assertNotEquals(false, $pos);
@@ -419,7 +419,7 @@ class SelectControlTest extends PlaisioTestCase
     $input->setOptions($days, 'day_id', 'days');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     self::assertNotEmpty($html);
   }

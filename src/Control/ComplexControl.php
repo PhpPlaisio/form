@@ -173,7 +173,7 @@ class ComplexControl extends Control implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getErrorMessages($recursive = false): ?array
+  public function getErrorMessages(bool $recursive = false): ?array
   {
     $ret = [];
     if ($recursive)
@@ -239,12 +239,12 @@ class ComplexControl extends Control implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $ret = $this->prefix;
     foreach ($this->controls as $control)
     {
-      $ret .= $control->getHtml($walker);
+      $ret .= $control->htmlControl($walker);
     }
     $ret .= $this->postfix;
 

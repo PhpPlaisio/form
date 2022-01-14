@@ -64,7 +64,7 @@ class ResetControlTest extends PlaisioTestCase
     $form->mergeValues($values);
 
     // Generate HTML.
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);
@@ -91,7 +91,7 @@ class ResetControlTest extends PlaisioTestCase
           ->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);
@@ -120,7 +120,7 @@ class ResetControlTest extends PlaisioTestCase
     $form->setValues($values);
 
     // Generate HTML.
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);

@@ -12,21 +12,21 @@ class DropDownControl extends SelectControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Class for distinguishing drop down controls from other select controls.
+   * Class for distinguishing dropdown controls from other select controls.
    *
    * @var string
    */
-  public static string $cssClass = 'drop-down-control';
+  public static string $cssClass = 'dropdown-control';
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addClass(self::$cssClass);
 
-    return parent::getHtml($walker);
+    return parent::htmlControl($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

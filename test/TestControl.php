@@ -31,7 +31,7 @@ class TestControl extends SimpleControl
   /**
    * @inheritDoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     return '';
   }

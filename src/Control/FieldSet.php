@@ -39,14 +39,13 @@ class FieldSet extends ComplexControl
   private $subClasses = 'fieldset';
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritdoc
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     if (empty($this->controls)) return '';
 
@@ -56,12 +55,14 @@ class FieldSet extends ComplexControl
       $this->addClass(ComplexControl::$isErrorClass);
     }
 
-    $ret = $this->getHtmlStartTag();
-    $ret .= $this->getHtmlLegend($walker);
-    $ret .= parent::getHtml($walker);
-    $ret .= $this->getHtmlEndTag();
+    $inner = $this->htmlLegend($walker);
+    $inner .= parent::htmlControl($walker);
 
-    return $ret;
+    $struct = ['tag'  => 'fieldset',
+               'attr' => $this->attributes,
+               'html' => $inner];
+
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -120,44 +121,18 @@ class FieldSet extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the end tag of this fieldset.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function getHtmlEndTag(): string
-  {
-    return '</fieldset>';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the legend for this fieldset.
    *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function getHtmlLegend(RenderWalker $walker): string
-  {
-    return ($this->legend!==null) ? $this->legend->getHtml($walker) : '';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the start tag of the fieldset.
+   * @param RenderWalker $walker The object for walking the form control tree.
    *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  protected function getHtmlStartTag(): string
+  protected function htmlLegend(RenderWalker $walker): string
   {
-    return Html::generateTag('fieldset', $this->attributes);
+    return ($this->legend!==null) ? $this->legend->htmlLegend($walker) : '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

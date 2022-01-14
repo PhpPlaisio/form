@@ -70,7 +70,7 @@ class TextAreaControlTest extends PlaisioTestCase
     $form = new RawForm('myForm');
     $form->addFieldSet($fieldSet);
 
-    $html     = $form->getHtml();
+    $html     = $form->htmlForm();
     $expected = '<form method="post" action="/" class="frm-form"><fieldset class="frm-fieldset"><textarea class="frm-textarea" name="myForm[myFieldSet][myInput]"></textarea></fieldset></form>';
     self::assertSame($expected, $html);
   }
@@ -90,7 +90,7 @@ class TextAreaControlTest extends PlaisioTestCase
           ->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $pos = strpos($html, 'Hello<textarea');
     self::assertNotEquals(false, $pos);
@@ -176,7 +176,7 @@ class TextAreaControlTest extends PlaisioTestCase
     $input->setValue(pi());
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     self::assertNotEmpty($html);
   }

@@ -34,7 +34,7 @@ class UrlCleaner implements Cleaner
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a normalized URL if the submitted value is a URL. Otherwise returns the submitted value.
+   * Returns a normalized URL if the submitted value is a URL. Otherwise, returns the submitted value.
    *
    * @param mixed $value The submitted URL.
    *

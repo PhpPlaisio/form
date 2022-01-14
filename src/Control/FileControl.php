@@ -28,7 +28,7 @@ class FileControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addControlClasses($walker, 'file');
 
@@ -36,9 +36,10 @@ class FileControl extends SimpleControl
     $this->attributes['name'] = $this->submitName;
 
     $ret = $this->prefix;
-    $ret .= $this->getHtmlPrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->getHtmlPostfixLabel();
+    $ret .= $this->htmlPrefixLabel();
+    $ret .= Html::htmlNested(['tag'  => 'input',
+                              'attr' => $this->attributes]);
+    $ret .= $this->htmlPostfixLabel();
     $ret .= $this->postfix;
 
     return $ret;

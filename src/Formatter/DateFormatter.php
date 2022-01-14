@@ -17,7 +17,7 @@ class DateFormatter implements Formatter
   private string $format;
 
   /**
-   * If set the date that will treated as an open date. An open date will be shown as an empty form control.
+   * If set the date that will be treated as an open date. An open date will be shown as an empty form control.
    *
    * @var string|null
    */

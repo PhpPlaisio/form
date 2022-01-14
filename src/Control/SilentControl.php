@@ -23,7 +23,7 @@ class SilentControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addControlClasses($walker, 'silent');
 

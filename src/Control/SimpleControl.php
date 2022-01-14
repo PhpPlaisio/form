@@ -607,9 +607,11 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  protected function getHtmlLabel(): string
+  protected function htmlLabel(): string
   {
-    return Html::generateElement('label', $this->labelAttributes, $this->label, true);
+    return Html::htmlNested(['tag'  => 'label',
+                             'attr' => $this->labelAttributes,
+                             'html' => $this->label]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -621,11 +623,11 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  protected function getHtmlPostfixLabel(): string
+  protected function htmlPostfixLabel(): string
   {
     if ($this->labelPosition===self::LABEL_POSITION_POST)
     {
-      $ret = $this->getHtmlLabel();
+      $ret = $this->htmlLabel();
     }
     else
     {
@@ -637,14 +639,14 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns HTML code for a label for this form control te be inserted before the HTML code of this form control.
+   * Returns the HTML code for a label for this form control te be inserted before the HTML code of this form control.
    *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  protected function getHtmlPrefixLabel(): string
+  protected function htmlPrefixLabel(): string
   {
     // If a label must be generated make sure the form control and the label have matching 'id' and 'for' attributes.
     if ($this->labelPosition!==null)
@@ -663,7 +665,7 @@ abstract class SimpleControl extends Control
 
     if ($this->labelPosition===self::LABEL_POSITION_PRE)
     {
-      $ret = $this->getHtmlLabel();
+      $ret = $this->htmlLabel();
     }
     else
     {

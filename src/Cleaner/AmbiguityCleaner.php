@@ -176,7 +176,7 @@ class AmbiguityCleaner implements Cleaner
     {
       foreach ($ambiguities as $ambiguity)
       {
-        // Note: str_replace works fine with multi byte characters like UTF-8.
+        // Note: str_replace works fine with multibyte characters like UTF-8.
         $clean = str_replace($ambiguity, $unambiguity, $clean);
       }
     }

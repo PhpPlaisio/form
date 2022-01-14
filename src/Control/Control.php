@@ -74,7 +74,7 @@ abstract class Control
   protected string $prefix = '';
 
   /**
-   * The submit name or name in the generated HTML code of this form control.
+   * The submit-name or name in the generated HTML code of this form control.
    *
    * @var string
    */
@@ -121,26 +121,26 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML of the form control for autonomous use, i.e outside a from.
+   * Returns the HTML of the form control for autonomous use, i.e. outside a from.
    *
    * @param string      $moduleClass    The CSS module class.
    * @param string|null $subModuleClass The CSS sub-module class.
-   * @param string      $submitName     The submit name of the parent control.
+   * @param string      $submitName     The submit-name of the parent control.
    *
    * @return string
    */
-  public function getAutonomousHtml(string $moduleClass = '',
+  public function getAutonomousHtml(string  $moduleClass = '',
                                     ?string $subModuleClass = null,
-                                    string $submitName = ''): string
+                                    string  $submitName = ''): string
   {
     $this->prepare(new PrepareWalker($submitName));
 
-    return $this->getHtml(new RenderWalker($moduleClass, $subModuleClass));
+    return $this->htmlControl(new RenderWalker($moduleClass, $subModuleClass));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the the error messages of this form control.
+   * Returns the error messages of this form control.
    *
    * @param bool $recursive
    *
@@ -149,24 +149,10 @@ abstract class Control
    * @since 1.0.0
    * @api
    */
-  public function getErrorMessages(/** @noinspection PhpUnusedParameterInspection */
-    $recursive = false): ?array
+  public function getErrorMessages(bool $recursive = false): ?array
   {
     return $this->errorMessages;
   }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the HTML code for this form control.
-   *
-   * @param RenderWalker $walker The object for walking the form control tree.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  abstract public function getHtml(RenderWalker $walker): string;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -192,7 +178,7 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the submit name of this form control
+   * Returns the submit-name of this form control
    *
    * @return string
    */
@@ -211,6 +197,19 @@ abstract class Control
    * @api
    */
   abstract public function getSubmittedValue();
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the HTML code for this form control.
+   *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  abstract public function htmlControl(RenderWalker $walker): string;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -250,8 +249,8 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the initial value(s) of this form control. The values of form controls for which no explicit value is set are
-   * left unchanged.
+   * Sets the initial value(s) of this form control. The values of the form controls for which no explicit value is set
+   * are left unchanged.
    *
    * @param array $values The initial values as nested arrays.
    *
@@ -290,7 +289,7 @@ abstract class Control
    * @since 1.0.0
    * @api
    */
-  public function setErrorMessage(string $message): self
+  public function setErrorMessage(string $message)
   {
     $this->errorMessages[] = $message;
 
@@ -408,7 +407,7 @@ abstract class Control
   /**
    * Sets the name this will be used for this form control when the form is submitted.
    *
-   * @param string $parentSubmitName The submit name of the parent form control of this form control.
+   * @param string $parentSubmitName The submit-name of the parent form control of this form control.
    */
   protected function setSubmitName(string $parentSubmitName): void
   {

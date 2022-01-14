@@ -27,7 +27,7 @@ class MultipleFileControlTest extends PlaisioTestCase
     $form = new RawForm('myForm');
     $form->addFieldSet($fieldSet);
 
-    $html     = $form->getHtml();
+    $html     = $form->htmlForm();
     $expected = '<input class="frm-file" type="file" name="myForm[myFieldSet][myInput][]" multiple="multiple"/>';
     self::assertStringContainsString($expected, $html);
   }
@@ -58,7 +58,7 @@ class MultipleFileControlTest extends PlaisioTestCase
           ->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);

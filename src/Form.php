@@ -147,7 +147,7 @@ class Form extends RawForm
    */
   protected function handleEchoForm(): void
   {
-    echo $this->getHtml();
+    echo $this->htmlForm();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

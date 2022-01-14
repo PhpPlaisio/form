@@ -6,7 +6,7 @@ namespace Plaisio\Form\Control;
 use Plaisio\Form\Cleaner\CompoundCleaner;
 
 /**
- * Interface for object that getHtml HTML elements holding one or more form control elements.
+ * Interface for class for HTML elements holding one or more form control elements.
  */
 interface CompoundControl
 {
@@ -21,7 +21,7 @@ interface CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function addCleaner(CompoundCleaner $cleaner);
+  public function addCleaner(CompoundCleaner $cleaner): self;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

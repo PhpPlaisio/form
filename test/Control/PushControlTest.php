@@ -33,7 +33,7 @@ abstract class PushControlTest extends PlaisioTestCase
     $form = new RawForm('myForm');
     $form->addFieldSet($fieldSet);
 
-    $html     = $form->getHtml();
+    $html     = $form->htmlForm();
     $expected = sprintf('<input class="frm-%s" type="%s" name="myForm[myFieldSet][myInput]"/>',
                         $this->getControlType(),
                         $this->getControlType());
@@ -173,7 +173,7 @@ abstract class PushControlTest extends PlaisioTestCase
     $form->mergeValues($values);
 
     // Generate HTML.
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);
@@ -199,7 +199,7 @@ abstract class PushControlTest extends PlaisioTestCase
 
     $input->setPrefix('Hello');
     $input->setPostfix('World');
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);
@@ -272,7 +272,7 @@ abstract class PushControlTest extends PlaisioTestCase
     $form->setValues($values);
 
     // Generate HTML.
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);

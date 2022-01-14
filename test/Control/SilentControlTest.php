@@ -104,7 +104,7 @@ class SilentControlTest extends PlaisioTestCase
           ->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);
@@ -123,7 +123,7 @@ class SilentControlTest extends PlaisioTestCase
     $_POST['submit'] = 'submit';
 
     $form = $this->setupForm1($this->getValidInitialValue());
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     self::assertStringContainsString($this->getValidSubmittedValue(), $html);
   }

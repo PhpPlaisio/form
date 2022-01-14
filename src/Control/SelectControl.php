@@ -63,29 +63,41 @@ class SelectControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the options of this select box as set by {@link setOptions}.
+   *
+   * @return array[]
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getOptions(): array
+  {
+    return $this->options ?? [];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addControlClasses($walker, 'select');
 
     $this->attributes['name'] = $this->submitName;
-
-    $html = $this->prefix;
-    $html .= $this->getHtmlPrefixLabel();
-    $html .= Html::generateTag('select', $this->attributes);
-
-    $valueAsString = Cast::toManString($this->value, '');
+    $valueAsString            = Cast::toManString($this->value, '');
+    $inner                    = [];
 
     if ($this->emptyOption!==null)
     {
       $optionAttributes = ['value'    => $this->emptyOption,
                            'selected' => ($valueAsString===Cast::toManString($this->emptyOption, ''))];
 
-      $html .= Html::generateElement('option', $optionAttributes, ' ');
+      $inner[] = ['tag'  => 'option',
+                  'attr' => $optionAttributes,
+                  'text' => ' '];
     }
 
     if (is_array($this->options))
@@ -102,29 +114,21 @@ class SelectControl extends SimpleControl
         $optionAttributes['value']    = $code;
         $optionAttributes['selected'] = ($valueAsString===$keyAsString);
 
-        $html .= Html::generateElement('option', $optionAttributes, $option[$this->labelKey]);
+        $inner[] = ['tag'  => 'option',
+                    'attr' => $optionAttributes,
+                    'text' => $option[$this->labelKey]];
       }
     }
 
-    $html .= '</select>';
-    $html .= $this->getHtmlPostfixLabel();
+    $html = $this->prefix;
+    $html .= $this->htmlPrefixLabel();
+    $html .= Html::htmlNested(['tag'   => 'select',
+                               'attr'  => $this->attributes,
+                               'inner' => $inner]);
+    $html .= $this->htmlPostfixLabel();
     $html .= $this->postfix;
 
     return $html;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the options of this select box as set by {@link setOptions}.
-   *
-   * @return array[]
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getOptions(): array
-  {
-    return $this->options ?? [];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

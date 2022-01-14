@@ -48,7 +48,7 @@ class CheckboxesControl extends SimpleControl
   protected ?array $labelAttributesMap = null;
 
   /**
-   * If true and only if true labels are HTML code. Otherwise special characters in the labels will be replaced with
+   * If true and only if true labels are HTML code. Otherwise, special characters in the labels will be replaced with
    * HTML entities.
    *
    * @var bool
@@ -89,18 +89,44 @@ class CheckboxesControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Adds the value of checked checkboxes the values with the name of this form control as key.
+   *
+   * @param array $values The values.
+   */
+  public function getSetValuesBase(array &$values): void
+  {
+    if ($this->name==='')
+    {
+      $tmp = &$values;
+    }
+    else
+    {
+      $values[$this->name] = [];
+      $tmp                 = &$values[$this->name];
+    }
+
+    foreach ($this->options as $option)
+    {
+      // Get the (database) ID of the option.
+      $key = $option[$this->keyKey];
+
+      // Get the original value (i.e. the option is checked or not).
+      $tmp[$key] = (!empty($option[$this->checkedKey]));
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    *
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addControlClasses($walker, 'checkboxes');
 
-    $html = $this->prefix;
-    $html .= Html::generateTag('span', $this->attributes);
-
+    $inner = [];
     if (is_array($this->options))
     {
       foreach ($this->options as $option)
@@ -119,44 +145,21 @@ class CheckboxesControl extends SimpleControl
         $inputAttributes['name']    = ($this->submitName!=='') ? $this->submitName.'['.$code.']' : $code;
         $inputAttributes['checked'] = (!empty($option[$this->checkedKey]));
 
-        $inner = Html::generateVoidElement('input', $inputAttributes);
-        $inner .= ($this->labelIsHtml) ? $option[$this->labelKey] : Html::txt2Html($option[$this->labelKey]);
-        $html  .= Html::generateElement('label', $labelAttributes, $inner, true);
+        $inner[] = ['tag'   => 'label',
+                    'attr'  => $labelAttributes,
+                    'inner' => [['tag'  => 'input',
+                                 'attr' => $inputAttributes],
+                                [($this->labelIsHtml) ? 'html' : 'text' => $option[$this->labelKey]]]];
       }
     }
 
-    $html .= '</span>';
+    $html = $this->prefix;
+    $html .= Html::htmlNested(['tag'   => 'span',
+                               'attr'  => $this->attributes,
+                               'inner' => $inner]);
     $html .= $this->postfix;
 
     return $html;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds the value of checked checkboxes the values with the name of this form control as key.
-   *
-   * @param array $values The values.
-   */
-  public function getSetValuesBase(array &$values): void
-  {
-    if ($this->name==='')
-    {
-      $tmp = &$values;
-    }
-    else
-    {
-      $values[$this->name] = [];
-      $tmp                 = &$values[$this->name];
-    }
-
-    foreach ($this->options as $i => $option)
-    {
-      // Get the (database) ID of the option.
-      $key = $option[$this->keyKey];
-
-      // Get the original value (i.e. the option is checked or not).
-      $tmp[$key] = (!empty($option[$this->checkedKey]));
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -192,7 +195,7 @@ class CheckboxesControl extends SimpleControl
   /**
    * Sets the map from the keys in the options to attribute names of the input element.
    *
-   * Note the following attributes will ignored:
+   * Note the following attributes will be ignored:
    * <ul>
    * <li> type
    * <li> name
@@ -214,7 +217,7 @@ class CheckboxesControl extends SimpleControl
   /**
    * Sets the map from the keys in the options to attribute names of the label element.
    *
-   * Note the following attribute will ignored:
+   * Note the following attribute will be ignored:
    * <ul>
    * <li> for
    * </ul>
@@ -308,6 +311,7 @@ class CheckboxesControl extends SimpleControl
     if ($this->name==='')
     {
       // Nothing to do.
+      unset($void);
     }
     elseif (isset($values[$this->name]))
     {

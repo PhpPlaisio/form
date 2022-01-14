@@ -38,7 +38,7 @@ class TestControl extends Control
   /**
    * @inheritDoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     throw new \LogicException('Not implemented');
   }

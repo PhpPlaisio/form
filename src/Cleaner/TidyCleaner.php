@@ -76,7 +76,7 @@ class TidyCleaner implements Cleaner
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a HTML snippet cleaned by [HTML Tidy](http://www.html-tidy.org/).
+   * Returns an HTML snippet cleaned by [HTML Tidy](http://www.html-tidy.org/).
    *
    * @param mixed $value The submitted HTML snippet.
    *

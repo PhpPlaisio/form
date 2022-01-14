@@ -254,7 +254,7 @@ class RawFormTest extends PlaisioTestCase
     $form->mergeValues($merge);
 
     // Generate HTML.
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);

@@ -284,35 +284,6 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code of this form.
-   *
-   * Note: This method will not load submitted values
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getHtml(): string
-  {
-    if (!isset($this->attributes['action']))
-    {
-      $this->attributes['action'] = Nub::$nub->request->getRequestUri();
-    }
-
-    $this->prepare();
-
-    $this->addClasses($this->renderWalker->getClasses('form'));
-
-    $html = $this->getHtmlStartTag();
-    $html .= $this->getHtmlBody();
-    $html .= $this->getHtmlEndTag();
-
-    return $html;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns all form controls which failed one or more validation tests.
    *
    * @return array A nested array of form control names (keys are form control names and (for complex form controls)
@@ -403,6 +374,34 @@ class RawForm implements CompoundControl
   public function haveChangedControls(): bool
   {
     return !empty($this->changedControls);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the HTML code of this form.
+   *
+   * Note: This method will not load submitted values
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function htmlForm(): string
+  {
+    if (!isset($this->attributes['action']))
+    {
+      $this->attributes['action'] = Nub::$nub->request->getRequestUri();
+    }
+
+    $this->prepare();
+    $this->addClasses($this->renderWalker->getClasses('form'));
+
+    $struct = ['tag'  => 'form',
+               'attr' => $this->attributes,
+               'html' => $this->fieldSets->htmlControl($this->renderWalker)];
+
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -522,7 +521,7 @@ class RawForm implements CompoundControl
    *
    * @return $this
    */
-  public function setErrorMessage(string $message): self
+  public function setErrorMessage(string $message)
   {
     $this->errorMessages[] = $message;
 
@@ -546,48 +545,6 @@ class RawForm implements CompoundControl
     $this->fieldSets->setValuesBase($values);
 
     return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the inner HTML code of this form.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function getHtmlBody(): string
-  {
-    return $this->fieldSets->getHtml($this->renderWalker);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the end tag of this form.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function getHtmlEndTag(): string
-  {
-    return '</form>';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the start tag of this form.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  protected function getHtmlStartTag(): string
-  {
-    return Html::generateTag('form', $this->attributes);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

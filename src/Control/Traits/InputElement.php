@@ -35,9 +35,10 @@ trait InputElement
     else                  $this->attributes['value'] = $this->value;
 
     $ret = $this->prefix;
-    $ret .= $this->getHtmlPrefixLabel();
-    $ret .= Html::generateVoidElement('input', $this->attributes);
-    $ret .= $this->getHtmlPostfixLabel();
+    $ret .= $this->htmlPrefixLabel();
+    $ret .= Html::htmlNested(['tag'  => 'input',
+                              'attr' => $this->attributes]);
+    $ret .= $this->htmlPostfixLabel();
     $ret .= $this->postfix;
 
     return $ret;

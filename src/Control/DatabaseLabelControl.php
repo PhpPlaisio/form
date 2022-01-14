@@ -9,7 +9,7 @@ use Plaisio\Form\Validator\LengthValidator;
 use SetBased\Exception\LogicException;
 
 /**
- * Form control for database labels.
+ * Form control for a database label.
  */
 class DatabaseLabelControl extends TextControl
 {

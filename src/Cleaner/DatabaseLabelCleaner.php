@@ -55,9 +55,7 @@ class DatabaseLabelCleaner implements Cleaner
       $clean = sprintf('%s_%s', $this->prefix, $clean);
     }
 
-    $clean = trim(preg_replace('/[^0-9A-Z]+/', '_', mb_strtoupper($clean)), '_');
-
-    return $clean;
+    return trim(preg_replace('/[^0-9A-Z]+/', '_', mb_strtoupper($clean)), '_');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

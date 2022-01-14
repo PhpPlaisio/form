@@ -52,7 +52,7 @@ class HtmlControlTest extends PlaisioTestCase
     $form = new RawForm('myForm');
     $form->addFieldSet($fieldSet);
 
-    $html     = $form->getHtml();
+    $html     = $form->htmlForm();
     $expected = '<fieldset class="frm-fieldset">Hello, World!</fieldset>';
     self::assertStringContainsString($expected, $html);
   }

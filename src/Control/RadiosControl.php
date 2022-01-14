@@ -83,13 +83,11 @@ class RadiosControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addControlClasses($walker, 'radios');
 
-    $html = $this->prefix;
-    $html .= Html::generateTag('span', $this->attributes);
-
+    $inner = [];
     if (is_array($this->options))
     {
       $valueAsString = Cast::toManString($this->value, '');
@@ -108,13 +106,18 @@ class RadiosControl extends SimpleControl
         $inputAttributes['value']   = $value;
         $inputAttributes['checked'] = ($valueAsString===$keyAsString);
 
-        $inner = Html::generateVoidElement('input', $inputAttributes);
-        $inner .= ($this->labelIsHtml) ? $option[$this->labelKey] : Html::txt2Html($option[$this->labelKey]);
-        $html  .= Html::generateElement('label', $labelAttributes, $inner, true);
+        $inner[] = ['tag'   => 'label',
+                    'attr'  => $labelAttributes,
+                    'inner' => [['tag'  => 'input',
+                                 'attr' => $inputAttributes],
+                                [($this->labelIsHtml) ? 'html' : 'text' => $option[$this->labelKey]]]];
       }
     }
 
-    $html .= '</span>';
+    $html = $this->prefix;
+    $html .= Html::htmlNested(['tag'   => 'span',
+                               'attr'  => $this->attributes,
+                               'inner' => $inner]);
     $html .= $this->postfix;
 
     return $html;

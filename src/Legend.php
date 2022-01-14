@@ -34,11 +34,13 @@ class Legend
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlLegend(RenderWalker $walker): string
   {
     $this->addClasses($walker->getClasses('legend'));
 
-    return Html::generateElement('legend', $this->attributes, $this->legend, true);
+    return Html::htmlNested(['tag'  => 'legend',
+                             'attr' => $this->attributes,
+                             'html' => $this->legend]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

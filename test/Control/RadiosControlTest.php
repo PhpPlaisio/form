@@ -123,7 +123,7 @@ class RadiosControlTest extends PlaisioTestCase
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html     = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->htmlControl(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm-radios">
 <label class="frm-radio" for="plaisio-id-18">
@@ -165,7 +165,7 @@ EOL;
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html     = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->htmlControl(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm-radios">
 <label class="frm-radio" for="plaisio-id-20">
@@ -194,7 +194,7 @@ EOL;
           ->setOptions($entities, 'key', 'name');
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html = $input->htmlControl(new RenderWalker('frm'));
 
     self::assertStringContainsString('>&lt;&amp;&#039;;&quot;&gt;</label>', $html);
     self::assertStringContainsString('>&amp;nbsp;</label>', $html);
@@ -215,7 +215,7 @@ EOL;
           ->setLabelIsHtml();
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html = $input->htmlControl(new RenderWalker('frm'));
 
     self::assertStringContainsString('<span>0</span>', $html);
     self::assertStringContainsString('<span>1</span>', $html);
@@ -402,7 +402,7 @@ EOL;
     $input->setOptions($days, 'day_id', 'days');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     self::assertNotEmpty($html);
   }

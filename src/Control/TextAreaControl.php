@@ -39,16 +39,18 @@ class TextAreaControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $this->addControlClasses($walker, 'textarea');
 
     $this->attributes['name'] = $this->submitName;
 
     $html = $this->prefix;
-    $html .= $this->getHtmlPrefixLabel();
-    $html .= Html::generateElement('textarea', $this->attributes, $this->value);
-    $html .= $this->getHtmlPostfixLabel();
+    $html .= $this->htmlPrefixLabel();
+    $html .= Html::htmlNested(['tag'  => 'textarea',
+                               'attr' => $this->attributes,
+                               'text' => $this->value]);
+    $html .= $this->htmlPostfixLabel();
     $html .= $this->postfix;
 
     return $html;

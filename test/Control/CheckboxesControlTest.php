@@ -147,7 +147,7 @@ class CheckboxesControlTest extends PlaisioTestCase
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html     = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->htmlControl(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm-checkboxes">
 <label class="frm-checkbox" for="plaisio-id-1">
@@ -189,7 +189,7 @@ EOL;
           ->setOptions($entities, 'key', 'label');
     TestControl::fixSubmitName($input);
 
-    $html     = $input->getHtml(new RenderWalker('frm'));
+    $html     = $input->htmlControl(new RenderWalker('frm'));
     $expected = <<< EOL
 <span class="frm-checkboxes">
 <label class="frm-checkbox" for="plaisio-id-3">
@@ -218,7 +218,7 @@ EOL;
           ->setOptions($entities, 'key', 'name');
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html = $input->htmlControl(new RenderWalker('frm'));
 
     self::assertStringContainsString('&lt;&amp;&#039;;&quot;&gt;', $html);
     self::assertStringContainsString('&amp;nbsp;', $html);
@@ -239,7 +239,7 @@ EOL;
           ->setLabelIsHtml();
     TestControl::fixSubmitName($input);
 
-    $html = $input->getHtml(new RenderWalker('frm'));
+    $html = $input->htmlControl(new RenderWalker('frm'));
 
     self::assertStringContainsString('<span>0</span>', $html);
     self::assertStringContainsString('<span>1</span>', $html);
@@ -302,7 +302,7 @@ EOL;
     $form->execute();
 
     // Generate HTML code for the form.
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $doc = new \DOMDocument();
     $doc->loadXML($html);
@@ -356,7 +356,7 @@ EOL;
     $form->setValues($values);
 
     // Generate HTML code for the form.
-    $form = $form->getHtml();
+    $form = $form->htmlForm();
 
     $doc = new \DOMDocument();
     $doc->loadXML($form);
@@ -510,7 +510,7 @@ EOL;
     $input->setOptions($days, 'day_id', 'days');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     self::assertNotEmpty($html);
   }

@@ -33,7 +33,7 @@ class DateCleaner implements Cleaner
   protected string $separator;
 
   /**
-   * If set the date that will treated as an open date. An empty form control will be translated to the open date.
+   * If set the date that will be treated as an open date. An empty form control will be translated to the open date.
    *
    * @var string|null
    */
@@ -61,7 +61,7 @@ class DateCleaner implements Cleaner
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Cleans a submitted date and returns the date in ISO 8601 machine format if the date is a valid date. Otherwise
+   * Cleans a submitted date and returns the date in ISO 8601 machine format if the date is a valid date. Otherwise,
    * returns the original submitted value.
    *
    * @param mixed $value The submitted date.
@@ -106,7 +106,7 @@ class DateCleaner implements Cleaner
     $date = \DateTime::createFromFormat($this->format, $value);
     if ($date)
     {
-      // Note: String '2000-02-30' will transformed to date '2000-03-01' with a warning. We consider this as an
+      // Note: String '2000-02-30' will bee transformed to date '2000-03-01' with a warning. We consider this as an
       // invalid date.
       $tmp = $date::getLastErrors();
       if ($tmp['warning_count']===0) return $date->format('Y-m-d');

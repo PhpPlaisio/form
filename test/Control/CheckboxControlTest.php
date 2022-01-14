@@ -124,7 +124,7 @@ class CheckboxControlTest extends PlaisioTestCase
           ->setPostfix('World');
     $fieldset->addFormControl($input);
 
-    $html = $form->getHtml();
+    $html = $form->htmlForm();
 
     $pos = strpos($html, 'Hello<input');
     self::assertNotEquals(false, $pos);
