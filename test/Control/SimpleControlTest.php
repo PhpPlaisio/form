@@ -88,7 +88,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test submitted values are echoed after to form has been executed.
+   * TTest submitted values are displayed in the form controls after to form has been executed.
    */
   public function testSubmittedValuesAreEchoed(): void
   {

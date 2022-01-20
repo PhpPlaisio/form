@@ -57,7 +57,10 @@ class Form extends RawForm
     }
 
     // Add hidden field for protection against CSRF.
-    if ($this->csrfCheck) $this->hiddenFieldSet->addFormControl(new SilentControl('ses_csrf_token'));
+    if ($this->csrfCheck)
+    {
+      $this->hiddenFieldSet->addFormControl(new SilentControl('ses_csrf_token'));
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -90,9 +93,9 @@ class Form extends RawForm
     $control = $this->hiddenFieldSet->getFormControlByName('ses_csrf_token');
 
     // If CSRF tokens (from session and from submitted form) don't match: possible CSRF attack.
-    $ses_csrf_token1 = Nub::$nub->session->getCsrfToken();
-    $ses_csrf_token2 = $control->getSubmittedValue();
-    if ($ses_csrf_token1!==$ses_csrf_token2)
+    $sesCsrfToken1 = Nub::$nub->session->getCsrfToken();
+    $sesCsrfToken2 = $control->getSubmittedValue();
+    if ($sesCsrfToken1!==$sesCsrfToken2)
     {
       throw new BadRequestException('Possible CSRF attack');
     }
@@ -100,20 +103,15 @@ class Form extends RawForm
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The default form handler. It only handles method 'handleEchoForm'. Otherwise, an exception is thrown.
+   * The default form handler. Throws a logic exception when the method is not an empty string.
    *
    * @param string $method The name of the method for handling the form state.
    */
   public function defaultHandler(string $method): void
   {
-    switch ($method)
+    if ($method!=='')
     {
-      case 'handleEchoForm':
-        $this->handleEchoForm();
-        break;
-
-      default:
-        throw new LogicException("Unknown form method '%s'", $method);
+      throw new LogicException("Unknown form method '%s'", $method);
     }
   }
 
@@ -137,17 +135,6 @@ class Form extends RawForm
     parent::loadSubmittedValues();
 
     $this->csrfCheck();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Generates and echos this form.
-   *
-   * This is the default method for generating and echoing a form.
-   */
-  protected function handleEchoForm(): void
-  {
-    echo $this->htmlForm();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -207,12 +207,12 @@ class RawForm implements CompoundControl
       $this->valid = $this->validate();
       if (!$this->valid)
       {
-        $handler = 'handleEchoForm';
+        $handler = '';
       }
     }
     else
     {
-      $handler = 'handleEchoForm';
+      $handler = '';
     }
 
     return $handler;

@@ -112,10 +112,10 @@ abstract class PushControlTest extends PlaisioTestCase
 
     self::assertArrayNotHasKey('button', $changed);
 
-    if (get_class($input)!=ForceSubmitControl::class)
+    if (get_class($input)!==ForceSubmitControl::class)
     {
       self::assertNull($form->isValid());
-      self::assertSame('handleEchoForm', $method);
+      self::assertSame('', $method);
       self::assertArrayNotHasKey('button', $values);
     }
     else

@@ -54,7 +54,7 @@ class HttpControlTest extends PlaisioTestCase
     $method  = $form->execute();
     $invalid = $form->getInvalidControls();
 
-    self::assertSame('handleEchoForm', $method);
+    self::assertSame('', $method);
     self::assertCount(1, $invalid);
   }
 

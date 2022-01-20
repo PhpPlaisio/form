@@ -343,7 +343,7 @@ class RawFormTest extends PlaisioTestCase
     $trigger->setValue('door')
             ->setMethod('handler');
 
-    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+    $this->searchSubmitHandlerTest($trigger, '');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -356,7 +356,7 @@ class RawFormTest extends PlaisioTestCase
     $trigger->setValue('door')
             ->setMethod('handler');
 
-    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+    $this->searchSubmitHandlerTest($trigger, '');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -369,7 +369,7 @@ class RawFormTest extends PlaisioTestCase
     $trigger->setValue('door')
             ->setMethod('handler');
 
-    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+    $this->searchSubmitHandlerTest($trigger, '');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -382,7 +382,7 @@ class RawFormTest extends PlaisioTestCase
     $trigger->setValue('door')
             ->setMethod('handler');
 
-    $this->searchSubmitHandlerTest($trigger, 'handleEchoForm');
+    $this->searchSubmitHandlerTest($trigger, '');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

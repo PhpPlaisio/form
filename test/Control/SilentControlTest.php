@@ -115,7 +115,7 @@ class SilentControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test submitted values are echoed after to form has been executed.
+   * Test submitted values are displayed in the form controls after to form has been executed.
    */
   public function testSubmittedValuesAreEchoed(): void
   {

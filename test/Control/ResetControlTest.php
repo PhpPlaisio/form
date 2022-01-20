@@ -39,7 +39,7 @@ class ResetControlTest extends PlaisioTestCase
     $changed = $form->getChangedControls();
 
     self::assertNull($form->isValid());
-    self::assertSame('handleEchoForm', $method);
+    self::assertSame('', $method);
     self::assertArrayNotHasKey('button', $values);
     self::assertArrayNotHasKey('button', $changed);
   }

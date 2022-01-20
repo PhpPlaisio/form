@@ -59,7 +59,7 @@ class IntegerControlTest extends TestCase
     $changed = $form->getChangedControls();
 
     self::assertFalse($form->isValid());
-    self::assertSame('handleEchoForm', $method);
+    self::assertSame('', $method);
     self::assertSame('Hello, world', $values['year']);
     self::assertArrayHasKey('year', $changed);
   }
@@ -91,7 +91,7 @@ class IntegerControlTest extends TestCase
     $changed = $form->getChangedControls();
 
     self::assertFalse($form->isValid());
-    self::assertSame('handleEchoForm', $method);
+    self::assertSame('', $method);
     self::assertSame(1900, $values['year']);
     self::assertArrayHasKey('year', $changed);
   }
