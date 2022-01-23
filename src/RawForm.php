@@ -406,6 +406,23 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the HTML code of this form just as htmlForm(), however, when the form has been successfully submitted,
+   * returns an empty string.
+   *
+   * Note: This method will not load submitted values
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function htmlFormEmptyIfValid(): string
+  {
+    return ($this->isValid()) ? '' : $this->htmlForm();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns:
    * <ul>
    * <li> true:  This form has been submitted and submitted values are valid.
