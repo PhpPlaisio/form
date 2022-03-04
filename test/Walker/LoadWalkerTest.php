@@ -8,12 +8,36 @@ use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\RawForm;
+use Plaisio\Form\Walker\LoadWalker;
 
 /**
  * Tests for class LoadWalker.
  */
 class LoadWalkerTest extends TestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test method descend with bogus data.
+   *
+   * @return void
+   */
+  public function testDescendWithBogusData(): void
+  {
+    $whiteListValues = [];
+    $changedControls = [];
+    $branch          = [];
+    $submittedValues = ['test1' => '',
+                        'test2' => 'xxx'];
+
+    $walker = new LoadWalker($submittedValues, $whiteListValues, $changedControls, '');
+
+    $walker->descend('test1', 'test1');
+    self::assertTrue(true);
+
+    $walker->descend('test2', 'test2');
+    self::assertTrue(true);
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test for method getPath().

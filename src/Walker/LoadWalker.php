@@ -55,12 +55,12 @@ class LoadWalker
    * @param array           $whiteListValues The white-listed submitted values.
    * @param array           $changedControls The form controls of which the value has changed.
    * @param string          $branch          The name of the branch where this walker starts walking.
-   * @param LoadWalker|null $parent          The parent walker of this walker..
+   * @param LoadWalker|null $parent          The parent walker of this walker.
    */
-  public function __construct(array $submittedValues,
-                              array &$whiteListValues,
-                              array &$changedControls,
-                              string $branch,
+  public function __construct(array       $submittedValues,
+                              array       &$whiteListValues,
+                              array       &$changedControls,
+                              string      $branch,
                               ?LoadWalker $parent = null)
   {
     $this->submittedValues = $submittedValues;
@@ -120,7 +120,7 @@ class LoadWalker
       return $this;
     }
 
-    if (!isset($this->submittedValues[$submitKey]))
+    if (!is_array($this->submittedValues[$submitKey] ?? null))
     {
       $this->submittedValues[$submitKey] = [];
     }
@@ -267,7 +267,7 @@ class LoadWalker
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the the current form control as a changed form control.
+   * Sets the current form control as a changed form control.
    *
    * @param int|string $name The name of the current form control.
    */
