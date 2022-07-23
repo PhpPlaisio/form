@@ -63,7 +63,7 @@ abstract class Control
    * The HTML code that will be appended after the HTML code of this form control.
    *
    * @var string
-   * @deprecated
+   * @deprecated Use class WrapperControl instead.
    */
   protected string $postfix = '';
 
@@ -71,7 +71,7 @@ abstract class Control
    * The HTML code that will be inserted before the HTML code of this form control.
    *
    * @var string
-   * @deprecated
+   * @deprecated Use class WrapperControl instead.
    */
   protected string $prefix = '';
 
@@ -324,9 +324,7 @@ abstract class Control
    *
    * @return $this
    *
-   * @since 1.0.0
-   * @api
-   * @deprecated
+   * @deprecated Use class WrapperControl instead.
    */
   public function setPostfix(string $htmlSnippet): self
   {
@@ -343,9 +341,7 @@ abstract class Control
    *
    * @return $this
    *
-   * @since 1.0.0
-   * @api
-   * @deprecated
+   * @deprecated Use class WrapperControl instead.
    */
   public function setPrefix(string $htmlSnippet): self
   {
