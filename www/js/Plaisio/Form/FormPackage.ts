@@ -1,8 +1,8 @@
-import {Form} from './Form';
+import {Form} from 'Plaisio/Form/Form';
 
 export class FormPackage extends Form
 {
   // Nothing to implement.
 }
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 0fae05d803c8d912af100a3c33036d84
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 9e498a98d0c896e80a5d313cab5e5d4c

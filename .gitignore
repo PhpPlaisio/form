@@ -3,7 +3,7 @@
 /bin/
 /composer.lock
 /doc/
-/node_modules
+/node_modules/
 /package-lock.json
 /plaisio-assets.csv
 /test/coverage.xml
@@ -11,5 +11,6 @@
 /vendor/
 /www/js/**/*.js
 /www/js/**/*.map
-/www/js/Plaisio/Helper
-/www/js/Plaisio/Table
+/www/js/Plaisio/Helper/
+/www/js/Plaisio/Kernel/
+/www/js/Plaisio/Table/

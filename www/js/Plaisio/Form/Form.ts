@@ -1,5 +1,8 @@
+import * as $ from 'jquery';
 import * as Cookies from 'js-cookie';
-import {Cast} from '../Helper/Cast';
+import {Cast} from 'Plaisio/Helper/Cast';
+import {Kernel} from 'Plaisio/Kernel/Kernel';
+import TriggeredEvent = JQuery.TriggeredEvent;
 
 /**
  * Class for forms.
@@ -12,21 +15,14 @@ export class Form
    */
   protected static forms: Form[] = [];
 
-  /**
-   * The jQuery object of the form.
-   */
-  private $form: JQuery;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
    * @param $form The jQuery object of the form.
    */
-  public constructor($form: JQuery)
+  public constructor(private $form: JQuery<Element>)
   {
-    this.$form = $form;
-
     // Install event handlers.
     const that = this;
     this.$form.on('submit', function ()
@@ -39,28 +35,22 @@ export class Form
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Registers form that matches a jQuery selector as a Form.
-   *
-   * @param selector The jQuery selector.
+   * Registers form as a Form.
    */
-  public static registerForm(selector: string): void
+  public static init(): void
   {
-    const that = this;
-
-    $(selector).each(function ()
+    const $body = $('body');
+    $body.on(Kernel.eventTypeBeefyHtmlAdded, function (event: TriggeredEvent, html: HTMLElement)
     {
-      let $form = $(this);
-
-      if (!$form.is('form'))
+      $(html).find('form').each(function ()
       {
-        $form = $form.find('form').first();
-      }
-
-      if (!$form.hasClass('is-registered'))
-      {
-        Form.forms.push(new that($form));
-        $form.addClass('is-registered');
-      }
+        const $form = $(this);
+        if (!$form.hasClass('is-registered'))
+        {
+          Form.forms.push(new Form($form));
+          $form.addClass('is-registered');
+        }
+      });
     });
   }
 
@@ -79,4 +69,4 @@ export class Form
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: aa3a1c176faa77acfb929d2d1f0167b4
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: beca2bccf50a3093b4ac97f05240c4f5
