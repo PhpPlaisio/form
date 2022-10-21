@@ -39,10 +39,9 @@ export class Form
    */
   public static init(): void
   {
-    const $body = $('body');
-    $body.on(Kernel.eventTypeBeefyHtmlAdded, function (event: TriggeredEvent, html: HTMLElement)
+    Kernel.onBeefyHtmlAdded(function (event: TriggeredEvent, $html: JQuery)
     {
-      $(html).find('form').each(function ()
+      $html.find('form').each(function ()
       {
         const $form = $(this);
         if (!$form.hasClass('is-registered'))
@@ -69,4 +68,4 @@ export class Form
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: beca2bccf50a3093b4ac97f05240c4f5
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: a39a096a37bff53d222f579cbcf1990d
