@@ -106,10 +106,13 @@ class DateCleaner implements Cleaner
     $date = \DateTime::createFromFormat($this->format, $value);
     if ($date)
     {
-      // Note: String '2000-02-30' will bee transformed to date '2000-03-01' with a warning. We consider this as an
+      // Note: String '2000-02-30' will be transformed to date '2000-03-01' with a warning. We consider this as an
       // invalid date.
       $tmp = $date::getLastErrors();
-      if ($tmp['warning_count']===0) return $date->format('Y-m-d');
+      if ($tmp===false || (isset($tmp['warning_count']) && $tmp['warning_count']===0))
+      {
+        return $date->format('Y-m-d');
+      }
     }
 
     return $value;
