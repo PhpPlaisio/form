@@ -22,8 +22,8 @@
 <a href="https://packagist.org/packages/plaisio/form"><img src="https://poser.pugx.org/plaisio/form/v/stable" alt="Latest Stable Version"/></a>
 </td>
 <td>
-<a href="https://travis-ci.org/PhpPlaisio/form"><img src="https://travis-ci.org/PhpPlaisio/form.svg?branch=master" alt="Build Status"/></a><br/>
-<a href="https://scrutinizer-ci.com/g/PhpPlaisio/form/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/form/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+<a href="https://github.com/PhpPlaisio/form/actions/workflows/unit.yml"><img src="https://github.com/PhpPlaisio/form/actions/workflows/unit.yml/badge.svg" alt="Build Status"/></a><br/>
+<a href="https://codecov.io/gh/PhpPlaisio/form"><img src="https://codecov.io/gh/PhpPlaisio/form/branch/master/graph/badge.svg" alt="Code Coverage"/></a>
 </td>
 <td>
 <a href="https://scrutinizer-ci.com/g/PhpPlaisio/form/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/form/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
