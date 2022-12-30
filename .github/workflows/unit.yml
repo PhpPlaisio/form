@@ -41,6 +41,9 @@ jobs:
       - name: "Install dependencies with Composer"
         run:  "composer update --no-ansi --no-interaction --no-progress"
 
+      - name: "Add properties to the kernel"
+        run:  "bin/plaisio --no-ansi plaisio:kernel-properties"
+
       - name: "Run tests with PHPUnit"
         run:  "bin/phing unit"
 
