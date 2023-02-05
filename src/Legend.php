@@ -72,7 +72,7 @@ class Legend
    * @since 1.0.0
    * @api
    */
-  public function setLegendText($text): self
+  public function setLegendText(mixed $text): self
   {
     $this->legend = Html::txt2Html($text);
 

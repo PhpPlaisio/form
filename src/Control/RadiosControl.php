@@ -74,7 +74,7 @@ class RadiosControl extends SimpleControl
    *
    * @var mixed
    */
-  protected $value = null;
+  protected mixed $value = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -127,7 +127,7 @@ class RadiosControl extends SimpleControl
   /**
    * Sets the map from the keys in the options to attribute names of the input element.
    *
-   * When a key does not exists in an option the attribute will not be generated. The following attributes will ignored:
+   * When a key does not exist in an option the attribute will not be generated. The following attributes will ignored:
    * <ul>
    * <li> type
    * <li> name
@@ -150,7 +150,7 @@ class RadiosControl extends SimpleControl
   /**
    * Sets the map from the keys in the options to attribute names of the label element.
    *
-   * When a key does not exists in an option the attribute will not be generated. The following attribute will ignored:
+   * When a key does not exist in an option the attribute will not be generated. The following attribute will ignored:
    * <ul>
    * <li> for
    * </ul>

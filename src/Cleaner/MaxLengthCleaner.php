@@ -38,12 +38,12 @@ class MaxLengthCleaner implements Cleaner
    *
    * @param mixed $value The submitted value.
    *
-   * @return mixed
+   * @return string|null
    *
    * @since 1.0.0
    * @api
    */
-  public function clean($value)
+  public function clean(mixed $value): ?string
   {
     if ($value==='' || $value===null)
     {

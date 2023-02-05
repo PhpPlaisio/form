@@ -49,7 +49,7 @@ class DateFormatter implements Formatter
    * @since 1.0.0
    * @api
    */
-  public function format($value)
+  public function format(mixed $value): mixed
   {
     if ($value===null) return null;
 

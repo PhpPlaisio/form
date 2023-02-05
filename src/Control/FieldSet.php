@@ -22,7 +22,7 @@ class FieldSet extends ComplexControl
    *
    * @var string|array|null
    */
-  private $additionalClasses = null;
+  private string|array|null $additionalClasses = null;
 
   /**
    * The legend of this fieldset.
@@ -36,7 +36,7 @@ class FieldSet extends ComplexControl
    *
    * @var string|array|null
    */
-  private $subClasses = 'fieldset';
+  private string|array|null $subClasses = 'fieldset';
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -76,7 +76,7 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  public function setAdditionalClasses($additionalClasses): FieldSet
+  public function setAdditionalClasses(array|string|null $additionalClasses): FieldSet
   {
     $this->additionalClasses = $additionalClasses;
 
@@ -112,7 +112,7 @@ class FieldSet extends ComplexControl
    * @since 1.0.0
    * @api
    */
-  public function setSubClasses($subClasses): FieldSet
+  public function setSubClasses(array|string|null $subClasses): FieldSet
   {
     $this->subClasses = $subClasses;
 

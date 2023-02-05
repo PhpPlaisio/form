@@ -10,13 +10,13 @@ use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\RenderWalker;
 
 /**
- * Control for setting the submit name of another control.
+ * Control for setting the submit-name of another control.
  */
 class TestControl extends SimpleControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the submit name of a control.
+   * Sets the submit-name of a control.
    *
    * @param Control $control The control.
    */

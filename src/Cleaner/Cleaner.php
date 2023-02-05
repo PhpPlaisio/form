@@ -19,7 +19,7 @@ interface Cleaner
    * @since 1.0.0
    * @api
    */
-  public function clean($value);
+  public function clean(mixed $value): mixed;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

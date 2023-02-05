@@ -10,7 +10,7 @@ class PrepareWalker
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The submit name of the control.
+   * The submit-name of the control.
    *
    * @var string
    */
@@ -20,7 +20,7 @@ class PrepareWalker
   /**
    * Object constructor.
    *
-   * @param string $submitName The submit name of the control.
+   * @param string $submitName The submit-name of the control.
    */
   public function __construct(string $submitName)
   {
@@ -31,7 +31,7 @@ class PrepareWalker
   /**
    * Descends into the control tree.
    *
-   * @param string $submitName The submit name of the control.
+   * @param string $submitName The submit-name of the control.
    *
    * @return $this
    */
@@ -42,7 +42,7 @@ class PrepareWalker
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the submit name of the parent form control.
+   * Returns the submit-name of the parent form control.
    *
    * @return string
    */

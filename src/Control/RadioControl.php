@@ -53,7 +53,7 @@ class RadioControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function setAttrValue($value): self
+  public function setAttrValue(mixed $value): self
   {
     $this->attributes['value'] = $value;
 

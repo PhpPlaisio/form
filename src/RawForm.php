@@ -341,7 +341,7 @@ class RawForm implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getSubmittedValue(): array
+  public function getSubmittedValue(): mixed
   {
     return $this->getValues();
   }

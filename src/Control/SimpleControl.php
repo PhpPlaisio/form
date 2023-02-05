@@ -87,7 +87,7 @@ abstract class SimpleControl extends Control
    *
    * @var mixed
    */
-  protected $value = null;
+  protected mixed $value = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -146,7 +146,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function getSubmittedValue()
+  public function getSubmittedValue(): mixed
   {
     return $this->value;
   }
@@ -264,7 +264,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setAttrMax($value): self
+  public function setAttrMax(mixed $value): self
   {
     $this->attributes['max'] = $value;
 
@@ -300,7 +300,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setAttrMin($value): self
+  public function setAttrMin(mixed $value): self
   {
     $this->attributes['min'] = $value;
 
@@ -408,7 +408,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setAttrStep($value): self
+  public function setAttrStep(mixed $value): self
   {
     $this->attributes['step'] = $value;
 
@@ -529,7 +529,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setLabelText($text): self
+  public function setLabelText(mixed $text): self
   {
     $this->label = Html::txt2Html($text);
 
@@ -547,7 +547,7 @@ abstract class SimpleControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setValue($value): self
+  public function setValue(mixed $value): self
   {
     $this->value = $value;
 
@@ -588,7 +588,7 @@ abstract class SimpleControl extends Control
    *
    * @return mixed
    */
-  protected function clean($value)
+  protected function clean(mixed $value): mixed
   {
     foreach ($this->cleaners as $cleaner)
     {

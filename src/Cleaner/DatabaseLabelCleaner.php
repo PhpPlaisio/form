@@ -35,9 +35,9 @@ class DatabaseLabelCleaner implements Cleaner
    *
    * @param mixed $value The submitted value.
    *
-   * @return mixed
+   * @return string|null
    */
-  public function clean($value)
+  public function clean(mixed $value): ?string
   {
     if ($value==='' || $value===null)
     {

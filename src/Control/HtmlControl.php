@@ -55,7 +55,7 @@ class HtmlControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function getSubmittedValue()
+  public function getSubmittedValue(): mixed
   {
     return $this->value;
   }
@@ -102,7 +102,7 @@ class HtmlControl extends Control
    * @since 1.0.0
    * @api
    */
-  public function setText($text): self
+  public function setText(mixed $text): self
   {
     $this->value = Html::txt2Html($text);
 

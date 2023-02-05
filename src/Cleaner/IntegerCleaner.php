@@ -34,7 +34,7 @@ class IntegerCleaner implements Cleaner
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a submitted value casted to an integer.
+   * Returns a submitted value cast to an integer.
    *
    * @param mixed $value The submitted value.
    *
@@ -43,7 +43,7 @@ class IntegerCleaner implements Cleaner
    * @since 1.0.0
    * @api
    */
-  public function clean($value)
+  public function clean(mixed $value): mixed
   {
     if ($value==='' || $value===null)
     {

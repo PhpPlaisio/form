@@ -56,7 +56,7 @@ class TestControl extends Control
   /**
    * @inheritDoc
    */
-  public function getSubmittedValue()
+  public function getSubmittedValue(): mixed
   {
     return $this->value;
   }

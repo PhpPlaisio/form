@@ -198,7 +198,7 @@ abstract class Control
    * @since 1.0.0
    * @api
    */
-  abstract public function getSubmittedValue();
+  abstract public function getSubmittedValue(): mixed;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

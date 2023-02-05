@@ -175,7 +175,7 @@ class LoadWalkerTest extends TestCase
   public function testGetWhitelistValueByPath5(): void
   {
     $this->expectException(\LogicException::class);
-    $this->expectErrorMessage('Branch Z does not exists at path /.');
+    $this->expectExceptionMessage('Branch Z does not exists at path /.');
     TestControl::$testName        = 'getWhitelistValueByPath(/Z)';
     TestControl::$testControlName = 'CCC';
 

@@ -152,12 +152,12 @@ class AmbiguityCleaner implements Cleaner
    *
    * @param mixed $value The submitted value.
    *
-   * @return mixed
+   * @return string|null
    *
    * @since 1.0.0
    * @api
    */
-  public function clean($value)
+  public function clean(mixed $value): ?string
   {
     // Return null for empty strings.
     if ($value==='' || $value===null)
@@ -182,7 +182,7 @@ class AmbiguityCleaner implements Cleaner
     }
 
     // Restore EOL for DOS users.
-    if (PHP_EOL!="\n")
+    if (PHP_EOL!=="\n")
     {
       $clean = str_replace("\n", PHP_EOL, $clean);
     }

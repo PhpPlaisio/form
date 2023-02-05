@@ -188,7 +188,7 @@ class LoadWalker
    *
    * @return mixed
    */
-  public function getSubmittedValue($submitKey)
+  public function getSubmittedValue(int|string $submitKey): mixed
   {
     if ($submitKey==='')
     {
@@ -206,7 +206,7 @@ class LoadWalker
    *
    * @return mixed
    */
-  public function getWhitelistValueByPath(string $path)
+  public function getWhitelistValueByPath(string $path): mixed
   {
     if (str_starts_with($path, '/'))
     {
@@ -260,7 +260,7 @@ class LoadWalker
    *
    * @return mixed
    */
-  public function getWithListValue(string $name)
+  public function getWithListValue(string $name): mixed
   {
     return $this->whiteListValues[$name] ?? null;
   }
@@ -271,7 +271,7 @@ class LoadWalker
    *
    * @param int|string $name The name of the current form control.
    */
-  public function setChanged($name): void
+  public function setChanged(int|string $name): void
   {
     $this->changedControls[$name] = true;
   }
@@ -283,7 +283,7 @@ class LoadWalker
    * @param int|string $name  The name of the current form control.
    * @param mixed      $value The whitelisted values.
    */
-  public function setWithListValue($name, $value): void
+  public function setWithListValue(int|string $name, mixed $value): void
   {
     $this->whiteListValues[$name] = $value;
   }

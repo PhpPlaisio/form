@@ -28,7 +28,10 @@ class TidyCleaner implements Cleaner
    */
   public static function get(): TidyCleaner
   {
-    if (self::$singleton===null) self::$singleton = new self();
+    if (self::$singleton===null)
+    {
+      self::$singleton = new self();
+    }
 
     return self::$singleton;
   }
@@ -80,12 +83,12 @@ class TidyCleaner implements Cleaner
    *
    * @param mixed $value The submitted HTML snippet.
    *
-   * @return mixed
+   * @return string|null
    *
    * @since 1.0.0
    * @api
    */
-  public function clean($value)
+  public function clean(mixed $value): ?string
   {
     if ($value==='' || $value===null)
     {
