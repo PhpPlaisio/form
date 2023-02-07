@@ -22,6 +22,7 @@ use SetBased\Exception\FallenException;
  *
  * @property-read RenderWalker $renderWalker The render walker.
  */
+#[\AllowDynamicProperties]
 class RawForm implements CompoundControl
 {
   //--------------------------------------------------------------------------------------------------------------------
