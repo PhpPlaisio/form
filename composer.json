@@ -10,7 +10,7 @@
     "php": ">=8.1",
     "ext-mbstring": "*",
     "ext-tidy": "*",
-    "plaisio-ts/helper-cast": "^2.0.0",
+    "plaisio-ts/helper-cast": "^2.1.0",
     "plaisio-ts/kernel": "^2.1.0",
     "plaisio/exception": "^1.2.0",
     "plaisio/helper-html": "^4.1.0",
@@ -28,7 +28,7 @@
     "ext-dom": "*",
     "phing/phing": "^3.0.0-RC4",
     "phpunit/phpunit": "^9.6.3",
-    "plaisio/console-kernel": "^1.0.0",
+    "plaisio/console-kernel": "^1.0.1",
     "plaisio/console-type-script": "^1.0.0",
     "plaisio/request-core": "^0.13.0"
   },
