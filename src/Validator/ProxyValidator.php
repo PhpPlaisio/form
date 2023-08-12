@@ -43,7 +43,7 @@ class ProxyValidator implements Validator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if the value of the form control meets the conditions of this validator. Returns false otherwise.
+   * Returns whether the value of the form control meets the conditions of this validator.
    *
    * @param Control $control The form control.
    *

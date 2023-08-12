@@ -34,7 +34,7 @@ class DateValidator implements Validator
       return true;
     }
 
-    // Only a string can hold a date.
+    // Only a string can hold a valid value.
     if (!is_string($value))
     {
       return false;

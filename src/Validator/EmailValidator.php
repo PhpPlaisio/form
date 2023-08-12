@@ -35,7 +35,7 @@ class EmailValidator implements Validator
       return true;
     }
 
-    // Only string can hold an email address.
+    // Only strings can hold a valid value.
     if (!is_string($value))
     {
       return false;

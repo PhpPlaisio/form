@@ -35,7 +35,7 @@ class HttpValidator implements Validator
       return true;
     }
 
-    // Only strings can be valid URLs.
+    // Only strings can hold a valid value.
     if (!is_string($value))
     {
       return false;

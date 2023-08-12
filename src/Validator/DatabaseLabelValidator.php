@@ -31,7 +31,9 @@ class DatabaseLabelValidator implements Validator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param Control $control
+   * Returns whether the submitted value of a form control is a valid database label.
+   *
+   * @param Control $control The form control.
    *
    * @return bool
    */
@@ -45,7 +47,7 @@ class DatabaseLabelValidator implements Validator
       return true;
     }
 
-    // Only a string can hold a date.
+    // Only strings can hold valid values.
     if (!is_string($value))
     {
       return false;

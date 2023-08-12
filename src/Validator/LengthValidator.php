@@ -44,7 +44,7 @@ class LengthValidator implements Validator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if the length of the value of a form control is within the specified range. Otherwise returns false.
+   * Returns whether the length of the value of a form control is within the specified range.
    *
    * Note:
    * * Empty values are considered valid.

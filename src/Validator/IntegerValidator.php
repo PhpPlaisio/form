@@ -91,7 +91,7 @@ class IntegerValidator implements Validator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if the value of the form control is an integer and with the specified range. Otherwise returns false.
+   * Returns whether the value of a form control is an integer and within the specified range.
    *
    * Note:
    * * Empty values are considered valid.
@@ -116,7 +116,7 @@ class IntegerValidator implements Validator
       return true;
     }
 
-    // Only strings and numbers can be valid values.
+    // Only strings and numbers can hold valid values.
     if (!is_string($value) && !is_numeric($value))
     {
       $control->setErrorMessage('Not a whole number.');

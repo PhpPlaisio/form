@@ -12,7 +12,7 @@ class MandatoryValidator implements Validator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if the form control has a value.
+   * Returns whether a form control has a value.
    *
    * Note:
    * * Empty values are considered invalid.

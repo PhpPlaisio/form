@@ -12,11 +12,11 @@ interface CompoundValidator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Validates a compound control (e.g. a complex control or a form).
+   * Returns whether the values of a compound control meets the conditions of this validator.
    *
    * @param CompoundControl $control The compound control to be validated.
    *
-   * @return bool On Successful validation returns true, otherwise false.
+   * @return bool
    *
    * @since 1.0.0
    * @api
