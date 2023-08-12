@@ -304,7 +304,10 @@ class RadiosControl extends SimpleControl
     {
       foreach ($this->inputAttributesMap as $key => $name)
       {
-        if (isset($option[$key])) $attributes[$name] = $option[$key];
+        if (isset($option[$key]))
+        {
+          $attributes[$name] = $option[$key];
+        }
       }
     }
 
@@ -345,7 +348,10 @@ class RadiosControl extends SimpleControl
     {
       foreach ($this->labelAttributesMap as $key => $name)
       {
-        if (isset($option[$key])) $attributes[$name] = $option[$key];
+        if (isset($option[$key]))
+        {
+          $attributes[$name] = $option[$key];
+        }
       }
     }
 

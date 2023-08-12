@@ -88,7 +88,10 @@ class Form extends RawForm
   public function csrfCheck(): void
   {
     // Return immediately if CSRF check is disabled.
-    if (!$this->csrfCheck) return;
+    if (!$this->csrfCheck)
+    {
+      return;
+    }
 
     $control = $this->hiddenFieldSet->getFormControlByName('ses_csrf_token');
 

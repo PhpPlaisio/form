@@ -27,7 +27,10 @@ class UrlCleaner implements Cleaner
    */
   public static function get(): UrlCleaner
   {
-    if (self::$singleton===null) self::$singleton = new self();
+    if (self::$singleton===null)
+    {
+      self::$singleton = new self();
+    }
 
     return self::$singleton;
   }

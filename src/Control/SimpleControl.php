@@ -462,7 +462,7 @@ abstract class SimpleControl extends Control
     }
     else
     {
-      if ($name=='class' && isset($this->labelAttributes[$name]))
+      if ($name==='class' && isset($this->labelAttributes[$name]))
       {
         $this->labelAttributes[$name] .= ' ';
         $this->labelAttributes[$name] .= $value;

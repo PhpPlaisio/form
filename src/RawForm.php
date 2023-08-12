@@ -342,7 +342,7 @@ class RawForm implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getSubmittedValue(): mixed
+  public function getSubmittedValue(): array
   {
     return $this->getValues();
   }
@@ -440,8 +440,8 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the form controls of this form. The values of form controls for which no explicit value is set
-   * are left unchanged.
+   * Sets the values of the form controls of this form. The values of the form controls for which no explicit value is
+   * set are left unchanged.
    *
    * @param array|null $values The values as a nested array.
    *
@@ -548,8 +548,8 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the form controls of this form. The values of form controls for which no explicit value is set
-   * are set to null.
+   * Sets the values of the form controls of this form. The values of the form controls for which no explicit value is
+   * set are set to null.
    *
    * @param array|null $values The values as a nested array.
    *

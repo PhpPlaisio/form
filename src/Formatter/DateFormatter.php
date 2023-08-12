@@ -51,13 +51,19 @@ class DateFormatter implements Formatter
    */
   public function format(mixed $value): mixed
   {
-    if ($value===null) return null;
+    if ($value===null)
+    {
+      return null;
+    }
 
     $match = preg_match('/^(\d{4})-(\d{1,2})-(\d{1,2})$/', $value, $parts);
     $valid = ($match && checkdate((int)$parts[2], (int)$parts[3], (int)$parts[1]));
     if ($valid)
     {
-      if ($value===$this->openDate) return '';
+      if ($value===$this->openDate)
+      {
+        return '';
+      }
 
       $date = new \DateTime($value);
 

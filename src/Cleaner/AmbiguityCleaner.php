@@ -141,7 +141,10 @@ class AmbiguityCleaner implements Cleaner
    */
   public static function get(): AmbiguityCleaner
   {
-    if (self::$singleton===null) self::$singleton = new self();
+    if (self::$singleton===null)
+    {
+      self::$singleton = new self();
+    }
 
     return self::$singleton;
   }

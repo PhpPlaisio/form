@@ -153,7 +153,7 @@ class SelectControl extends SimpleControl
   /**
    * Sets the map from the keys in the options to attribute names of the option element.
    *
-   * Note the following attributes will ignored:
+   * Note the following attributes will be ignored:
    * <ul>
    * <li> checked
    * <li> value

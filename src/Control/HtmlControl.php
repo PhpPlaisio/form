@@ -24,22 +24,6 @@ class HtmlControl extends Control
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function htmlControl(RenderWalker $walker): string
-  {
-    $html = $this->prefix;
-    $html .= $this->value;
-    $html .= $this->postfix;
-
-    return $html;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
    */
   public function getSetValuesBase(array &$values): void
   {
@@ -58,6 +42,22 @@ class HtmlControl extends Control
   public function getSubmittedValue(): mixed
   {
     return $this->value;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function htmlControl(RenderWalker $walker): string
+  {
+    $html = $this->prefix;
+    $html .= $this->value;
+    $html .= $this->postfix;
+
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

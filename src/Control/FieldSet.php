@@ -47,7 +47,10 @@ class FieldSet extends ComplexControl
    */
   public function htmlControl(RenderWalker $walker): string
   {
-    if (empty($this->controls)) return '';
+    if (empty($this->controls))
+    {
+      return '';
+    }
 
     $this->addClasses($walker->getClasses($this->subClasses, $this->additionalClasses));
     if ($this->error)

@@ -26,7 +26,10 @@ class RemoveWhitespaceCleaner implements Cleaner
    */
   public static function get(): RemoveWhitespaceCleaner
   {
-    if (!self::$singleton) self::$singleton = new self();
+    if (!self::$singleton)
+    {
+      self::$singleton = new self();
+    }
 
     return self::$singleton;
   }
@@ -37,7 +40,7 @@ class RemoveWhitespaceCleaner implements Cleaner
    *
    * @param mixed $value The submitted value.
    *
-   * @return string|array|null
+   * @return string|null
    *
    * @since 1.0.0
    * @api

@@ -90,12 +90,18 @@ class ComplexControl extends Control implements CompoundControl
   {
     foreach ($this->controls as $control)
     {
-      if ($control->name===$name) return $control;
+      if ($control->name===$name)
+      {
+        return $control;
+      }
 
       if ($control instanceof ComplexControl)
       {
         $tmp = $control->findFormControlByName($name);
-        if ($tmp) return $tmp;
+        if ($tmp)
+        {
+          return $tmp;
+        }
       }
     }
 
@@ -235,25 +241,6 @@ class ComplexControl extends Control implements CompoundControl
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function htmlControl(RenderWalker $walker): string
-  {
-    $ret = $this->prefix;
-    foreach ($this->controls as $control)
-    {
-      $ret .= $control->htmlControl($walker);
-    }
-    $ret .= $this->postfix;
-
-    return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
    */
   public function getSetValuesBase(array &$values): void
   {
@@ -285,6 +272,25 @@ class ComplexControl extends Control implements CompoundControl
   public function getSubmittedValue(): mixed
   {
     return $this->values;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function htmlControl(RenderWalker $walker): string
+  {
+    $ret = $this->prefix;
+    foreach ($this->controls as $control)
+    {
+      $ret .= $control->htmlControl($walker);
+    }
+    $ret .= $this->postfix;
+
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

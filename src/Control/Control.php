@@ -415,8 +415,14 @@ abstract class Control
 
     if ($parentSubmitName!=='')
     {
-      if ($submitKey!=='') $this->submitName = $parentSubmitName.'['.$submitKey.']';
-      else                 $this->submitName = $parentSubmitName;
+      if ($submitKey!=='')
+      {
+        $this->submitName = $parentSubmitName.'['.$submitKey.']';
+      }
+      else
+      {
+        $this->submitName = $parentSubmitName;
+      }
     }
     else
     {
