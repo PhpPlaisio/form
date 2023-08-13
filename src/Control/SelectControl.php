@@ -120,13 +120,11 @@ class SelectControl extends SimpleControl
       }
     }
 
-    $html = $this->prefix;
-    $html .= $this->htmlPrefixLabel();
+    $html = $this->htmlPrefixLabel();
     $html .= Html::htmlNested(['tag'   => 'select',
                                'attr'  => $this->attributes,
                                'inner' => $inner]);
     $html .= $this->htmlPostfixLabel();
-    $html .= $this->postfix;
 
     return $html;
   }

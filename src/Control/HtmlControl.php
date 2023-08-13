@@ -53,11 +53,7 @@ class HtmlControl extends Control
    */
   public function htmlControl(RenderWalker $walker): string
   {
-    $html = $this->prefix;
-    $html .= $this->value;
-    $html .= $this->postfix;
-
-    return $html;
+    return $this->value;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

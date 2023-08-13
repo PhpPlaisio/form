@@ -63,31 +63,6 @@ abstract class SimpleControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests for methods setPrefix() and setPostfix().
-   */
-  public function testPrefixAndPostfix(): void
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = $this->createControl('name');
-    $input->setValue('1')
-          ->setPrefix('Hello')
-          ->setPostfix('World');
-    $fieldset->addFormControl($input);
-
-    $html = $form->htmlForm();
-
-    $pos = strpos($html, 'Hello<input');
-    self::assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '/>World');
-    self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * TTest submitted values are displayed in the form controls after to form has been executed.
    */
   public function testSubmittedValuesAreEchoed(): void

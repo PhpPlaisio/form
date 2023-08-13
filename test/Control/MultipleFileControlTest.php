@@ -44,30 +44,6 @@ class MultipleFileControlTest extends PlaisioTestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Tests for methods setPrefix() and setPostfix().
-   */
-  public function testPrefixAndPostfix(): void
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new MultipleFileControl('name');
-    $input->setPrefix('Hello')
-          ->setPostfix('World');
-    $fieldset->addFormControl($input);
-
-    $html = $form->htmlForm();
-
-    $pos = strpos($html, 'Hello<input');
-    self::assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '/>World');
-    self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------

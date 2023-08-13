@@ -186,30 +186,6 @@ abstract class PushControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests for methods setPrefix() and setPostfix().
-   */
-  public function testPrefixAndPostfix(): void
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = $this->createControl('name');
-    $fieldset->addFormControl($input);
-
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
-    $html = $form->htmlForm();
-
-    $pos = strpos($html, 'Hello<input');
-    self::assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '/>World');
-    self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Method searchSubmitHandler must return the appropriate handler.
    */
   public function testSearchSubmitHandler1(): void

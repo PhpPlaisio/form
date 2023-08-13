@@ -60,14 +60,6 @@ abstract class Control
   protected ?Obfuscator $obfuscator = null;
 
   /**
-   * The HTML code that will be appended after the HTML code of this form control.
-   *
-   * @var string
-   * @deprecated Use class WrapperControl instead.
-   */
-  protected string $postfix = '';
-
-  /**
    * The HTML code that will be inserted before the HTML code of this form control.
    *
    * @var string
@@ -312,40 +304,6 @@ abstract class Control
   public function setObfuscator(Obfuscator $obfuscator): self
   {
     $this->obfuscator = $obfuscator;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the HTML code that is inserted before the HTML code of this form control.
-   *
-   * @param string $htmlSnippet The HTML prefix.
-   *
-   * @return $this
-   *
-   * @deprecated Use class WrapperControl instead.
-   */
-  public function setPostfix(string $htmlSnippet): self
-  {
-    $this->postfix = $htmlSnippet;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the HTML code that is appended after the HTML code of this form control.
-   *
-   * @param string $htmlSnippet The HTML postfix.
-   *
-   * @return $this
-   *
-   * @deprecated Use class WrapperControl instead.
-   */
-  public function setPrefix(string $htmlSnippet): self
-  {
-    $this->prefix = $htmlSnippet;
 
     return $this;
   }

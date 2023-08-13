@@ -222,30 +222,6 @@ class SelectControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests for methods setPrefix() and setPostfix().
-   */
-  public function testPrefixAndPostfix(): void
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new SelectControl('name');
-    $input->setPrefix('Hello');
-    $input->setPostfix('World');
-    $fieldset->addFormControl($input);
-
-    $html = $form->htmlForm();
-
-    $pos = strpos($html, 'Hello<select');
-    self::assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '</select>World');
-    self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Tests for setValue.
    *
    * @param mixed $value     The new value for the radios form control.

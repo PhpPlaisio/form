@@ -40,14 +40,12 @@ trait InputElement
       $this->attributes['value'] = $this->value;
     }
 
-    $ret = $this->prefix;
-    $ret .= $this->htmlPrefixLabel();
-    $ret .= Html::htmlNested(['tag'  => 'input',
+    $html = $this->htmlPrefixLabel();
+    $html .= Html::htmlNested(['tag'  => 'input',
                               'attr' => $this->attributes]);
-    $ret .= $this->htmlPostfixLabel();
-    $ret .= $this->postfix;
+    $html .= $this->htmlPostfixLabel();
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

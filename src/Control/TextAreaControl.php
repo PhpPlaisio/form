@@ -45,13 +45,11 @@ class TextAreaControl extends SimpleControl
 
     $this->attributes['name'] = $this->submitName;
 
-    $html = $this->prefix;
-    $html .= $this->htmlPrefixLabel();
+    $html = $this->htmlPrefixLabel();
     $html .= Html::htmlNested(['tag'  => 'textarea',
                                'attr' => $this->attributes,
                                'text' => $this->value]);
     $html .= $this->htmlPostfixLabel();
-    $html .= $this->postfix;
 
     return $html;
   }

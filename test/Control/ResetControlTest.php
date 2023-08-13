@@ -77,31 +77,6 @@ class ResetControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests for methods setPrefix() and setPostfix().
-   */
-  public function testPrefixAndPostfix(): void
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new ResetControl('name');
-    $input->setValue('1')
-          ->setPrefix('Hello')
-          ->setPostfix('World');
-    $fieldset->addFormControl($input);
-
-    $html = $form->htmlForm();
-
-    $pos = strpos($html, 'Hello<input');
-    self::assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '/>World');
-    self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Method setValue() has no effect for buttons.
    */
   public function testSetValues(): void

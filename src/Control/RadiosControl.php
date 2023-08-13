@@ -114,13 +114,9 @@ class RadiosControl extends SimpleControl
       }
     }
 
-    $html = $this->prefix;
-    $html .= Html::htmlNested(['tag'   => 'span',
+    return Html::htmlNested(['tag'   => 'span',
                                'attr'  => $this->attributes,
                                'inner' => $inner]);
-    $html .= $this->postfix;
-
-    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

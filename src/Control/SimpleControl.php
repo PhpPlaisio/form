@@ -627,14 +627,14 @@ abstract class SimpleControl extends Control
   {
     if ($this->labelPosition===self::LABEL_POSITION_POST)
     {
-      $ret = $this->htmlLabel();
+      $html = $this->htmlLabel();
     }
     else
     {
-      $ret = '';
+      $html = '';
     }
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -665,14 +665,14 @@ abstract class SimpleControl extends Control
 
     if ($this->labelPosition===self::LABEL_POSITION_PRE)
     {
-      $ret = $this->htmlLabel();
+      $html = $this->htmlLabel();
     }
     else
     {
-      $ret = '';
+      $html = '';
     }
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

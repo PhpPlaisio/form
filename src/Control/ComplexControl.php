@@ -283,14 +283,13 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function htmlControl(RenderWalker $walker): string
   {
-    $ret = $this->prefix;
+    $html = '';
     foreach ($this->controls as $control)
     {
-      $ret .= $control->htmlControl($walker);
+      $html .= $control->htmlControl($walker);
     }
-    $ret .= $this->postfix;
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

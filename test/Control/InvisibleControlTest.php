@@ -72,30 +72,6 @@ class InvisibleControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests for methods setPrefix() and setPostfix().
-   */
-  public function testPrefixAndPostfix(): void
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new InvisibleControl('name');
-    $input->setPrefix('Hello')
-          ->setPostfix('World');
-    $fieldset->addFormControl($input);
-
-    $html = $form->htmlForm();
-
-    $pos = strpos($html, 'Hello<input');
-    self::assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '/>World');
-    self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns an instance of the form control to be tested.
    *
    * @param string $name the name of the form control.

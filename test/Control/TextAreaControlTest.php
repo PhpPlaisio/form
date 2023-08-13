@@ -77,30 +77,6 @@ class TextAreaControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests for methods setPrefix() and setPostfix().
-   */
-  public function testPrefixAndPostfix(): void
-  {
-    $form     = new RawForm();
-    $fieldset = new FieldSet();
-    $form->addFieldSet($fieldset);
-
-    $input = new TextAreaControl('name');
-    $input->setPrefix('Hello')
-          ->setPostfix('World');
-    $fieldset->addFormControl($input);
-
-    $html = $form->htmlForm();
-
-    $pos = strpos($html, 'Hello<textarea');
-    self::assertNotEquals(false, $pos);
-
-    $pos = strpos($html, '/textarea>World');
-    self::assertNotEquals(false, $pos);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Test cleaning is done before testing value of the form control has changed.
    */
   public function testPruneWhitespaceNoChanged(): void

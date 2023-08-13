@@ -31,11 +31,9 @@ class CheckboxControl extends SimpleControl
     $this->attributes['name']    = $this->submitName;
     $this->attributes['checked'] = !empty($this->value);
 
-    $html = $this->prefix;
-    $html .= $this->htmlPrefixLabel();
+    $html = $this->htmlPrefixLabel();
     $html .= Html::htmlNested(['tag' => 'input', 'attr' => $this->attributes]);
     $html .= $this->htmlPostfixLabel();
-    $html .= $this->postfix;
 
     return $html;
   }
