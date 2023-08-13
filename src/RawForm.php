@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form;
 
+use Plaisio\Form\Arranger\Arranger;
 use Plaisio\Form\Cleaner\CompoundCleaner;
 use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\CompoundControl;
@@ -91,6 +92,7 @@ class RawForm implements CompoundControl
   protected array $values = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -247,8 +249,9 @@ class RawForm implements CompoundControl
   /**
    * Returns all form control names of which the value has been changed.
    *
-   * @return array A nested array of form control names (keys are form control names and (for complex form controls)
-   *               values are arrays or (for simple form controls) true).
+   * @return array A nested array of form control names. Keys are form control names and for complex form controls
+   *               values are arrays, for simple form controls value is true.
+   *
    * @note  This method should only be invoked after method Form::loadSubmittedValues() has been invoked.
    *
    * @since 1.0.0
@@ -257,6 +260,20 @@ class RawForm implements CompoundControl
   public function getChangedControls(): array
   {
     return $this->changedControls;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns all child form controls (i.e. fieldsets) of this compound form control.
+   *
+   * @return Control[]
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getControls(): array
+  {
+    return $this->fieldSets->getControls();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -287,8 +304,9 @@ class RawForm implements CompoundControl
   /**
    * Returns all form controls which failed one or more validation tests.
    *
-   * @return array A nested array of form control names (keys are form control names and (for complex form controls)
-   *               values are arrays or (for simple form controls) true).
+   * @return array A nested array of form control names. Keys are form control names and for complex form controls
+   *               values are arrays and for simple form controls values is true.
+   *
    * @note  This method should only be invoked after method Form::validate() has been invoked.
    *
    * @since 1.0.0
@@ -317,7 +335,7 @@ class RawForm implements CompoundControl
   /**
    * Returns the current values of the form controls of this form. This method can be invoked before
    * loadSubmittedValues has been invoked. The values returned are the values set with {@link setValues},
-   * {@link mergeValues}, and {@link SimpleControl.setValue}. These values might not be white listed.
+   * {@link mergeValues}, and {@link SimpleControl.setValue}. These values might not be whitelisted.
    * After {@link loadSubmittedValues} has been invoked use {@link getValues}.
    *
    * @return array
@@ -451,6 +469,24 @@ class RawForm implements CompoundControl
   public function mergeValues(?array $values): void
   {
     $this->fieldSets->mergeValuesBase($values);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the arranger for arranging the HTML code of the child controls of the compound control.
+   *
+   * @param Arranger $arranger The new arranger of this compound control.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setArranger(Arranger $arranger): self
+  {
+    $this->fieldSets->setArranger($arranger);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

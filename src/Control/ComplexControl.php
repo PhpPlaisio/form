@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Arranger\Arranger;
+use Plaisio\Form\Arranger\LinearArranger;
 use Plaisio\Form\Cleaner\CompoundCleaner;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
@@ -42,6 +44,29 @@ class ComplexControl extends Control implements CompoundControl
    * @var array
    */
   protected array $values = [];
+
+  /**
+   * The arranger for arranging the HTML code of the child form controls.
+   *
+   * @var Arranger
+   */
+  private Arranger $arranger;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Object constructor.
+   *
+   * @param string|null $name The name of this complex form control.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function __construct(?string $name = '')
+  {
+    parent::__construct($name);
+
+    $this->arranger = new LinearArranger();
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -169,6 +194,17 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns all child form controls of this complex form control.
+   *
+   * @return Control[]
+   */
+  public function getControls(): array
+  {
+    return $this->controls;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns an array of all error messages of the child form controls of this complex form controls.
    *
    * @param bool $recursive If set error messages of complex child controls of this complex form controls are fetched
@@ -214,7 +250,7 @@ class ComplexControl extends Control implements CompoundControl
     $control = $this->findFormControlByName($name);
     if ($control===null)
     {
-      throw new LogicException("Form control with name '%s' does not exists.", $name);
+      throw new LogicException("Form control with name '%s' does not exist.", $name);
     }
 
     return $control;
@@ -232,7 +268,7 @@ class ComplexControl extends Control implements CompoundControl
     $control = $this->findFormControlByPath($path);
     if ($control===null)
     {
-      throw new LogicException("Form control with path '%s' does not exists.", $path);
+      throw new LogicException("Form control with path '%s' does not exist.", $path);
     }
 
     return $control;
@@ -269,7 +305,7 @@ class ComplexControl extends Control implements CompoundControl
    * @since 1.0.0
    * @api
    */
-  public function getSubmittedValue(): mixed
+  public function getSubmittedValue(): array
   {
     return $this->values;
   }
@@ -283,13 +319,7 @@ class ComplexControl extends Control implements CompoundControl
    */
   public function htmlControl(RenderWalker $walker): string
   {
-    $html = '';
-    foreach ($this->controls as $control)
-    {
-      $html .= $control->htmlControl($walker);
-    }
-
-    return $html;
+    return $this->arranger->htmlArrange($walker, $this);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -396,6 +426,24 @@ class ComplexControl extends Control implements CompoundControl
     }
 
     return null;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the arranger for arranging the HTML code of the child form controls of the complex form control.
+   *
+   * @param Arranger $arranger The new arranger of this complex form control.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setArranger(Arranger $arranger): self
+  {
+    $this->arranger = $arranger;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Arranger\Arranger;
 use Plaisio\Form\Cleaner\CompoundCleaner;
 
 /**
@@ -53,6 +54,17 @@ interface CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns all child form controls of this compound form control.
+   *
+   * @return Control[]
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getControls(): array;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Searches for a form control with by name. If more than one form control with the same name exists the first found
    * form control is returned. If no form control is found an exception is thrown.
    *
@@ -81,7 +93,7 @@ interface CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the name of this form control
+   * Returns the name of this form control.
    *
    * @return string
    *
@@ -100,6 +112,19 @@ interface CompoundControl
    * @api
    */
   public function getSubmittedValue(): mixed;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the arranger for arranging the HTML code of the child controls of the compound control.
+   *
+   * @param Arranger $arranger The new arranger of this compound control.
+   *
+   * @return $this
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setArranger(Arranger $arranger): self;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
