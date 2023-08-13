@@ -60,14 +60,6 @@ abstract class Control
   protected ?Obfuscator $obfuscator = null;
 
   /**
-   * The HTML code that will be inserted before the HTML code of this form control.
-   *
-   * @var string
-   * @deprecated Use class WrapperControl instead.
-   */
-  protected string $prefix = '';
-
-  /**
    * The submit-name or name in the generated HTML code of this form control.
    *
    * @var string
