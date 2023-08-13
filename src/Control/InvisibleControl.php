@@ -48,7 +48,7 @@ class InvisibleControl extends SimpleControl
    *
    * Note:
    * Always sets the white listed value to the value of this constant form control.
-   * Never uses whitelisted values and never sets the changed controls.
+   * Never uses whitelisted values and never sets the changed form controls.
    */
   protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {

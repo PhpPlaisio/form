@@ -8,7 +8,7 @@ use Plaisio\Helper\HtmlElement;
 use Plaisio\Helper\RenderWalker;
 
 /**
- * A complex control that wraps its child form controls in an HTML element (default a div container).
+ * A complex form control that wraps its child form controls in an HTML element (default a div container).
  */
 class WrapperControl extends ComplexControl
 {

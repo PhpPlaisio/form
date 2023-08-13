@@ -42,7 +42,7 @@ abstract class PushControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is hidden.
+   * Test form control is hidden.
    */
   public function testIsHidden(): void
   {
@@ -64,7 +64,7 @@ abstract class PushControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Method loadSubmittedValuesBase must set the white list value but not the change controls.
+   * Method loadSubmittedValuesBase must set the whitelist value but not the changed form controls.
    */
   public function testLoadSubmittedValues1(): void
   {
@@ -263,7 +263,7 @@ abstract class PushControlTest extends PlaisioTestCase
   /**
    * Returns a concrete instance of PushControl.
    *
-   * @param string|null $name The of the control.
+   * @param string|null $name The name of the form control.
    *
    * @return PushControl
    */

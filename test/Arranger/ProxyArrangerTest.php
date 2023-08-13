@@ -22,7 +22,7 @@ class ProxyArrangerTest extends PlaisioTestCase
    * Arrangers child form control in reverse order.
    *
    * @param RenderWalker    $walker        The object for walking the form control tree.
-   * @param CompoundControl $parentControl The parent control of which the child control must be arranged.
+   * @param CompoundControl $parentControl The parent form control of which the child form control must be arranged.
    *
    * @return string
    */

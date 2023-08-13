@@ -32,10 +32,10 @@ class ProxyArranger implements Arranger
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the arranged HTML code of the child controls of a compound control.
+   * Returns the arranged HTML code of the child form controls of a compound form control.
    *
    * @param RenderWalker    $walker        The object for walking the form control tree.
-   * @param CompoundControl $parentControl The parent control of which the child control must be arranged.
+   * @param CompoundControl $parentControl The parent form control of which the child form control must be arranged.
    *
    * @return string
    */

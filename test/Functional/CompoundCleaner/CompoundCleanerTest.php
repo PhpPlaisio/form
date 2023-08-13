@@ -10,7 +10,7 @@ use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\RawForm;
 
 /**
- * test for compound cleaner and changed controls.
+ * Test cases for compound cleaner and changed form controls.
  */
 class CompoundCleanerTest extends TestCase
 {

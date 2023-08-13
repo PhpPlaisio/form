@@ -6,15 +6,15 @@ namespace Plaisio\Form\Validator;
 use Plaisio\Form\Control\CompoundControl;
 
 /**
- * Interface for defining classes that validate compound controls (e.g. a complex control or a form).
+ * Interface for defining classes that validate compound form controls (e.g. a complex form control or a form).
  */
 interface CompoundValidator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether the values of a compound control meets the conditions of this validator.
+   * Returns whether the values of a compound form control meets the conditions of this validator.
    *
-   * @param CompoundControl $control The compound control to be validated.
+   * @param CompoundControl $control The compound form control to be validated.
    *
    * @return bool
    *

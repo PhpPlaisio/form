@@ -20,7 +20,7 @@ class ResetControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Method loadSubmittedValuesBase must set the white list value but not the change controls.
+   * Method loadSubmittedValuesBase must set the whitelist value but not the changed form controls.
    */
   public function testLoadSubmittedValues1(): void
   {

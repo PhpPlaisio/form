@@ -7,7 +7,7 @@ use Plaisio\Form\Cleaner\CompoundCleaner;
 use SetBased\Exception\LogicException;
 
 /**
- * Class for walking the control tree when loading submitted values.
+ * Class for walking the form control tree when loading submitted values.
  */
 class LoadWalker
 {
@@ -72,9 +72,9 @@ class LoadWalker
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Ascends upto the control tree.
+   * Ascends upto the form control tree.
    *
-   * @param string $name The name of the control.
+   * @param string $name The name of the form control.
    *
    * @return array
    */
@@ -106,9 +106,9 @@ class LoadWalker
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Descends into the control tree.
+   * Descends into the form control tree.
    *
-   * @param string $name      The name of the control.
+   * @param string $name      The name of the form control.
    * @param string $submitKey The submit key of the form control.
    *
    * @return $this
@@ -254,7 +254,7 @@ class LoadWalker
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the whitelisted value of the current control.
+   * Returns the whitelisted value of the current form control.
    *
    * @param string $name
    *

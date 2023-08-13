@@ -41,12 +41,12 @@ class SelectControlTest extends PlaisioTestCase
   {
     $cases = [];
 
-    // Setting the value to null and no value is been posted must result in null for the value of the form control.
+    // Setting the value to null and no value has been posted must result in null for the value of the form control.
     $cases[] = ['value'     => null,
                 'submitted' => null,
                 'expected'  => null];
 
-    // Setting the value to empty string and no value is been posted must result in null for the value of the form
+    // Setting the value to empty string and no value has been posted must result in null for the value of the form
     // control.
     $cases[] = ['value'     => '',
                 'submitted' => null,
@@ -85,7 +85,7 @@ class SelectControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is not marked changed when the empty value is submitted.
+   * Test form control is not marked changed when the empty value is submitted.
    */
   public function testChangedControls1(): void
   {
@@ -103,7 +103,7 @@ class SelectControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is marked changed when a valid value is submitted.
+   * Test form control is marked changed when a valid value is submitted.
    */
   public function testChangedControls2(): void
   {
@@ -121,7 +121,7 @@ class SelectControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is not marked changed when a none valid value is submitted.
+   * Test form control is not marked changed when a none valid value is submitted.
    */
   public function testChangedControls3(): void
   {
@@ -139,7 +139,7 @@ class SelectControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is not marked changed when the none default empty value is submitted.
+   * Test form control is not marked changed when the none default empty value is submitted.
    */
   public function testChangedControls4(): void
   {

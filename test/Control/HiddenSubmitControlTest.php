@@ -17,7 +17,7 @@ class HiddenSubmitControlTest extends PushControlTest
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is hidden.
+   * Test form control is hidden.
    */
   public function testIsHidden(): void
   {

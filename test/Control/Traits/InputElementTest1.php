@@ -13,7 +13,7 @@ trait InputElementTest1
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Overload this method when the class is different form the control type.
+   * Overload this method when the class is different form the form control type.
    *
    * @return string
    */

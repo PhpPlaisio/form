@@ -207,8 +207,7 @@ class ComplexControl extends Control implements CompoundControl
   /**
    * Returns an array of all error messages of the child form controls of this complex form controls.
    *
-   * @param bool $recursive If set error messages of complex child controls of this complex form controls are fetched
-   *                        also.
+   * @param bool $recursive Whether to fetch error messages of child form controls of this complex form control also.
    *
    * @return array|null
    *
@@ -358,8 +357,8 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the form controls of this complex control. The values of the form controls for which no explicit
-   * value are set are not affected.
+   * Sets the values of the form controls of this complex form control. The values of the form controls for which no
+   * explicit value are set are not affected.
    *
    * @param array|null $values The values as a nested array.
    */
@@ -381,7 +380,7 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Prepares this form complex control for HTML code generation or loading submitted values.
+   * Prepares this complex form control for HTML code generation or loading submitted values.
    *
    * @param PrepareWalker $walker The object for walking the form control tree.
    *
@@ -448,8 +447,8 @@ class ComplexControl extends Control implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the values of the form controls of this complex control. The values of the form controls for which no explicit
-   * value are set will be set to null.
+   * Sets the values of the form controls of this complex form control. The values of the form controls for which no
+   * explicit value are set will be set to null.
    *
    * @param array|null $values The values as a nested array.
    *

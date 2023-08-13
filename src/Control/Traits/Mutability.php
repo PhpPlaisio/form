@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control\Traits;
 
 /**
- * Trait for mutability of controls.
+ * Trait for mutability of form controls.
  */
 trait Mutability
 {

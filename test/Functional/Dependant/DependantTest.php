@@ -10,7 +10,7 @@ use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\RawForm;
 
 /**
- * Test dependant controls.
+ * Test dependant form controls.
  */
 class DependantTest extends TestCase
 {

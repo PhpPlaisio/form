@@ -32,7 +32,7 @@ abstract class Control
   public static string $isMandatoryClass = 'is-mandatory';
 
   /**
-   * Whether this control is erroneous.
+   * Whether this form control is erroneous.
    *
    * @var bool
    */
@@ -119,7 +119,7 @@ abstract class Control
    *
    * @param string      $moduleClass    The CSS module class.
    * @param string|null $subModuleClass The CSS sub-module class.
-   * @param string      $submitName     The submit-name of the parent control.
+   * @param string      $submitName     The submit-name of the parent form control.
    *
    * @return string
    */
@@ -207,7 +207,7 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether this control is erroneous.
+   * Returns whether this form control is erroneous.
    *
    * @return bool
    */
@@ -218,8 +218,7 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if and only if this control is a hidden control (e.g. hidden, invisible, and constant control).
-   * Otherwise, returns false.
+   * Returns whether this form control is a hidden form control (e.g. hidden, invisible, and constant form control).
    *
    * @since 1.0.0
    * @api
@@ -231,7 +230,7 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if and only if this control can trigger a form submit.
+   * Returns whether this form control can trigger a form submit.
    *
    * @since 1.0.0
    * @api
@@ -259,9 +258,9 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets whether this control is erroneous.
+   * Sets whether this form control is erroneous.
    *
-   * @param bool $error Whether this control is erroneous.
+   * @param bool $error Whether this form control is erroneous.
    *
    * @return Control
    */
@@ -347,8 +346,8 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the name of the method for handling the form when the form submit is triggered by this control. Otherwise,
-   * return null.
+   * Returns the name of the method for handling the form when the form submit is triggered by this form control.
+   * Otherwise, return null.
    *
    * @param array $submittedValues The submitted values.
    *
@@ -390,7 +389,7 @@ abstract class Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the key under which the control is submitted in the submitted values.
+   * Returns the key under which this form control is submitted in the submitted values.
    *
    * @return string
    *

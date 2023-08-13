@@ -23,7 +23,7 @@ class RawFormTest extends PlaisioTestCase
   /**
    * Base test for testing searchSubmitHandler.
    *
-   * @param Control     $trigger  The control that will trigger the form submit.
+   * @param Control     $trigger  The form control that will trigger the form submit.
    * @param string|null $expected The expected value.
    */
   public function searchSubmitHandlerTest(Control $trigger, ?string $expected): void
@@ -49,7 +49,7 @@ class RawFormTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test for finding a complex control with different types of names.
+   * Test for finding a complex form control with different types of names.
    */
   public function testFindComplexControl(): void
   {

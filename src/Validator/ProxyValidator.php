@@ -6,7 +6,7 @@ namespace Plaisio\Form\Validator;
 use Plaisio\Form\Control\Control;
 
 /**
- * A validator for validating controls that delegates the validation to a callable.
+ * A validator for validating form controls that delegates the validation to a callable.
  */
 class ProxyValidator implements Validator
 {

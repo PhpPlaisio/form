@@ -473,9 +473,9 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the arranger for arranging the HTML code of the child controls of the compound control.
+   * Sets the arranger for arranging the HTML code of the child form controls of the compound form control.
    *
-   * @param Arranger $arranger The new arranger of this compound control.
+   * @param Arranger $arranger The new arranger of this compound form control.
    *
    * @return $this
    *

@@ -66,7 +66,7 @@ class AmbiguityCleanerTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test umlauts are preserved. For example: Ö is "\xc3\x96" and "\x96" is a control character that will removed.
+   * Test umlauts are preserved. For example: Ö is "\xc3\x96" and "\x96" is a control character that will be removed.
    */
   public function testUmlautClean(): void
   {

@@ -7,7 +7,7 @@ use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Walker\LoadWalker;
 
 /**
- * Control for states based on the value control with a country.
+ * Form control for states based on the value of a form control with a country.
  */
 class StateControl extends SelectControl
 {

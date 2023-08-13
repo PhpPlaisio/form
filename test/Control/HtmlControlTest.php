@@ -59,7 +59,7 @@ class HtmlControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is hidden.
+   * Test form control is hidden.
    */
   public function testIsHidden(): void
   {

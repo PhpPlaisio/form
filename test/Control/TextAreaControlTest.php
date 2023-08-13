@@ -161,7 +161,7 @@ class TextAreaControlTest extends PlaisioTestCase
   /**
    * Returns a concrete instance of TextAreaControl.
    *
-   * @param string|null $name The of the control.
+   * @param string|null $name The name of the form control.
    *
    * @return TextAreaControl
    */

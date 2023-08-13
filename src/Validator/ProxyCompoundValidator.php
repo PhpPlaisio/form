@@ -6,7 +6,7 @@ namespace Plaisio\Form\Validator;
 use Plaisio\Form\Control\CompoundControl;
 
 /**
- * A validator for validating compound controls that delegates the validation to a callable.
+ * A validator for validating compound form controls that delegates the validation to a callable.
  */
 class ProxyCompoundValidator implements CompoundValidator
 {
@@ -43,9 +43,9 @@ class ProxyCompoundValidator implements CompoundValidator
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether the values of a compound control meets the conditions of this validator.
+   * Returns whether the values of a compound form control meets the conditions of this validator.
    *
-   * @param CompoundControl $control The compound control to be validated.
+   * @param CompoundControl $control The compound form control to be validated.
    *
    * @return bool
    *

@@ -565,7 +565,7 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds all control classes to this form control.
+   * Adds all form control classes to this form control.
    *
    * @param RenderWalker $walker The object for walking the form control tree.
    * @param string       $type   The type of this from control (not to be confused with type attribute of input

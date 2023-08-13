@@ -222,7 +222,7 @@ class ComplexControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test control is hidden.
+   * Test form control is hidden.
    */
   public function testIsHidden(): void
   {
@@ -352,7 +352,7 @@ class ComplexControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Find a control test with alphanumeric name of the control in the complex control.
+   * Finds a form control test with alphanumeric name of the form control in the complex form control.
    */
   public function testValid4(): void
   {
@@ -360,22 +360,22 @@ class ComplexControlTest extends PlaisioTestCase
 
     foreach ($names as $name)
     {
-      // Create form with control inside of complex control.
+      // Create form with form control inside a complex form control.
       $form = $this->setForm3($name);
 
-      // First find complex control by name.
+      // First find complex form control by name.
       /** @var ComplexControl $complexControl */
       $complexControl = $form->findFormControlByName($name);
 
-      // Test for complex control.
+      // Test for complex form control.
       self::assertNotEmpty($complexControl);
       self::assertEquals($this->originComplexControl, $complexControl);
       self::assertEquals($name, $complexControl->getName());
 
-      // Find control by name.
+      // Find form control by name.
       $input = $complexControl->findFormControlByName($name);
 
-      // Test for control.
+      // Test for form control.
       self::assertNotEmpty($input);
       self::assertEquals($this->originControl, $input);
       self::assertEquals($name, $input->getName());
@@ -384,7 +384,7 @@ class ComplexControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Each form controls in form must validate and add to invalid controls if it not valid.
+   * Each form controls in form must validate and add to invalid form controls if it is not valid.
    */
   public function testValidate(): void
   {
@@ -392,16 +392,16 @@ class ComplexControlTest extends PlaisioTestCase
     $fieldset = new FieldSet();
     $form->addFieldSet($fieldset);
 
-    // Create mandatory control.
+    // Create mandatory form control.
     $input = new CheckboxControl('input_1');
     $input->addValidator(new MandatoryValidator());
     $fieldset->addFormControl($input);
 
-    // Create optional control.
+    // Create optional form control.
     $input = new CheckboxControl('input_2');
     $fieldset->addFormControl($input);
 
-    // Create mandatory control.
+    // Create mandatory form control.
     $input = new CheckboxControl('input_3');
     $input->addValidator(new MandatoryValidator());
     $fieldset->addFormControl($input);
@@ -569,7 +569,7 @@ class ComplexControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test form with specific name of control.
+   * Test form with specific name of a form control.
    *
    * @param string $name The name of the form control.
    *

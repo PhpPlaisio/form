@@ -32,7 +32,7 @@ class PushControl extends SimpleControl
   protected string $buttonType = '';
 
   /**
-   * The name of the method for handling the form when the form submit is triggered by this control.
+   * The name of the method for handling the form when the form submit is triggered by this form control.
    *
    * @var string|null
    */
@@ -65,7 +65,7 @@ class PushControl extends SimpleControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the name of the method for handling the form when the form submit is triggered by this control.
+   * Sets the name of the method for handling the form when the form submit is triggered by this form control.
    *
    * @param null|string $method The name of the method.
    *

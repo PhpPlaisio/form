@@ -12,7 +12,7 @@ class DropDownControl extends SelectControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Class for distinguishing dropdown controls from other select controls.
+   * Class for distinguishing dropdown form controls from other select form controls.
    *
    * @var string
    */

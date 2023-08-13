@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace Plaisio\Form\Walker;
 
 /**
- * Class for walking the control tree when preparing the form.
+ * Class for walking the form control tree when preparing the form.
  */
 class PrepareWalker
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The submit-name of the control.
+   * The submit-name of the form control.
    *
    * @var string
    */
@@ -20,7 +20,7 @@ class PrepareWalker
   /**
    * Object constructor.
    *
-   * @param string $submitName The submit-name of the control.
+   * @param string $submitName The submit-name of the form control.
    */
   public function __construct(string $submitName)
   {
@@ -29,9 +29,9 @@ class PrepareWalker
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Descends into the control tree.
+   * Descends into the form control tree.
    *
-   * @param string $submitName The submit-name of the control.
+   * @param string $submitName The submit-name of the form control.
    *
    * @return $this
    */
