@@ -17,7 +17,7 @@ class IntegerCleaner implements Cleaner
    *
    * @var IntegerCleaner|null
    */
-  static private ?IntegerCleaner $singleton = null;
+  private static ?IntegerCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

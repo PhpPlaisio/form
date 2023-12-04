@@ -16,7 +16,7 @@ class RemoveWhitespaceCleaner implements Cleaner
    *
    * @var RemoveWhitespaceCleaner|null
    */
-  static private ?RemoveWhitespaceCleaner $singleton = null;
+  private static ?RemoveWhitespaceCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

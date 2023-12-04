@@ -42,7 +42,7 @@ trait InputElement
 
     $html = $this->htmlPrefixLabel();
     $html .= Html::htmlNested(['tag'  => 'input',
-                              'attr' => $this->attributes]);
+                               'attr' => $this->attributes]);
     $html .= $this->htmlPostfixLabel();
 
     return $html;

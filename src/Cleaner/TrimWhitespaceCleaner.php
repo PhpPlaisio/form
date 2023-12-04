@@ -16,7 +16,7 @@ class TrimWhitespaceCleaner implements Cleaner
    *
    * @var TrimWhitespaceCleaner|null
    */
-  static private ?TrimWhitespaceCleaner $singleton = null;
+  private static ?TrimWhitespaceCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

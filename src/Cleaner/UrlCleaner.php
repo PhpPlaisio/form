@@ -17,7 +17,7 @@ class UrlCleaner implements Cleaner
    *
    * @var UrlCleaner|null
    */
-  static private ?UrlCleaner $singleton = null;
+  private static ?UrlCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

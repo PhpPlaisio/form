@@ -17,7 +17,7 @@ class PruneWhitespaceCleaner implements Cleaner
    *
    * @var PruneWhitespaceCleaner|null
    */
-  static private ?PruneWhitespaceCleaner $singleton = null;
+  private static ?PruneWhitespaceCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

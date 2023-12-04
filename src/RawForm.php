@@ -92,7 +92,6 @@ class RawForm implements CompoundControl
   protected array $values = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

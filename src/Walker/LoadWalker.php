@@ -241,7 +241,7 @@ class LoadWalker
         if (!array_key_exists($branch, $tmp))
         {
           $fullPath = $this->getPath().(($path==='') ? '' : '/'.$path);
-          throw new LogicException('Branch %s does not exists at path %s.', $branch, $fullPath);
+          throw new LogicException('Branch %s does not exist at path %s.', $branch, $fullPath);
         }
         $tmp  = $tmp[$branch];
         $path = $path.'/'.$branch;

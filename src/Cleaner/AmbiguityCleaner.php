@@ -26,7 +26,7 @@ class AmbiguityCleaner implements Cleaner
    *
    * @var AmbiguityCleaner|null
    */
-  static private ?AmbiguityCleaner $singleton = null;
+  private static ?AmbiguityCleaner $singleton = null;
 
   /**
    * Intended entered characters (unambiguities) and there possible mistakenly entered characters (ambiguities).

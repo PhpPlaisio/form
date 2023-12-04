@@ -18,7 +18,7 @@ class TidyCleaner implements Cleaner
    *
    * @var TidyCleaner|null
    */
-  static private ?TidyCleaner $singleton = null;
+  private static ?TidyCleaner $singleton = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
