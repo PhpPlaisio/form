@@ -59,7 +59,7 @@ class HttpValidator implements Validator
     // Test that the page actually exits. We consider all HTTP 200-399 responses as valid.
     try
     {
-      $headers = get_headers($url);
+      $headers = @get_headers($url);
       $valid   = (is_array($headers) && preg_match('/^HTTP\\/\\d+\\.\\d+\\s+[23]\\d\\d\\s*.*$/', $headers[0]));
     }
     catch (\Exception $e)

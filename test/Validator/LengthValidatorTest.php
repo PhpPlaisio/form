@@ -17,7 +17,7 @@ class LengthValidatorTest extends TestCase
    *
    * @return array
    */
-  public function getInvalidValues(): array
+  public static function getInvalidValues(): array
   {
     $ret = [];
 
@@ -28,7 +28,7 @@ class LengthValidatorTest extends TestCase
     $ret[] = [10, 20, 'Isaac'];
 
     // Only strings are valid
-    $ret[] = [0, 100, $this];
+    $ret[] = [0, 100, new \stdClass()];
     $ret[] = [0, 100, ['foo' => 'bar']];
     $ret[] = [0, 100, false];
     $ret[] = [0, 100, true];
@@ -42,7 +42,7 @@ class LengthValidatorTest extends TestCase
    *
    * @return array
    */
-  public function getValidValues(): array
+  public static function getValidValues(): array
   {
     $ret = [];
 
@@ -72,7 +72,7 @@ class LengthValidatorTest extends TestCase
    *
    * @dataProvider getInvalidValues
    */
-  public function testInvalidStrings(int $minLength, int $maxLength, $value): void
+  public function testInvalidStrings(int $minLength, int $maxLength, mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new LengthValidator($minLength, $maxLength);
@@ -90,7 +90,7 @@ class LengthValidatorTest extends TestCase
    *
    * @dataProvider getValidValues
    */
-  public function testValidStrings(int $minLength, int $maxLength, $value): void
+  public function testValidStrings(int $minLength, int $maxLength, mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new LengthValidator($minLength, $maxLength);

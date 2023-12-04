@@ -9,7 +9,7 @@ use Plaisio\Form\Control\SimpleControl;
 /**
  * Unit tests for class ButtonControl.
  */
-class ButtonControlTest extends PushControlTest
+class ButtonControlTest extends PushControlTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

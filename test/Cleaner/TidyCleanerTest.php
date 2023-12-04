@@ -17,6 +17,20 @@ class TidyCleanerTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Return HTML snippet test cases.
+   *
+   * @return string[][]
+   */
+  public static function snippets(): array
+  {
+    return [['<h2>subheading</h3>', '<h2>subheading</h2>'],
+            ['<h1>heading', '<h1>heading</h1>'],
+            ['<br>', '<br />'],
+            ['<p>&nbsp;</p>', null]];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns an instance of TidyCleaner.
    *
    * @return TidyCleaner
@@ -24,20 +38,6 @@ class TidyCleanerTest extends PlaisioTestCase
   public function createCleaner(): TidyCleaner
   {
     return TidyCleaner::get();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Return HTML snippet test cases.
-   *
-   * @return string[][]
-   */
-  public function snippets(): array
-  {
-    return [['<h2>subheading</h3>', '<h2>subheading</h2>'],
-            ['<h1>heading', '<h1>heading</h1>'],
-            ['<br>', '<br />'],
-            ['<p>&nbsp;</p>', null]];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

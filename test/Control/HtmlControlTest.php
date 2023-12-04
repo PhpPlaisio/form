@@ -204,7 +204,7 @@ class HtmlControlTest extends PlaisioTestCase
    *
    * @return RawForm
    */
-  private function setupForm1($html = null): RawForm
+  private function setupForm1(?string $html = null): RawForm
   {
     $form     = new RawForm();
     $fieldset = new FieldSet();

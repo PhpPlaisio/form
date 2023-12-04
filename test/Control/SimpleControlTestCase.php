@@ -10,9 +10,9 @@ use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
- *  Abstract parent class for unit tests for child classes of CommonSimpleControlTest.
+ *  Abstract parent class for unit tests for child classes of CommonSimpleControlTestCase.
  */
-abstract class SimpleControlTest extends PlaisioTestCase
+abstract class SimpleControlTestCase extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -133,7 +133,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the concrete CommonSimpleControlTest
+   * Returns the concrete CommonSimpleControlTestCase
    *
    * @param string $name The name of the form control.
    *
@@ -171,7 +171,7 @@ abstract class SimpleControlTest extends PlaisioTestCase
    *
    * @return RawForm
    */
-  private function setupForm1($value): RawForm
+  private function setupForm1(mixed $value): RawForm
   {
     $form     = new RawForm();
     $fieldset = new FieldSet();

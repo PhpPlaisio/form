@@ -10,7 +10,7 @@ use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 /**
  * Unit tests for class HiddenSubmitControl.
  */
-class HiddenSubmitControlTest extends PushControlTest
+class HiddenSubmitControlTest extends PushControlTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   use InputElementTest1;

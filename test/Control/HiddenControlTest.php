@@ -9,16 +9,16 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\ImmutableTest;
+use Plaisio\Form\Test\Control\Traits\ImmutableTestCase;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 
 /**
  * Unit tests for class HiddenControl.
  */
-class HiddenControlTest extends SimpleControlTest
+class HiddenControlTest extends SimpleControlTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use ImmutableTest;
+  use ImmutableTestCase;
   use InputElementTest1;
 
   //--------------------------------------------------------------------------------------------------------------------

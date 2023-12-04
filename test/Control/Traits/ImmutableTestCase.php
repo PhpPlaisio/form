@@ -11,7 +11,7 @@ use Plaisio\Form\RawForm;
 /**
  * Test for immutable form controls.
  */
-trait ImmutableTest
+trait ImmutableTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

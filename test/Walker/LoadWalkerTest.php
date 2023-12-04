@@ -25,7 +25,6 @@ class LoadWalkerTest extends TestCase
   {
     $whiteListValues = [];
     $changedControls = [];
-    $branch          = [];
     $submittedValues = ['test1' => '',
                         'test2' => 'xxx'];
 
@@ -175,7 +174,7 @@ class LoadWalkerTest extends TestCase
   public function testGetWhitelistValueByPath5(): void
   {
     $this->expectException(\LogicException::class);
-    $this->expectExceptionMessage('Branch Z does not exists at path /.');
+    $this->expectExceptionMessage('Branch Z does not exist at path /.');
     TestControl::$testName        = 'getWhitelistValueByPath(/Z)';
     TestControl::$testControlName = 'CCC';
 

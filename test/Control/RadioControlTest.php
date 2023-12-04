@@ -232,17 +232,26 @@ class RadioControlTest extends PlaisioTestCase
     $input = new RadioControl('name');
     $input->setAttrValue(1)
           ->setValue(1);
-    if ($immutable===1) $input->setImmutable(true);
+    if ($immutable===1)
+    {
+      $input->setImmutable(true);
+    }
     $fieldset->addFormControl($input);
 
     $input = new RadioControl('name');
     $input->setAttrValue(2);
-    if ($immutable===2) $input->setImmutable(true);
+    if ($immutable===2)
+    {
+      $input->setImmutable(true);
+    }
     $fieldset->addFormControl($input);
 
     $input = new RadioControl('name');
     $input->setAttrValue(3);
-    if ($immutable===3) $input->setImmutable(true);
+    if ($immutable===3)
+    {
+      $input->setImmutable(true);
+    }
     $fieldset->addFormControl($input);
 
     $input = new ForceSubmitControl('submit', true);

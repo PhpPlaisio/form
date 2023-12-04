@@ -17,6 +17,17 @@ class PruneWhitespaceCleanerTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns cases with spaces only.
+   *
+   * @return array
+   */
+  public static function whitespaceOnly(): array
+  {
+    return [[''], [null], [' '], ['  '], ["\n"], ["\n \n"], ["\n \t"], [" \t\n\r\0\x0B \t\n\r\0\x0B"]];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns an instance of PruneWhitespaceCleaner.
    *
    * @return PruneWhitespaceCleaner
@@ -39,6 +50,7 @@ class PruneWhitespaceCleanerTest extends PlaisioTestCase
     self::assertEquals('Hello World!', $value);
   }
 
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with ambiguous whitespaceOnly only.
@@ -51,7 +63,6 @@ class PruneWhitespaceCleanerTest extends PlaisioTestCase
 
     self::assertNull($value);
   }
-
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -67,17 +78,6 @@ class PruneWhitespaceCleanerTest extends PlaisioTestCase
     $clean   = $cleaner->clean($string);
 
     self::assertNull($clean);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns cases with with spaces only.
-   *
-   * @return array
-   */
-  public function whitespaceOnly(): array
-  {
-    return [[''], [null], [' '], ['  '], ["\n"], ["\n \n"], ["\n \t"], [" \t\n\r\0\x0B \t\n\r\0\x0B"]];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

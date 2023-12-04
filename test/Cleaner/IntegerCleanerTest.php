@@ -17,7 +17,7 @@ class IntegerCleanerTest extends TestCase
    *
    * @return string[][]
    */
-  public function getCases(): array
+  public static function getCases(): array
   {
     return [[null, null],
             ['', null],
@@ -35,10 +35,10 @@ class IntegerCleanerTest extends TestCase
    *
    * @return array
    */
-  public function getNonStrings(): array
+  public static function getNonStrings(): array
   {
     return [[[]],
-            [$this],
+            [new \stdClass()],
             [fopen('php://stdin', 'r')]];
   }
 
@@ -51,7 +51,7 @@ class IntegerCleanerTest extends TestCase
    *
    * @dataProvider getCases
    */
-  public function testClean($value, $expected): void
+  public function testClean(mixed $value, mixed $expected): void
   {
     $cleaner = IntegerCleaner::get();
 
@@ -67,7 +67,7 @@ class IntegerCleanerTest extends TestCase
    *
    * @dataProvider getNonStrings
    */
-  public function testNonString($value): void
+  public function testNonString(mixed $value): void
   {
     $this->expectException(\LogicException::class);
 

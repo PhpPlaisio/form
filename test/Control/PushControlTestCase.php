@@ -8,16 +8,16 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\PushControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTest;
+use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTestCase;
 use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
  * Abstract parent class for unit tests for child classes of PushControl.
  */
-abstract class PushControlTest extends PlaisioTestCase
+abstract class PushControlTestCase extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use CommonSimpleControlTest;
+  use CommonSimpleControlTestCase;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

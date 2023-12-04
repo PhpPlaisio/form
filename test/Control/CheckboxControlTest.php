@@ -8,7 +8,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\ImmutableTest;
+use Plaisio\Form\Test\Control\Traits\ImmutableTestCase;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 use Plaisio\Form\Test\PlaisioTestCase;
 
@@ -18,7 +18,7 @@ use Plaisio\Form\Test\PlaisioTestCase;
 class CheckboxControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use ImmutableTest;
+  use ImmutableTestCase;
   use InputElementTest1;
 
   //--------------------------------------------------------------------------------------------------------------------

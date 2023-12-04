@@ -73,7 +73,7 @@ class ProxyValidatorTest extends PlaisioTestCase
    *
    * @return bool
    */
-  public function validate(Control $control, $data = null): bool
+  public function validate(Control $control, mixed $data = null): bool
   {
     return ($control->getSubmittedValue()==$data);
   }
@@ -82,11 +82,11 @@ class ProxyValidatorTest extends PlaisioTestCase
   /**
    * Setups a form with a text form control (which must be a valid email address) values.
    *
-   * @param mixed $data The additional data.
+   * @param mixed|null $data The additional data.
    *
    * @return RawForm
    */
-  private function setupForm1($data = null): RawForm
+  private function setupForm1(mixed $data = null): RawForm
   {
     $form     = new RawForm();
     $fieldset = new FieldSet();

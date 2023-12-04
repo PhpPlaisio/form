@@ -17,7 +17,7 @@ class EmailValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getInvalidValues(): array
+  public static function getInvalidValues(): array
   {
     $ret = [];
 
@@ -35,7 +35,7 @@ class EmailValidatorTest extends PlaisioTestCase
     // An email address without an existing A or MX record is invalid.
     $ret[] = ['info@xsetbased.nl'];
 
-    // An email address with a to long local part must be invalid. The maximum length of the local part is 64 characters,
+    // An email address with to long local part must be invalid. The maximum length of the local part is 64 characters,
     // see http://en.wikipedia.org/wiki/Email_address.
     $local = str_repeat('x', 65);
     $ret[] = ["$local@setbased.nl"];
@@ -44,7 +44,7 @@ class EmailValidatorTest extends PlaisioTestCase
     $ret[] = ['info.setbased.nl'];
 
     // Only strings are valid
-    $ret[] = [$this];
+    $ret[] = [new \stdClass()];
     $ret[] = [['foo' => 'bar']];
     $ret[] = [false];
     $ret[] = [true];
@@ -58,7 +58,7 @@ class EmailValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getValidValues(): array
+  public static function getValidValues(): array
   {
     $ret = [];
 
@@ -94,7 +94,7 @@ class EmailValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getInvalidValues
    */
-  public function testInvalidAddresses($value): void
+  public function testInvalidAddresses(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new EmailValidator();
@@ -110,7 +110,7 @@ class EmailValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getValidValues
    */
-  public function testValidAddresses($value): void
+  public function testValidAddresses(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new EmailValidator();

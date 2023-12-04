@@ -18,7 +18,7 @@ class TestControl extends Control
    *
    * @var mixed
    */
-  public $value;
+  public mixed $value;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,20 +27,11 @@ class TestControl extends Control
    * @param string $name  The name of the form control.
    * @param mixed  $value The value of this form control.
    */
-  public function __construct(string $name, $value)
+  public function __construct(string $name, mixed $value)
   {
     parent::__construct($name);
 
     $this->value = $value;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritDoc
-   */
-  public function htmlControl(RenderWalker $walker): string
-  {
-    throw new \LogicException('Not implemented');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,6 +50,15 @@ class TestControl extends Control
   public function getSubmittedValue(): mixed
   {
     return $this->value;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  public function htmlControl(RenderWalker $walker): string
+  {
+    throw new \LogicException('Not implemented');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

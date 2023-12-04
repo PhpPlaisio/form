@@ -17,11 +17,11 @@ class HttpValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getInvalidValues(): array
+  public static function getInvalidValues(): array
   {
     $ret = [];
 
-    // An usual url address must be invalid.
+    // A unusual url address must be invalid.
     $ret[] = ['hffd//:www.setbased/nl'];
     $ret[] = ['http//golgelinva'];
     $ret[] = ['ftp//:!#$%&\'*+-/=?^_`{}|~ed.com'];
@@ -33,7 +33,7 @@ class HttpValidatorTest extends PlaisioTestCase
     $ret[] = ['http://www.xsetbased.nl'];
 
     // Only strings are valid
-    $ret[] = [$this];
+    $ret[] = [new \stdClass()];
     $ret[] = [['foo' => 'bar']];
     $ret[] = [false];
     $ret[] = [true];
@@ -47,7 +47,7 @@ class HttpValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getValidValues(): array
+  public static function getValidValues(): array
   {
     $ret = [];
 
@@ -73,7 +73,7 @@ class HttpValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getInvalidValues
    */
-  public function testInvalidUrl($value): void
+  public function testInvalidUrl(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new HttpValidator();
@@ -89,7 +89,7 @@ class HttpValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getValidValues
    */
-  public function testValidUrl($value): void
+  public function testValidUrl(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new HttpValidator();

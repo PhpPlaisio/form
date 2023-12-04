@@ -253,7 +253,7 @@ class SilentControlTest extends PlaisioTestCase
    *
    * @return RawForm
    */
-  private function setupForm1($value): RawForm
+  private function setupForm1(mixed $value): RawForm
   {
     $form     = new RawForm();
     $fieldset = new FieldSet();

@@ -9,7 +9,7 @@ use Plaisio\Form\Control\SubmitControl;
 /**
  * Unit tests for class SubmitControl.
  */
-class SubmitControlTest extends PushControlTest
+class SubmitControlTest extends PushControlTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   public function testAttributes(): void

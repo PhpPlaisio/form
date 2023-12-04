@@ -87,7 +87,7 @@ class AmbiguityCleanerTest extends PlaisioTestCase
     $property->setAccessible(true);
     $unambiguities = $property->getValue($cleaner);
 
-    foreach ($unambiguities as $unambiguity => $ambiguities)
+    foreach ($unambiguities as $ambiguities)
     {
       foreach ($ambiguities as $ambiguity)
       {

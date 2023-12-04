@@ -15,7 +15,7 @@ class DatabaseLabelControlTest extends TestCase
   /**
    * Returns invalid label prefixes.
    */
-  public function getInvalidPrefixes(): array
+  public static function getInvalidPrefixes(): array
   {
     return [['123ABC'],
             ['_CMP_ID'],

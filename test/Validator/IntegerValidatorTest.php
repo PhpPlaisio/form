@@ -17,7 +17,7 @@ class IntegerValidatorTest extends TestCase
    *
    * @return array
    */
-  public function getInvalidValues(): array
+  public static function getInvalidValues(): array
   {
     $ret = [];
 
@@ -36,7 +36,7 @@ class IntegerValidatorTest extends TestCase
     $ret[] = [-1, 10, -23];
 
     // Only strings or integers are valid.
-    $ret[] = [null, null, $this];
+    $ret[] = [null, null, new \stdClass()];
     $ret[] = [null, null, ['foo' => 'bar']];
 
     return $ret;
@@ -48,7 +48,7 @@ class IntegerValidatorTest extends TestCase
    *
    * @return array
    */
-  public function getValidValues(): array
+  public static function getValidValues(): array
   {
     $ret = [];
 
@@ -79,27 +79,6 @@ class IntegerValidatorTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test against invalid strings.
-   *
-   * @param int|null $minValue The minimum value.
-   * @param int|null $maxValue The maximum value.
-   * @param mixed    $value    The invalid value.
-   *
-   * @dataProvider getInvalidValues
-   */
-  public function testInvalidValues(?int $minValue, ?int $maxValue, $value): void
-  {
-    $control   = new TestControl('test', $value);
-    $validator = new IntegerValidator($minValue, $maxValue);
-    $valid     = $validator->validate($control);
-    $errors    = $control->getErrorMessages();
-    self::assertFalse($valid);
-    self::assertIsArray($errors);
-    self::assertCount(1, $errors);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Test against valid strings.
    *
    * @param int|null $minValue The minimum value.
@@ -108,7 +87,7 @@ class IntegerValidatorTest extends TestCase
    *
    * @dataProvider getValidValues
    */
-  public function testValidValues(?int $minValue, ?int $maxValue, $value): void
+  public static function testValidValues(?int $minValue, ?int $maxValue, mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new IntegerValidator($minValue, $maxValue);
@@ -116,6 +95,27 @@ class IntegerValidatorTest extends TestCase
     $errors    = $control->getErrorMessages();
     self::assertTrue($valid);
     self::assertNull($errors);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test against invalid strings.
+   *
+   * @param int|null $minValue The minimum value.
+   * @param int|null $maxValue The maximum value.
+   * @param mixed    $value    The invalid value.
+   *
+   * @dataProvider getInvalidValues
+   */
+  public function testInvalidValues(?int $minValue, ?int $maxValue, mixed $value): void
+  {
+    $control   = new TestControl('test', $value);
+    $validator = new IntegerValidator($minValue, $maxValue);
+    $valid     = $validator->validate($control);
+    $errors    = $control->getErrorMessages();
+    self::assertFalse($valid);
+    self::assertIsArray($errors);
+    self::assertCount(1, $errors);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

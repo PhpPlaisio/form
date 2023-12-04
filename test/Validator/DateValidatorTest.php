@@ -17,7 +17,7 @@ class DateValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getInvalidValues(): array
+  public static function getInvalidValues(): array
   {
     return [['15- 7 -20'],
             ['10-april-1966'],
@@ -25,7 +25,7 @@ class DateValidatorTest extends PlaisioTestCase
             ['15- 7 -20'],
             ['2015-02-29'],
             ['2020-11-31'],
-            [$this],
+            [new \stdClass()],
             ['foo' => 'bar'],
             [false],
             [true]];
@@ -37,7 +37,7 @@ class DateValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getValidValues(): array
+  public static function getValidValues(): array
   {
     return [['1966-04-10'], ['1970-01-01'], ['1900-01-01'], ['9999-12-31'], ['2020-02-29'], [''], [null]];
   }
@@ -50,7 +50,7 @@ class DateValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getInvalidValues
    */
-  public function testInvalidDates($value): void
+  public function testInvalidDates(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new DateValidator();
@@ -66,7 +66,7 @@ class DateValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getValidValues
    */
-  public function testValidDates($value): void
+  public function testValidDates(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new DateValidator();

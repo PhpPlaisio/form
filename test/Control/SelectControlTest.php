@@ -20,7 +20,7 @@ class SelectControlTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getEmptyValues(): array
+  public static function getEmptyValues(): array
   {
     $cases = [];
 
@@ -37,7 +37,7 @@ class SelectControlTest extends PlaisioTestCase
    *
    * @return array[]
    */
-  public function setValueCases(): array
+  public static function setValueCases(): array
   {
     $cases = [];
 
@@ -230,7 +230,7 @@ class SelectControlTest extends PlaisioTestCase
    *
    * @dataProvider setValueCases
    */
-  public function testSetValue($value, $submitted, $expected)
+  public function testSetValue(mixed $value, mixed $submitted, mixed $expected)
   {
     $_POST['cnt_id'] = $submitted;
 
@@ -343,13 +343,13 @@ class SelectControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test labels are casted to strings.
+   * Test labels are cast to strings.
    *
    * @param mixed $empty The empty value.
    *
    * @dataProvider getEmptyValues
    */
-  public function testWithEmptyValue($empty): void
+  public function testWithEmptyValue(mixed $empty): void
   {
     $_POST['day_id'] = $empty;
 
@@ -379,7 +379,7 @@ class SelectControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test labels are casted to strings.
+   * Test labels are cast to strings.
    */
   public function testWithNumericValues(): void
   {

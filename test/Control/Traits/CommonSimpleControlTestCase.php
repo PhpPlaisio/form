@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Control\Traits;
 
 /**
- * Test cases for child classes of CommonSimpleControlTest.
+ * Test cases for child classes of CommonSimpleControlTestCase.
  */
-trait CommonSimpleControlTest
+trait CommonSimpleControlTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -14,7 +14,7 @@ trait CommonSimpleControlTest
    *
    * @return string[][]
    */
-  public function booleanAttributes(): array
+  public static function booleanAttributes(): array
   {
     return [['setAttrAutoComplete', 'autocomplete'],
             ['setAttrAutoFocus', 'autofocus'],
@@ -32,7 +32,7 @@ trait CommonSimpleControlTest
    *
    * @return string[][]
    */
-  public function integerAttributes(): array
+  public static function integerAttributes(): array
   {
     return [['setAttrMaxLength', 'maxlength'],
             ['setAttrSize', 'size']];
@@ -44,7 +44,7 @@ trait CommonSimpleControlTest
    *
    * @return string[][]
    */
-  public function stringAttributes(): array
+  public static function stringAttributes(): array
   {
     return [['setAttrForm', 'form'],
             ['setAttrList', 'list'],

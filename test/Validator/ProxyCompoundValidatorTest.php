@@ -73,7 +73,7 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
    *
    * @return bool
    */
-  public function validate(CompoundControl $control, $data = null): bool
+  public function validate(CompoundControl $control, mixed $data = null): bool
   {
     $input = $control->getFormControlByName('input');
 
@@ -88,7 +88,7 @@ class ProxyCompoundValidatorTest extends PlaisioTestCase
    *
    * @return RawForm
    */
-  private function setupForm1($data = null): RawForm
+  private function setupForm1(mixed $data = null): RawForm
   {
     $form     = new RawForm();
     $fieldset = new FieldSet();

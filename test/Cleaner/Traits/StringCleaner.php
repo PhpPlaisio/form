@@ -14,10 +14,10 @@ trait StringCleaner
    *
    * @return array
    */
-  public function getNonStrings(): array
+  public static function getNonStrings(): array
   {
     return [[[]],
-            [$this],
+            [new \stdClass()],
             [fopen('php://stdin', 'r')]];
   }
 
@@ -29,7 +29,7 @@ trait StringCleaner
    *
    * @dataProvider getNonStrings
    */
-  public function testNonString($value): void
+  public function testNonString(mixed $value): void
   {
     $this->expectException(\LogicException::class);
 

@@ -494,7 +494,7 @@ EOL;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test labels are casted to strings.
+   * Test labels are cast to strings.
    */
   public function testWithNumericValues(): void
   {

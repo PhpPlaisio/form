@@ -8,8 +8,8 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\TextAreaControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTest;
-use Plaisio\Form\Test\Control\Traits\ImmutableTest;
+use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTestCase;
+use Plaisio\Form\Test\Control\Traits\ImmutableTestCase;
 use Plaisio\Form\Test\PlaisioTestCase;
 
 /**
@@ -18,11 +18,11 @@ use Plaisio\Form\Test\PlaisioTestCase;
 class TextAreaControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use ImmutableTest;
-  use CommonSimpleControlTest
+  use ImmutableTestCase;
+  use CommonSimpleControlTestCase
   {
-    CommonSimpleControlTest::stringAttributes as parentStringAttributes;
-    CommonSimpleControlTest::integerAttributes as parentIntegerAttributes;
+    CommonSimpleControlTestCase::stringAttributes as parentStringAttributes;
+    CommonSimpleControlTestCase::integerAttributes as parentIntegerAttributes;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -31,9 +31,9 @@ class TextAreaControlTest extends PlaisioTestCase
    *
    * @return string[][]
    */
-  public function integerAttributes(): array
+  public static function integerAttributes(): array
   {
-    $ret = $this->parentIntegerAttributes();
+    $ret = self::parentIntegerAttributes();
 
     $ret[] = ['setAttrCols', 'cols'];
     $ret[] = ['setAttrRows', 'rows'];
@@ -47,9 +47,9 @@ class TextAreaControlTest extends PlaisioTestCase
    *
    * @return string[][]
    */
-  public function stringAttributes(): array
+  public static function stringAttributes(): array
   {
-    $ret = $this->parentStringAttributes();
+    $ret = self::parentStringAttributes();
 
     $ret[] = ['setAttrWrap', 'wrap'];
 
@@ -140,7 +140,7 @@ class TextAreaControlTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test labels are casted to strings.
+   * Test labels are cast to strings.
    */
   public function testWithNumericValues(): void
   {

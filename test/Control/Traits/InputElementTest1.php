@@ -36,8 +36,10 @@ trait InputElementTest1
     $form = new RawForm('myForm');
     $form->addFieldSet($fieldSet);
 
-    $html     = $form->htmlForm();
-    $expected = sprintf('<form method="post" action="/" class="frm-form"><fieldset class="frm-fieldset"><input class="frm-%s" type="%s" name="myForm[myFieldSet][myInput]"/></fieldset></form>', $this->getControlClass(), $this->getControlType());
+    $html = $form->htmlForm();
+    $expected = sprintf('<form method="post" action="/" class="frm-form"><fieldset class="frm-fieldset"><input class="frm-%s" type="%s" name="myForm[myFieldSet][myInput]"/></fieldset></form>',
+                        $this->getControlClass(),
+                        $this->getControlType());
     self::assertSame($expected, $html);
   }
 

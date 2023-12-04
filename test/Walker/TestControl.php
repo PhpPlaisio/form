@@ -32,7 +32,7 @@ class TestControl extends TextControl
    *
    * @var mixed
    */
-  public static $testResult = null;
+  public static mixed $testResult = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

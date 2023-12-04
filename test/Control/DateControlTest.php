@@ -10,17 +10,17 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Formatter\DateFormatter;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\Control\Traits\ImmutableTest;
+use Plaisio\Form\Test\Control\Traits\ImmutableTestCase;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 use Plaisio\Form\Test\Control\Traits\InputElementTest2;
 
 /**
  * Unit tests for class DateControl.
  */
-class DateControlTest extends SimpleControlTest
+class DateControlTest extends SimpleControlTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
-  use ImmutableTest;
+  use ImmutableTestCase;
   use InputElementTest1;
   use InputElementTest2;
 

@@ -85,7 +85,7 @@ class RawFormTest extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test for finding a complex with with different types of names.
+   * Test for finding a complex with different types of names.
    */
   public function testFindSimpleControl(): void
   {

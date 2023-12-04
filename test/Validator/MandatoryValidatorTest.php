@@ -17,7 +17,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getInvalidValues(): array
+  public static function getInvalidValues(): array
   {
     $ret = [];
 
@@ -36,7 +36,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
    *
    * @return array
    */
-  public function getValidValues(): array
+  public static function getValidValues(): array
   {
     $ret = [];
 
@@ -44,7 +44,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
     $ret[] = [true];
     $ret[] = [0];
     $ret[] = ['0'];
-    $ret[] = [$this];
+    $ret[] = [new \stdClass()];
     $ret[] = [['options' => ['a' => false, 'b' => true, 'c' => false]]];
     $ret[] = [['options' => ['a' => '', 'b' => '0', 'c' => null]]];
     $ret[] = [['options' => ['a' => '', 'b' => 0, 'c' => null]]];
@@ -61,7 +61,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getInvalidValues
    */
-  public function testInvalidAddresses($value): void
+  public function testInvalidAddresses(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new MandatoryValidator();
@@ -80,7 +80,7 @@ class MandatoryValidatorTest extends PlaisioTestCase
    *
    * @dataProvider getValidValues
    */
-  public function testValidAddresses($value): void
+  public function testValidAddresses(mixed $value): void
   {
     $control   = new TestControl('test', $value);
     $validator = new MandatoryValidator();

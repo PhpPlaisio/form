@@ -10,7 +10,7 @@ use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 /**
  * Unit tests for class ForceSubmitControl.
  */
-class ForceSubmitControlTest extends PushControlTest
+class ForceSubmitControlTest extends PushControlTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   use InputElementTest1;

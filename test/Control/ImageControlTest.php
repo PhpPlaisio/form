@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Control;
 
-use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ImageControl;
 use Plaisio\Form\Control\SimpleControl;
-use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 use Plaisio\Form\Test\PlaisioTestCase;
 
