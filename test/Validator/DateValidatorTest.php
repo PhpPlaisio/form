@@ -26,7 +26,7 @@ class DateValidatorTest extends PlaisioTestCase
             ['2015-02-29'],
             ['2020-11-31'],
             [new \stdClass()],
-            ['foo' => 'bar'],
+            [['foo' => 'bar']],
             [false],
             [true]];
   }

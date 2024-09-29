@@ -52,7 +52,6 @@ class HttpValidatorTest extends PlaisioTestCase
     $ret = [];
 
     // Valid URL must be valid.
-    $ret[] = ['http://www.setbased.nl'];
     $ret[] = ['http://www.google.com'];
     $ret[] = ['http://www.php.net'];
     $ret[] = ['https://www.google.com'];

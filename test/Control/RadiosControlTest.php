@@ -19,16 +19,14 @@ class RadiosControlTest extends PlaisioTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns empty values
-   *
-   * @return array
    */
   public static function getEmptyValues(): array
   {
     $cases = [];
 
-    $cases[] = ['value' => 0];
-    $cases[] = ['value' => '0'];
-    $cases[] = ['value' => ' '];
+    $cases[] = ['empty' => 0];
+    $cases[] = ['empty' => '0'];
+    $cases[] = ['empty' => ' '];
 
     return $cases;
   }
@@ -36,8 +34,6 @@ class RadiosControlTest extends PlaisioTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test cases for setValue.
-   *
-   * @return array[]
    */
   public static function setValueCases(): array
   {

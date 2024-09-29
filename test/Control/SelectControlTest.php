@@ -24,9 +24,9 @@ class SelectControlTest extends PlaisioTestCase
   {
     $cases = [];
 
-    $cases[] = ['value' => 0];
-    $cases[] = ['value' => '0'];
-    $cases[] = ['value' => ' '];
+    $cases[] = ['empty' => 0];
+    $cases[] = ['empty' => '0'];
+    $cases[] = ['empty' => ' '];
 
     return $cases;
   }

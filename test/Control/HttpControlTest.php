@@ -27,8 +27,6 @@ class HttpControlTest extends PlaisioTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns hidden.
-   *
-   * @return string
    */
   public function getControlClass(): string
   {
@@ -115,23 +113,19 @@ class HttpControlTest extends PlaisioTestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns a valid initial value.
-   *
-   * @return mixed
    */
   protected function getValidInitialValue()
   {
-    return 'http://www.google.com/';
+    return 'https://www.google.com/';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns a valid submitted value (different form initial value).
-   *
-   * @return string
    */
   protected function getValidSubmittedValue(): string
   {
-    return 'http://www.setbased.nl/';
+    return 'https://www.nahouw.net/';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

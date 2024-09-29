@@ -191,9 +191,9 @@ class RawForm implements CompoundControl
    * <li> If the form is submitted the submitted values are validated:
    *      <ul>
    *      <li> If the submitted values are valid the appropriated handler is returned.
-   *      <li> Otherwise the form is shown.
+   *      <li> Otherwise, the form is shown.
    *      </ul>
-   * <li> Otherwise the form is shown.
+   * <li> Otherwise, the form is shown.
    * </ul>
    *
    * @return string The appropriate handler method.
@@ -409,7 +409,7 @@ class RawForm implements CompoundControl
   {
     if (!isset($this->attributes['action']))
     {
-      $this->attributes['action'] = Nub::$nub->request->getRequestUri();
+      $this->attributes['action'] = Nub::$nub->request->requestUri;
     }
 
     $this->prepare();
