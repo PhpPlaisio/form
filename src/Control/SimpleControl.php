@@ -34,12 +34,12 @@ abstract class SimpleControl extends Control
   /**
    * The label will be inserted before the HML code of this form control.
    */
-  const LABEL_POSITION_PRE = 1;
+  const int LABEL_POSITION_PRE = 1;
 
   /**
    * The label will be inserted before the HML code of this form control.
    */
-  const LABEL_POSITION_POST = 2;
+  const int LABEL_POSITION_POST = 2;
 
   /**
    * The cleaner to clean and/or translate (to machine format) the submitted value.
@@ -478,7 +478,8 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the inner HTML of the label for this form control.
+   * Sets the inner HTML of the label for this form control. The label position must be set by calling
+   * setLabelPosition().
    *
    * @param string|null $htmlSnippet The (inner) label HTML snippet. It is the developer's responsibility that it is
    *                                 valid HTML code.
@@ -499,9 +500,9 @@ abstract class SimpleControl extends Control
   /**
    * Sets the position of the label of this form control.
    * <ul>
-   * <li> C_LABEL_POSITION_PRE  The label will be inserted before the HML code of this form control.
-   * <li> C_LABEL_POSITION_POST The label will be appended after the HML code of this form control.
-   * <li> null                  No label will be generated for this form control.
+   * <li> SimpleControl::LABEL_POSITION_PRE  The label will be inserted before the HML code of this form control.
+   * <li> SimpleControl::LABEL_POSITION_POST The label will be appended after the HML code of this form control.
+   * <li> null                               No label will be generated for this form control.
    * </ul>
    *
    * @param int|null $position
@@ -520,7 +521,8 @@ abstract class SimpleControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the inner HTML of the abel for this form control.
+   * Sets the inner HTML of the abel for this form control. The label position must be set by calling
+   * setLabelPosition().
    *
    * @param bool|int|float|string|null $text The (inner) label text. Special characters are converted to HTML entities.
    *
