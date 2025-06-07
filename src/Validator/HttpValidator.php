@@ -62,7 +62,7 @@ class HttpValidator implements Validator
       $headers = @get_headers($url);
       $valid   = (is_array($headers) && preg_match('/^HTTP\\/\\d+\\.\\d+\\s+[23]\\d\\d\\s*.*$/', $headers[0]));
     }
-    catch (\Exception $e)
+    catch (\Exception)
     {
       // Something went wrong. Possibly:
       // * Unable to open stream.

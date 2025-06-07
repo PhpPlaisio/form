@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner\Traits;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 /**
  * Trait for cleaner that expect string values only.
  */
@@ -26,9 +28,8 @@ trait StringCleaner
    * Test a cleaning a non-string yields the item.
    *
    * @param mixed $value The non-string.
-   *
-   * @dataProvider getNonStrings
    */
+  #[DataProvider('getNonStrings')]
   public function testNonString(mixed $value): void
   {
     $this->expectException(\LogicException::class);

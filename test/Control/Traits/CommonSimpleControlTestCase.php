@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Control\Traits;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 /**
  * Test cases for child classes of CommonSimpleControlTestCase.
  */
@@ -58,9 +60,8 @@ trait CommonSimpleControlTestCase
    *
    * @param string $method
    * @param string $attribute
-   *
-   * @dataProvider booleanAttributes
    */
+  #[DataProvider('booleanAttributes')]
   public function testBoolean(string $method, string $attribute): void
   {
     $input = $this->createControl('awesome');
@@ -104,9 +105,8 @@ trait CommonSimpleControlTestCase
    *
    * @param string $method
    * @param string $attribute
-   *
-   * @dataProvider integerAttributes
    */
+  #[DataProvider('integerAttributes')]
   public function testInteger(string $method, string $attribute): void
   {
     $input = $this->createControl('awesome');
@@ -128,9 +128,8 @@ trait CommonSimpleControlTestCase
    *
    * @param string $method
    * @param string $attribute
-   *
-   * @dataProvider stringAttributes
    */
+  #[DataProvider('stringAttributes')]
   public function testString(string $method, string $attribute): void
   {
     $input = $this->createControl('awesome');

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Validator\LengthValidator;
 
@@ -69,9 +70,8 @@ class LengthValidatorTest extends TestCase
    * @param int   $minLength The minimum length.
    * @param int   $maxLength The maximum length.
    * @param mixed $value     The invalid value.
-   *
-   * @dataProvider getInvalidValues
    */
+  #[DataProvider('getInvalidValues')]
   public function testInvalidStrings(int $minLength, int $maxLength, mixed $value): void
   {
     $control   = new TestControl('test', $value);
@@ -87,9 +87,8 @@ class LengthValidatorTest extends TestCase
    * @param int   $minLength The minimum length.
    * @param int   $maxLength The maximum length.
    * @param mixed $value     The valid value.
-   *
-   * @dataProvider getValidValues
    */
+  #[DataProvider('getValidValues')]
   public function testValidStrings(int $minLength, int $maxLength, mixed $value): void
   {
     $control   = new TestControl('test', $value);

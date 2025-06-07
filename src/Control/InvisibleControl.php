@@ -52,7 +52,7 @@ class InvisibleControl extends SimpleControl
    */
   protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
-    // Note: by definition the value of a input:invisible form control will not be changed, whatever is submitted.
+    // Note: by definition the value of an input:invisible form control will not be changed, whatever is submitted.
     $walker->setWithListValue($this->name, $this->value);
   }
 

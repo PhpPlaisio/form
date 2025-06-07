@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Control;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Control\DatabaseLabelControl;
 
@@ -28,9 +29,8 @@ class DatabaseLabelControlTest extends TestCase
    * Test invalid prefix.
    *
    * @param string $prefix The invalid prefix.
-   *
-   * @dataProvider getInvalidPrefixes
    */
+  #[DataProvider('getInvalidPrefixes')]
   public function testInvalidPrefix1(string $prefix): void
   {
     $this->expectException(\LogicException::class);

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Plaisio\Form\Cleaner\TidyCleaner;
 use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
 use Plaisio\Form\Test\PlaisioTestCase;
@@ -44,11 +45,10 @@ class TidyCleanerTest extends PlaisioTestCase
   /**
    * Test with HTML snippet.
    *
-   * @dataProvider snippets
-   *
    * @param string|null $value    The dirty value.
    * @param string|null $expected The expected clean value.
    */
+  #[DataProvider('snippets')]
   public function testHtmlSnippet(?string $value, ?string $expected): void
   {
     $cleaner = TidyCleaner::get();

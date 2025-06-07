@@ -15,7 +15,7 @@ use SetBased\Exception\LogicException;
  *
  * This cleaner will replace common mistakenly entered characters with the intended entered character.
  *
- * In unicode there are many other characters that look similar, COLON (U+003A) and FULLWIDTH COLON' (U+FF1A), and
+ * In Unicode there are many other characters that look similar, COLON (U+003A) and FULLWIDTH COLON' (U+FF1A), and
  * many other characters from different blocks. Handling these characters is better handled by Validators.
  */
 class AmbiguityCleaner implements Cleaner

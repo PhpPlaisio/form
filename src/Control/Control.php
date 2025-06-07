@@ -91,14 +91,14 @@ abstract class Control
   /**
    * Adds a compound validator for this form control.
    *
-   * @param Validator|CompoundValidator $validator
+   * @param CompoundValidator|Validator $validator
    *
    * @return $this
    *
    * @since 1.0.0
    * @api
    */
-  public function addValidator($validator): self
+  public function addValidator(Validator|CompoundValidator $validator): self
   {
     $this->validators[] = $validator;
 

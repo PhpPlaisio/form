@@ -166,14 +166,7 @@ class CheckboxesControl extends SimpleControl
    */
   public function mergeValuesBase(array $values): void
   {
-    if (isset($values[$this->name]))
-    {
-      $values = &$values[$this->name];
-    }
-    else
-    {
-      $values = null;
-    }
+    $values = $values[$this->name] ?? null;
 
     if ($values!==null)
     {

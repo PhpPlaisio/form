@@ -69,7 +69,7 @@ class MultipleFileControl extends SimpleControl
    * @since 1.0.0
    * @api
    */
-  public function setValue($value): self
+  public function setValue(mixed $value): self
   {
     // Nothing to do.
 

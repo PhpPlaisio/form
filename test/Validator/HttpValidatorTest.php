@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Validator\HttpValidator;
 
@@ -69,9 +70,8 @@ class HttpValidatorTest extends PlaisioTestCase
    * Test against invalid URLs.
    *
    * @param mixed $value The invalid value.
-   *
-   * @dataProvider getInvalidValues
    */
+  #[DataProvider('getInvalidValues')]
   public function testInvalidUrl(mixed $value): void
   {
     $control   = new TestControl('test', $value);
@@ -85,9 +85,8 @@ class HttpValidatorTest extends PlaisioTestCase
    * Test against valid URLs.
    *
    * @param mixed $value The valid value.
-   *
-   * @dataProvider getValidValues
    */
+  #[DataProvider('getValidValues')]
   public function testValidUrl(mixed $value): void
   {
     $control   = new TestControl('test', $value);

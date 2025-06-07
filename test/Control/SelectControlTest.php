@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Control;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SelectControl;
@@ -227,9 +228,8 @@ class SelectControlTest extends PlaisioTestCase
    * @param mixed $value     The new value for the radios form control.
    * @param mixed $submitted The submitted value.
    * @param mixed $expected  The expected value.
-   *
-   * @dataProvider setValueCases
    */
+  #[DataProvider('setValueCases')]
   public function testSetValue(mixed $value, mixed $submitted, mixed $expected)
   {
     $_POST['cnt_id'] = $submitted;
@@ -346,9 +346,8 @@ class SelectControlTest extends PlaisioTestCase
    * Test labels are cast to strings.
    *
    * @param mixed $empty The empty value.
-   *
-   * @dataProvider getEmptyValues
    */
+  #[DataProvider('getEmptyValues')]
   public function testWithEmptyValue(mixed $empty): void
   {
     $_POST['day_id'] = $empty;

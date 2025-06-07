@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Cleaner\IntegerCleaner;
 
@@ -48,9 +49,8 @@ class IntegerCleanerTest extends TestCase
    *
    * @param mixed $value    The dirty value.
    * @param mixed $expected The expected clean value.
-   *
-   * @dataProvider getCases
    */
+  #[DataProvider('getCases')]
   public function testClean(mixed $value, mixed $expected): void
   {
     $cleaner = IntegerCleaner::get();
@@ -64,9 +64,8 @@ class IntegerCleanerTest extends TestCase
    * Test a cleaning a non-string yields the item.
    *
    * @param mixed $value The non-string.
-   *
-   * @dataProvider getNonStrings
    */
+  #[DataProvider('getNonStrings')]
   public function testNonString(mixed $value): void
   {
     $this->expectException(\LogicException::class);

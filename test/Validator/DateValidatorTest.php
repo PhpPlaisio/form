@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Plaisio\Form\Test\PlaisioTestCase;
 use Plaisio\Form\Validator\DateValidator;
 
@@ -47,9 +48,8 @@ class DateValidatorTest extends PlaisioTestCase
    * Test against invalid dates.
    *
    * @param mixed $value The invalid value.
-   *
-   * @dataProvider getInvalidValues
    */
+  #[DataProvider('getInvalidValues')]
   public function testInvalidDates(mixed $value): void
   {
     $control   = new TestControl('test', $value);
@@ -63,9 +63,8 @@ class DateValidatorTest extends PlaisioTestCase
    * Test against valid dates.
    *
    * @param mixed $value The valid value.
-   *
-   * @dataProvider getValidValues
    */
+  #[DataProvider('getValidValues')]
   public function testValidDates(mixed $value): void
   {
     $control   = new TestControl('test', $value);

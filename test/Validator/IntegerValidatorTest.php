@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Validator\IntegerValidator;
 
@@ -84,9 +85,8 @@ class IntegerValidatorTest extends TestCase
    * @param int|null $minValue The minimum value.
    * @param int|null $maxValue The maximum value.
    * @param mixed    $value    The valid value.
-   *
-   * @dataProvider getValidValues
    */
+  #[DataProvider('getValidValues')]
   public static function testValidValues(?int $minValue, ?int $maxValue, mixed $value): void
   {
     $control   = new TestControl('test', $value);
@@ -104,9 +104,8 @@ class IntegerValidatorTest extends TestCase
    * @param int|null $minValue The minimum value.
    * @param int|null $maxValue The maximum value.
    * @param mixed    $value    The invalid value.
-   *
-   * @dataProvider getInvalidValues
    */
+  #[DataProvider('getInvalidValues')]
   public function testInvalidValues(?int $minValue, ?int $maxValue, mixed $value): void
   {
     $control   = new TestControl('test', $value);

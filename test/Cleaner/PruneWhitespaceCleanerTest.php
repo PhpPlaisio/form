@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Cleaner;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Plaisio\Form\Cleaner\PruneWhitespaceCleaner;
 use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
 use Plaisio\Form\Test\PlaisioTestCase;
@@ -68,10 +69,9 @@ class PruneWhitespaceCleanerTest extends PlaisioTestCase
   /**
    * Tests whitespaces only.
    *
-   * @dataProvider whitespaceOnly
-   *
    * @param string|null $string $string String with only whitespace.
    */
+  #[DataProvider('whitespaceOnly')]
   public function testWhitSpaceOnly(?string $string): void
   {
     $cleaner = PruneWhitespaceCleaner::get();
