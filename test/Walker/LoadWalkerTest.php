@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Walker;
 
-use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\RawForm;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 use Plaisio\Form\Walker\LoadWalker;
 
 /**
  * Tests for class LoadWalker.
  */
-class LoadWalkerTest extends TestCase
+class LoadWalkerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

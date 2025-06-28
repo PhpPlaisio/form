@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Test\Functional\CompoundCleaner;
 
-use PHPUnit\Framework\TestCase;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Form\RawForm;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Test cases for compound cleaner and changed form controls.
  */
-class CompoundCleanerTest extends TestCase
+class CompoundCleanerTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -47,8 +47,8 @@ class CompoundCleanerTest extends TestCase
     $values  = $form->getValues();
     $changed = $form->getChangedControls();
 
-    self::assertSame($values['A'], 'a');
-    self::assertSame($values['B'], 'c');
+    self::assertSame('a', $values['A']);
+    self::assertSame('c', $values['B']);
     self::assertArrayHasKey('B', $changed);
     self::assertArrayNotHasKey('A', $changed);
     self::assertArrayNotHasKey('A/B', $changed);

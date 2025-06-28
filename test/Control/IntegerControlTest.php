@@ -11,11 +11,12 @@ use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 use Plaisio\Form\Test\Control\Traits\InputElementTest2;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Unit tests for class IntegerControl.
  */
-class IntegerControlTest extends TestCase
+class IntegerControlTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   use InputElementTest1;

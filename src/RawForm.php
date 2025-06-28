@@ -490,8 +490,8 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the attribute [action](http://www.w3schools.com/tags/att_form_action.asp). The default value is the URI which
-   * was given the access the current page, i.e. $_SERVER['REQUEST_URI'].
+   * Sets the attribute [action](http://www.w3schools.com/tags/att_form_action.asp). The default value is the URI to the
+   * current page, i.e., the HTTP header REQUEST_URI.
    *
    * @param string|null $url The URL to send the form-data when this form is submitted.
    *
@@ -612,11 +612,11 @@ class RawForm implements CompoundControl
     switch ($this->attributes['method'])
     {
       case 'post':
-        $values = $_POST;
+        $values = Nub::$nub->request->post;
         break;
 
       case 'get':
-        $values = $_GET;
+        $values = Nub::$nub->request->cgi;
         break;
 
       default:
@@ -664,11 +664,11 @@ class RawForm implements CompoundControl
     switch ($this->attributes['method'])
     {
       case 'post':
-        $values = $_POST;
+        $values = Nub::$nub->request->post;
         break;
 
       case 'get':
-        $values = $_GET;
+        $values = Nub::$nub->request->cgi;
         break;
 
       default:
@@ -680,8 +680,8 @@ class RawForm implements CompoundControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Validates all form controls of this form against all their installed validation checks. After all form controls
-   * passed their validations validates the form itself against all its installed validation checks.
+   * Validates all form controls of this form against all their installed validation checks. After all, form controls
+   * passed their validations, validates the form itself against all its installed validation checks.
    *
    * @return bool True if the submitted values are valid, false otherwise.
    *

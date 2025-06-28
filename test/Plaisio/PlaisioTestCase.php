@@ -42,11 +42,10 @@ class PlaisioTestCase extends TestCase
    */
   protected function setUp(): void
   {
-    $this->kernel = new TestKernel();
-
     $_POST = [];
-
     $_SERVER['REQUEST_URI'] = '/';
+
+    $this->kernel = new TestKernel();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

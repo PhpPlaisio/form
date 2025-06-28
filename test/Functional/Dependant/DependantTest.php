@@ -8,11 +8,12 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\RawForm;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Test dependant form controls.
  */
-class DependantTest extends TestCase
+class DependantTest extends PlaisioTestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
