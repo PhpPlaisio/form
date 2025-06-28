@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Form\Test;
+namespace Plaisio\Form\Test\Plaisio;
 
 use Plaisio\PlaisioKernel;
 use Plaisio\Request\CoreRequest;
@@ -20,7 +20,7 @@ class TestKernel extends PlaisioKernel
    */
   protected function getRequest(): Request
   {
-    return new CoreRequest($_SERVER, $_COOKIE);
+    return new CoreRequest($_SERVER, $_GET, $_POST, $_COOKIE, new TestRequestParameterResolver());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

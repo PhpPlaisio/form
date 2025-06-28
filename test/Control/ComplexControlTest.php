@@ -11,7 +11,7 @@ use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 use Plaisio\Form\Validator\MandatoryValidator;
 
 /**

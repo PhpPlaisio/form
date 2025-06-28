@@ -7,8 +7,8 @@ use Plaisio\Form\Control\CheckboxesControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\PlaisioTestCase;
-use Plaisio\Form\Test\TestControl;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\TestControl;
 use Plaisio\Helper\RenderWalker;
 
 /**

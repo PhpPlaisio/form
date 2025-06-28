@@ -9,7 +9,7 @@ use Plaisio\Form\Control\PushControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTestCase;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Abstract parent class for unit tests for child classes of PushControl.

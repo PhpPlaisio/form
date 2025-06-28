@@ -6,7 +6,7 @@ namespace Plaisio\Form\Test\Control;
 use Plaisio\Form\Control\FileControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Unit tests for class FileControl.

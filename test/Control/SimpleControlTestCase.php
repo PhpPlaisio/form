@@ -7,7 +7,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\Control\SubmitControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  *  Abstract parent class for unit tests for child classes of CommonSimpleControlTestCase.

@@ -10,7 +10,7 @@ use Plaisio\Form\Control\TextAreaControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\CommonSimpleControlTestCase;
 use Plaisio\Form\Test\Control\Traits\ImmutableTestCase;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Unit tests for class TextAreaControl.

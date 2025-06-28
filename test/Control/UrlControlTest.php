@@ -11,7 +11,7 @@ use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\ImmutableTestCase;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
 use Plaisio\Form\Test\Control\Traits\InputElementTest2;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Unit tests for class UrlControl.

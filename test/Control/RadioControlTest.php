@@ -9,7 +9,7 @@ use Plaisio\Form\Control\RadioControl;
 use Plaisio\Form\Control\SimpleControl;
 use Plaisio\Form\RawForm;
 use Plaisio\Form\Test\Control\Traits\InputElementTest1;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Unit tests for class PasswordControl.

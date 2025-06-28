@@ -13,6 +13,7 @@ use Plaisio\Form\Control\HiddenSubmitControl;
 use Plaisio\Form\Control\SubmitControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\RawForm;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Test cases for class RawForm.

@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Plaisio\Form\Cleaner\RemoveWhitespaceCleaner;
 use Plaisio\Form\Cleaner\TrimWhitespaceCleaner;
 use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Test cases for class RemoveWhitespaceCleaner.

@@ -5,7 +5,7 @@ namespace Plaisio\Form\Test\Control;
 
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\Control\WrapperControl;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Unit tests for class WrapperControl.

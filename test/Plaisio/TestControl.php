@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Form\Test;
+namespace Plaisio\Form\Test\Plaisio;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SimpleControl;

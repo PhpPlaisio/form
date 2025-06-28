@@ -9,7 +9,7 @@ use Plaisio\Form\Control\CompoundControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 use Plaisio\Helper\RenderWalker;
 
 /**

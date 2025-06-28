@@ -7,7 +7,7 @@ use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\ForceSubmitControl;
 use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\RawForm;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 use SetBased\Helper\Cast;
 
 /**

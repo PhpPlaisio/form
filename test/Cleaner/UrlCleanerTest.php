@@ -5,7 +5,7 @@ namespace Plaisio\Form\Test\Cleaner;
 
 use Plaisio\Form\Cleaner\UrlCleaner;
 use Plaisio\Form\Test\Cleaner\Traits\StringCleaner;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Test cases for class UrlCleaner.

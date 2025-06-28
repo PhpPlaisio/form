@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Validator;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 use Plaisio\Form\Validator\DateValidator;
 
 /**

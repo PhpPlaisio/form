@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Test\Formatter;
 
 use Plaisio\Form\Formatter\DateFormatter;
-use Plaisio\Form\Test\PlaisioTestCase;
+use Plaisio\Form\Test\Plaisio\PlaisioTestCase;
 
 /**
  * Test cases for class DateFormatter.

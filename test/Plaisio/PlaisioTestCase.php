@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Form\Test;
+namespace Plaisio\Form\Test\Plaisio;
 
 use PHPUnit\Framework\TestCase;
 use Plaisio\PlaisioKernel;
