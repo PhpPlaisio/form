@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Validator;
 
 use Plaisio\Form\Control\Control;
+use Plaisio\Kernel\Nub;
 
 /**
  * Validator for http URLs.
@@ -59,7 +60,9 @@ class HttpValidator implements Validator
     // Test that the page actually exits. We consider all HTTP 200-399 responses as valid.
     try
     {
-      $headers = @get_headers($url);
+      $context = stream_context_create(['http' => ['method'     => 'HEAD',
+                                                   'user_agent' => Nub::$nub->request->userAgent]]);
+      $headers = @get_headers($url, false, $context);
       $valid   = (is_array($headers) && preg_match('/^HTTP\\/\\d+\\.\\d+\\s+[23]\\d\\d\\s*.*$/', $headers[0]));
     }
     catch (\Exception)
