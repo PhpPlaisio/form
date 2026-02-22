@@ -52,6 +52,56 @@ abstract class SimpleControlTestCase extends PlaisioTestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test has a label.
+   */
+  public function testHasLabel1(): void
+  {
+    $input = $this->createControl('label');
+    $input->setLabelText('A label')
+          ->setLabelPosition(SimpleControl::LABEL_POSITION_PRE);
+
+    self::assertTrue($input->hasLabel());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test has not a label.
+   */
+  public function testHasLabel2(): void
+  {
+    $input = $this->createControl('label');
+    $input->setLabelText('A label');
+
+    self::assertFalse($input->hasLabel());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test has not a label.
+   */
+  public function testHasLabel3(): void
+  {
+    $input = $this->createControl('label');
+    $input->setLabelPosition(SimpleControl::LABEL_POSITION_PRE);
+
+    self::assertFalse($input->hasLabel());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test has not a label.
+   */
+  public function testHasLabel4(): void
+  {
+    $input = $this->createControl('label');
+    $input->setLabelText('')
+          ->setLabelPosition(SimpleControl::LABEL_POSITION_PRE);
+
+    self::assertFalse($input->hasLabel());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test is submit trigger.
    */
   public function testIsSubmitTrigger(): void
@@ -195,4 +245,3 @@ abstract class SimpleControlTestCase extends PlaisioTestCase
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-

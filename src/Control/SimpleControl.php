@@ -109,8 +109,7 @@ abstract class SimpleControl extends Control
     }
   }
 
-
-//--------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Adds a cleaner to this form control.
    *
@@ -149,6 +148,20 @@ abstract class SimpleControl extends Control
   public function getSubmittedValue(): mixed
   {
     return $this->value;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns whether this form control has a label.
+   *
+   * @return bool
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function hasLabel(): bool
+  {
+    return $this->label!==null && $this->label!=='' && $this->labelPosition!==null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
